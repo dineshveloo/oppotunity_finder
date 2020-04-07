@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Opportunity Finder</title>  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="JS/fte.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
+  <link rel="stylesheet" type="text/css" href="../css/Capture.css">
+  <script src="../js/calculations.js"></script>
+  <style>
+      input[type="text"] {
+     width: 100%; 
+     box-sizing: border-box;
+     -webkit-box-sizing:border-box;
+     -moz-box-sizing: border-box;
+     text-align: center;
+}/* removing this would make input not to go over cells border, but they would be too short, I want them to fit cells size */
+    table {border-top: 1px solid #110202; border-left: 1px solid #160404;}
+      table td {border-right: 1px solid #021802; border-bottom: 1px solid #020f02;}
+      </style>
+
+
+
+
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data -target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            
+              <img  class="navbar-brand" src="mphasis_logo.jpg">
+            
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
+                 <ul class="dropdown-menu" role="menu">
+                  <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
+              <li><a href="/user/processViewById"><b>View Process</b></a></li>
+              <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
+              <li><a href="/user/processPrioritization"><b>Process Prioritization</b></a></li>
+                    
+                    
+                 </ul>
+             </li>
+            <li><a href="/user/userManagement">User Management</a></li>
+        <li><a href="/user/About">About</a></li>
+        <li><a href="/user/Contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="jumbotron" id="cp">
+        <div class="container text-center" >
+        <h1 id="pc">Effort estimation</h1>
+        <p>Tables for calculating effort</p>
+        
+        </div>
+      </div>
+<center><font color="green"><h1>{{viewtitle}}</h1></font></center>
+<center><font color="red"><h1>{{viewerror}}</h1></font></center>
+<div class="text-right">        
+             <button type="button" onclick="goBack()" class="btn btn-success">Back</button>  
+        
+          </div>
+          
+     </style>    
+</head>
+
+
+<body>
+<form action="configurationDetails">
+<div align="left">
+<h1>Effort Table</h1>
+</div>
+<br>
+ <div class="table-responsive">
+     
+        <table align="center">
+            <thead>
+   <tr>
+              <td scope="col"><h3><b>Classification</b></h3></td>
+              <td scope="col"><h3><b>Developer</b></h3></td>
+              <td scope="col"><h3><b>Sr Developer</b></h3></td>
+              <td scope="col"><h3><b>BA</b></h3></td>
+              <td scope="col"><h3><b>Architect</b></h3></td>
+              <td scope="col"><h3><b>PM</b></h3></td>
+              <td scope="col"><h3><b>DM</b></h3></td>
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+       <td>Simple</td>
+      <td><input type="text" name="Simple_Dev" value="{{list.Simple_Dev}}" readonly></td>
+      <td><input type="text"  name="Simple_Srdev" value="{{list.Simple_Srdev}}" readonly></td>
+      <td><input type="text" name="Simple_BA" value="{{list.Simple_BA}}" readonly></td>
+      <td><input type="text" name="Simple_Arch" value="{{list.Simple_Arch}}" readonly></td>
+      <td><input type="text" name="Simple_PM" value="{{list.Simple_PM}}" readonly></td>
+      <td><input type="text" name="Simple_DM" value="{{list.Simple_DM}}" readonly></td>
+   </tr>
+   
+   <tr>
+      
+       <td>Medium</td>
+      <td><input type="text" name="Medium_Dev" value="{{list.Medium_Dev}}" readonly></td>
+      <td><input type="text" name="Medium_Srdev" value="{{list.Medium_Srdev}}" readonly></td>
+      <td><input type="text" name="Medium_BA" value="{{list.Medium_BA}}" readonly></td>
+      <td><input type="text" name="Medium_Arch" value="{{list.Medium_Arch}}" readonly></td>
+      <td><input type="text" name="Medium_PM" value="{{list.Medium_PM}}" readonly></td>
+      <td><input type="text" name="Medium_DM" value="{{list.Medium_DM}}" readonly></td>
+   </tr>
+   
+   <tr>
+       
+       <td>Complex</td>
+      <td><input type="text" name="Complex_Dev" value="{{list.Complex_Dev}}" readonly></td>
+      <td><input type="text" name="Complex_Srdev" value="{{list.Complex_Srdev}}" readonly></td>
+      <td><input type="text" name="Complex_BA" value="{{list.Complex_BA}}" readonly></td>
+      <td><input type="text" name="Complex_Arch" value="{{list.Complex_Arch}}" readonly></td>
+      <td><input type="text" name="Complex_PM" value="{{list.Complex_PM}}" readonly></td>
+      <td><input type="text" name="Complex_DM" value="{{list.Complex_DM}}" readonly></td>
+   </tr>
+   
+   </tbody>
+</table>
+      </div>
+      
+ <div class="table-responsive">
+     <div align="left">
+<h1>Liscence cost</h1>
+</div>
+<br>
+ <div class="table-responsive">
+     
+        <table align="center">
+            <thead>
+   <tr>
+              <td scope="col"><h3><b>Studio</b></h3></td>
+              <td scope="col"><h3><b>Cost</b></h3></td>
+  </tr>
+   </thead>
+   <tbody>
+      <tr>
+       <td>Bot Creator</td>
+      <td><input type="text" name="Bot_Creator_Cost" value="{{list.Bot_Creator_Cost}}" readonly></td>
+   </tr>
+   
+   <tr><td>Bot Runner(Unattended)</td>
+      <td><input type="text" name="Bot_Run_Unatt_Cost" value="{{list.Bot_Run_Unatt_Cost}}" readonly></td>
+   </tr>
+   
+   <tr>
+       <td>Bot Runner(Attended)</td>
+      <td><input type="text" name="Bot_Run_Att_Cost" value="{{list.Bot_Run_Att_Cost}}" readonly></td>
+        </tr>
+   
+   <tr>
+       <td>Control Room</td>
+      <td><input type="text" name="Cont_Room_Cost" value="{{list.Cont_Room_Cost}}" readonly></td>
+   </tr>
+    <tr>
+       <td>VM</td>
+      <td><input type="text" name="VM_Cost" value="{{list.VM_Cost}}" readonly></td>
+   </tr>
+    <tr>
+       <td>Server</td>
+      <td><input type="text" name="Server_Cost" value="{{list.Server_Cost}}" readonly></td>
+   </tr>
+  </tbody>
+</table>
+      </div>
+      <div class="table-responsive">
+     <div align="left">
+<h1>Rate Card</h1>(per hour in USD)
+</div>
+<br>
+ <div class="table-responsive">
+     
+        <table align="center">
+            <thead>
+   <tr>
+              <td scope="col"><h3><b>Role</b></h3></td>
+              <td scope="col"><h3><b>Cost</b></h3></td>
+  </tr>
+   </thead>
+   <tbody>
+      <tr>
+       <td>Developer</td>
+      <td><input type="text" name="Dev_Cost" value="{{list.Dev_Cost}}"></td>
+   </tr>
+   
+   <tr><td>Sr.developer</td>
+      <td><input type="text" name="Srdev_Cost" value="{{list.Srdev_Cost}}"></td>
+   </tr>
+   
+   <tr>
+       <td>BA</td>
+      <td><input type="text" name="BA_Cost" value="{{list.BA_Cost}}"></td>  </tr>
+   
+   <tr>
+       <td>Architecht</td>
+      <td><input type="text" name="Arch_Cost" value="{{list.Arch_Cost}}"></td>
+   </tr>
+    
+   <tr>
+       <td>PM</td>
+      <td><input type="text" name="PM_Cost" value="{{list.PM_Cost}}"></td>
+   </tr>
+   
+   <tr>
+       <td>DU Lead</td>
+      <td><input type="text" name="DUlead_Cost" value="{{list.DUlead_Cost}}"></td>
+   </tr>
+  </tbody>
+</table>
+ <div class="table-responsive">
+     <div align="left">
+<h1>Infrastructure cost</h1>
+</div>
+<br>
+ <div class="table-responsive">
+     
+        <table align="center">
+            <thead>
+   <tr>
+              <td scope="col"><h3><b>Studio</b></h3></td>
+              <td scope="col"><h3><b>Cost</b></h3></td>
+  </tr>
+   </thead>
+   <tbody>
+    <tr>
+       <td>VM</td>
+      <td><input type="text" name="VM_Cost" value="{{list.VM_Cost}}" readonly></td>
+   </tr>
+    <tr>
+       <td>Server</td>
+      <td><input type="text" name="Server_Cost" value="{{list.Server_Cost}}" readonly></td>
+   </tr>
+  </tbody>
+</table>
+      </div>
+
+      <br> 
+      <div align="center">
+      <input type="submit" class="btn btn-success" value="Edit">
+      </div>
+      </form>
+ 

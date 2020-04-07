@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Opportunity Finder</title>  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="JS/fte.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
+  <link rel="stylesheet" type="text/css" href="../css/Capture.css">
+  <script src="../js/calculations.js"></script>
+  
+<style>
+     #end{
+  padding-top: 20rem;
+}
+#allign1{
+  padding-top: 10rem;
+  
+}
+
+</style>
+
+
+
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            
+              <img  class="navbar-brand" src="mphasis_logo.jpg">
+            
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
+                 <ul class="dropdown-menu" role="menu">
+                  <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
+              <li><a href="/user/processViewById"><b>View Process</b></a></li>
+              <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
+              <li><a href="/user/processPrioritization"><b>Process Prioritization</b></a></li>
+                    
+                    
+                 </ul>
+             </li>
+            <li><a href="/user/userManagement">User Management</a></li>
+        <li><a href="/user/About">About</a></li>
+        <li><a href="/user/Contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="jumbotron" id="cp">
+        <div class="container text-center" >
+        <h1 id="pc">Contact Us</h1>
+        <p>Do you have any questions? Please do not hesitate to contact us directly.</p>
+        
+        </div>
+      </div>
+<center><font color="green"><h1>{{viewtitle}}</h1></font></center>
+<div class="text-right">
+          
+          
+                
+             <button type="button" onclick="goBack()" class="btn btn-success">Back</button>  
+        
+          </div>
+          <div id="allign1">
+<div class="container" id="abc">
+    <div class="row">
+        <div class="col-md-6">
+    
+  <form action="/user/addProcess" method="POST">
+    <div class="row">
+      <div class="col-20">
+        <label for="name">Ranjeev</label>
+      </div>
+      </div>
+      
+      
+    <div class="row">
+      <div class="col-20">
+        <label for="number">1234567891</label>
+      </div>
+      
+    </div>
+    <div class="row">
+      <div class="col-20">
+        <label for="email">Ranjeev@mphasis.com</label>  
+      </div>
+      
+    </div>
+    
+      
+      
+    </div>
+    
+    
+    <div class="col-md-6">
+    <div class="row">
+        <div class="col-20">
+          <label for="name">Veena</label>
+        </div>
+        
+      </div>
+      <div class="row">
+          <div class="col-20">
+            <label for="number">9876543210</label>
+          </div>
+          
+        </div>
+        <div class="row">
+            <div class="col-20">
+              <label for="email">veena@mphasis.com</label>  
+            </div>
+            
+          </div>
+          
+          
+            </div>
+            
+            
+            
+          </div>
+          </div>
+          
+          </div>
+          
+             
+          
+        
+          
+  </form>
+  </div>
+  <div id="end"> 
+  <footer class="container-fluid text-center">
+      <p>&copy; All Rights Reserved Mphasis Limited 2020</p>
+    </footer> 
+    </div>
+  </body>
+</html> 

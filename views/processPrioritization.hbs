@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Opportunity Finder</title>  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="JS/fte.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
+  <link rel="stylesheet" type="text/css" href="../css/Capture.css">
+  
+<script src="../js/calculations.js"></script>
+
+
+
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            
+              <img  class="navbar-brand" src="mphasis_logo.jpg">
+            
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
+                 <ul class="dropdown-menu" role="menu">
+                       <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
+              <li><a href="/user/processViewById"><b>View Process</b></a></li>
+              <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
+              <li><a href="/user/list"><b>Process Prioritization</b></a></li>
+                    
+                 </ul>
+             </li>
+                   <li><a href="/user/userManagement">User Management</a></li>
+                   <li><a href="/user/About">About</a></li>
+                   <li><a href="/user/Contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="jumbotron" id="cp">
+        <div class="container text-center" >
+        <h1 id="pc">List of Processes Assessed</h1>
+        <p>View Essential Data Points for Process Prioritizaion</p>
+        
+        </div>
+      </div>
+  <div class="text-right">
+          
+          
+                
+            <button type="button" onclick="goBack()" class="btn btn-success">Back</button>  
+        
+          </div>
+
+<div class="container text-center" id="abc1">
+    
+        
+    
+  <form action="">
+    
+    <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Process Name</th>
+              <th scope="col">Process Id</th>
+              <th scope="col">Monthly Volume</th>
+              <th scope="col">AHT(in Min)</th>
+              <th scope="col">FTE</th>
+              <th scope="col">Automation Potential</th>
+              <th scope="col">FTE Benefit</th>
+            </tr>
+          </thead>
+          <tbody>
+              {{#each list}}
+            <tr>
+              <td>{{this.Proc_Name}}</td>
+              <td>{{this.Proc_Id}}</td>
+              <td>{{this.Mon_Vol}}</td>
+             <td>{{this.AHT}}</td>
+             <td>{{this.FTE}}</td>
+             <td>{{this.AP_Perc}}</td>
+             <td>{{this.FTE_Benefit}}</td>
+            </tr>
+           {{/each}}
+          </tbody>
+        </table>
+      </div>
+      
+      
+    </div>
+    
+    
+            
+            
+          
+          
+          
+          
+          
+  </form>
+  
+</body>
+</html> 
