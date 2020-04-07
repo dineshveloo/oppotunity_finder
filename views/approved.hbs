@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Opportunity Finder</title>  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  {{!-- <script src="JS/fte.js"></script> --}}
+  {{!-- <link rel="stylesheet" type="text/css" href="css/reference_css.css">
+  <link rel="stylesheet" type="text/css" href="../css/Capture.css">
+  <script src="../js/calculations.js"></script> --}}
+  
+<style>
+
+    .jumbotron{
+    background-color:  rgb(153, 51, 102);
+    color: white;   
+    font-family: "Montserrat-Black";
+    padding-bottom: 4.5rem;
+}
+
+.img-responsive {
+	filter: grayscale(100%);
+	margin: 0 auto;
+}
+
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+.footer {
+      background-color: #f2f2f2;
+}
+
+.col-sm-4 {
+	padding-top: 9rem;
+	padding-bottom: 9rem;
+}
+ .col-sm-6 {
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+} 
+ 
+
+.navbar-brand {
+  padding-top: 2px; 
+  padding-left: 2px;
+  padding-bottom: 2px;
+}
+.navbar-brand>img {
+  padding-top: 0.25rem;
+  height: 100%;
+  width: auto;
+  padding-bottom: 0.25rem;
+}
+
+
+
+#myInput{
+   
+    width: 230px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 60px;
+   -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  } 
+   #myInput:focus {
+     width:50%;
+   }
+   #search{
+    padding-right: 10px;
+   }
+* {
+    box-sizing: border-box;
+  }
+  
+  input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  input[type=number], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+  
+  #allign{
+    padding-top: 8rem;
+  }
+  th,td{
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  #abc {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    padding-top: 1px;
+    padding-bottom: 80px;
+    
+  }
+  #abc1 {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    
+    
+  }
+
+  
+  .col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+  }
+  .col-md-6{
+    padding-left: 13rem;
+  }
+  
+  .col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+  }
+.form-control:focus{
+border-color:rgb(216, 133, 174);
+}
+  footer {
+
+background-color: rgb(197, 195, 195);
+}
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  
+  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
+    </style>
+
+<script type="text/javascript">
+function goBack() {
+javascript: history.go(-1);
+    location.reload(true);
+}
+</script>
+
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            
+              {{!-- <img  class="navbar-brand" src="C:\Users\chaganti.saireddy\Desktop\Opportunity_Finder_node5MAR2020\views\images\mphasis_logo.jpg"> --}}
+            
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
+                 <ul class="dropdown-menu" role="menu">
+                  <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
+              <li><a href="/user/processViewById"><b>View Process</b></a></li>
+              <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
+              <li><a href="/user/processPrioritization"><b>Process Prioritization</b></a></li>
+                    
+                    
+                 </ul>
+             </li>
+            <li><a href="/user/userManagement">User Management</a></li>
+        <li><a href="/user/About">About</a></li>
+        <li><a href="/user/Contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="jumbotron" id="cp">
+        <div class="container text-center" >
+        <h1 id="pc">Capture Process</h1>
+        <p>Capture Process Related Details</p>
+        
+        </div>
+      </div>
+<center><font color="green"><h1>Approved Successfully</h1></font></center>
+<div class="text-right">
+          
+          
+             <form action="/user/adminHome">   
+             <button type="submit" class="btn btn-success">Back</button>  
+             </form>
+        {{!-- <a href=’javascript:window.location = document.referrer;’>Click here to refresh and view changes</a>  --}}
+          </div>

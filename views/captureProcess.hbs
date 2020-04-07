@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Opportunity Finder</title>  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="JS/fte.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
+  <link rel="stylesheet" type="text/css" href="../css/Capture.css">
+  <script src="../js/calculations.js"></script>
+  
+
+
+
+
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            
+              <img  class="navbar-brand" src="mphasis_logo.jpg">
+            
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
+                 <ul class="dropdown-menu" role="menu">
+                  <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
+              <li><a href="/user/processViewById"><b>View Process</b></a></li>
+              <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
+              <li><a href="/user/processPrioritization"><b>Process Prioritization</b></a></li>
+                    
+                    
+                 </ul>
+             </li>
+            <li><a href="/user/userManagement">User Management</a></li>
+        <li><a href="/user/About">About</a></li>
+        <li><a href="/user/Contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="jumbotron" id="cp">
+        <div class="container text-center" >
+        <h1 id="pc">Capture Process</h1>
+        <p>Capture Process Related Details</p>
+        
+        </div>
+      </div>
+<center><font color="green"><h1>{{viewtitle}}</h1></font></center>
+<div class="text-right">
+          
+          
+                
+             <button type="button" onclick="goBack()" class="btn btn-success">Back</button>  
+        
+          </div>
+<div class="container" id="abc">
+    <div class="row">
+        <div class="col-md-6">
+    
+  <form action="/user/addProcess" method="POST">
+    <div class="row">
+      <div class="col-20">
+        <label for="fname">1. Client Name</label>
+      </div>
+      <div class="col-75">
+        <input type="text-center"  class="form-control" id="cname" maxlength="30" name="clientName" onkeypress="return isAlphabet(event)" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-20">
+        <label for="lname">2. Business Unit</label>
+      </div>
+      <div class="col-75">
+        <input type="text-center" class="form-control" id="busiunit" maxlength="30" name="Buss_Unit" onkeypress="return isAlphabet(event)" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-20">
+        <label for="country">3. Sub Business Unit</label>  
+      </div>
+      <div class="col-75">
+        <input type="text-center" class="form-control" id="subbunit" maxlength="30" name="Sub_Buss_Unit" onkeypress="return isAlphabet(event)" required>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-20">
+          <label for="country">4. Process Name</label>  
+        </div>
+        <div class="col-75">
+          <input type="text-center" class="form-control" id="pname" maxlength="30" name="Proc_Name" onkeypress="return isAlphabet(event)" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-20">
+          <label for="country">5. Process Id</label>  
+        </div>
+        <div class="col-75">
+          <input type="text-center"  class="form-control" id="procid" maxlength="30" name="Proc_Id" required>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-20">
+        <label for="subject">6. Process Description</label>
+      </div>
+      <div class="col-75">
+        <input id="subject" class="form-control"  name="Proc_Desc" style="height:120px" required>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-20">
+          <label for="country">7. Monthly Volume</label>  
+        </div>
+        <div class="col-75">
+            <input type="number-center" class="form-control" oninput="calculate()" onkeypress="return isNumberKey(event)"  id="mv" maxlength="30" name="Mon_Vol" required/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-20">
+          <label for="country">8. AHT(in minutes)</label>  
+        </div>
+        <div class="col-75">
+            <input type="number-center" class="form-control" oninput="calculate()"  onkeypress="return isNumberKey(event)" id="aht" step="any" maxlength="30" name="AHT" required/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-20">
+          <label for="country">9. FTE</label>  
+        </div>
+        <div class="col-75">
+            <input type="number-center"   class="form-control"  id="fte" step="any" maxlength="30" name="FTE" readonly>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-20">
+          <label for="sla">10. SLA</label>
+        </div> 
+        <div class="col-75">
+          <select  class="form-control" id="slacalc" name="SLA" required>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="Less than 8 hrs">Less than 8 hrs</option>
+                     <option value="Less than 12 hrs">Less than 12 hrs</option>
+                     <option value="Less than 24 hrs">Less than 24 hrs</option>
+                     <option value="Less than 48 hrs">Less than 48 hrs</option>
+          </select>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div class="col-md-6">
+    <div class="row">
+        <div class="col-20">
+          <label for="fname">11. TAT</label>
+        </div>
+        <div class="col-75">
+          <select  class="form-control" id="slacalc" name="TAT" required>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="Less than 8 hrs">Less than 8 hrs</option>
+                     <option value="Less than 12 hrs">Less than 12 hrs</option>
+                     <option value="Less than 24 hrs">Less than 24 hrs</option>
+                     <option value="Less than 48 hrs">Less than 48 hrs</option>
+                     </select>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-20">
+            <label for="lname">12. Applications Used</label>
+          </div>
+          <div class="col-75">
+            <input  class="form-control" type="text-center" id="appused" maxlength="150" name="App_Used" required>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-20">
+              <label for="country">13. Documentations of the process</label>  
+            </div>
+            <div class="col-75">
+                  <select  class="form-control" id="docpre" onchange="automation()" name="Doc_Present" required>
+                          <option disabled selected value> -- select an option -- </option>
+                           <option value="0.4">No Documenation</option>
+                           <option value="0.6">Partial Documentation</option>
+                           <option value="0.8">Detailed Documentation</option>
+                          </select>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-20">
+                <label for="country">14. Rule based process</label>  
+              </div>
+              <div class="col-75">
+                      <select class="form-control"  id="rbased" onchange="ap()" name="Rule_Based" required>
+                              <option disabled selected value> -- select an option -- </option>
+                              <option value="0.8">High</option>
+                              <option value="0.5">Medium</option>
+                              <option value="0.2">Low</option>
+                             </select>
+              </div>
+            </div>
+          <div class="row">
+            <div class="col-20">
+              <label for="subject">15. Structure of Input Data</label>
+            </div>
+            <div class="col-75">
+                  <select class="form-control" id="dattype" name="Stuc_Data" required>
+                          <option disabled selected value> -- select an option -- </option>
+                      <option value="Structured">Structured</option>
+                      <option value="Unstructured">Unstructured</option>
+                      <option value="Mix of both">Mix of both</option>
+                     </select>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-20">
+                <label for="country">16. Input data type</label>  
+              </div>
+              <div class="col-75">
+                      <select  class="form-control" id="indat" name="Inp_Data_Type" required>
+                              <option disabled selected value> -- select an option -- </option>
+                          <option value="Digitized">Digitized</option>
+                          <option value="Non Digitized">Non Digitized</option>
+                          <option value="Mix of Both">Mix of both</option>
+                         </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-20">
+                <label for="country">17. Percentage of process amenable for RPA</label>  
+              </div>
+              <div class="col-75">
+                      <input class="form-control" oninput="ap()" onchange="ValidateRange()" onkeyup="validOrPunchTheUser(this)" onkeypress="return isNumberKey(event)" min="0" max="100" type="number-center" step="any" name="Amenable_RPA" id="arpa" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-20">
+                <label for="country">18. Percentage of process amenable for cognitive</label>  
+              </div>
+              <div class="col-75">
+                      <input class="form-control" oninput="ap()" onchange="ValidateRange1()" onkeyup="validOrPunchTheUser(this)"  onkeypress="return isNumberKey(event)" min="0" max="100" type="number-center" step="any" name="Amenable_Cognitive" id="crpa" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-20">
+                <label for="sla">19. Automation Readiness</label>
+              </div>
+              <div class="col-75">
+                      <input class="form-control" type="number-center" step="any" name="Automation_Ready" min="0" max="100" id="Ar" readonly>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-20">
+                <label for="sla">20. Percentage of Automation Potential</label>
+              </div>
+              <div class="col-75">
+                      <input class="form-control" min="0" max="100" id="apot" type="number-center" step="any" name="AP_Perc" readonly>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-20">
+                <label for="sla">21. FTE Benifit</label>
+              </div>
+              <div class="col-75">
+                      <input class="form-control" id="fteb" type="number-center" step="any" name="FTE_Benefit" readonly>
+              </div>
+            </div>
+            
+            
+          </div>
+          </div>
+          <div class="text-center">
+          
+          
+                
+            <input type="submit" class="btn btn-success" value="Next"> 
+        
+          </div>
+          </div>
+          
+             
+          
+        </div>
+        </div>
+          
+  </form>
+  <!-- </div>
+  
+</div>
+
+<footer class="text-center">
+    <div>
+        <a href="Processdiscovery.html">
+            <input type="submit" class="btn btn-success" value="Submit"> 
+        </a>
+        </div>
+  </footer>
+</body>
+</html> -->
