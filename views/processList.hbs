@@ -12,8 +12,22 @@
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
+  <script src="../js/edit.js"></script>
+
+
   
+  {{!-- <style>
+    #sub{
+      padding-right:38rem
+    }
+    #btnedit , #su {
+display:inline-block;
+/**other codes**/
+}
+    
+  </style> --}}
   
+
 
 
 
@@ -77,7 +91,7 @@
     {{!-- <div class="row"> --}}
         <div class="col-md-6 col-sm-4" align="left">
     
-  <form action="/user/addProcess" autocomplete="off">
+  <form action="/user/updateDetails" method="POST">
   
     <div class="row">
       <div class="col-20">
@@ -170,8 +184,12 @@
         <div class="col-20">
           <label for="fname">11. TAT</label>
         </div>
+        
         <div class="col-75">
-          <input  class="form-control" type="text-center" id="tatname" maxlength="50" name="TAT" value="{{process.TAT}}" readonly>
+          <select  class="form-control" id="slacalc" name="TAT" readonly>
+                <option>{{process.TAT}}</option>
+                
+                     </select>
         </div>
       </div>
       <div class="row">
@@ -227,7 +245,7 @@
                 <label for="country">17. Percentage of process amenable for RPA</label>  
               </div>
               <div class="col-75">
-                      <input class="form-control" type="number-center" step="any" name="Amenable_RPA" value="{{process.Amenable_RPA}}" readonly>
+                      <input class="form-control" id="arpa" type="number-center" step="any" name="Amenable_RPA" value="{{process.Amenable_RPA}}" readonly>
               </div>
             </div>
             <div class="row">
@@ -235,7 +253,7 @@
                 <label for="country">18. Percentage of process amenable for cognitive</label>  
               </div>
               <div class="col-75">
-                      <input class="form-control" type="number-center" step="any" name="Amenable_Cognitive" value="{{process.Amenable_Cognitive}}" readonly>
+                      <input class="form-control" id="ac" type="number-center" step="any" name="Amenable_Cognitive" value="{{process.Amenable_Cognitive}}" readonly>
               </div>
             </div>
             <div class="row">
@@ -259,21 +277,22 @@
                 <label for="sla">21. FTE Benifit</label>
               </div>
               <div class="col-75">
-                      <input class="form-control" type="number-center" step="any" name="FTE_Benefit" value="{{process.FTE_Benefit}}" readonly>
+                      <input class="form-control" id="fteb" type="number-center" step="any" name="FTE_Benefit" value="{{process.FTE_Benefit}}" readonly>
               </div>
             </div>
+            <div id="bt">
             
-            
+            </div>
           </div>
-          {{!-- </div> --}}
-          <div class="text-center">
           
           
-                
-            <form action="/user/viewSecond">
-                  <input type="hidden" value="{{this._id}}" name="id">
-               <input type="submit" class="btn btn-success" value="Next">
-               </form> 
+          
+          
+
+            <div class="button-center" id="sub">  
+              <input id="btnEdit" class="btn btn-success" type="button" value="Edit">
+               
+            <input type="submit" class="btn btn-success" value="Next" id="su"> 
         
           </div>
           </div>

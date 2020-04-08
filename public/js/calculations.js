@@ -464,3 +464,13 @@ function isNumberKey(evt){
           //     }
           //   }
           // }
+
+
+        //   document.getElementById('edit').onclick = function() {
+        //     document.getElementById('fte').readOnly =false;
+        //  };
+
+      
+
+
+ 

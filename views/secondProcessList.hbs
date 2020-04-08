@@ -12,9 +12,22 @@
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
-  
+  <script src="../js/edit.js"></script>
+{{!-- <script>
+$(document).ready(function()
+{
+ $('#btnEdit').click(function()
+ {
+   $('#sit').prop('readonly', false);  
+ });
 
-
+ });
+</script> --}}
+<style>
+  #bt{
+    padding-left: 48rem;
+  }
+</style>
 
 
 
@@ -77,13 +90,13 @@
     <div class="row">
         <div class="col-md-6">
     
-  <form action="/user/addProcessTwo" autocomplete="off">
+  <form action="/user/updateDetailsTwo" method="POST">
     <div class="row">
       <div class="col-20">
         <label for="fname">21. Process ID</label>
       </div>
       <div class="col-75">
-        <input type="text-center"  class="form-control" name="Proc_Id" value="{{list.Proc_Id}}" readonly>
+        <input type="text-center"  class="form-control" name="Proc_Id" value="{{secprocess.Proc_Id}}" readonly>
       </div>
     </div>
 
@@ -130,7 +143,7 @@
         <label for="fname">22. Number of applications involved in the process</label>
       </div>
       <div class="col-75">
-        <input type="text-center"  class="form-control"  name="Num_of_apps" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_apps}}"  readonly>
+        <input type="text-center"  class="form-control" id="na" name="Num_of_apps" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_apps}}"  readonly>
       </div>
     </div>
     <div class="row">
@@ -138,7 +151,7 @@
         <label for="lname">23. Number of mainframe applications involved</label>
       </div>
       <div class="col-75">
-        <input type="text-center" class="form-control" name="Num_of_mainframe" onkeypress="return isNumberKey(event)"  value="{{secprocess.Num_of_mainframe}}"  readonly>
+        <input type="text-center" id="nm" class="form-control" name="Num_of_mainframe" onkeypress="return isNumberKey(event)"  value="{{secprocess.Num_of_mainframe}}"  readonly>
       </div>
     </div>
     <div class="row">
@@ -146,7 +159,7 @@
         <label for="country">24. Number of applications to be accessed through Citrix</label>  
       </div>
       <div class="col-75">
-        <input type="text-center" class="form-control"  name="Num_of_Citrix" onkeypress="return isNumberKey(event)"  value="{{secprocess.Num_of_Citrix}}"  readonly>
+        <input type="text-center" class="form-control" id="nc" name="Num_of_Citrix" onkeypress="return isNumberKey(event)"  value="{{secprocess.Num_of_Citrix}}"  readonly>
       </div>
     </div>
     <div class="row">
@@ -155,7 +168,7 @@
         </div>
         <div class="col-75">
            <select  class="form-control" name="Third_party_sites" readonly>
-                <option>{{secprocess.Third_party_sites}}"</option>
+                <option>{{secprocess.Third_party_sites}}</option>
                 
                      
           </select>
@@ -167,7 +180,7 @@
 </label>  
         </div>
         <div class="col-75">
-          <input type="text-center"  class="form-control"  maxlength="30" name="Num_of_scrs" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_scrs}}"  readonly>
+          <input type="text-center" id="ns" class="form-control"  maxlength="30" name="Num_of_scrs" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_scrs}}"  readonly>
         </div>
       </div>
     <div class="row">
@@ -176,7 +189,7 @@
 </label>
       </div>
       <div class="col-75">
-        <input id="subject" class="form-control"  name="Num_of_proccessteps" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_proccessteps}}"  readonly>
+        <input id="subject" class="form-control" id="np" name="Num_of_proccessteps" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_proccessteps}}"  readonly>
       </div>
     </div>
     <div class="row">
@@ -185,7 +198,7 @@
 </label>  
         </div>
         <div class="col-75">
-            <input type="number-center" class="form-control"  onkeypress="return isNumberKey(event)"    name="Num_of_Scenarios" value="{{secprocess.Num_of_Scenarios}}"  readonly/>
+            <input type="number-center" class="form-control" id="ne" onkeypress="return isNumberKey(event)"    name="Num_of_Scenarios" value="{{secprocess.Num_of_Scenarios}}"  readonly/>
         </div>
       </div>
       <div class="row">
@@ -194,7 +207,7 @@
 </label>  
         </div>
         <div class="col-75">
-            <input type="number-center" class="form-control"   onkeypress="return isNumberKey(event)" name="Num_of_Decpoints" value="{{secprocess.Num_of_Decpoints}}"  readonly/>
+            <input type="number-center" class="form-control" id="nd"  onkeypress="return isNumberKey(event)" name="Num_of_Decpoints" value="{{secprocess.Num_of_Decpoints}}"  readonly/>
         </div>
       </div>
       <div class="row">
@@ -203,7 +216,7 @@
 </label>  
         </div>
         <div class="col-75">
-            <input type="number-center" class="form-control" name="Num_of_standardinput" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_standardinput}}"  readonly>
+            <input type="number-center" id="sit" class="form-control" name="Num_of_standardinput" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_standardinput}}"  readonly>
         </div>
       </div>
       <div class="row">
@@ -224,7 +237,7 @@
 </label>
         </div>
         <div class="col-75">
-            <input type="number-center"   class="form-control"  step="any" maxlength="30" name="Num_of_basedcontrols" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_basedcontrols}}"  readonly>
+            <input type="number-center"  id="nda" class="form-control"  step="any" maxlength="30" name="Num_of_basedcontrols" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_basedcontrols}}"  readonly>
         </div>
       </div>
       
@@ -238,7 +251,7 @@
 </label>
           </div>
           <div class="col-75">
-            <input  class="form-control" type="text-center"   name="Num_of_accessprofile" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_accessprofile}}"  readonly>
+            <input  class="form-control" id="nap" type="text-center"   name="Num_of_accessprofile" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_accessprofile}}"  readonly>
           </div>
         </div>
         <div class="row">
@@ -247,7 +260,7 @@
 </label>  
             </div>
             <div class="col-75">
-            <input  class="form-control" type="text-center"  name="Num_of_browsersupp" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_browsersupp}}"  readonly>
+            <input  class="form-control" id="nbs" type="text-center"  name="Num_of_browsersupp" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_browsersupp}}"  readonly>
           </div>
           </div>
           <div class="row">
@@ -277,7 +290,7 @@
                 <label for="country">37. Service Level Agreement of the process?</label>  
               </div>
               <div class="col-75">
-                      <select  class="form-control"  name="Svc_lvl_agr" readonly>
+                      <select  class="form-control" id="sa" name="Svc_lvl_agr" readonly>
                               <option>{{secprocess.Svc_lvl_agr}} </option>
                           
                          </select>
@@ -289,7 +302,7 @@
 </label>  
               </div>
               <div class="col-75">
-                      <input  class="form-control" type="text-center"  name="Num_of_getsignoff" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_getsignoff}}"  readonly>
+                      <input  class="form-control" id="nob" type="text-center"  name="Num_of_getsignoff" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_getsignoff}}"  readonly>
               </div>
             </div>
             <div class="row">
@@ -298,7 +311,7 @@
 </label>  
               </div>
               <div class="col-75">
-                      <input  class="form-control" type="text-center"  name="Num_of_Envsetup" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_Envsetup}}"  readonly>
+                      <input  class="form-control" type="text-center" id="nbt" name="Num_of_Envsetup" onkeypress="return isNumberKey(event)" value="{{secprocess.Num_of_Envsetup}}"  readonly>
               </div>
             </div>
             <div class="row">
@@ -306,7 +319,7 @@
                 <label for="sla">40. Funtional Point ( Ease of Implementation) X- Axis</label>
               </div>
               <div class="col-75">
-                      <input class="form-control" type="number-center" name="Func_point"  value="{{secprocess.Func_point}}"  readonly>
+                      <input class="form-control" id="fp" type="number-center" name="Func_point"  value="{{secprocess.Func_point}}"  readonly>
               </div>
             </div>
             <div class="row">
@@ -315,7 +328,7 @@
 </label>
               </div>
               <div class="col-75">
-                      <input class="form-control"  type="number-center" name="Monthly_effsaving" value="{{secprocess.Monthly_effsaving}}"  readonly>
+                      <input class="form-control" id="mes" type="number-center" name="Monthly_effsaving" value="{{secprocess.Monthly_effsaving}}"  readonly>
               </div>
             </div>
             <div class="row">
@@ -324,7 +337,7 @@
 </label>
               </div>
               <div class="col-75">
-                      <input class="form-control"  type="number-center"  name="Effort" value="{{secprocess.Effort}}"  readonly>
+                      <input class="form-control" id="ef" type="number-center"  name="Effort" value="{{secprocess.Effort}}"  readonly>
               </div>
             </div>
 
@@ -335,18 +348,19 @@
 </label>
               </div>
               <div class="col-75">
-                      <input class="form-control"  type="number-center"  name="Quadrant" value="{{secprocess.Quadrant}}"  readonly>
+                      <input class="form-control" id="Qu" type="number-center"  name="Quadrant" value="{{secprocess.Quadrant}}"  readonly>
               </div>
             </div>
             
             
           </div>
           </div>
-          <div class="text-center">
-          
+          <div class="button-center" id="bt">
+          <input id="btnEdit" class="btn btn-success" type="button" value="Edit">
+
           
                 
-            <input type="submit" class="btn btn-success" value="Submit"> 
+            <input type="submit" class="btn btn-success" value="submit">
         
           </div>
           </div>

@@ -803,25 +803,21 @@ router.get('/list', (req,res) => {
     // else
     // res.render("processViewById",{viewtitle:"Please enter the Process Id"});
         });
-router.get("/approveProcessById/:id",(req,res)=>{
-    // console.log(req)
-  if(req.params.id.match(/^[0-9a-fA-F]{24}$/)){
-      console.log(req.params.id.match(/^[0-9a-fA-F]{24}$/))
-      ProcessModel.findByIdAndUpdate(req.params.id,{Status:"APPROVED"}, (err,doc)=>{
-          console.log(doc)
-        if (!err) {
-            res.render("approved"); 
-           }         
-     else
-       { res.send('Error during updating the record: ' + err);}
-
+        router.get("/approveProcessById",(req,res)=>{
+     
+            ProcessModel.findByIdAndUpdate({_id:req.query.Id},{Status:"APPROVED"}, (err,doc)=>{
+                console.log(req.query.Id)
+                console.log(doc)
+                console.log("after doc")
+              if (!err) {
+                  res.render("approveProcess",{viewtitle:"Approved Successfully"}); 
+                 }         
+           else
+             { res.send('Error during updating the record: ' + err);}
+      
+            });
+       
       });
-  }
-  else{
-    res.render("approveProcess",{viewtitle : "Invalid"})  
-  }
-});
-
 // router.get("/approveProcessById/:id", (req, res)=>{
 //     console.log(req.params.id);
 //     if(req.params.id){
@@ -912,12 +908,15 @@ router.get('/view', (req, res) => {
 
 
     router.get('/viewSecond', (req, res) => {
-        ProcessModel.findById({Proc_Id:req.body.Proc_Id}, (err, doc) => {
+        SecondProcessModel.find({Proc_Id:req.query.Proc_Id}, (err, doc) => {
             
-           
+            console.log(req.body.Proc_Id);
+            console.log(req.query.Proc_Id);
+            console.log(req.params.Proc_Id);
                 if (!err) {
+                
                     
-                res.render("secondProcessList", {viewtitle:"secprocess",secprocess:doc
+                res.render("secondProcessList", {secprocess:doc[0]
                 });
                 //console.log(doc);
                 }
@@ -927,5 +926,120 @@ router.get('/view', (req, res) => {
                 
                //res.send("Process Not Approved");
         });
+        });
+
+
+        router.post("/updateDetails",(req,res)=>{
+
+            var processmodel = new ProcessModel();
+            processmodel.Proc_Desc = req.body.Proc_Desc;
+            processmodel.Mon_Vol = req.body.Mon_Vol;
+            processmodel.AHT = req.body.AHT;
+            processmodel.App_Used = req.body.App_Used;
+            processmodel.Amenable_Cognitive = req.body.Amenable_Cognitive;
+            processmodel. Automation_Ready = req.body.Automation_Ready;
+
+            
+                    var updated_doc={$set: {Proc_Desc:req.body.Proc_Desc, 
+                        Mon_Vol:req.body.Mon_Vol,
+                        AHT:req.body.AHT,
+                        App_Used:req.body.App_Used,
+                        Amenable_Cognitive:req.body.Amenable_Cognitive,
+                        Automation_Ready:req.body.Automation_Ready,
+                                                }}
+                    ProcessModel.updateOne({Proc_Id:req.body.Proc_Id},updated_doc,(err,doc)=>{
+                        console.log(updated_doc);
+                        if (!err) {
+                
+                    
+                            SecondProcessModel.find({Proc_Id:req.body.Proc_Id}, (err, doc) => {
+            
+                                console.log(req.body.Proc_Id);
+                                console.log(req.query.Proc_Id);
+                                console.log(req.params.Proc_Id);
+                                    if (!err) {
+                                    
+                                        
+                                    res.render("secondProcessList", {secprocess:doc[0]
+                                    });
+                                    console.log(doc);
+                                    }
+                                    else
+                                       { res.send('Error: ' + err);}
+                    
+                                    
+                                   //res.send("Process Not Approved");
+                            });
+                            //console.log(doc);
+                            }
+                            else
+                               { res.send('Error: ' + err);}
+                    });
+                
+                // { $set: { <field1>: <value1>, ... } }
+                
+            
+            
+            
+        });
+
+
+        router.post("/updateDetailsTwo",(req,res)=>{
+
+            var secondprocessmodel = new SecondProcessModel();
+            secondprocessmodel.Num_of_apps = req.body.Num_of_apps;
+            secondprocessmodel.Num_of_mainframe = req.body.Num_of_mainframe;
+            secondprocessmodel.Num_of_Citrix = req.body.Num_of_Citrix;
+            secondprocessmodel.Num_of_scrs = req.body.Num_of_scrs;
+            secondprocessmodel.Num_of_proccessteps = req.body.Num_of_proccessteps;
+            secondprocessmodel.Num_of_Scenarios = req.body.Num_of_Scenarios;
+            secondprocessmodel.Num_of_Decpoints = req.body.Num_of_Decpoints;
+            secondprocessmodel.Num_of_standardinput = req.body.Num_of_standardinput;
+            secondprocessmodel.Num_of_basedcontrols = req.body.Num_of_basedcontrols;
+            secondprocessmodel.Num_of_accessprofile = req.body.Num_of_accessprofile;
+            secondprocessmodel.Num_of_browsersupp = req.body.Num_of_browsersupp;
+            secondprocessmodel.Num_of_getsignoff = req.body.Num_of_getsignoff;
+            secondprocessmodel.Num_of_Envsetup = req.body.Num_of_Envsetup;
+            secondprocessmodel.Func_point = req.body.Func_point;
+            secondprocessmodel.Monthly_effsaving = req.body.Monthly_effsaving;
+            secondprocessmodel.Effort = req.body.Effort;
+            secondprocessmodel.Quadrant = req.body.Quadrant;
+
+            
+                    var updated_doc={$set: {Num_of_apps:req.body.Num_of_apps,
+                        Num_of_mainframe:req.body.Num_of_mainframe,
+                        Num_of_Citrix:req.body.Num_of_Citrix,
+                        Num_of_scrs:req.body.Num_of_scrs,
+                        Num_of_proccessteps:req.body.Num_of_proccessteps,
+                        Num_of_Scenarios:req.body.Num_of_Scenarios,
+                        Num_of_Decpoints:req.body.Num_of_Decpoints,
+                        Num_of_standardinput:req.body.Num_of_standardinput,
+                        Num_of_basedcontrols:req.body.Num_of_basedcontrols,
+                        Num_of_accessprofile:req.body.Num_of_accessprofile,
+                        Num_of_browsersupp:req.body.Num_of_browsersupp,
+                        Num_of_getsignoff:req.body.Num_of_getsignoff,
+                        Num_of_Envsetup:req.body.Num_of_Envsetup,
+                        Func_point:req.body.Func_point,
+                        Monthly_effsaving:req.body.Monthly_effsaving,
+                        Effort:req.body.Effort,
+                        Quadrant:req.body.Quadrant,
+                                                }}
+                    SecondProcessModel.updateOne({Proc_Id:req.body.Proc_Id},updated_doc,(err,doc)=>{
+                        console.log(updated_doc);
+                        if(!err)
+                {
+                   res.render("captureProcess",{viewtitle:"Updated Successfully"})
+                }
+                else{
+                    console.log(err);
+                    res.render("captureProcess",{viewerror:"error Occured in proceeding"})
+                }
+                    });
+                
+                // { $set: { <field1>: <value1>, ... } }
+                
+            
+            
+            
         });
 module.exports = router;
