@@ -101,7 +101,7 @@ input[type=text] {
              <button  type="button" onclick="goBack()" class="btn btn-success">Back</button>  
           </div>
           
- <center> <font color="green">{{viewresult}}</font></center>
+ <center> <font color="green">{{viewtitle}}</font></center>
 <div id="allign">
   {{!-- <input type="text" name="search" placeholder="Search.."id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> --}}
   {{!--   <input type="text" name="search" placeholder="Search by client name"  onkeyup="myFunction()" >  --}}
@@ -155,7 +155,11 @@ input[type=text] {
               <td>{{this.Sub_Buss_Unit}}</td>
              <td>{{this.Proc_Name}}</td>
              <td>{{this.Proc_Id}}</td>
-             <td ><a href="/user/approveProcessById/{{this._id}}"> Approve </a></td>
+             <td><form action="/user/approveProcessById">
+                  <input type="hidden" value="{{this._id}}" name="Id">
+               <input type="submit" class="btn btn-success" value="Approve">
+               </form> 
+             </td>
             </tr>
            {{/each}}
           </tbody>
