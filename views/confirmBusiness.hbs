@@ -28,12 +28,12 @@
      -webkit-box-sizing:border-box;
      -moz-box-sizing: border-box;
      text-align: center;
-}/* removing this would make input not to go over cells border, but they would be too short, I want them to fit cells size */
-    table {border-top: 1px solid #110202; border-left: 1px solid #160404;}
-      table td {border-right: 1px solid #021802; border-bottom: 1px solid #020f02;}
-      #projectduration{
-        size: 4;
-      }
+}
+body{
+background-color:rgb(247, 240, 240);
+}
+
+
 </style>
 
 
@@ -100,11 +100,11 @@
     
   <form action="/user/effortcalculation" method="POST">
   
-    <div class="table-responsive">
+    <div class="container">
      
-        <table align="center">
+        <table class="table table-condensed" border="3" align="center">
             <thead>
-   <tr>
+   <tr class="danger">
               <td scope="col"><h3><b>Process Type</b></h3></td>
               <td scope="col"><h3><b>Count</b></h3></td>
 
@@ -112,33 +112,33 @@
    </thead>
    <tbody>
    <tr>
-       <td>Simple</td>
+       <td style="text-align: center; vertical-align: middle;"><b>Simple</b></td>
       <td><input type="text" id="columnbox" name="Simple_Count" value="{{list.Simple_Count}}" readonly></td>
 
    </tr>
    
    <tr>
-       <td>Medium</td>
+       <td style="text-align: center; vertical-align: middle;"><b>Medium</b></td>
       <td><input type="text" id="columnbox" name="Medium_Count" value="{{list.Medium_Count}}" readonly></td>
       
    </tr>
    
    <tr>
-       <td>Complex</td>
+       <td style="text-align: center; vertical-align: middle;"><b>Complex</b></td>
       <td><input type="text" id="columnbox" name="Complex_Count" value="{{list.Complex_Count}}" readonly></td>
       
    </tr>
-      <tr>
-       <td>Total</td>
-      <td><input type="text" id="columnbox" name="Total_Count" value="{{list.Total_Count}}" readonly></td>
+      <tr class="success">
+       <td style="text-align: center; vertical-align: middle;"><b>Total</b></td>
+      <td style="font-weight: bold"><input type="text" id="columnbox" name="Total_Count" value="{{list.Total_Count}}" readonly></td>
       
    </tr>
    </tbody>
 </table>
 </div> 
 <br><br>
-<div align="center">
-<label for="Proj_Dura">Project Duration (in months)</label>
+<div  align="center">
+<label id="cb" for="Proj_Dura"><font size="5"><b>Project Duration </font><font size="4">(in months)</font></b></label>
 <input type="text-center"  maxlength="30" id="projectduration" name="Proj_Dura" required>
  </div>
  <br>

@@ -15,9 +15,7 @@
   
   <style>
     
-input[type="text"]::placeholder {  
-text-align: center; 
-} 
+
 
 input[type=text] {
   width: 130px;
@@ -33,9 +31,9 @@ input[type=text] {
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
 } 
- input[type=text]:focus {
+ {{!-- input[type=text]:focus {
    width:100%;
- }
+ } --}}
 
     
     
@@ -88,7 +86,7 @@ input[type=text] {
           </div>
         </div>
       </nav>
-      <input type="hidden" name="Session_Name" value="{{viewtitle}}">
+      
       <div class="jumbotron" id="cp">
         <div class="container text-center" >
          <h1 id="pc">Approve Process</h1>
@@ -99,46 +97,46 @@ input[type=text] {
       
        <div class="text-right">
              <button  type="button" onclick="goBack()" class="btn btn-success">Back</button>  
-          </div>
-          
- <center> <font color="green">{{viewtitle}}</font></center>
+          </div><br><br>
+          {{!-- <div id="search" align="center">
+        <input type="text" class="fa-fa-search" id="myInput" onkeyup="myFunction()" placeholder="Search Client Name" title="Type in a name"> 
+  <span class="glyphicon glyphicon-search"></span>
+      </div> --}}
+ <center> <font color="green"><h3>{{viewtitle}}</h3></font></center>
 <div id="allign">
   {{!-- <input type="text" name="search" placeholder="Search.."id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> --}}
-  {{!--   <input type="text" name="search" placeholder="Search by client name"  onkeyup="myFunction()" >  --}}
+  {{!--   <input type="text" name="search" placeholder="Search by client name"  onkeyup="myFunction()" >  --}}
 
- <form action="">
+
     
     <div class="table-responsive">
         <table class="table" id="myTable">
           <thead>
             <tr>
               <th>
-                 
-                <input type="text" class="fa-fa-search" id="myInput" onKeyup="clientName()" text-align="center" placeholder="Search Client Name" title="Type in a name" > 
-                   
-                 
-                 
+
+                <input type="text" class="fa-fa-search" id="clientnameinput" onkeyup="clientName()" placeholder="Search" title="Type in a name"> 
+  
               </th>
                <th>
             
-                <input type="text" class="fa-fa-search" id="businessunitinput" onkeyup="businessunit()" text-align="center" placeholder="Search Business Unit" title="Type in a business unit"> 
+                <input type="text" class="fa-fa-search" id="businessunitinput" onkeyup="businessunit()" text-align="center" placeholder="Search" title="Type in a business unit"> 
                    
               </th>
 
               <th>
-                <input type="text" class="fa-fa-search" id="subbusinessunitinput" onkeyup="subbusinessunit()" text-align="center" placeholder="Search Sub Business Unit" title="Type in a sub business unit"> 
+                <input type="text" class="fa-fa-search" id="subbusinessunitinput" onkeyup="subbusinessunit()" text-align="center" placeholder="Search" title="Type in a sub business unit"> 
                    
               </th>
               <th>
-                <input type="text" class="fa-fa-search" id="processnameinput" onkeyup="processname()" text-align="center" placeholder="Search Process Name" title="Type in a process name"> 
+                <input type="text" class="fa-fa-search" id="processnameinput" onkeyup="processname()" text-align="center" placeholder="Search" title="Type in a process name"> 
                    
               </th>
               <th>
-                <input type="text" class="fa-fa-search" id="processidinput" onkeyup="processid()" text-align="center" placeholder="Search Process Id" title="Type in a process id"> 
+                <input type="text" class="fa-fa-search" id="processidinput" onkeyup="processid()" text-align="center" placeholder="Search" title="Type in a process id"> 
                    
               </th>
-              </tr>
-                 
+            </tr>
             <tr>
               <th scope="col">Client Name</th>
               <th scope="col">Business Unit</th>
@@ -168,16 +166,6 @@ input[type=text] {
       
       
     </div>
-    
-    
-            
-            
-          
-          
-          
-          
-          
-  </form>
   
   </div>
   

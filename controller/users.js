@@ -380,9 +380,12 @@ router.post("/effortcalculation",(req,res)=>{
             BA_Cost=Total_BA_Effort*docs[0].BA_Cost*168;
             Arch_Cost=Total_Arch_Effort*docs[0].Arch_Cost*168;
             PM_Cost=Total_PM_Effort*docs[0].PM_Cost*168;
-            PM_Cost=PM_Cost.toFixed(2);
+            // PM_Cost=PM_Cost.toFixed(2);
             DUlead_Cost=Total_DM_Effort*docs[0].DUlead_Cost*168;
             Total_Imp_Cost=Dev_Cost+Srdev_Cost+BA_Cost+Arch_Cost+PM_Cost+DUlead_Cost;
+            
+            // Total_Imp_Cost=Total_Imp_Cost.toFixed(2);
+            console.log(Total_Imp_Cost);
             
 
             res.render("Calculation",
@@ -932,18 +935,34 @@ router.get('/view', (req, res) => {
         router.post("/updateDetails",(req,res)=>{
 
             var processmodel = new ProcessModel();
-            processmodel.Proc_Desc = req.body.Proc_Desc;
-            processmodel.Mon_Vol = req.body.Mon_Vol;
-            processmodel.AHT = req.body.AHT;
-            processmodel.App_Used = req.body.App_Used;
-            processmodel.Amenable_Cognitive = req.body.Amenable_Cognitive;
-            processmodel. Automation_Ready = req.body.Automation_Ready;
-
+            
+    processmodel.Proc_Desc = req.body.Proc_Desc;
+    processmodel.Mon_Vol = req.body.Mon_Vol;
+    processmodel.AHT = req.body.AHT;
+    processmodel.FTE = req.body.FTE;
+    processmodel.SLA = req.body.SLA;
+    processmodel.TAT = req.body.TAT;
+    processmodel.App_Used = req.body.App_Used;
+    processmodel.Doc_Present = req.body.Doc_Present;
+    processmodel.Rule_Based = req.body.Rule_Based;
+    processmodel.Stuc_Data = req.body.Stuc_Data;
+    processmodel.Inp_Data_Type = req.body.Inp_Data_Type;
+    processmodel.Amenable_RPA = req.body.Amenable_RPA;
+    processmodel.Amenable_Cognitive = req.body.Amenable_Cognitive;
+    processmodel. Automation_Ready = req.body.Automation_Ready;
+    processmodel.AP_Perc = req.body.AP_Perc;
+    processmodel.FTE_Benefit = req.body.FTE_Benefit;
             
                     var updated_doc={$set: {Proc_Desc:req.body.Proc_Desc, 
                         Mon_Vol:req.body.Mon_Vol,
                         AHT:req.body.AHT,
+                        SLA:req.body.SLA,
+                        TAT:req.body.TAT,
                         App_Used:req.body.App_Used,
+                        Doc_Present:req.body.Doc_Present,
+                        Rule_Based:req.body.Rule_Based,
+                        Stuc_Data:req.body.Stuc_Data,
+                        Inp_Data_Type:req.body.Inp_Data_Type,
                         Amenable_Cognitive:req.body.Amenable_Cognitive,
                         Automation_Ready:req.body.Automation_Ready,
                                                 }}
@@ -988,35 +1007,44 @@ router.get('/view', (req, res) => {
 
             var secondprocessmodel = new SecondProcessModel();
             secondprocessmodel.Num_of_apps = req.body.Num_of_apps;
-            secondprocessmodel.Num_of_mainframe = req.body.Num_of_mainframe;
-            secondprocessmodel.Num_of_Citrix = req.body.Num_of_Citrix;
-            secondprocessmodel.Num_of_scrs = req.body.Num_of_scrs;
-            secondprocessmodel.Num_of_proccessteps = req.body.Num_of_proccessteps;
-            secondprocessmodel.Num_of_Scenarios = req.body.Num_of_Scenarios;
-            secondprocessmodel.Num_of_Decpoints = req.body.Num_of_Decpoints;
-            secondprocessmodel.Num_of_standardinput = req.body.Num_of_standardinput;
-            secondprocessmodel.Num_of_basedcontrols = req.body.Num_of_basedcontrols;
-            secondprocessmodel.Num_of_accessprofile = req.body.Num_of_accessprofile;
-            secondprocessmodel.Num_of_browsersupp = req.body.Num_of_browsersupp;
-            secondprocessmodel.Num_of_getsignoff = req.body.Num_of_getsignoff;
-            secondprocessmodel.Num_of_Envsetup = req.body.Num_of_Envsetup;
-            secondprocessmodel.Func_point = req.body.Func_point;
-            secondprocessmodel.Monthly_effsaving = req.body.Monthly_effsaving;
-            secondprocessmodel.Effort = req.body.Effort;
-            secondprocessmodel.Quadrant = req.body.Quadrant;
-
+    secondprocessmodel.Num_of_mainframe = req.body.Num_of_mainframe;
+    secondprocessmodel.Num_of_Citrix = req.body.Num_of_Citrix;
+    secondprocessmodel.Third_party_sites = req.body.Third_party_sites;
+    secondprocessmodel.Num_of_scrs = req.body.Num_of_scrs;
+    secondprocessmodel.Num_of_proccessteps = req.body.Num_of_proccessteps;
+    secondprocessmodel.Num_of_Scenarios = req.body.Num_of_Scenarios;
+    secondprocessmodel.Num_of_Decpoints = req.body.Num_of_Decpoints;
+    secondprocessmodel.Num_of_standardinput = req.body.Num_of_standardinput;
+    secondprocessmodel.Intr_dynamic_table = req.body.Intr_dynamic_table;
+    secondprocessmodel.Num_of_basedcontrols = req.body.Num_of_basedcontrols;
+    secondprocessmodel.Num_of_accessprofile = req.body.Num_of_accessprofile;
+    secondprocessmodel.Num_of_browsersupp = req.body.Num_of_browsersupp;
+    secondprocessmodel.Operation_stability = req.body.Operation_stability;
+    secondprocessmodel.Freq_change = req.body.Freq_change;
+    secondprocessmodel.Svc_lvl_agr = req.body.Svc_lvl_agr;
+    secondprocessmodel.Num_of_getsignoff = req.body.Num_of_getsignoff;
+    secondprocessmodel.Num_of_Envsetup = req.body.Num_of_Envsetup;
+    secondprocessmodel.Func_point = req.body.Func_point;
+    secondprocessmodel.Monthly_effsaving = req.body.Monthly_effsaving;
+    secondprocessmodel.Effort = req.body.Effort;
+    secondprocessmodel.Quadrant = req.body.Quadrant;
             
                     var updated_doc={$set: {Num_of_apps:req.body.Num_of_apps,
                         Num_of_mainframe:req.body.Num_of_mainframe,
                         Num_of_Citrix:req.body.Num_of_Citrix,
+                        Third_party_sites:req.body.Third_party_sites,
                         Num_of_scrs:req.body.Num_of_scrs,
                         Num_of_proccessteps:req.body.Num_of_proccessteps,
                         Num_of_Scenarios:req.body.Num_of_Scenarios,
                         Num_of_Decpoints:req.body.Num_of_Decpoints,
                         Num_of_standardinput:req.body.Num_of_standardinput,
+                        Intr_dynamic_table:req.body.Intr_dynamic_table,
                         Num_of_basedcontrols:req.body.Num_of_basedcontrols,
                         Num_of_accessprofile:req.body.Num_of_accessprofile,
                         Num_of_browsersupp:req.body.Num_of_browsersupp,
+                        Operation_stability:req.body.Operation_stability,
+                        Freq_change:req.body.Freq_change,
+                        Svc_lvl_agr:req.body.Svc_lvl_agr,
                         Num_of_getsignoff:req.body.Num_of_getsignoff,
                         Num_of_Envsetup:req.body.Num_of_Envsetup,
                         Func_point:req.body.Func_point,

@@ -13,7 +13,13 @@
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
   <script src="../js/edit.js"></script>
+<script>
+  $(document).ready(function() {  
 
+   $('#slacalc option:contains("HTML")').attr("disabled","disabled");
+
+});​
+</script>
 
   
   {{!-- <style>
@@ -170,8 +176,13 @@ display:inline-block;
           <label for="sla">10. SLA</label>
         </div>
         <div class="col-75">
-          <select  class="form-control" id="slacalc" name="SLA" readonly>
+          <select  class="form-control" id="slacalc" name="SLA">
                 <option>{{process.SLA}}</option>
+                {{!-- <option readonly>{{process.SLA}}</option> --}}
+                <option id="1" value="Less than 8 hrs" disabled>Less than 8 hrs</option>
+                     <option id="2" value="Less than 12 hrs" disabled>Less than 12 hrs</option>
+                     <option id="3" value="Less than 24 hrs" disabled>Less than 24 hrs</option>
+                     <option id="4" value="Less than 48 hrs" disabled>Less than 48 hrs</option>
                 
           </select>
         </div>
@@ -186,8 +197,13 @@ display:inline-block;
         </div>
         
         <div class="col-75">
-          <select  class="form-control" id="slacalc" name="TAT" readonly>
-                <option>{{process.TAT}}</option>
+          <select  class="form-control" id="TAT" name="TAT">
+                
+                <option> {{process.TAT}} </option>
+                <option id="5" value="Less than 8 hrs" disabled>Less than 8 hrs</option>
+                     <option id="6" value="Less than 12 hrs" disabled>Less than 12 hrs</option>
+                     <option id="7" value="Less than 24 hrs" disabled>Less than 24 hrs</option>
+                     <option id="8" value="Less than 48 hrs" disabled>Less than 48 hrs</option>
                 
                      </select>
         </div>
@@ -205,8 +221,12 @@ display:inline-block;
               <label for="country">13. Documentations of the process</label>  
             </div>
             <div class="col-75">
-                  <select  class="form-control" id="docpre" name="Doc_Present" readonly>
-                          <option>{{process.Doc_Present}}</option>
+                  <select  class="form-control" id="docpre" name="Doc_Present">
+                          
+                          <option> {{process.Doc_Present}} </option>
+                           <option id="9" value="No Documenation" disabled>No Documenation</option>
+                           <option id="10" value="Partial Documentation" disabled>Partial Documentation</option>
+                           <option id="11" value="Detailed Documentation" disabled>Detailed Documentation</option>
                           </select>
             </div>
           </div>
@@ -215,8 +235,13 @@ display:inline-block;
                 <label for="country">14. Rule based process</label>  
               </div>
               <div class="col-75">
-                      <select class="form-control"  id="rbased" name="Rule_Based" readonly>
-                             <option>{{process.Rule_Based}}</option>
+                      <select class="form-control"  id="rbased" name="Rule_Based">
+                             
+                             <option>{{process.Rule_Based}} </option>
+                              <option id="12" value="High" disabled>High</option>
+                              <option id="13" value="Medium" disabled>Medium</option>
+                              <option id="14" value="Low" disabled>Low</option>
+
                              </select>
               </div>
             </div>
@@ -225,8 +250,12 @@ display:inline-block;
               <label for="subject">15. Structure of Input Data</label>
             </div>
             <div class="col-75">
-                  <select class="form-control" id="dattype" name="Stuc_Data" readonly>
+                  <select class="form-control" id="dattype" name="Stuc_Data">
+                          
                           <option>{{process.Stuc_Data}}</option>
+                      <option id="15" value="Structured" disabled>Structured</option>
+                      <option id="16" value="Unstructured" disabled>Unstructured</option>
+                      <option id="17" value="Mix of both" disabled>Mix of both</option>
                      </select>
             </div>
           </div>
@@ -235,8 +264,13 @@ display:inline-block;
                 <label for="country">16. Input data type</label>  
               </div>
               <div class="col-75">
-                      <select  class="form-control" id="indat" name="Inp_Data_Type" readonly>
+                      <select  class="form-control" id="indat" name="Inp_Data_Type">
+                               
                                <option>{{process.Inp_Data_Type}}</option>
+                          <option id="18" value="Digitized" disabled>Digitized</option>
+                          <option id="19" value="Non Digitized" disabled>Non Digitized</option>
+                          <option id="20" value="Mix of Both" disabled>Mix of both</option>
+
                          </select>
               </div>
             </div>

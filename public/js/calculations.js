@@ -18,19 +18,43 @@ function calculate() {
 function automation(){
     var selObj  = document.getElementById('docpre');
     var selValue = selObj.options[selObj.selectedIndex].value;
-    document.getElementById("Ar").value = selValue*100;
+    var documentation_value;
+    switch(selValue) {
+      case "No Documenation":
+        documentation_value = 0.4;
+        break;
+      case "Partial Documentation":
+        documentation_value = 0.6;
+        break;
+      case "Detailed Documentation":
+        documentation_value = 0.8;
+        break;
+    }
+    document.getElementById("Ar").value = documentation_value*100;
     fte_benifit();
 
 };
 
 function ap(){
     var selObj1  = document.getElementById("rbased");
-    var selValue1 = selObj1.options[selObj1.selectedIndex].value;
+    var rulebased_value_str = selObj1.options[selObj1.selectedIndex].value;
+    var rulebased_value_int;
+    switch(rulebased_value_str) {
+      case "Low":
+        rulebased_value_int = 0.2;
+        break;
+      case "Medium":
+        rulebased_value_int = 0.5;
+        break;
+      case "High":
+        rulebased_value_int = 0.8;
+        break;
+    }
     var arpa = document.getElementById('arpa').value;
     var arpa1 = arpa/100;
     var crpa = document.getElementById('crpa').value;
     var crpa1 = crpa/100;
-    var result1 = (arpa1*selValue1*100)+(crpa1*(crpa/2));
+    var result1 = (arpa1*rulebased_value_int*100)+(crpa1*(crpa/2));
     result2 = result1.toFixed(2);
     // var result2 = crpa/2;
     // var result3 = crpa*result2;
@@ -177,7 +201,7 @@ function isNumberKey(evt){
     
     function clientName() {
         var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
+        input = document.getElementById("clientnameinput");
         filter = input.value.toUpperCase();
         table = document.getElementById("myTable");
         tr = table.getElementsByTagName("tr");

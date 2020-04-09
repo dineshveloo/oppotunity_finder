@@ -167,8 +167,12 @@ $(document).ready(function()
           <label for="country">25. Are there any 3rd Party Sites involved  in the process</label>  
         </div>
         <div class="col-75">
-           <select  class="form-control" name="Third_party_sites" readonly>
+           <select id="tps" class="form-control" name="Third_party_sites">
+                
                 <option>{{secprocess.Third_party_sites}}</option>
+                <option id="21" value="Yes" disabled>Yes</option>
+                     <option id="22" value="No" disabled>No</option>
+                     
                 
                      
           </select>
@@ -225,8 +229,11 @@ $(document).ready(function()
 </label>
         </div> 
         <div class="col-75">
-          <select  class="form-control"  name="Intr_dynamic_table" readonly>
+          <select id="dt" class="form-control"  name="Intr_dynamic_table">
+                
                 <option>{{secprocess.Intr_dynamic_table}} </option>
+                <option value="Less than 8 hrs"  id="23" disabled>Less than 8 hrs</option>
+                     <option value="Less than 12 hrs" id="24" disabled>Less than 12 hrs</option>
                 
           </select>
         </div>
@@ -268,8 +275,11 @@ $(document).ready(function()
                 <label for="country">35. Operational stability of the applications and how often is it changed?</label>  
               </div>
               <div class="col-75">
-                      <select class="form-control"   name="Operation_stability" readonly>
-                              <option >{{secprocess.Operation_stability}} </option>
+                      <select class="form-control" id="os"  name="Operation_stability">
+                              
+                              <option>{{secprocess.Operation_stability}}</option>
+                              <option id="25" value="Planned Downtime" disabled>Planned Downtime</option>
+                              <option id="26" value="Once in a month" disabled>Once in a month</option>
                               
                              </select>
               </div>
@@ -279,8 +289,12 @@ $(document).ready(function()
               <label for="subject">36. Frequency of business process Change</label>
             </div>
             <div class="col-75">
-                  <select class="form-control" name="Freq_change" readonly>
+                  <select id="fbc" class="form-control" name="Freq_change">
+                          
                           <option>{{secprocess.Freq_change}}</option>
+                      <option id="27" value="Frequently" disabled>Frequently</option>
+                      <option id="28" value="Infrequently" disabled>Infrequently</option>
+
                       
                      </select>
             </div>
@@ -290,8 +304,13 @@ $(document).ready(function()
                 <label for="country">37. Service Level Agreement of the process?</label>  
               </div>
               <div class="col-75">
-                      <select  class="form-control" id="sa" name="Svc_lvl_agr" readonly>
-                              <option>{{secprocess.Svc_lvl_agr}} </option>
+                      <select  class="form-control" id="sa" name="Svc_lvl_agr">
+                              
+                              <option>{{secprocess.Svc_lvl_agr}}</option>
+                          <option id="29" value="Less than 8 hrs" disabled>Less than 8 hrs</option>
+                          <option id="30" value="Less than or equal to 24 hrs" disabled>Less than or equal to 24 hrs</option>
+                          <option id="31" value="More than 24 hrs" disabled>More than 24 hrs</option>
+
                           
                          </select>
               </div>
