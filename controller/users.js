@@ -656,6 +656,9 @@ catch(e){
       });
 }   
 });
+
+
+
 router.post("/addProcessTwo", (req, res)=>{
     var secondprocessmodel = new SecondProcessModel();
     secondprocessmodel.Proc_Id = req.body.Proc_Id;
@@ -695,7 +698,7 @@ router.post("/addProcessTwo", (req, res)=>{
         if (err){
             if (err.name === 'MongoError' && err.code === 11000) {
                 // Duplicate username
-                return res.status(422).send({ success: false, message: 'Process already exist!' });
+                return res.status(422).send({ success: false, message: 'Process already exists!' });
               }
         // res.redirect("/user/processlist");
         // console.log("success");
