@@ -68,10 +68,8 @@ $(document).ready(function()
    $('#nbs').prop('readonly', false); 
    $('#nob').prop('readonly', false);
    $('#nbt').prop('readonly', false); 
-   $('#fp').prop('readonly', false); 
-   $('#mes').prop('readonly', false); 
-   $('#ef').prop('readonly', false); 
-   $('#Qu').prop('readonly', false);
+   
+   
    
 
 

@@ -60,14 +60,19 @@ input[type=text] {
   width: 100%;
   
   font-size: 13.8px;
-  background-color: white;
-  background-image: url('searchicon.png');
-  background-position: 10px 10px; 
+   
   background-repeat: no-repeat;
-  padding: 10px 10px 12px 10px;
+  
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
 } 
+body{
+
+background-color:rgb(247, 240, 240);
+}
+#example-select-all{
+  color: white;
+}
 
 
  
@@ -154,31 +159,31 @@ input[type=text] {
              <tr>
               <th>
                  
-                <input type="text" class="fa-fa-search" id="myInput" onKeyup="clientName2()" text-align="center" placeholder="Search Client Name" title="Type in a name" > 
-                   <span class="glyphicon glyphicon-search"></span>
+                <input type="text" class="fa-fa-search" id="myInput" onKeyup="clientName2()" text-align="center" placeholder="Search" title="Type in a name" > 
+                   
                  
                  
               </th>
                <th>
             
-                <input type="text" class="fa-fa-search" id="businessunitinput" onkeyup="businessunit2()" text-align="center" placeholder="Search Business Unit" title="Type in a business unit"> 
+                <input type="text" class="fa-fa-search" id="businessunitinput" onkeyup="businessunit2()" text-align="center" placeholder="Search" title="Type in a business unit"> 
                    {{!-- <span class="glyphicon glyphicon-search"></span> --}}
               </th>
 
               <th>
-                <input type="text" class="fa-fa-search" id="subbusinessunitinput" onkeyup="subbusinessunit2()" text-align="center"  placeholder=" Search Sub Business Unit" title="Type in a sub business unit"> 
+                <input type="text" class="fa-fa-search" id="subbusinessunitinput" onkeyup="subbusinessunit2()" text-align="center"  placeholder="Search" title="Type in a sub business unit"> 
                    
               </th>
               <th>
-                <input type="text" class="fa-fa-search" id="processnameinput" onkeyup="processname2()" text-align="center" placeholder="Search Process Name" title="Type in a process name"> 
+                <input type="text" class="fa-fa-search" id="processnameinput" onkeyup="processname2()" text-align="center" placeholder="Search" title="Type in a process name"> 
                    
               </th>
               <th>
-                <input type="text" class="fa-fa-search" id="processidinput" onkeyup="processid2()" text-align="center" placeholder="Search Process Id" title="Type in a process id"> 
+                <input type="text" class="fa-fa-search" id="processidinput" onkeyup="processid2()" text-align="center" placeholder="Search" title="Type in a process id"> 
                    
               </th>
               <th>
-                <input type="text" class="fa-fa-search" id="classificationinput" onkeyup="classification()" text-align="center" placeholder="Search Classification" title="Type in a classification">
+                <input type="text" class="fa-fa-search" id="classificationinput" onkeyup="classification()" text-align="center" placeholder="Search" title="Type in a classification">
                    
               </th>
               <th>

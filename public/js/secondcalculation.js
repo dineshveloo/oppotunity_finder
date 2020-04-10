@@ -121,7 +121,7 @@ function funtional_point(){
     var aht = document.getElementById('aht_2').value;
     var app = document.getElementById('apot_2').value;
     var mes = document.getElementById('meffs');
-    var output = aht * app * monthlyvolume;
+    var output = aht * app/100 * monthlyvolume;
     var output1 = output/60;
     var output2 = Math.ceil(output1);
     mes.value = output2;
@@ -175,16 +175,16 @@ function funtional_point(){
     
     var qua = document.getElementById('qua');
     var quaout; 
-    if ((funcPoint > 55) && (mes > 1500)) {
+    if ((funcPoint >= 55) && (mes >= 1500)) {
       quaout = "Big Bets";
     }
-    if ((funcPoint > 55) && (mes < 1500)) {
+    if ((funcPoint >= 55) && (mes <= 1500)) {
       quaout = "Defer";
     }
-    if ((funcPoint < 55) && (mes < 1500)) {
+    if ((funcPoint <= 55) && (mes <= 1500)) {
       quaout = "Low Hanging Fruits";
     }
-    if ((funcPoint < 55) && (mes > 1500)) {
+    if ((funcPoint <= 55) && (mes >= 1500)) {
       quaout = "Quick Wins";
     }
     // switch(true){
