@@ -12,13 +12,9 @@
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
+  <script src="../js/secondcalculation.js"></script>
   
-
-
-
-
-
-
+  
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -126,11 +122,32 @@
       </div>
     </div>
     <div class="row">
+    <div class="col-75">
+            <input type="number=center"  onloadeddata="monthly_savings()" class="form-control" id="mv_2" maxlength="30" value="{{list.Mon_Vol}}" name="Mon_Vol" readonly>
+        </div>
+        </div>
+         <div class="row">
+        {{!-- <div class="col-20">
+          <label for="country">8. AHT(in minutes)</label>  
+        </div> --}}
+        <div class="col-75">
+            <input type="number-center"  onloadeddata="monthly_savings()" class="form-control" id="aht_2" step="any" maxlength="30" value="{{list.AHT}}" name="AHT" readonly/>
+        </div>
+      </div>
+      <div class="row">
+              {{!-- <div class="col-20">
+                <label for="sla">20. Percentage of Automation Potential</label>
+              </div> --}}
+              <div class="col-75">
+                      <input class="form-control" onloadeddata="monthly_savings()"  min="0" max="100" id="apot_2" type="number-center" value="{{list.AP_Perc}}" step="any" name="AP_Perc" readonly>
+              </div>
+            </div>
+    <div class="row">
       <div class="col-20">
         <label for="fname">22. Number of applications involved in the process</label>
       </div>
       <div class="col-75">
-        <input type="text-center"  class="form-control"  name="Num_of_apps" onkeypress="return isNumberKey(event)"  required>
+        <input type="text-center" oninput="funtional_point()" id="noa" class="form-control"  name="Num_of_apps" onkeypress="return isNumberKey(event)"  required>
       </div>
     </div>
     <div class="row">
@@ -138,7 +155,7 @@
         <label for="lname">23. Number of mainframe applications involved</label>
       </div>
       <div class="col-75">
-        <input type="text-center" class="form-control" name="Num_of_mainframe" onkeypress="return isNumberKey(event)"  required>
+        <input type="text-center" oninput="funtional_point()" id="nom" class="form-control" name="Num_of_mainframe" onkeypress="return isNumberKey(event)"  required>
       </div>
     </div>
     <div class="row">
@@ -146,7 +163,7 @@
         <label for="country">24. Number of applications to be accessed through Citrix</label>  
       </div>
       <div class="col-75">
-        <input type="text-center" class="form-control"  name="Num_of_Citrix" onkeypress="return isNumberKey(event)"  required>
+        <input type="text-center" oninput="funtional_point()" id= "noc" class="form-control"  name="Num_of_Citrix" onkeypress="return isNumberKey(event)"  required>
       </div>
     </div>
     <div class="row">
@@ -154,7 +171,7 @@
           <label for="country">25. Are there any 3rd Party Sites involved  in the process</label>  
         </div>
         <div class="col-75">
-           <select  class="form-control" name="Third_party_sites" required>
+           <select  id="tps" onchange="funtional_point()" class="form-control" name="Third_party_sites" required>
                 <option disabled selected value> -- select an option -- </option>
                 <option value="Yes">Yes</option>
                      <option value="No">No</option>
@@ -168,7 +185,7 @@
 </label>  
         </div>
         <div class="col-75">
-          <input type="text-center"  class="form-control"  maxlength="30" name="Num_of_scrs" onkeypress="return isNumberKey(event)" required>
+          <input type="text-center" oninput="funtional_point()" id="nos" class="form-control"  maxlength="30" name="Num_of_scrs" onkeypress="return isNumberKey(event)" required>
         </div>
       </div>
     <div class="row">
@@ -177,7 +194,7 @@
 </label>
       </div>
       <div class="col-75">
-        <input id="subject" class="form-control"  name="Num_of_proccessteps" onkeypress="return isNumberKey(event)" required>
+        <input id="subject" oninput="funtional_point()" class="form-control"  name="Num_of_proccessteps" onkeypress="return isNumberKey(event)" required>
       </div>
     </div>
     <div class="row">
@@ -186,7 +203,7 @@
 </label>  
         </div>
         <div class="col-75">
-            <input type="number-center" class="form-control"  onkeypress="return isNumberKey(event)"    name="Num_of_Scenarios" required/>
+            <input type="number-center" oninput="funtional_point()"  id="nosc" class="form-control"  onkeypress="return isNumberKey(event)"    name="Num_of_Scenarios" required/>
         </div>
       </div>
       <div class="row">
@@ -195,7 +212,7 @@
 </label>  
         </div>
         <div class="col-75">
-            <input type="number-center" class="form-control"   onkeypress="return isNumberKey(event)" name="Num_of_Decpoints" required/>
+            <input type="number-center" oninput="funtional_point()" id="nod" class="form-control"   onkeypress="return isNumberKey(event)" name="Num_of_Decpoints" required/>
         </div>
       </div>
       <div class="row">
@@ -204,7 +221,7 @@
 </label>  
         </div>
         <div class="col-75">
-            <input type="number-center" class="form-control" name="Num_of_standardinput" onkeypress="return isNumberKey(event)" required>
+            <input type="number-center" oninput="funtional_point()" id="nost" class="form-control" name="Num_of_standardinput" onkeypress="return isNumberKey(event)" required>
         </div>
       </div>
       <div class="row">
@@ -213,10 +230,10 @@
 </label>
         </div> 
         <div class="col-75">
-          <select  class="form-control"  name="Intr_dynamic_table" required>
+          <select  class="form-control" onchange="funtional_point()" id="indt"  name="Intr_dynamic_table" required>
                 <option disabled selected value> -- select an option -- </option>
-                <option value="Less than 8 hrs">Less than 8 hrs</option>
-                     <option value="Less than 12 hrs">Less than 12 hrs</option>
+                <option value="Yes">Yes</option>
+                     <option value="No">No</option>
                      
           </select>
         </div>
@@ -227,7 +244,7 @@
 </label>
         </div>
         <div class="col-75">
-            <input type="number-center"   class="form-control"  step="any" maxlength="30" name="Num_of_basedcontrols" onkeypress="return isNumberKey(event)" required>
+            <input type="number-center" oninput="funtional_point()" id="nob" class="form-control"  step="any" maxlength="30" name="Num_of_basedcontrols" onkeypress="return isNumberKey(event)" required>
         </div>
       </div>
       
@@ -241,7 +258,7 @@
 </label>
           </div>
           <div class="col-75">
-            <input  class="form-control" type="text-center"   name="Num_of_accessprofile" onkeypress="return isNumberKey(event)" required>
+            <input  class="form-control" oninput="funtional_point()" type="text-center" id="noap"  name="Num_of_accessprofile" onkeypress="return isNumberKey(event)" required>
           </div>
         </div>
         <div class="row">
@@ -250,7 +267,7 @@
 </label>  
             </div>
             <div class="col-75">
-            <input  class="form-control" type="text-center"  name="Num_of_browsersupp" onkeypress="return isNumberKey(event)" required>
+            <input  class="form-control" oninput="funtional_point()" type="text-center" id="nbs" name="Num_of_browsersupp" onkeypress="return isNumberKey(event)" required>
           </div>
           </div>
           <div class="row">
@@ -258,7 +275,7 @@
                 <label for="country">35. Operational stability of the applications and how often is it changed?</label>  
               </div>
               <div class="col-75">
-                      <select class="form-control"   name="Operation_stability" required>
+                      <select class="form-control" onchange="funtional_point()" id="opst"  name="Operation_stability" required>
                               <option disabled selected value> -- select an option -- </option>
                               <option value="Planned Downtime">Planned Downtime</option>
                               <option value="Once in a month">Once in a month</option>
@@ -270,7 +287,7 @@
               <label for="subject">36. Frequency of business process Change</label>
             </div>
             <div class="col-75">
-                  <select class="form-control" name="Freq_change" required>
+                  <select class="form-control"  onchange="funtional_point()" id="freqch" name="Freq_change" required>
                           <option disabled selected value> -- select an option -- </option>
                       <option value="Frequently">Frequently</option>
                       <option value="Infrequently">Infrequently</option>
@@ -283,7 +300,7 @@
                 <label for="country">37. Service Level Agreement of the process?</label>  
               </div>
               <div class="col-75">
-                      <select  class="form-control"  name="Svc_lvl_agr" required>
+                      <select  class="form-control" onchange="funtional_point()" id="svc" name="Svc_lvl_agr" required>
                               <option disabled selected value> -- select an option -- </option>
                           <option value="Less than 8 hrs">Less than 8 hrs</option>
                           <option value="Less than or equal to 24 hrs">Less than or equal to 24 hrs</option>
@@ -297,7 +314,7 @@
 </label>  
               </div>
               <div class="col-75">
-                      <input  class="form-control" type="text-center"  name="Num_of_getsignoff" onkeypress="return isNumberKey(event)" required>
+                      <input  class="form-control" oninput="funtional_point()" type="text-center" id="nog"  name="Num_of_getsignoff" onkeypress="return isNumberKey(event)" required>
               </div>
             </div>
             <div class="row">
@@ -306,7 +323,7 @@
 </label>  
               </div>
               <div class="col-75">
-                      <input  class="form-control" type="text-center"  name="Num_of_Envsetup" onkeypress="return isNumberKey(event)" required>
+                      <input  class="form-control" oninput="funtional_point()" type="text-center" id="noes"  name="Num_of_Envsetup" onkeypress="return isNumberKey(event)" required>
               </div>
             </div>
             <div class="row">
@@ -314,7 +331,7 @@
                 <label for="sla">40. Funtional Point ( Ease of Implementation) X- Axis</label>
               </div>
               <div class="col-75">
-                      <input class="form-control" type="number-center" name="Func_point"  required>
+                      <input class="form-control"  type="number-center" id="funp" name="Func_point"  readonly>
               </div>
             </div>
             <div class="row">
@@ -323,7 +340,7 @@
 </label>
               </div>
               <div class="col-75">
-                      <input class="form-control"  type="number-center" name="Monthly_effsaving" required>
+                      <input class="form-control"  type="number-center" id="meffs" name="Monthly_effsaving" required>
               </div>
             </div>
             <div class="row">
@@ -332,7 +349,7 @@
 </label>
               </div>
               <div class="col-75">
-                      <input class="form-control"  type="number-center"  name="Effort" required>
+                      <input class="form-control"  type="number-center" id="effo" name="Effort" required>
               </div>
             </div>
 
@@ -343,7 +360,7 @@
 </label>
               </div>
               <div class="col-75">
-                      <input class="form-control"  type="number-center"  name="Quadrant" required>
+                      <input class="form-control"  type="number-center" id="qua" name="Quadrant" required>
               </div>
             </div>
             

@@ -64,7 +64,7 @@ function ap(){
     document.getElementById("apot").value = result2;
     fte_benifit();
 
-}
+};
 function fte_benifit(){
     var ap = document.getElementById('apot').value/100;
     var fte = document.getElementById('fte').value;
@@ -73,7 +73,192 @@ function fte_benifit(){
     var final = Math.ceil(result2);
     resulta.value = final;  
 
-}
+};
+
+
+// function funtional_point(){
+//   var a = 2;
+//   var b = 4;
+//   var c = 4;
+//   var d = 5;
+//   var e = 0.5;
+//   var f = 0.2;
+//   var g = 4;
+//   var h = 0.5;
+//   var i = 4;
+//   var j = 1;
+//   var k = 0.5;
+//   var l = 4;
+//   var m = 2.5;
+//   var n = 2.5;
+//   var o = 10;
+//   var p = 4;
+//   var q = 2.5;
+//   var r = 2.5;
+//   var Num_of_apps = document.getElementById('Num_of_app').value;
+//   var Num_of_mainframe = document.getElementById('Num_of_mainfram').value;
+//   var Num_of_Citrix = document.getElementById('Num_of_Citri').value;
+//   var Third_party_sites = document.getElementById('Third_party_site');
+//   var Third_party_sites_str = Third_party_sites.options[Third_party_sites.selectedIndex].value;
+//   var Third_party_sites_int;
+//   switch(Third_party_sites_str){
+//     case "Yes":
+//         Third_party_sites_int = 1;
+//       break;
+//     case "No":
+//         Third_party_sites_int = 0;
+//       break;
+    
+//   }
+//   var Num_of_scrs = document.getElementById('Num_of_scr').value;
+//   var Num_of_proccessteps = document.getElementById('subject').value;
+//   var Num_of_Scenarios = document.getElementById('Num_of_Scenario').value;
+//   var Num_of_Decpoints = document.getElementById('Num_of_Decpoint').value;
+//   var Num_of_standardinput = document.getElementById('Num_of_standardinpu').value;
+//   var Intr_dynamic_table = document.getElementById('Intr_dynamic_tabl');
+//   var Intr_dynamic_table_str = Intr_dynamic_table.options[Intr_dynamic_table.selectedIndex].value;
+//   var Intr_dynamic_table_int;
+//   switch(Intr_dynamic_table_str){
+//     case "Yes":
+//       Intr_dynamic_table_int = 1;
+//       break;
+//     case "No":
+//       Intr_dynamic_table_int = 0;
+//       break;
+    
+//   }
+//   var Num_of_basedcontrols = document.getElementById('Num_of_basedcontrol').value;
+//   var Num_of_accessprofiles = document.getElementById('Num_of_accessprofile').value;
+//   var Num_of_browsersupp = document.getElementById('Num_of_browsersup').value;
+//   var Operation_stability = document.getElementById('Operation_stabilit');
+//   var Operation_stability_str = Operation_stability.options[Operation_stability.selectedIndex].value;
+//   var Operation_stability_int;
+//   switch(Operation_stability_str){
+//     case "Planned Downtime":
+//       Operation_stability_int = 0;
+//       break;
+//     case "Once in a month":
+//       Operation_stability_int = 1;
+//       break;
+    
+//   }
+
+//   var Freq_change = document.getElementById('Freq_chang');
+//   var Freq_change_str =Freq_change.options[Freq_change.selectedIndex].value;
+//   var Freq_change_int;
+//   switch(Freq_change_str){
+//     case "Frequently":
+//       Freq_change_int = 1;
+//       break;
+//     case "Infrequently":
+//       Freq_change_int = 0;
+//       break;
+    
+//   }
+//   var Svc_lvl_agr = document.getElementById('Svc_lvl_ag');
+//   var Svc_lvl_agr_str =Svc_lvl_agr.options[Svc_lvl_agr.selectedIndex].value;
+//   var Svc_lvl_agr_int;
+//   switch(Svc_lvl_agr_str){
+//     case "Less than 8 hrs":
+//       Svc_lvl_agr_int = 2;
+//       break;
+//     case "Less than or equal to 24 hrs":
+//       Svc_lvl_agr_int = 1;
+//       break;
+//     case "More than 24 hrs":
+//         Svc_lvl_agr_int = 0;
+//   }
+//   var Num_of_getsignoff = document.getElementById('Num_of_getsignof').value;
+//   var Num_of_Envsetup = document.getElementById('Num_of_Envsetu').value;
+//   var Func_point = document.getElementById('Func_poin');
+//   var aa = a * Num_of_apps;
+//   var bm = b * Num_of_mainframe;
+//   var cc = c * Num_of_Citrix;
+//   var dt = d * Third_party_sites_int;
+//   var es = e * Num_of_scrs;
+//   var fp = f * Num_of_proccessteps;
+//   var gs = g * Num_of_Scenarios;
+//   var hd = h * Num_of_Decpoints;
+//   var is = i * Num_of_standardinput;
+//   var jd = j * Intr_dynamic_table_int;
+//   var kb = k * Num_of_basedcontrols;
+//   var la = l * Num_of_accessprofiles;
+//   var mb = m * Num_of_browsersupp;
+//   var no = n * Operation_stability_int;
+//   var ofc = o * Freq_change_int;
+//   var ps = p * Svc_lvl_agr_int;
+//   var qg = q * Num_of_getsignoff;
+//   var re = r * Num_of_Envsetup;
+//   var output = aa + bm + cc + dt + es + fp + gs + hd + is + jd + kb + la + mb + no + ofc + ps + qg + re;
+//   Func_point.value = output;
+//   effort();
+//   quadrant();
+// };
+// function monthly_savings(){
+//   var monthlyvolume = document.getElementById('mv').value; 
+//   var aht = document.getElementById('aht').value;
+//   var app = document.getElementById('apot').value;
+//   var mes = document.getElementById('Monthly_effsavin');
+//   var output = aht * app * monthlyvolume;
+//   var output1 = output/60;
+//   var output2 = Math.ceil(output1);
+//   mes.value = output2;
+//   quadrant();
+// };
+
+// function effort(){
+//   var xaxis = document.getElementById('Func_poin').value;
+//   var yaxis = document.getElementById('Effor');
+//   var yout;
+//   switch(true){
+//     case ((xaxis >= 0) && (xaxis <= 10)):
+//       yout = 4;
+//       break;
+//     case ((xaxis >= 11) && (xaxis <= 20)):
+//         yout = 8;
+//         break;
+//     case ((xaxis >= 21) && (xaxis <= 40)):
+//             yout = 12;
+//             break;
+//      case ((xaxis >= 41) && (xaxis <= 60)):
+//                 yout = 16;
+//                 break;
+//      case ((xaxis >= 61) && (xaxis <= 110)):
+//                 yout = 20;
+//                 break;
+//   }
+//   yaxis.value = yout;
+  
+ 
+// };
+
+// function quadrant(){
+//   var xaxis = document.getElementById('Func_poin').value;
+//   var yaxis = document.getElementById('Effor').value;
+  
+//   var qua = document.getElementById('Quadran');
+//   var quaout;
+//   switch(true){
+//     case ((xaxis > 55) && (yaxis > 1500)):
+//         quaout = "Big Bets";
+//       break;
+//     case ((xaxis > 55) && (yaxis < 1500)):
+//         quaout = "Defer";
+//         break;
+//     case ((xaxis < 55) && (yaxis < 1500)):
+//         quaout = "Low Hanging Fruits";
+//             break;
+//      case ((xaxis < 55) && (yaxis > 1500)):
+//         quaout = "Quick Wins";
+//                 break;
+     
+//   }
+
+// qua.value = quaout;
+
+
+// };
+
 function ValidateRange() {
     var value = parseInt(document.getElementById("arpa").value);
     if (value < 0 || value > 100) {
@@ -81,7 +266,7 @@ function ValidateRange() {
         return false;
     }
     return true;
-}
+};
 function ValidateRange1() {
     var value = parseInt(document.getElementById("crpa").value);
     if (value < 0 || value > 100) {
@@ -89,7 +274,7 @@ function ValidateRange1() {
         return false;
     }
     return true;
-}
+};
 // function isAlphabet(evt){
 //     var charCode = (evt.which) ? evt.which : evt.keyCode
 //    if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)){
@@ -112,7 +297,7 @@ function isNumberKey(evt){
         
     }
         
-    } 
+    }; 
     function isAlphabet(evt){
         var charCode = (evt.which) ? evt.which : evt.keyCode
           if (!(charCode > 31 && (charCode < 48 || charCode > 57))){
@@ -124,7 +309,7 @@ function isNumberKey(evt){
           return true;
       }
       
-      } 
+      } ;
       function GetSelected() {
         //Create an Array.
         console.log("i am in get selcted func")
@@ -158,24 +343,24 @@ function isNumberKey(evt){
               });
         }
     window.history.back();
-    }
+    };
       function goBack() {
           
         window.history.back();
-      }
+      };
       
       function validnum(a) { 
         if(a < 0 || a > 100) 
             return false;
         else 
             return true;
-    } 
+    } ;
     function validOrPunchTheUser(inputElement) {
         if(!validnum(inputElement.value)) {
             window.alert('Please enter the value between 0 to 100'); // punch the user
             inputElement.value = ""; // take away their things
         }
-    }
+    };
 
     function getprocessid(){
         var cname  = document.getElementById('clientName').value;
@@ -197,7 +382,7 @@ function isNumberKey(evt){
                 res.render("processviewById",{viewtitle:"there is no proccess id with the above values"});
             }
         });
-    }
+    };
     
     function clientName() {
         var input, filter, table, tr, td, i, txtValue;
@@ -216,7 +401,7 @@ function isNumberKey(evt){
             }
           }       
         }
-      }
+      };
     
       function clientName2() {
         var input, filter, table, tr, td, i, txtValue;
@@ -235,7 +420,7 @@ function isNumberKey(evt){
             }
           }       
         }
-      }
+      };
     
 
 
@@ -256,7 +441,7 @@ function isNumberKey(evt){
             }
           }       
         }
-      }
+      };
 
       function businessunit2() {
         var input, filter, table, tr, td, i, txtValue;
@@ -275,7 +460,7 @@ function isNumberKey(evt){
             }
           }       
         }
-      }
+      };
 
 
       function subbusinessunit() {
@@ -295,7 +480,7 @@ function isNumberKey(evt){
             }
           }       
         }
-      }
+      };
 
       function subbusinessunit2() {
         var input, filter, table, tr, td, i, txtValue;
@@ -314,7 +499,7 @@ function isNumberKey(evt){
             }
           }       
         }
-      }
+      };
 
 
       function processname() {
@@ -334,7 +519,7 @@ function isNumberKey(evt){
             }
           }       
         }
-      }
+      };
 
       function processname2() {
         var input, filter, table, tr, td, i, txtValue;
@@ -353,7 +538,7 @@ function isNumberKey(evt){
             }
           }       
         }
-      }
+      };
 
 
       function processid() {
@@ -373,7 +558,7 @@ function isNumberKey(evt){
             }
           }
         }
-      }
+      };
 
       function processid2() {
         var input, filter, table, tr, td, i, txtValue;
@@ -392,7 +577,7 @@ function isNumberKey(evt){
             }
           }
         }
-      }
+      };
       // function processId() {
       //   var input, filter, table, tr, td, i, txtValue;
       //   input = document.getElementById("processIdinput");
@@ -468,7 +653,7 @@ function isNumberKey(evt){
                 }
               }       
             }
-          }
+          };
     
           // function selectprocess() {
           //   var input, filter, table, tr, td, i, txtValue;
