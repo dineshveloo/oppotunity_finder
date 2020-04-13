@@ -64,3 +64,14 @@
    #search{
     padding-right: 10px;
    }
+   .navbar-brand1 {
+    padding-top: 2px; 
+    padding-left: 2px;
+    padding-bottom: 2px;
+  }
+  .navbar-brand1>img {
+    padding-top: 0.25rem;
+    height: 10%;
+    width: auto;
+    padding-bottom: 0.25rem;
+  }

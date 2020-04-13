@@ -116,10 +116,10 @@ function funtional_point(){
     effort();
     quadrant();
   };
-  function monthly_savings(){
-    var monthlyvolume = document.getElementById('mv_2').value; 
-    var aht = document.getElementById('aht_2').value;
-    var app = document.getElementById('apot_2').value;
+  window.onload = function(){
+    var monthlyvolume = document.getElementById('mvtwo').value; 
+    var aht = document.getElementById('ahttwo').value;
+    var app = document.getElementById('apottwo').value;
     var mes = document.getElementById('meffs');
     var output = aht * app/100 * monthlyvolume;
     var output1 = output/60;
@@ -147,23 +147,7 @@ function funtional_point(){
     if ((funcPoint >= 61) || (funcPoint <= 110)){
       yout = 20;
     }
-    // switch(xaxis){
-    //   case ((xaxis >= 0) && (xaxis <= 10)):
-    //     yout = 4;
-    //     break;
-    //   case ((xaxis >= 11) && (xaxis <= 20)):
-    //       yout = 8;
-    //       break;
-    //   case ((xaxis >= 21) && (xaxis <= 40)):
-    //           yout = 12;
-    //           break;
-    //    case ((xaxis >= 41) && (xaxis <= 60)):
-    //               yout = 16;
-    //               break;
-    //    case ((xaxis >= 61) && (xaxis <= 110)):
-    //               yout = 20;
-    //               break;
-    // }
+    
     efforts.value = yout;
     
    
@@ -187,22 +171,7 @@ function funtional_point(){
     if ((funcPoint <= 55) && (mes >= 1500)) {
       quaout = "Quick Wins";
     }
-    // switch(true){
-    //   case ((xaxis > 55) || (yaxis > 1500)):
-    //       quaout = "Big Bets";
-    //     break;
-    //   case ((xaxis > 55) || (yaxis < 1500)):
-    //       quaout = "Defer";
-    //       break;
-    //   case ((xaxis < 55) || (yaxis < 1500)):
-    //       quaout = "Low Hanging Fruits";
-    //           break;
-    //    case ((xaxis < 55) || (yaxis > 1500)):
-    //       quaout = "Quick Wins";
-    //               break;
-       
-    // }
-  
+    
   qua.value = quaout;
   
   
