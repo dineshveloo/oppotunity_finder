@@ -32,6 +32,22 @@ $(document).on('click','.selectAll', function(e){
 
 </script>
 
+<script>
+      $(document).ready(function(){
+        $('#btnClear').click(function(){        
+        $('#processes input[type="text"]').val('');
+            $('#processes #myInput').val('');
+            clientName2();
+           businessunit2();
+           subbusinessunit2();
+           processname2();
+           processid2();
+           classification();
+                  
+        });
+      });
+    </script>
+
   <style>
     
 input[type="text"]::placeholder {  
@@ -210,7 +226,7 @@ background-color:rgb(247, 240, 240);
              <td>{{this.Proc_Name}}</td>
              <td>{{this.Proc_Id}}</td>
               <td>{{this.Classification}}</td>
-             <td> <input type="checkbox" class='list-item' name="Selected_Process" value="{{this.Proc_Id}},{{this.Func_point}},{{this.Quadrant}},{{this.Classification}}"></td>
+             <td> <input type="checkbox" class='list-item' name="Selected_Process" value="{{this.Proc_Id}},{{this.Sub_Buss_Unit}},{{this.Proc_Name}},{{this.clientName}},{{this.Buss_Unit}},{{this.Classification}}"></td>
             </tr>
            {{/each}}
           </tbody>
@@ -219,7 +235,9 @@ background-color:rgb(247, 240, 240);
         
       </div>
       <div align="center" id="submit">
+         <input type="button" class="btn btn-success" id="btnClear" value="Clear Search"/>
       <button  type="submit" class="btn btn-success">Submit</button>
+     
       </div>
       </div>
       

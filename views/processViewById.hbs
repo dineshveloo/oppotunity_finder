@@ -13,6 +13,21 @@
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
   
+  <script>
+      $(document).ready(function(){
+        $('#btnClear').click(function(){        
+      $('#myTable input[type="text"]').val('');
+       $('#myTable #clientnameinput').val('');
+           clientName();
+           businessunit();
+           subbusinessunit();
+           processname();
+           processid();
+         
+      
+    });
+      });
+    </script>
   <style>
 
     input[type="text"]::placeholder {  
@@ -117,7 +132,7 @@ background-color:rgb(247, 240, 240);
                    <tr>
               <th>
                  
-                <input type="text" class="fa-fa-search" id="myInput" onKeyup="clientName()" text-align="center" placeholder="Search" title="Type in a name" > 
+                <input type="text" class="fa-fa-search" id="clientnameinput" onKeyup="clientName()" text-align="center" placeholder="Search" title="Type in a name" > 
                    
                  
                  
@@ -168,6 +183,10 @@ background-color:rgb(247, 240, 240);
            {{/each}}
           </tbody>
         </table>
+      </div>
+      <div align="center">
+      
+      <input type="button" class="btn btn-success" id="btnClear" value="Clear Search"/>
       </div>
       </div>
     </div>

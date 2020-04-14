@@ -12,6 +12,22 @@
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
+
+  <script>
+      $(document).ready(function(){
+        $('#btnClear').click(function(){        
+        
+         $('#myTable input[type="text"]').val('');
+          $('#myTable #clientnameinput').val('');
+          clientName();
+           businessunit();
+           subbusinessunit();
+           processname();
+           processid();
+                  
+        });
+      });
+    </script>
   
   <style>
     
@@ -31,9 +47,7 @@ input[type=text] {
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
 } 
- {{!-- input[type=text]:focus {
-   width:100%;
- } --}}
+ 
 
     body{
 
@@ -171,6 +185,9 @@ background-color:rgb(247, 240, 240);
     </div>
   
   </div>
-  
+   <div align="center">
+      
+      <input type="button" class="btn btn-success" id="btnClear" value="Clear Search"/>
+      </div>
 </body>
 </html> 
