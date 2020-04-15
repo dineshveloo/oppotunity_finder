@@ -123,6 +123,10 @@ var ConfigurationDetailsSchema = new mongoose.Schema({
     Server_Cost:{
         type:Number,
         required:"Required"
+    },
+    FTE_Cost:{
+        type:Number,
+        required:"Required"
     }
 
 },

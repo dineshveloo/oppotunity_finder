@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title>Opportunity Finder</title>  
+<title>Rapid Assessment Tool</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -12,6 +12,7 @@
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
+  <script src="../js/secondcalculation.js"></script>
   <style>
       input[type="text"] {
      width: 100%; 
@@ -375,5 +376,125 @@ background-color:rgb(247, 240, 240);
   </tbody>
 </table>
       </div>
+
+
+
+
+       <div id="eff" align="left">
+<h1 ><strong>Savings</strong><font size="5"><b> (in USD)</b></font></h1>
+</div>
+<br>
+ <div class="container">
+     
+        <table class="table table-condensed" border="3">
+            <thead>
+   <tr class="danger">
+              <td scope="col"><h3><b></b></h3></td>
+              <td scope="col"><h3><b>Year 1</b></h3></td>
+              <td scope="col"><h3><b>year 2</b></h3></td>
+              <td scope="col"><h3><b>Year 3</b></h3></td>
+              <td scope="col"><h3><b>Year 4</b></h3></td>
+              <td scope="col"><h3><b>Year 5</b></h3></td>
+              
+   </tr>
+   </thead>
+   <tbody>
+   <tr>
+       <td style="text-align: center; vertical-align: middle;"><b>Implementation Cost (in USD)</b></td>
+      <td><input type="text" id="imp1"  name="Total_Imp_Cost" value="{{Total_Imp_Cost}}" readonly></td>
+      <td><input type="text" id="imp2"  value="0" readonly></td>
+      <td><input type="text" id="imp3"  value="0" readonly></td>
+      <td><input type="text" id="imp4"  value="0" readonly></td>
+      <td><input type="text" id="imp5" value="0" readonly></td>
+      
+   </tr>
+   
+   <tr>
+      
+       <td style="text-align: center; vertical-align: middle;"><b>Automation License Cost (in USD)</b></td>
+      <td><input type="text" id="lic1"  value="{{Totalof_Total_Lisc_Price}}" readonly></td>
+      <td><input type="text" id="lc2"  value="{{Totalof_Total_Lisc_Price}}" readonly></td>
+      <td><input type="text" id="lc3" value="{{Totalof_Total_Lisc_Price}}" readonly></td>
+      <td><input type="text" id="lc4" value="{{Totalof_Total_Lisc_Price}}" readonly></td>
+      <td><input type="text" id="lc5" value="{{Totalof_Total_Lisc_Price}}" readonly></td>
+      
+   </tr>
+   
+   <tr>
+       
+       <td style="text-align: center; vertical-align: middle;"><b>Infrastructure Cost (in USD)</b></td>
+      <td><input type="text" id="infc1"  value="{{Totalof_Total_Infra_Price}}" readonly></td>
+      <td><input type="text" id="infc2" value="{{Totalof_Total_Infra_Price}}" readonly></td>
+      <td><input type="text" id="infc3" value="{{Totalof_Total_Infra_Price}}" readonly></td>
+      <td><input type="text" id="infc4" value="{{Totalof_Total_Infra_Price}}" readonly></td>
+      <td><input type="text" id="infc5" value="{{Totalof_Total_Infra_Price}}" readonly></td>
+         </tr>
+   
+   <tr>
+       
+       <td style="text-align: center; vertical-align: middle;"><b>Maintenance Cost (in USD)</b></td>
+      <td><input type="text" id="mac1"  value="{{Maint_Cost}}" readonly></td>
+      <td><input type="text" id="mc2" value="{{Maint_Cost}}" readonly></td>
+      <td><input type="text" id="mc3" value="{{Maint_Cost}}" readonly></td>
+      <td><input type="text" id="mc4" value="{{Maint_Cost}}" readonly></td>
+      <td><input type="text" id="mc5" value="{{Maint_Cost}}" readonly></td>
+         </tr>
+
+ <tr>
+       
+       <td style="text-align: center; vertical-align: middle;"><b>FTE Savings (count)</b></td>
+      <td><input type="text" id="year1" placeholder="Enter Here" oninput="fte_savings_usd()"></td>
+      <td><input type="text" id="year2"  placeholder="Enter Here" oninput="fte_savings_usd()"></td>
+      <td><input type="text" id="year3"  placeholder="Enter Here" oninput="fte_savings_usd()"></td>
+      <td><input type="text" id="year4"  placeholder="Enter Here" oninput="fte_savings_usd()"></td>
+      <td><input type="text" id="year5"  placeholder="Enter Here" oninput="fte_savings_usd()"></td>
+         </tr>
+  <tr>
+       
+       <td style="text-align: center; vertical-align: middle;"><b>FTE Cost (in USD)</b></td>
+      <td><input type="text" name="FTE_Price" id="y1" value="{{FTE_Price}}" readonly ></td>
+      <td><input type="text" name="FTE_Price" id="y2" value="{{FTE_Price}}" readonly ></td>
+      <td><input type="text" name="FTE_Price" id="y3" value="{{FTE_Price}}" readonly ></td>
+      <td><input type="text" name="FTE_Price" id="y4" value="{{FTE_Price}}" readonly ></td>
+      <td><input type="text" name="FTE_Price" id="y5" value="{{FTE_Price}}" readonly ></td>
+      
+      {{!-- <td><input type="text" id="y2" oninput="fte_savings_usd()"></td>
+      <td><input type="text" id="y3" oninput="fte_savings_usd()"></td>
+      <td><input type="text" id="y4" oninput="fte_savings_usd()"></td>
+      <td><input type="text" id="y5" oninput="fte_savings_usd()"></td> --}}
+         </tr>
+
+
+    <tr>
+       
+       <td style="text-align: center; vertical-align: middle;"><b>FTE Savings (in USD)</b></td>
+      <td><input type="text" id="ftesav1" readonly></td>
+      <td><input type="text" id="ftesav2" readonly></td>
+      <td><input type="text" id="ftesav3" readonly></td>
+      <td><input type="text" id="ftesav4" readonly></td>
+      <td><input type="text" id="ftesav5" readonly></td>
+         </tr>
+
+    <tr>
+       
+       <td style="text-align: center; vertical-align: middle;"><b>Net Savings (in USD)</b></td>
+      <td style="font-weight: bold"><input type="text" id="nets1" readonly></td>
+      <td style="font-weight: bold"><input type="text" id="nets2" readonly></td>
+      <td style="font-weight: bold"><input type="text" id="nets3" readonly></td>
+      <td style="font-weight: bold"><input type="text" id="nets4" readonly></td>
+      <td style="font-weight: bold"><input type="text" id="nets5" readonly></td>
+         </tr>
+
+   </tbody>
+</table>
+<div  align="center">
+<label id="cb" for="Net_Savings"><font size="4"><b>Total Net Savings</font><font size="2"> (in USD)</font></b></label>
+<input  style="font-weight: bold; text-align: center; vertical-align: middle;" type="number-center"  maxlength="30" id="totns" name="Net_Savings" readonly>
+</div>
+
+      </div>
+      
+      
+ 
 
    </form>

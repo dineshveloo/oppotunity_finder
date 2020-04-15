@@ -31,8 +31,8 @@ res.render("adminHome")
 router.get("/Calculation", (req, res)=>{
     res.render("Calculation")
     });
-router.get("/captureProcess", (req, res)=>{
-    res.render("captureProcess")
+router.get("/CaptureProcess", (req, res)=>{
+    res.render("CaptureProcess")
 });
 
 
@@ -127,6 +127,7 @@ router.post("/addConfigurationDetails",(req,res)=>{
     configurationdetailsmodel.Cont_Room_Cost=req.body.Cont_Room_Cost;
     configurationdetailsmodel.VM_Cost=req.body.VM_Cost;
     configurationdetailsmodel.Server_Cost=req.body.Server_Cost;
+    configurationdetailsmodel.FTE_Cost=req.body.FTE_Cost;
     ConfigurationDetailsModel.find((err,doc)=>{
         if(!err)
         {
@@ -162,6 +163,7 @@ router.post("/addConfigurationDetails",(req,res)=>{
                 Cont_Room_Cost:req.body.Cont_Room_Cost,
                 VM_Cost:req.body.VM_Cost,
                 Server_Cost:req.body.Server_Cost,
+                FTE_Cost:req.body.FTE_Cost,
                 }}
             ConfigurationDetailsModel.updateOne({Simple_Dev:doc[0].Simple_Dev},updated_doc,(err,doc)=>{
                 if(!err)
@@ -198,6 +200,54 @@ router.post("/addConfigurationDetails",(req,res)=>{
     }
     });
 });
+// router.post("/addConfigurationDetails",(req,res)=>{
+
+//     var configurationdetailsmodel = new ConfigurationDetailsModel();
+//     configurationdetailsmodel.Simple_Dev=req.body.Simple_Dev;
+//     configurationdetailsmodel.Simple_Srdev=req.body.Simple_Srdev;
+//     configurationdetailsmodel.Simple_BA=req.body.Simple_BA;
+//     configurationdetailsmodel.Simple_Arch=req.body.Simple_Arch;
+//     configurationdetailsmodel.Simple_PM=req.body.Simple_PM;
+//     configurationdetailsmodel.Simple_DM=req.body.Simple_DM;
+//     configurationdetailsmodel.Medium_Dev=req.body.Medium_Dev;
+//     configurationdetailsmodel.Medium_Srdev=req.body.Medium_Srdev;
+//     configurationdetailsmodel.Medium_BA=req.body.Medium_BA;
+//     configurationdetailsmodel.Medium_Arch=req.body.Medium_Arch;
+//     configurationdetailsmodel.Medium_PM=req.body.Medium_PM;
+//     configurationdetailsmodel.Medium_DM=req.body.Medium_DM;
+//     configurationdetailsmodel.Complex_Dev=req.body.Complex_Dev;
+//     configurationdetailsmodel.Complex_Srdev=req.body.Complex_Srdev;
+//     configurationdetailsmodel.Complex_BA=req.body.Complex_BA;
+//     configurationdetailsmodel.Complex_Arch=req.body.Complex_Arch;
+//     configurationdetailsmodel.Complex_PM=req.body.Complex_PM;
+//     configurationdetailsmodel.Complex_DM=req.body.Complex_DM;
+//     configurationdetailsmodel.Dev_Cost=req.body.Dev_Cost;
+//     configurationdetailsmodel.Srdev_Cost=req.body.Srdev_Cost;
+//     configurationdetailsmodel.BA_Cost=req.body.BA_Cost;
+//     configurationdetailsmodel.Arch_Cost=req.body.Arch_Cost;
+//     configurationdetailsmodel.PM_Cost=req.body.PM_Cost;
+//     configurationdetailsmodel.DUlead_Cost=req.body.DUlead_Cost;
+//     configurationdetailsmodel.Bot_Creator_Cost=req.body.Bot_Creator_Cost;
+//     configurationdetailsmodel.Bot_Run_Unatt_Cost=req.body.Bot_Run_Unatt_Cost;
+//     configurationdetailsmodel.Bot_Run_Att_Cost=req.body.Bot_Run_Att_Cost;
+//     configurationdetailsmodel.Cont_Room_Cost=req.body.Cont_Room_Cost;
+//     configurationdetailsmodel.VM_Cost=req.body.VM_Cost;
+//     configurationdetailsmodel.Server_Cost=req.body.Server_Cost;
+//     configurationdetailsmodel.FTE_Cost=req.body.FTE_Cost;
+//  configurationdetailsmodel.save((err,doc)=>{
+//                 if(!err)
+//                 {
+//                     // res.send(simplecount,mediumcount,complexcount);
+//                     res.render("configurationDetails",{viewtitle:"Details Saved Successfully"})
+//                 }
+//                 else
+//                 {
+//                     console.log(err)
+//                     res.render("configurationDetails",{viewerror:"error Occured while Saving the details"});
+//                 }
+//             });
+// });
+
 router.post("/addSelectedProcess",(req,res)=>{
     var businessmodel= new BusinessModel();
     businessmodel.Selected_Process=req.body.Selected_Process; 
@@ -371,6 +421,7 @@ router.post("/effortcalculation",(req,res)=>{
             Server_Count=1;
             VM_Price=docs[0].VM_Cost;
             Server_Price=docs[0].Server_Cost;
+            FTE_Price=docs[0].FTE_Cost;
             Total_VM_Price=VM_Count*VM_Price;
             Total_Server_Price=Server_Count*Server_Price;
             Totalof_Total_Infra_Price=Total_VM_Price+Total_Server_Price;
@@ -386,6 +437,8 @@ router.post("/effortcalculation",(req,res)=>{
             
             // Total_Imp_Cost=Total_Imp_Cost.toFixed(2);
             console.log(Total_Imp_Cost);
+            Maint_Cost=Math.floor(totalcount/7*30000)
+             
             
 
             res.render("Calculation",
@@ -449,6 +502,7 @@ router.post("/effortcalculation",(req,res)=>{
             Server_Count:Server_Count,
             VM_Price:VM_Price,
             Server_Price:Server_Price,
+            FTE_Price:FTE_Price,
             Total_VM_Price:Total_VM_Price,
             Total_Server_Price:Total_Server_Price,
             Totalof_Total_Infra_Price:Totalof_Total_Infra_Price,
@@ -460,6 +514,7 @@ router.post("/effortcalculation",(req,res)=>{
             PM_Cost:PM_Cost,
             DUlead_Cost:DUlead_Cost,
             Total_Imp_Cost:Total_Imp_Cost,
+            Maint_Cost:Maint_Cost,
             
             });
             
@@ -1059,11 +1114,11 @@ router.get('/view', (req, res) => {
                         console.log(updated_doc);
                         if(!err)
                 {
-                   res.render("captureProcess",{viewtitle:"Updated Successfully"})
+                   res.render("CaptureProcess",{viewtitle:"Updated Successfully"})
                 }
                 else{
                     console.log(err);
-                    res.render("captureProcess",{viewerror:"error Occured in proceeding"})
+                    res.render("CaptureProcess",{viewerror:"error Occured in proceeding"})
                 }
                     });
                 

@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-<title>Opportunity Finder</title>  
+<title>Rapid Assessment Tool</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -31,6 +31,20 @@
 }
 body{
 background-color:rgb(247, 240, 240);
+}
+
+#tl{
+  padding-left:63rem;
+}
+select option {
+    margin: 40px;
+    background:white;
+    color:black; 
+    
+}
+#selectTool{
+  color:rgb(8, 8, 8);
+  background-color: rgb(211, 168, 189);
 }
 
 
@@ -140,7 +154,55 @@ background-color:rgb(247, 240, 240);
 <div  align="center">
 <label id="cb" for="Proj_Dura"><font size="5"><b>Project Duration </font><font size="4">(in months)</font></b></label>
 <input type="text-center"  maxlength="30" id="projectduration" name="Proj_Dura" required>
- </div>
+</div>
+<br>
+
+
+<div class="row">
+  <div class="col-md-12 school-options-dropdown text-center">
+    <div class="dropdown btn-group">
+
+      {{!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Tool
+        <span class="caret"></span>
+      </button> --}}
+      <select  class="form-control" id="selectTool" name="RPA_Tool" required>
+                <option style="font-weight: bold; text-align: center; vertical-align: middle;" disabled selected value> <b>Select Tool</b></option>
+                <option value="Automation Anywhere">Automation Anywhere</option>
+                     <option value="UiPath">UiPath</option>
+                     <option value="BluePrism">BluePrism</option>
+                     <option value="Pega Robotics">Pega Robotics</option>
+          </select>
+
+      {{!-- <select class="dropdown-menu w-100">
+        <option>Automation Anywhere</option>
+        <option>UiPath</option>
+        <option>BluePrism</option>
+        <option>Pega Robotics</option>
+        
+      </select> --}}
+
+    </div>
+  </div>
+</div>
+
+
+{{!-- <div align="center">
+
+  
+<label id="cb" for="selectTool"><font size="3"><b>Select Tool</font></b></label>
+<select  class="form-control" id="selectTool" name="RPA_Tool" required>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="Automation Anywhere">Automation Anywhere</option>
+                     <option value="UiPath">UiPath</option>
+                     <option value="BluePrism">BluePrism</option>
+                     <option value="Pega Robotics">Pega Robotics</option>
+          </select>
+
+</div> --}}
+
+
+
+
  <br>
  <div align="center">
     <input type="submit" class="btn btn-success" value="Proceed"> 
