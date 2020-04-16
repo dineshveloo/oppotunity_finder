@@ -437,10 +437,12 @@ router.post("/effortcalculation",(req,res)=>{
             
             // Total_Imp_Cost=Total_Imp_Cost.toFixed(2);
             console.log(Total_Imp_Cost);
-            Maint_Cost=Math.floor(totalcount/7*30000)
-             
-            
-
+            Maint_Cost=Math.floor(totalcount/7*30000);
+            FTE_Savings_Count=Math.round(simplecount*0.5+mediumcount*1+complexcount*2);
+            FTE_Savings_USD=FTE_Price*FTE_Savings_Count;
+            Net_Savings=Math.round(FTE_Savings_USD-(Total_Imp_Cost+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Net_Savings_Two=Math.round(FTE_Savings_USD-(0+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Total_Net_Savings=Net_Savings+(4*Net_Savings_Two);
             res.render("Calculation",
             {Simple_Dev_Effort:Simple_Dev_Effort,
                 Simple_Srdev_Effort:Simple_Srdev_Effort,
@@ -515,6 +517,12 @@ router.post("/effortcalculation",(req,res)=>{
             DUlead_Cost:DUlead_Cost,
             Total_Imp_Cost:Total_Imp_Cost,
             Maint_Cost:Maint_Cost,
+            FTE_Savings_Count:FTE_Savings_Count,
+            FTE_Savings_USD:FTE_Savings_USD,
+            Net_Savings:Net_Savings,
+            Net_Savings_Two:Net_Savings_Two,
+            Total_Net_Savings:Total_Net_Savings,
+
             
             });
             
