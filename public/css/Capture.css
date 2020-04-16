@@ -98,3 +98,35 @@ background-color: rgb(197, 195, 195);
     margin-top: 0;
   }
 }
+
+#abc2 {
+
+  border-radius: 5px;
+  background-color: #f2f2f2;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+.col-30 {
+  float:right;
+  width: 87%;
+  margin-top: 6px;
+}
+.col-40 {
+  float: right;
+  width: 90%;
+  margin-top: 6px;
+
+}
+.col-md-6{
+  padding-left: 13rem;
+}
+.col-sm-6 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-right: 4rem;
+  padding-left:3rem;
+}

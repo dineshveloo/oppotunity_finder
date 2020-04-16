@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title>Opportunity Finder</title>  
+<title>Rapid Assessment Tool</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,6 +13,21 @@
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
   
+  <script>
+      $(document).ready(function(){
+        $('#btnClear').click(function(){        
+      $('#myTable input[type="text"]').val('');
+       $('#myTable #clientnameinput').val('');
+           clientName();
+           businessunit();
+           subbusinessunit();
+           processname();
+           processid();
+         
+      
+    });
+      });
+    </script>
   <style>
 
     input[type="text"]::placeholder {  
@@ -44,6 +59,10 @@ input[type=text] {
   #submit{
       padding-top: 10ch;
     }
+    body{
+
+background-color:rgb(247, 240, 240);
+}
   </style>
   
 </head>
@@ -94,7 +113,11 @@ input[type=text] {
       </div>
       
        <div class="text-right">
-             <button  type="button" onclick="goBack()" class="btn btn-success">Back</button>  
+             <button  type="button" onclick="goBack()" class="btn btn-success">Back</button>
+             
+      
+      <input type="button" class="btn btn-success" id="btnClear" value="Clear Search"/>
+        
           </div>
 <center> <font color="red">{{viewtitle}}</font></center>
 <div id="allign">
@@ -113,27 +136,27 @@ input[type=text] {
                    <tr>
               <th>
                  
-                <input type="text" class="fa-fa-search" id="myInput" onKeyup="clientName()" text-align="center" placeholder="Search Client Name" title="Type in a name" > 
+                <input type="text" class="fa-fa-search" id="clientnameinput" onKeyup="clientName()" text-align="center" placeholder="Search" title="Type in a name" > 
                    
                  
                  
               </th>
                <th>
             
-                <input type="text" class="fa-fa-search" id="businessunitinput" onkeyup="businessunit()" text-align="center" placeholder="Search Business Unit" title="Type in a business unit"> 
+                <input type="text" class="fa-fa-search" id="businessunitinput" onkeyup="businessunit()" text-align="center" placeholder="Search" title="Type in a business unit"> 
                    
               </th>
 
               <th>
-                <input type="text" class="fa-fa-search" id="subbusinessunitinput" onkeyup="subbusinessunit()" text-align="center" placeholder="Search Sub Business Unit" title="Type in a sub business unit"> 
+                <input type="text" class="fa-fa-search" id="subbusinessunitinput" onkeyup="subbusinessunit()" text-align="center" placeholder="Search" title="Type in a sub business unit"> 
                    
               </th>
               <th>
-                <input type="text" class="fa-fa-search" id="processnameinput" onkeyup="processname()" text-align="center" placeholder="Search Process Name" title="Type in a process name"> 
+                <input type="text" class="fa-fa-search" id="processnameinput" onkeyup="processname()" text-align="center" placeholder="Search" title="Type in a process name"> 
                    
               </th>
               <th>
-                <input type="text" class="fa-fa-search" id="processidinput" onkeyup="processid()" text-align="center" placeholder="Search Process Id" title="Type in a process id"> 
+                <input type="text" class="fa-fa-search" id="processidinput" onkeyup="processid()" text-align="center" placeholder="Search" title="Type in a process id"> 
                    
               </th>
               </tr>
@@ -165,6 +188,7 @@ input[type=text] {
           </tbody>
         </table>
       </div>
+      
       </div>
     </div>
     

@@ -31,8 +31,8 @@ res.render("adminHome")
 router.get("/Calculation", (req, res)=>{
     res.render("Calculation")
     });
-router.get("/captureProcess", (req, res)=>{
-    res.render("captureProcess")
+router.get("/CaptureProcess", (req, res)=>{
+    res.render("CaptureProcess")
 });
 
 
@@ -127,6 +127,7 @@ router.post("/addConfigurationDetails",(req,res)=>{
     configurationdetailsmodel.Cont_Room_Cost=req.body.Cont_Room_Cost;
     configurationdetailsmodel.VM_Cost=req.body.VM_Cost;
     configurationdetailsmodel.Server_Cost=req.body.Server_Cost;
+    configurationdetailsmodel.FTE_Cost=req.body.FTE_Cost;
     ConfigurationDetailsModel.find((err,doc)=>{
         if(!err)
         {
@@ -162,6 +163,7 @@ router.post("/addConfigurationDetails",(req,res)=>{
                 Cont_Room_Cost:req.body.Cont_Room_Cost,
                 VM_Cost:req.body.VM_Cost,
                 Server_Cost:req.body.Server_Cost,
+                FTE_Cost:req.body.FTE_Cost,
                 }}
             ConfigurationDetailsModel.updateOne({Simple_Dev:doc[0].Simple_Dev},updated_doc,(err,doc)=>{
                 if(!err)
@@ -198,6 +200,54 @@ router.post("/addConfigurationDetails",(req,res)=>{
     }
     });
 });
+// router.post("/addConfigurationDetails",(req,res)=>{
+
+//     var configurationdetailsmodel = new ConfigurationDetailsModel();
+//     configurationdetailsmodel.Simple_Dev=req.body.Simple_Dev;
+//     configurationdetailsmodel.Simple_Srdev=req.body.Simple_Srdev;
+//     configurationdetailsmodel.Simple_BA=req.body.Simple_BA;
+//     configurationdetailsmodel.Simple_Arch=req.body.Simple_Arch;
+//     configurationdetailsmodel.Simple_PM=req.body.Simple_PM;
+//     configurationdetailsmodel.Simple_DM=req.body.Simple_DM;
+//     configurationdetailsmodel.Medium_Dev=req.body.Medium_Dev;
+//     configurationdetailsmodel.Medium_Srdev=req.body.Medium_Srdev;
+//     configurationdetailsmodel.Medium_BA=req.body.Medium_BA;
+//     configurationdetailsmodel.Medium_Arch=req.body.Medium_Arch;
+//     configurationdetailsmodel.Medium_PM=req.body.Medium_PM;
+//     configurationdetailsmodel.Medium_DM=req.body.Medium_DM;
+//     configurationdetailsmodel.Complex_Dev=req.body.Complex_Dev;
+//     configurationdetailsmodel.Complex_Srdev=req.body.Complex_Srdev;
+//     configurationdetailsmodel.Complex_BA=req.body.Complex_BA;
+//     configurationdetailsmodel.Complex_Arch=req.body.Complex_Arch;
+//     configurationdetailsmodel.Complex_PM=req.body.Complex_PM;
+//     configurationdetailsmodel.Complex_DM=req.body.Complex_DM;
+//     configurationdetailsmodel.Dev_Cost=req.body.Dev_Cost;
+//     configurationdetailsmodel.Srdev_Cost=req.body.Srdev_Cost;
+//     configurationdetailsmodel.BA_Cost=req.body.BA_Cost;
+//     configurationdetailsmodel.Arch_Cost=req.body.Arch_Cost;
+//     configurationdetailsmodel.PM_Cost=req.body.PM_Cost;
+//     configurationdetailsmodel.DUlead_Cost=req.body.DUlead_Cost;
+//     configurationdetailsmodel.Bot_Creator_Cost=req.body.Bot_Creator_Cost;
+//     configurationdetailsmodel.Bot_Run_Unatt_Cost=req.body.Bot_Run_Unatt_Cost;
+//     configurationdetailsmodel.Bot_Run_Att_Cost=req.body.Bot_Run_Att_Cost;
+//     configurationdetailsmodel.Cont_Room_Cost=req.body.Cont_Room_Cost;
+//     configurationdetailsmodel.VM_Cost=req.body.VM_Cost;
+//     configurationdetailsmodel.Server_Cost=req.body.Server_Cost;
+//     configurationdetailsmodel.FTE_Cost=req.body.FTE_Cost;
+//  configurationdetailsmodel.save((err,doc)=>{
+//                 if(!err)
+//                 {
+//                     // res.send(simplecount,mediumcount,complexcount);
+//                     res.render("configurationDetails",{viewtitle:"Details Saved Successfully"})
+//                 }
+//                 else
+//                 {
+//                     console.log(err)
+//                     res.render("configurationDetails",{viewerror:"error Occured while Saving the details"});
+//                 }
+//             });
+// });
+
 router.post("/addSelectedProcess",(req,res)=>{
     var businessmodel= new BusinessModel();
     businessmodel.Selected_Process=req.body.Selected_Process; 
@@ -282,6 +332,10 @@ router.post("/effortcalculation",(req,res)=>{
         if(!err)
         {
             console.log(docs)
+            Simple=simplecount;
+            Complex=complexcount;
+            Medium=mediumcount;
+            Total=totalcount;
             Simple_Dev_Effort=docs[0].Simple_Dev*simplecount;
             Simple_Srdev_Effort=docs[0].Simple_Srdev*simplecount;
             Simple_BA_Effort=docs[0].Simple_BA*simplecount;
@@ -303,8 +357,10 @@ router.post("/effortcalculation",(req,res)=>{
             Medium_Arch_Effort=docs[0].Medium_Arch*mediumcount;
             // Medium_Arch_Effort=Medium_Arch_Effort.toFixed(2);
             Medium_PM_Effort=docs[0].Medium_PM*mediumcount;
+            Medium_PM_Effort=Math.round(Medium_PM_Effort);
             // Medium_PM_Effort=Medium_PM_Effort.toFixed(2)
             Medium_DM_Effort=docs[0].Medium_DM*mediumcount;
+            Medium_DM_Effort=Math.round(Medium_DM_Effort);
             // Medium_DM_Effort=Medium_DM_Effort.toFixed(2);
             Total_Medium_Effort=Medium_Dev_Effort+Medium_Srdev_Effort+Medium_BA_Effort+Medium_Arch_Effort+Medium_PM_Effort+Medium_DM_Effort;
             Total_Medium_Effort=Total_Medium_Effort.toFixed(2);
@@ -339,16 +395,23 @@ router.post("/effortcalculation",(req,res)=>{
             Total_Of_Total_Effort=Total_Simple_Effort+Total_Medium_Effort+Total_Complex_Effort;
             Total_Of_Total_Effort=Total_Of_Total_Effort.toFixed(2);
 
-            Dev_Roundoff=Math.round(Total_Dev_Effort/projectduration);
-            Srdev_Roundoff=Math.round(Total_Srdev_Effort/projectduration);
-            BA_Roundoff=(Total_BA_Effort/projectduration);
+            Dev_Roundoff=Math.ceil(Total_Dev_Effort/projectduration);
+            Srdev_Roundoff=Math.ceil(Total_Srdev_Effort/projectduration);
+            BA_Roundoff=Math.round((Total_BA_Effort/projectduration)*100)/100;
+            BA_Roundoff=Math.round((BA_Roundoff)*10)/10;
             BA_Roundoff=BA_Roundoff.toFixed(2);
-            Arch_Roundoff=(Total_Arch_Effort/projectduration);
+            Arch_Roundoff=Math.round((Total_Arch_Effort/projectduration)*100)/100;
+            Arch_Roundoff=Math.round((Arch_Roundoff)*10)/10;
             Arch_Roundoff=Arch_Roundoff.toFixed(2);
-            PM_Roundoff=(Total_PM_Effort/projectduration);
+            PM_Roundoff=Math.round((Total_PM_Effort/projectduration)*100)/100;
+            PM_Roundoff=Math.round((PM_Roundoff)*10)/10;
             PM_Roundoff=PM_Roundoff.toFixed(2);
-            DM_Roundoff=(Total_DM_Effort/projectduration);
+            
+            DM_Roundoff=Math.round((Total_DM_Effort/projectduration)*100)/100;
+           
+            DM_Roundoff=Math.round((DM_Roundoff)*10)/10;
             DM_Roundoff=DM_Roundoff.toFixed(2);
+            DM_Roundoff=(Total_DM_Effort/projectduration).toFixed(2);
             Total_Rounoff=Total_Of_Total_Effort/projectduration;
             Total_Rounoff=Total_Rounoff.toFixed(2);
             
@@ -371,6 +434,7 @@ router.post("/effortcalculation",(req,res)=>{
             Server_Count=1;
             VM_Price=docs[0].VM_Cost;
             Server_Price=docs[0].Server_Cost;
+            FTE_Price=docs[0].FTE_Cost;
             Total_VM_Price=VM_Count*VM_Price;
             Total_Server_Price=Server_Count*Server_Price;
             Totalof_Total_Infra_Price=Total_VM_Price+Total_Server_Price;
@@ -379,14 +443,33 @@ router.post("/effortcalculation",(req,res)=>{
             Srdev_Cost=Total_Srdev_Effort*docs[0].Srdev_Cost*168;
             BA_Cost=Total_BA_Effort*docs[0].BA_Cost*168;
             Arch_Cost=Total_Arch_Effort*docs[0].Arch_Cost*168;
-            PM_Cost=Total_PM_Effort*docs[0].PM_Cost*168;
-            PM_Cost=PM_Cost.toFixed(2);
+            PM_Cost=Math.round(Total_PM_Effort*docs[0].PM_Cost*168);
+            // PM_Cost=PM_Cost.toFixed(2);
             DUlead_Cost=Total_DM_Effort*docs[0].DUlead_Cost*168;
             Total_Imp_Cost=Dev_Cost+Srdev_Cost+BA_Cost+Arch_Cost+PM_Cost+DUlead_Cost;
+            Total_Imp_Cost_Two=Total_Imp_Cost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             
-
+            // Total_Imp_Cost=Total_Imp_Cost.toFixed(2);
+            console.log(Total_Imp_Cost);
+            Maint_Cost=Math.ceil(totalcount/7*30000);
+            FTE_Savings_Count=Math.round(simplecount*0.5+mediumcount*1+complexcount*2);
+            FTE_Savings_USD=FTE_Price*FTE_Savings_Count;
+            Net_Savings=Math.round(FTE_Savings_USD-(Total_Imp_Cost+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Net_Savings_Two=Math.round(FTE_Savings_USD-(0+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Total_Net_Savings=Net_Savings+(4*Net_Savings_Two);
+            Total_Net_Savings_Two=Total_Net_Savings.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            Total_TCO=Total_Imp_Cost+(5*Totalof_Total_Lisc_Price)+(5*Totalof_Total_Infra_Price)+(5*Maint_Cost);
+            Total_TCO_Two=Total_TCO.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             res.render("Calculation",
             {Simple_Dev_Effort:Simple_Dev_Effort,
+                Total:Total,
+                Total_Net_Savings_Two:Total_Net_Savings_Two,
+                Total_Imp_Cost_Two:Total_Imp_Cost_Two,
+                Total_TCO_Two:Total_TCO_Two,
+                Simple:Simple,
+                Medium:Medium,
+                Complex:Complex,
+                Total_TCO:Total_TCO,
                 Simple_Srdev_Effort:Simple_Srdev_Effort,
                 Simple_BA_Effort:Simple_BA_Effort,
                 Simple_Arch_Effort:Simple_Arch_Effort,
@@ -423,6 +506,7 @@ router.post("/effortcalculation",(req,res)=>{
             Dev_Roundoff:Dev_Roundoff,
             Srdev_Roundoff:Srdev_Roundoff,
             BA_Roundoff:BA_Roundoff,
+            
             Arch_Roundoff:Arch_Roundoff,
             PM_Roundoff:PM_Roundoff,
             DM_Roundoff:DM_Roundoff,
@@ -446,6 +530,7 @@ router.post("/effortcalculation",(req,res)=>{
             Server_Count:Server_Count,
             VM_Price:VM_Price,
             Server_Price:Server_Price,
+            FTE_Price:FTE_Price,
             Total_VM_Price:Total_VM_Price,
             Total_Server_Price:Total_Server_Price,
             Totalof_Total_Infra_Price:Totalof_Total_Infra_Price,
@@ -457,6 +542,13 @@ router.post("/effortcalculation",(req,res)=>{
             PM_Cost:PM_Cost,
             DUlead_Cost:DUlead_Cost,
             Total_Imp_Cost:Total_Imp_Cost,
+            Maint_Cost:Maint_Cost,
+            FTE_Savings_Count:FTE_Savings_Count,
+            FTE_Savings_USD:FTE_Savings_USD,
+            Net_Savings:Net_Savings,
+            Net_Savings_Two:Net_Savings_Two,
+            Total_Net_Savings:Total_Net_Savings,
+
             
             });
             
@@ -666,6 +758,9 @@ router.post("/addProcessTwo", (req, res)=>{
     secondprocessmodel.Buss_Unit = req.body.Buss_Unit;
     secondprocessmodel.Sub_Buss_Unit = req.body.Sub_Buss_Unit;
     secondprocessmodel.Proc_Name = req.body.Proc_Name;
+    secondprocessmodel.Mon_Vol = req.body.Mon_Vol;
+    secondprocessmodel.AHT = req.body.AHT;
+    secondprocessmodel.AP_Perc = req.body.AP_Perc;
     secondprocessmodel.Num_of_apps = req.body.Num_of_apps;
     secondprocessmodel.Num_of_mainframe = req.body.Num_of_mainframe;
     secondprocessmodel.Num_of_Citrix = req.body.Num_of_Citrix;
@@ -935,18 +1030,34 @@ router.get('/view', (req, res) => {
         router.post("/updateDetails",(req,res)=>{
 
             var processmodel = new ProcessModel();
-            processmodel.Proc_Desc = req.body.Proc_Desc;
-            processmodel.Mon_Vol = req.body.Mon_Vol;
-            processmodel.AHT = req.body.AHT;
-            processmodel.App_Used = req.body.App_Used;
-            processmodel.Amenable_Cognitive = req.body.Amenable_Cognitive;
-            processmodel. Automation_Ready = req.body.Automation_Ready;
-
+            
+    processmodel.Proc_Desc = req.body.Proc_Desc;
+    processmodel.Mon_Vol = req.body.Mon_Vol;
+    processmodel.AHT = req.body.AHT;
+    processmodel.FTE = req.body.FTE;
+    processmodel.SLA = req.body.SLA;
+    processmodel.TAT = req.body.TAT;
+    processmodel.App_Used = req.body.App_Used;
+    processmodel.Doc_Present = req.body.Doc_Present;
+    processmodel.Rule_Based = req.body.Rule_Based;
+    processmodel.Stuc_Data = req.body.Stuc_Data;
+    processmodel.Inp_Data_Type = req.body.Inp_Data_Type;
+    processmodel.Amenable_RPA = req.body.Amenable_RPA;
+    processmodel.Amenable_Cognitive = req.body.Amenable_Cognitive;
+    processmodel. Automation_Ready = req.body.Automation_Ready;
+    processmodel.AP_Perc = req.body.AP_Perc;
+    processmodel.FTE_Benefit = req.body.FTE_Benefit;
             
                     var updated_doc={$set: {Proc_Desc:req.body.Proc_Desc, 
                         Mon_Vol:req.body.Mon_Vol,
                         AHT:req.body.AHT,
+                        SLA:req.body.SLA,
+                        TAT:req.body.TAT,
                         App_Used:req.body.App_Used,
+                        Doc_Present:req.body.Doc_Present,
+                        Rule_Based:req.body.Rule_Based,
+                        Stuc_Data:req.body.Stuc_Data,
+                        Inp_Data_Type:req.body.Inp_Data_Type,
                         Amenable_Cognitive:req.body.Amenable_Cognitive,
                         Automation_Ready:req.body.Automation_Ready,
                                                 }}
@@ -991,35 +1102,44 @@ router.get('/view', (req, res) => {
 
             var secondprocessmodel = new SecondProcessModel();
             secondprocessmodel.Num_of_apps = req.body.Num_of_apps;
-            secondprocessmodel.Num_of_mainframe = req.body.Num_of_mainframe;
-            secondprocessmodel.Num_of_Citrix = req.body.Num_of_Citrix;
-            secondprocessmodel.Num_of_scrs = req.body.Num_of_scrs;
-            secondprocessmodel.Num_of_proccessteps = req.body.Num_of_proccessteps;
-            secondprocessmodel.Num_of_Scenarios = req.body.Num_of_Scenarios;
-            secondprocessmodel.Num_of_Decpoints = req.body.Num_of_Decpoints;
-            secondprocessmodel.Num_of_standardinput = req.body.Num_of_standardinput;
-            secondprocessmodel.Num_of_basedcontrols = req.body.Num_of_basedcontrols;
-            secondprocessmodel.Num_of_accessprofile = req.body.Num_of_accessprofile;
-            secondprocessmodel.Num_of_browsersupp = req.body.Num_of_browsersupp;
-            secondprocessmodel.Num_of_getsignoff = req.body.Num_of_getsignoff;
-            secondprocessmodel.Num_of_Envsetup = req.body.Num_of_Envsetup;
-            secondprocessmodel.Func_point = req.body.Func_point;
-            secondprocessmodel.Monthly_effsaving = req.body.Monthly_effsaving;
-            secondprocessmodel.Effort = req.body.Effort;
-            secondprocessmodel.Quadrant = req.body.Quadrant;
-
+    secondprocessmodel.Num_of_mainframe = req.body.Num_of_mainframe;
+    secondprocessmodel.Num_of_Citrix = req.body.Num_of_Citrix;
+    secondprocessmodel.Third_party_sites = req.body.Third_party_sites;
+    secondprocessmodel.Num_of_scrs = req.body.Num_of_scrs;
+    secondprocessmodel.Num_of_proccessteps = req.body.Num_of_proccessteps;
+    secondprocessmodel.Num_of_Scenarios = req.body.Num_of_Scenarios;
+    secondprocessmodel.Num_of_Decpoints = req.body.Num_of_Decpoints;
+    secondprocessmodel.Num_of_standardinput = req.body.Num_of_standardinput;
+    secondprocessmodel.Intr_dynamic_table = req.body.Intr_dynamic_table;
+    secondprocessmodel.Num_of_basedcontrols = req.body.Num_of_basedcontrols;
+    secondprocessmodel.Num_of_accessprofile = req.body.Num_of_accessprofile;
+    secondprocessmodel.Num_of_browsersupp = req.body.Num_of_browsersupp;
+    secondprocessmodel.Operation_stability = req.body.Operation_stability;
+    secondprocessmodel.Freq_change = req.body.Freq_change;
+    secondprocessmodel.Svc_lvl_agr = req.body.Svc_lvl_agr;
+    secondprocessmodel.Num_of_getsignoff = req.body.Num_of_getsignoff;
+    secondprocessmodel.Num_of_Envsetup = req.body.Num_of_Envsetup;
+    secondprocessmodel.Func_point = req.body.Func_point;
+    secondprocessmodel.Monthly_effsaving = req.body.Monthly_effsaving;
+    secondprocessmodel.Effort = req.body.Effort;
+    secondprocessmodel.Quadrant = req.body.Quadrant;
             
                     var updated_doc={$set: {Num_of_apps:req.body.Num_of_apps,
                         Num_of_mainframe:req.body.Num_of_mainframe,
                         Num_of_Citrix:req.body.Num_of_Citrix,
+                        Third_party_sites:req.body.Third_party_sites,
                         Num_of_scrs:req.body.Num_of_scrs,
                         Num_of_proccessteps:req.body.Num_of_proccessteps,
                         Num_of_Scenarios:req.body.Num_of_Scenarios,
                         Num_of_Decpoints:req.body.Num_of_Decpoints,
                         Num_of_standardinput:req.body.Num_of_standardinput,
+                        Intr_dynamic_table:req.body.Intr_dynamic_table,
                         Num_of_basedcontrols:req.body.Num_of_basedcontrols,
                         Num_of_accessprofile:req.body.Num_of_accessprofile,
                         Num_of_browsersupp:req.body.Num_of_browsersupp,
+                        Operation_stability:req.body.Operation_stability,
+                        Freq_change:req.body.Freq_change,
+                        Svc_lvl_agr:req.body.Svc_lvl_agr,
                         Num_of_getsignoff:req.body.Num_of_getsignoff,
                         Num_of_Envsetup:req.body.Num_of_Envsetup,
                         Func_point:req.body.Func_point,
@@ -1031,11 +1151,11 @@ router.get('/view', (req, res) => {
                         console.log(updated_doc);
                         if(!err)
                 {
-                   res.render("captureProcess",{viewtitle:"Updated Successfully"})
+                   res.render("CaptureProcess",{viewtitle:"Updated Successfully"})
                 }
                 else{
                     console.log(err);
-                    res.render("captureProcess",{viewerror:"error Occured in proceeding"})
+                    res.render("CaptureProcess",{viewerror:"error Occured in proceeding"})
                 }
                     });
                 

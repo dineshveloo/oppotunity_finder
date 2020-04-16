@@ -23,6 +23,18 @@ var SecondProcessSchema = new mongoose.Schema({
         type: String,
         unique:true
     },
+
+    Mon_Vol: {
+        type: Number,
+       
+    },
+    AHT: {
+        type: Number,
+        
+    },
+    AP_Perc: {
+        type: Number,
+    },
     
     Num_of_apps: {
         type : Number,

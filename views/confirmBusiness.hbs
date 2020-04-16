@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-<title>Opportunity Finder</title>  
+<title>Rapid Assessment Tool</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -28,12 +28,26 @@
      -webkit-box-sizing:border-box;
      -moz-box-sizing: border-box;
      text-align: center;
-}/* removing this would make input not to go over cells border, but they would be too short, I want them to fit cells size */
-    table {border-top: 1px solid #110202; border-left: 1px solid #160404;}
-      table td {border-right: 1px solid #021802; border-bottom: 1px solid #020f02;}
-      #projectduration{
-        size: 4;
-      }
+}
+body{
+background-color:rgb(247, 240, 240);
+}
+
+#tl{
+  padding-left:63rem;
+}
+select option {
+    margin: 40px;
+    background:white;
+    color:black; 
+    
+}
+#selectTool{
+  color:rgb(8, 8, 8);
+  background-color: rgb(211, 168, 189);
+}
+
+
 </style>
 
 
@@ -100,11 +114,11 @@
     
   <form action="/user/effortcalculation" method="POST">
   
-    <div class="table-responsive">
+    <div class="container">
      
-        <table align="center">
+        <table class="table table-condensed" border="3" align="center">
             <thead>
-   <tr>
+   <tr class="danger">
               <td scope="col"><h3><b>Process Type</b></h3></td>
               <td scope="col"><h3><b>Count</b></h3></td>
 
@@ -112,35 +126,83 @@
    </thead>
    <tbody>
    <tr>
-       <td>Simple</td>
+       <td style="text-align: center; vertical-align: middle;"><b>Simple</b></td>
       <td><input type="text" id="columnbox" name="Simple_Count" value="{{list.Simple_Count}}" readonly></td>
 
    </tr>
    
    <tr>
-       <td>Medium</td>
+       <td style="text-align: center; vertical-align: middle;"><b>Medium</b></td>
       <td><input type="text" id="columnbox" name="Medium_Count" value="{{list.Medium_Count}}" readonly></td>
       
    </tr>
    
    <tr>
-       <td>Complex</td>
+       <td style="text-align: center; vertical-align: middle;"><b>Complex</b></td>
       <td><input type="text" id="columnbox" name="Complex_Count" value="{{list.Complex_Count}}" readonly></td>
       
    </tr>
       <tr>
-       <td>Total</td>
-      <td><input type="text" id="columnbox" name="Total_Count" value="{{list.Total_Count}}" readonly></td>
+       <td style="text-align: center; vertical-align: middle;"><b>Total</b></td>
+      <td style="font-weight: bold"><input type="text" id="columnbox" name="Total_Count" value="{{list.Total_Count}}" readonly></td>
       
    </tr>
    </tbody>
 </table>
 </div> 
 <br><br>
-<div align="center">
-<label for="Proj_Dura">Project Duration (in months)</label>
+<div  align="center">
+<label id="cb" for="Proj_Dura"><font size="5"><b>Project Duration </font><font size="4">(in months)</font></b></label>
 <input type="text-center"  maxlength="30" id="projectduration" name="Proj_Dura" required>
- </div>
+</div>
+<br>
+
+
+<div class="row">
+  <div class="col-md-12 school-options-dropdown text-center">
+    <div class="dropdown btn-group">
+
+      {{!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Tool
+        <span class="caret"></span>
+      </button> --}}
+      <select  class="form-control" id="selectTool" name="RPA_Tool" required>
+                <option style="font-weight: bold; text-align: center; vertical-align: middle;" disabled selected value> <b>Select Tool</b></option>
+                <option value="Automation Anywhere">Automation Anywhere</option>
+                     <option value="UiPath">UiPath</option>
+                     <option value="BluePrism">BluePrism</option>
+                     <option value="Pega Robotics">Pega Robotics</option>
+          </select>
+
+      {{!-- <select class="dropdown-menu w-100">
+        <option>Automation Anywhere</option>
+        <option>UiPath</option>
+        <option>BluePrism</option>
+        <option>Pega Robotics</option>
+        
+      </select> --}}
+
+    </div>
+  </div>
+</div>
+
+
+{{!-- <div align="center">
+
+  
+<label id="cb" for="selectTool"><font size="3"><b>Select Tool</font></b></label>
+<select  class="form-control" id="selectTool" name="RPA_Tool" required>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="Automation Anywhere">Automation Anywhere</option>
+                     <option value="UiPath">UiPath</option>
+                     <option value="BluePrism">BluePrism</option>
+                     <option value="Pega Robotics">Pega Robotics</option>
+          </select>
+
+</div> --}}
+
+
+
+
  <br>
  <div align="center">
     <input type="submit" class="btn btn-success" value="Proceed"> 
