@@ -58,8 +58,8 @@
       
       <div class="jumbotron" id="cp">
         <div class="container text-center" >
-        <h1 id="pc">List of Processes Assessed</h1>
-        <p>View Essential Data Points for Process Prioritizaion</p>
+        <h1 id="pc">Process Prioritization</h1>
+        <p>View Data Points for Process Prioritizaion</p>
         
         </div>
       </div>
@@ -71,37 +71,120 @@
         
           </div>
 
+
+ 
+ <div class="container">
+  <div class="row">
+    <div class="col-sm-6"> 
+      <img src="quadrant_view.jpg" class="image-fluid img-thumbnail" alt="Responsive image" style="height:75%%">
+    </div>
+    <div class="col-sm-6"> 
+     
+     <div class="row">
+       <p><b>QUICK WINS:</b> Processes that are very good candidates for automation. 
+         These processes are characterized by high volumes, well defined rules and 
+         simple systems or applications. These should be considered for implementation 
+         in the early stages of automation journey.</p>
+     </div>
+      <br>
+      <br>
+     <div class="row">
+        <p><b>BIG BETS:</b> Processes that offer the highest ROI if automated correctly. 
+          These processes are characterized by high volumes as well as high complexity.
+          These processes should be considered once the organization reaches higher levels 
+          of automation maturity.</p>
+     </div>
+      <br>
+      <br>
+     <div class="row">
+       <p><b>LOW HANGING FRUITS:</b> Processes that should be considered for pilots and PoC 
+         to kickstart automation journey. Typically organizations also chalk out 
+         strategies for CoE setup and Enablement  after the Pilots are completed.</p>
+     </div>
+      <br>
+      <br>
+     <div class="row">
+       <p><b>DEFER :</b> Processes that are very low volume and/or Ad-Hoc in nature leading 
+         to increased implementation complexity. Should not be considered until a 
+         viable business case.</p>
+     </div>
+
+   </div>
+  </div>
+ </div>
+
 <div class="container text-center" id="abc1">
-    
-        
+     
     
   <form action="">
     
-    <div class="table-responsive">
+    <div class="table-responsive table-sm">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Process Name</th>
-              <th scope="col">Process Id</th>
-              <th scope="col">Monthly Volume</th>
-              <th scope="col">AHT(in Min)</th>
-              <th scope="col">FTE</th>
-              <th scope="col">Automation Potential</th>
-              <th scope="col">FTE Benefit</th>
+              <th scope="col"><h5><b>Process Name</b></h5></th>
+              <th scope="col"><h5><b>Process Id</b></th>
+              <th scope="col"><h5><b>Monthly Volume</b></h5></th>
+              <th scope="col"><h5><b>AHT(min)</b></h5></th>
+              <th scope="col"><h5><b>FTE</h5></b></th>
+              <th scope="col"><h5><b>Automation Potential</b></h5></th>
+              <th scope="col"><h5><b>FTE Benefit</b></h5></th>
+              <th scope="col"><h5><b>Implementation Complexity</b></h5></th>
+              <th scope="col"><h5><b>Quadrant</b></h5></th>
+              <th scope="col"><h5><b>Ranking</b></h5></th>
             </tr>
           </thead>
           <tbody>
-              {{#each list}}
+              {{!-- {{#each list}}
             <tr>
-              <td>{{this.Proc_Name}}</td>
-              <td>{{this.Proc_Id}}</td>
-              <td>{{this.Mon_Vol}}</td>
-             <td>{{this.AHT}}</td>
-             <td>{{this.FTE}}</td>
-             <td>{{this.AP_Perc}}</td>
-             <td>{{this.FTE_Benefit}}</td>
+              <td><h5>{{this.Proc_Name}}</h5></td>
+              <td><h5>{{this.Proc_Id}}</h5></td>
+              <td><h5>{{this.Mon_Vol}}</h5></td>
+             <td><h5>{{this.AHT}}</h5></td>
+             <td><h5>{{this.FTE}}</h5></td>
+             <td></h5>{{this.AP_Perc}}<h5></h5></td>
+             <td><h5>{{this.FTE_Benefit}}</h5></td>
             </tr>
-           {{/each}}
+           {{/each}} --}}
+            <tr>
+              <td><h5>Accounts Payable</h5></td>
+              <td><h5>C1_FO_NA_AP</h5></td>
+              <td><h5>20000</h5></td>
+             <td><h5>15</h5></td>
+             <td><h5>30</h5></td>
+             <td><h5>72</h5></td>
+             <td><h5>22</h5></td>
+             <td><h5>Medium</h5></td>
+             <td><h5>Big Bets</h5></td>
+             <td><h5>2</h5></td>
+            </tr>
+
+             <tr>
+              <td><h5>Invoice Processing</h5></td>
+              <td><h5>C1_FO_NA_IP</h5></td>
+              <td><h5>30000</h5></td>
+             <td><h5>20</h5></td>
+             <td><h5>60</h5></td>
+             <td><h5>72</h5></td>
+             <td><h5>44</h5></td>
+             <td><h5>Complex</h5></td>
+             <td><h5>Big Bets</h5></td>
+             <td><h5>3</h5></td>
+            </tr>
+
+              <tr>
+              <td><h5>PO Creation</h5></td>
+              <td><h5>C1_PR_OM_PC</h5></td>
+              <td><h5>30000</h5></td>
+             <td><h5>20</h5></td>
+             <td><h5>60</h5></td>
+             <td><h5>68.5</h5></td>
+             <td><h5>42</h5></td>
+             <td><h5>Simple</h5></td>
+             <td><h5>Quick Wins</h5></td>
+             <td><h5>1</h5></td>
+            </tr>
+
           </tbody>
         </table>
       </div>
