@@ -332,6 +332,10 @@ router.post("/effortcalculation",(req,res)=>{
         if(!err)
         {
             console.log(docs)
+            Simple=simplecount;
+            Complex=complexcount;
+            Medium=mediumcount;
+            Total=totalcount;
             Simple_Dev_Effort=docs[0].Simple_Dev*simplecount;
             Simple_Srdev_Effort=docs[0].Simple_Srdev*simplecount;
             Simple_BA_Effort=docs[0].Simple_BA*simplecount;
@@ -353,8 +357,10 @@ router.post("/effortcalculation",(req,res)=>{
             Medium_Arch_Effort=docs[0].Medium_Arch*mediumcount;
             // Medium_Arch_Effort=Medium_Arch_Effort.toFixed(2);
             Medium_PM_Effort=docs[0].Medium_PM*mediumcount;
+            Medium_PM_Effort=Math.round(Medium_PM_Effort);
             // Medium_PM_Effort=Medium_PM_Effort.toFixed(2)
             Medium_DM_Effort=docs[0].Medium_DM*mediumcount;
+            Medium_DM_Effort=Math.round(Medium_DM_Effort);
             // Medium_DM_Effort=Medium_DM_Effort.toFixed(2);
             Total_Medium_Effort=Medium_Dev_Effort+Medium_Srdev_Effort+Medium_BA_Effort+Medium_Arch_Effort+Medium_PM_Effort+Medium_DM_Effort;
             Total_Medium_Effort=Total_Medium_Effort.toFixed(2);
@@ -389,16 +395,23 @@ router.post("/effortcalculation",(req,res)=>{
             Total_Of_Total_Effort=Total_Simple_Effort+Total_Medium_Effort+Total_Complex_Effort;
             Total_Of_Total_Effort=Total_Of_Total_Effort.toFixed(2);
 
-            Dev_Roundoff=Math.round(Total_Dev_Effort/projectduration);
-            Srdev_Roundoff=Math.round(Total_Srdev_Effort/projectduration);
-            BA_Roundoff=(Total_BA_Effort/projectduration);
+            Dev_Roundoff=Math.ceil(Total_Dev_Effort/projectduration);
+            Srdev_Roundoff=Math.ceil(Total_Srdev_Effort/projectduration);
+            BA_Roundoff=Math.round((Total_BA_Effort/projectduration)*100)/100;
+            BA_Roundoff=Math.round((BA_Roundoff)*10)/10;
             BA_Roundoff=BA_Roundoff.toFixed(2);
-            Arch_Roundoff=(Total_Arch_Effort/projectduration);
+            Arch_Roundoff=Math.round((Total_Arch_Effort/projectduration)*100)/100;
+            Arch_Roundoff=Math.round((Arch_Roundoff)*10)/10;
             Arch_Roundoff=Arch_Roundoff.toFixed(2);
-            PM_Roundoff=(Total_PM_Effort/projectduration);
+            PM_Roundoff=Math.round((Total_PM_Effort/projectduration)*100)/100;
+            PM_Roundoff=Math.round((PM_Roundoff)*10)/10;
             PM_Roundoff=PM_Roundoff.toFixed(2);
-            DM_Roundoff=(Total_DM_Effort/projectduration);
+            
+            DM_Roundoff=Math.round((Total_DM_Effort/projectduration)*100)/100;
+           
+            DM_Roundoff=Math.round((DM_Roundoff)*10)/10;
             DM_Roundoff=DM_Roundoff.toFixed(2);
+            DM_Roundoff=(Total_DM_Effort/projectduration).toFixed(2);
             Total_Rounoff=Total_Of_Total_Effort/projectduration;
             Total_Rounoff=Total_Rounoff.toFixed(2);
             
@@ -430,21 +443,27 @@ router.post("/effortcalculation",(req,res)=>{
             Srdev_Cost=Total_Srdev_Effort*docs[0].Srdev_Cost*168;
             BA_Cost=Total_BA_Effort*docs[0].BA_Cost*168;
             Arch_Cost=Total_Arch_Effort*docs[0].Arch_Cost*168;
-            PM_Cost=Total_PM_Effort*docs[0].PM_Cost*168;
+            PM_Cost=Math.round(Total_PM_Effort*docs[0].PM_Cost*168);
             // PM_Cost=PM_Cost.toFixed(2);
             DUlead_Cost=Total_DM_Effort*docs[0].DUlead_Cost*168;
             Total_Imp_Cost=Dev_Cost+Srdev_Cost+BA_Cost+Arch_Cost+PM_Cost+DUlead_Cost;
             
             // Total_Imp_Cost=Total_Imp_Cost.toFixed(2);
             console.log(Total_Imp_Cost);
-            Maint_Cost=Math.floor(totalcount/7*30000);
+            Maint_Cost=Math.ceil(totalcount/7*30000);
             FTE_Savings_Count=Math.round(simplecount*0.5+mediumcount*1+complexcount*2);
             FTE_Savings_USD=FTE_Price*FTE_Savings_Count;
             Net_Savings=Math.round(FTE_Savings_USD-(Total_Imp_Cost+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
             Net_Savings_Two=Math.round(FTE_Savings_USD-(0+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
             Total_Net_Savings=Net_Savings+(4*Net_Savings_Two);
+            Total_TCO=Total_Imp_Cost+(5*Totalof_Total_Lisc_Price)+(5*Totalof_Total_Infra_Price)+(5*Maint_Cost);
             res.render("Calculation",
             {Simple_Dev_Effort:Simple_Dev_Effort,
+                Total:Total,
+                Simple:Simple,
+                Medium:Medium,
+                Complex:Complex,
+                Total_TCO:Total_TCO,
                 Simple_Srdev_Effort:Simple_Srdev_Effort,
                 Simple_BA_Effort:Simple_BA_Effort,
                 Simple_Arch_Effort:Simple_Arch_Effort,
@@ -481,6 +500,7 @@ router.post("/effortcalculation",(req,res)=>{
             Dev_Roundoff:Dev_Roundoff,
             Srdev_Roundoff:Srdev_Roundoff,
             BA_Roundoff:BA_Roundoff,
+            
             Arch_Roundoff:Arch_Roundoff,
             PM_Roundoff:PM_Roundoff,
             DM_Roundoff:DM_Roundoff,
