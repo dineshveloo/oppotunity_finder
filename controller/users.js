@@ -447,6 +447,7 @@ router.post("/effortcalculation",(req,res)=>{
             // PM_Cost=PM_Cost.toFixed(2);
             DUlead_Cost=Total_DM_Effort*docs[0].DUlead_Cost*168;
             Total_Imp_Cost=Dev_Cost+Srdev_Cost+BA_Cost+Arch_Cost+PM_Cost+DUlead_Cost;
+            Total_Imp_Cost_Two=Total_Imp_Cost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             
             // Total_Imp_Cost=Total_Imp_Cost.toFixed(2);
             console.log(Total_Imp_Cost);
@@ -456,10 +457,15 @@ router.post("/effortcalculation",(req,res)=>{
             Net_Savings=Math.round(FTE_Savings_USD-(Total_Imp_Cost+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
             Net_Savings_Two=Math.round(FTE_Savings_USD-(0+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
             Total_Net_Savings=Net_Savings+(4*Net_Savings_Two);
+            Total_Net_Savings_Two=Total_Net_Savings.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             Total_TCO=Total_Imp_Cost+(5*Totalof_Total_Lisc_Price)+(5*Totalof_Total_Infra_Price)+(5*Maint_Cost);
+            Total_TCO_Two=Total_TCO.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             res.render("Calculation",
             {Simple_Dev_Effort:Simple_Dev_Effort,
                 Total:Total,
+                Total_Net_Savings_Two:Total_Net_Savings_Two,
+                Total_Imp_Cost_Two:Total_Imp_Cost_Two,
+                Total_TCO_Two:Total_TCO_Two,
                 Simple:Simple,
                 Medium:Medium,
                 Complex:Complex,
