@@ -116,7 +116,43 @@ function funtional_point(){
     effort();
     quadrant();
   };
-  window.onload = function(){
+
+  function ap(){
+    var selObj1  = document.getElementById("rbased");
+    var rulebased_value_str = selObj1.options[selObj1.selectedIndex].value;
+    var rulebased_value_int;
+    switch(rulebased_value_str) {
+      case "Low":
+        rulebased_value_int = 0.2;
+        break;
+      case "Medium":
+        rulebased_value_int = 0.5;
+        break;
+      case "High":
+        rulebased_value_int = 0.8;
+        break;
+    }
+    var arpa = document.getElementById('arpa').value;
+    var arpa1 = arpa/100;
+    var crpa = document.getElementById('crpa').value;
+    var crpa1 = crpa/100;
+    var apot = document.getElementById("apot");
+    var result1 = (arpa1*rulebased_value_int*100)+(crpa1*(crpa/2));
+    result2 = result1.toFixed(2);
+    // var result2 = crpa/2;
+    // var result3 = crpa*result2;
+    // var result4 = result1+result3;
+   
+    
+    apot.value = result2;
+    fte_benifit();
+    y_axis();
+
+};
+  
+  
+  
+  function Y_axis(){
     var monthlyvolume = document.getElementById('mvtwo').value; 
     var aht = document.getElementById('ahttwo').value;
     var app = document.getElementById('apottwo').value;
@@ -176,6 +212,7 @@ function funtional_point(){
   
   
   };
+  
   
   var result1;
   var result2;
@@ -268,4 +305,10 @@ function funtional_point(){
     // window.onload = net_savings();
   };
   // window.onload = net_savings();
+//  function quapri(){
+//   var qua = document.getElementById('qua').value;
+//   var tabledata = document.getElementById('tqua');
+//   tabledata.value = qua;
   
+
+//  } ;

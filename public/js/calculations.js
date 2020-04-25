@@ -1,7 +1,16 @@
 const ProcessModel = mongoose.model('Process');
+// const SecondProcessModel =mongoose.model('SecondProcess');
 // const express = require("express");
 // const mongoose = require("mongoose");
 // const router=express.Router();
+// db.Process.aggregate([{
+//   $lookup: {
+//           from: "SecondProcess",
+//           localField: "Proc_Id",
+//           foreignField: "Proc_Id",
+//           as: "Combined_Process"
+//       }
+// }])
 
 function calculate() {
     var myBox1 = document.getElementById('mv').value; 
@@ -12,6 +21,7 @@ function calculate() {
     var myyyResult = Math.ceil(myyResult);
     result.value = myyyResult;
     fte_benifit();
+    // y_axis();
 
     
 };
@@ -35,6 +45,8 @@ function automation(){
 
 };
 
+
+
 function ap(){
     var selObj1  = document.getElementById("rbased");
     var rulebased_value_str = selObj1.options[selObj1.selectedIndex].value;
@@ -54,6 +66,7 @@ function ap(){
     var arpa1 = arpa/100;
     var crpa = document.getElementById('crpa').value;
     var crpa1 = crpa/100;
+    var apot = document.getElementById("apot");
     var result1 = (arpa1*rulebased_value_int*100)+(crpa1*(crpa/2));
     result2 = result1.toFixed(2);
     // var result2 = crpa/2;
@@ -61,8 +74,10 @@ function ap(){
     // var result4 = result1+result3;
    
     
-    document.getElementById("apot").value = result2;
+    apot.value = result2;
     fte_benifit();
+    y_axis();
+   
 
 };
 function fte_benifit(){
@@ -76,188 +91,6 @@ function fte_benifit(){
 };
 
 
-// function funtional_point(){
-//   var a = 2;
-//   var b = 4;
-//   var c = 4;
-//   var d = 5;
-//   var e = 0.5;
-//   var f = 0.2;
-//   var g = 4;
-//   var h = 0.5;
-//   var i = 4;
-//   var j = 1;
-//   var k = 0.5;
-//   var l = 4;
-//   var m = 2.5;
-//   var n = 2.5;
-//   var o = 10;
-//   var p = 4;
-//   var q = 2.5;
-//   var r = 2.5;
-//   var Num_of_apps = document.getElementById('Num_of_app').value;
-//   var Num_of_mainframe = document.getElementById('Num_of_mainfram').value;
-//   var Num_of_Citrix = document.getElementById('Num_of_Citri').value;
-//   var Third_party_sites = document.getElementById('Third_party_site');
-//   var Third_party_sites_str = Third_party_sites.options[Third_party_sites.selectedIndex].value;
-//   var Third_party_sites_int;
-//   switch(Third_party_sites_str){
-//     case "Yes":
-//         Third_party_sites_int = 1;
-//       break;
-//     case "No":
-//         Third_party_sites_int = 0;
-//       break;
-    
-//   }
-//   var Num_of_scrs = document.getElementById('Num_of_scr').value;
-//   var Num_of_proccessteps = document.getElementById('subject').value;
-//   var Num_of_Scenarios = document.getElementById('Num_of_Scenario').value;
-//   var Num_of_Decpoints = document.getElementById('Num_of_Decpoint').value;
-//   var Num_of_standardinput = document.getElementById('Num_of_standardinpu').value;
-//   var Intr_dynamic_table = document.getElementById('Intr_dynamic_tabl');
-//   var Intr_dynamic_table_str = Intr_dynamic_table.options[Intr_dynamic_table.selectedIndex].value;
-//   var Intr_dynamic_table_int;
-//   switch(Intr_dynamic_table_str){
-//     case "Yes":
-//       Intr_dynamic_table_int = 1;
-//       break;
-//     case "No":
-//       Intr_dynamic_table_int = 0;
-//       break;
-    
-//   }
-//   var Num_of_basedcontrols = document.getElementById('Num_of_basedcontrol').value;
-//   var Num_of_accessprofiles = document.getElementById('Num_of_accessprofile').value;
-//   var Num_of_browsersupp = document.getElementById('Num_of_browsersup').value;
-//   var Operation_stability = document.getElementById('Operation_stabilit');
-//   var Operation_stability_str = Operation_stability.options[Operation_stability.selectedIndex].value;
-//   var Operation_stability_int;
-//   switch(Operation_stability_str){
-//     case "Planned Downtime":
-//       Operation_stability_int = 0;
-//       break;
-//     case "Once in a month":
-//       Operation_stability_int = 1;
-//       break;
-    
-//   }
-
-//   var Freq_change = document.getElementById('Freq_chang');
-//   var Freq_change_str =Freq_change.options[Freq_change.selectedIndex].value;
-//   var Freq_change_int;
-//   switch(Freq_change_str){
-//     case "Frequently":
-//       Freq_change_int = 1;
-//       break;
-//     case "Infrequently":
-//       Freq_change_int = 0;
-//       break;
-    
-//   }
-//   var Svc_lvl_agr = document.getElementById('Svc_lvl_ag');
-//   var Svc_lvl_agr_str =Svc_lvl_agr.options[Svc_lvl_agr.selectedIndex].value;
-//   var Svc_lvl_agr_int;
-//   switch(Svc_lvl_agr_str){
-//     case "Less than 8 hrs":
-//       Svc_lvl_agr_int = 2;
-//       break;
-//     case "Less than or equal to 24 hrs":
-//       Svc_lvl_agr_int = 1;
-//       break;
-//     case "More than 24 hrs":
-//         Svc_lvl_agr_int = 0;
-//   }
-//   var Num_of_getsignoff = document.getElementById('Num_of_getsignof').value;
-//   var Num_of_Envsetup = document.getElementById('Num_of_Envsetu').value;
-//   var Func_point = document.getElementById('Func_poin');
-//   var aa = a * Num_of_apps;
-//   var bm = b * Num_of_mainframe;
-//   var cc = c * Num_of_Citrix;
-//   var dt = d * Third_party_sites_int;
-//   var es = e * Num_of_scrs;
-//   var fp = f * Num_of_proccessteps;
-//   var gs = g * Num_of_Scenarios;
-//   var hd = h * Num_of_Decpoints;
-//   var is = i * Num_of_standardinput;
-//   var jd = j * Intr_dynamic_table_int;
-//   var kb = k * Num_of_basedcontrols;
-//   var la = l * Num_of_accessprofiles;
-//   var mb = m * Num_of_browsersupp;
-//   var no = n * Operation_stability_int;
-//   var ofc = o * Freq_change_int;
-//   var ps = p * Svc_lvl_agr_int;
-//   var qg = q * Num_of_getsignoff;
-//   var re = r * Num_of_Envsetup;
-//   var output = aa + bm + cc + dt + es + fp + gs + hd + is + jd + kb + la + mb + no + ofc + ps + qg + re;
-//   Func_point.value = output;
-//   effort();
-//   quadrant();
-// };
-// function monthly_savings(){
-//   var monthlyvolume = document.getElementById('mv').value; 
-//   var aht = document.getElementById('aht').value;
-//   var app = document.getElementById('apot').value;
-//   var mes = document.getElementById('Monthly_effsavin');
-//   var output = aht * app * monthlyvolume;
-//   var output1 = output/60;
-//   var output2 = Math.ceil(output1);
-//   mes.value = output2;
-//   quadrant();
-// };
-
-// function effort(){
-//   var xaxis = document.getElementById('Func_poin').value;
-//   var yaxis = document.getElementById('Effor');
-//   var yout;
-//   switch(true){
-//     case ((xaxis >= 0) && (xaxis <= 10)):
-//       yout = 4;
-//       break;
-//     case ((xaxis >= 11) && (xaxis <= 20)):
-//         yout = 8;
-//         break;
-//     case ((xaxis >= 21) && (xaxis <= 40)):
-//             yout = 12;
-//             break;
-//      case ((xaxis >= 41) && (xaxis <= 60)):
-//                 yout = 16;
-//                 break;
-//      case ((xaxis >= 61) && (xaxis <= 110)):
-//                 yout = 20;
-//                 break;
-//   }
-//   yaxis.value = yout;
-  
- 
-// };
-
-// function quadrant(){
-//   var xaxis = document.getElementById('Func_poin').value;
-//   var yaxis = document.getElementById('Effor').value;
-  
-//   var qua = document.getElementById('Quadran');
-//   var quaout;
-//   switch(true){
-//     case ((xaxis > 55) && (yaxis > 1500)):
-//         quaout = "Big Bets";
-//       break;
-//     case ((xaxis > 55) && (yaxis < 1500)):
-//         quaout = "Defer";
-//         break;
-//     case ((xaxis < 55) && (yaxis < 1500)):
-//         quaout = "Low Hanging Fruits";
-//             break;
-//      case ((xaxis < 55) && (yaxis > 1500)):
-//         quaout = "Quick Wins";
-//                 break;
-     
-//   }
-
-// qua.value = quaout;
-
-
-// };
 
 function ValidateRange() {
     var value = parseInt(document.getElementById("arpa").value);
@@ -275,17 +108,7 @@ function ValidateRange1() {
     }
     return true;
 };
-// function isAlphabet(evt){
-//     var charCode = (evt.which) ? evt.which : evt.keyCode
-//    if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)){
-//        alert("Please enter alphabets as input")
-      
-      
-//           return false;
-//           return true;  
-//   }
-  
-// }
+
 function isNumberKey(evt){
         var charCode = (evt.which) ? evt.which : evt.keyCode
         if (charCode > 31 && (charCode < 48 || charCode > 57)){
@@ -578,63 +401,7 @@ function isNumberKey(evt){
           }
         }
       };
-      // function processId() {
-      //   var input, filter, table, tr, td, i, txtValue;
-      //   input = document.getElementById("processIdinput");
-      //   filter = input.value.toUpperCase();
-      //   table = document.getElementById("processes");
-      //   tr = table.getElementsByTagName("tr");
-      //   for (i = 0; i < tr.length; i++) {
-      //     td = tr[i].getElementsByTagName("td")[0];
-      //     if (td) {
-      //       txtValue = td.textContent || td.innerText;
-      //       if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      //         tr[i].style.display = "";
-      //       } else {
-      //         tr[i].style.display = "none";
-      //       }
-      //     }       
-      //   }
-      // }
-
-      //  function complexity() {
-      //       var input, filter, table, tr, td, i, txtValue;
-      //       input = document.getElementById("complexityinput");
-      //       filter = input.value.toUpperCase();
-      //       table = document.getElementById("processes");
-      //       tr = table.getElementsByTagName("tr");
-      //       for (i = 0; i < tr.length; i++) {
-      //         td = tr[i].getElementsByTagName("td")[1];
-      //         if (td) {
-      //           txtValue = td.textContent || td.innerText;
-      //           if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      //             tr[i].style.display = "";
-      //           } else {
-      //             tr[i].style.display = "none";
-      //           }
-      //         }       
-      //       }
-      //     }
-    
-    
-      //     function quadrant() {
-      //       var input, filter, table, tr, td, i, txtValue;
-      //       input = document.getElementById("quadrantinput");
-      //       filter = input.value.toUpperCase();
-      //       table = document.getElementById("processes");
-      //       tr = table.getElementsByTagName("tr");
-      //       for (i = 0; i < tr.length; i++) {
-      //         td = tr[i].getElementsByTagName("td")[2];
-      //         if (td) {
-      //           txtValue = td.textContent || td.innerText;
-      //           if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      //             tr[i].style.display = "";
-      //           } else {
-      //             tr[i].style.display = "none";
-      //           }
-      //         }       
-      //       }
-      //     }
+     
     
           function classification() {
             var input, filter, table, tr, td, i, txtValue;
@@ -654,32 +421,289 @@ function isNumberKey(evt){
               }       
             }
           };
+
+          function funtional_point(){
+            var a = 2;
+            var b = 4;
+            var c = 4;
+            var d = 5;
+            var e = 0.5;
+            var f = 0.2;
+            var g = 4;
+            var h = 0.5;
+            var i = 4;
+            var j = 1;
+            var k = 0.5;
+            var l = 4;
+            var m = 2.5;
+            var n = 2.5;
+            var o = 10;
+            var p = 4;
+            var q = 2.5;
+            var r = 2.5;
+            var numOfApps = document.getElementById('noa').value;
+            var numOfMainframe = document.getElementById('nom').value;
+            var numOfCitrix = document.getElementById('noc').value;
+            var thirdPartySites = document.getElementById('tps');
+            var thirdPartySites_str = thirdPartySites.options[thirdPartySites.selectedIndex].value;
+            var thirdPartySites_int;
+            switch(thirdPartySites_str){
+              case "Yes":
+                thirdPartySites_int = 1;
+                break;
+              case "No":
+                thirdPartySites_int = 0;
+                break;
+              
+            }
+            var numOfScrs = document.getElementById('nos').value;
+            var numOfProccessteps = document.getElementById('subject').value;
+            var numOfScenarios = document.getElementById('nosc').value;
+            var numOfDecpoints = document.getElementById('nod').value;
+            var numOfStandardinput = document.getElementById('nost').value;
+            var intrDynamicTable = document.getElementById('indt');
+            var intrDynamicTable_str = intrDynamicTable.options[intrDynamicTable.selectedIndex].value;
+            var intrDynamicTable_int;
+            switch(intrDynamicTable_str){
+              case "Yes":
+                intrDynamicTable_int = 1;
+                break;
+              case "No":
+                intrDynamicTable_int = 0;
+                break;
+              
+            }
+            var numOfBasedcontrols = document.getElementById('nob').value;
+            var numOfAccessprofiles = document.getElementById('noap').value;
+            var numOfBrowsersupp = document.getElementById('nbs').value;
+            var operationStability = document.getElementById('opst');
+            var operationStability_str = operationStability.options[operationStability.selectedIndex].value;
+            var operationStability_int;
+            switch(operationStability_str){
+              case "Planned Downtime":
+                operationStability_int = 0;
+                break;
+              case "Once in a month":
+                operationStability_int = 1;
+                break;
+              
+            }
+          
+            var freqChange = document.getElementById('freqch');
+            var freqChange_str =freqChange.options[freqChange.selectedIndex].value;
+            var freqChange_int;
+            switch(freqChange_str){
+              case "Frequently":
+                freqChange_int = 1;
+                break;
+              case "Infrequently":
+                freqChange_int = 0;
+                break;
+              
+            }
+            var svcLvlAgr = document.getElementById('svc');
+            var svcLvlAgr_str =svcLvlAgr.options[svcLvlAgr.selectedIndex].value;
+            var svcLvlAgr_int;
+            switch(svcLvlAgr_str){
+              case "Less than 8 hrs":
+                svcLvlAgr_int = 2;
+                break;
+              case "Less than or equal to 24 hrs":
+                svcLvlAgr_int = 1;
+                break;
+              case "More than 24 hrs":
+                  svcLvlAgr_int = 0;
+            }
+            var numOfGetsignoff = document.getElementById('nog').value;
+            var numOfEnvsetup = document.getElementById('noes').value;
+            var funcPoint = document.getElementById('funp');
+            var A = a * numOfApps;
+            var B = b * numOfMainframe;
+            var C = c * numOfCitrix;
+            var D = d * thirdPartySites_int;
+            var E = e * numOfScrs;
+            var F = f * numOfProccessteps;
+            var G = g * numOfScenarios;
+            var H = h * numOfDecpoints;
+            var I = i * numOfStandardinput;
+            var J = j * intrDynamicTable_int;
+            var K = k * numOfBasedcontrols;
+            var L = l * numOfAccessprofiles;
+            var M = m * numOfBrowsersupp;
+            var N = n * operationStability_int;
+            var O = o * freqChange_int;
+            var P = p * svcLvlAgr_int;
+            var Q = q * numOfGetsignoff;
+            var R = r * numOfEnvsetup;
+            var output = A + B + C + D + E + F + G + H + I + J + K + L + M + N + O + P + Q + R;
+            funcPoint.value = output;
+            effort();
+            quadrant();
+            // y_axis();
+          }; 
     
-          // function selectprocess() {
-          //   var input, filter, table, tr, td, i, txtValue;
-          //   input = document.getElementById("selectprocessinput");
-          //   filter = input.value.toUpperCase();
-          //   table = document.getElementById("processes");
-          //   tr = table.getElementsByTagName("tr");
-          //   for (i = 0; i < tr.length; i++) {
-          //     td = tr[i].getElementsByTagName("td")[4];
-          //     if (td) {
-          //       txtValue = td.textContent || td.innerText;
-          //       if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          //         tr[i].style.display = "";
-          //       } else {
-          //         tr[i].style.display = "none";
-          //       }
-          //     }
-          //   }
-          // }
-
-
-        //   document.getElementById('edit').onclick = function() {
-        //     document.getElementById('fte').readOnly =false;
-        //  };
-
+ 
+        function y_axis(){
+          var monthlyvolume = document.getElementById('mv').value; 
+          var aht = document.getElementById('aht').value;
+          var apot = document.getElementById("apot").value;
+          var mes = document.getElementById('meffs');
+          var output = aht * apot/100 * monthlyvolume;
+          var output1 = output/60;
+          var output2 = Math.ceil(output1);
+          mes.value = output2;
+          quadrant();
+        };
+        
+        function effort(){
+          var funcPoint = document.getElementById('funp').value;
+          var efforts = document.getElementById('effo');
+          var yout;
+          if ((funcPoint >= 0) || (funcPoint <= 10)){
+            yout = 4;
+          }
+          if ((funcPoint >= 11) || (funcPoint <= 20)){
+            yout = 8;
+          }
+          if ((funcPoint >= 21) || (funcPoint <= 40)){
+            yout = 12;
+          }
+          if ((funcPoint >= 41) || (funcPoint <= 60)){
+            yout = 16;
+          }
+          if ((funcPoint >= 61) || (funcPoint <= 110)){
+            yout = 20;
+          }
+          
+          efforts.value = yout;
+          
+         
+        };
+        
+        function quadrant(){
+          var funcPoint = document.getElementById('funp').value;
+          var mes = document.getElementById('meffs').value;
+          
+          var qua = document.getElementById('qua');
+          var quaout; 
+          if ((funcPoint >= 55) && (mes >= 1500)) {
+            quaout = "Big Bets";
+          }
+          if ((funcPoint >= 55) && (mes <= 1500)) {
+            quaout = "Defer";
+          }
+          if ((funcPoint <= 55) && (mes <= 1500)) {
+            quaout = "Low Hanging Fruits";
+          }
+          if ((funcPoint <= 55) && (mes >= 1500)) {
+            quaout = "Quick Wins";
+          }
+          
+        qua.value = quaout;
+        
+        
+        };
+        
+        
+        var result1;
+        var result2;
+        var result3;
+        var result4;
+        var result5;
       
+        function fte_savings_usd(){
+          var ftecount1 = document.getElementById('year1').value;
+          var ftecount2 = document.getElementById('year2').value;
+          var ftecount3 = document.getElementById('year3').value;
+          var ftecount4 = document.getElementById('year4').value;
+          var ftecount5 = document.getElementById('year5').value;
+      
+          var ftecost1 = document.getElementById('y1').value;
+          var ftecost2 = document.getElementById('y2').value;
+          var ftecost3 = document.getElementById('y3').value;
+          var ftecost4 = document.getElementById('y4').value;
+          var ftecost5 = document.getElementById('y5').value;
+          
+          var ftesavings1 = document.getElementById('ftesav1');
+          var ftesavings2 = document.getElementById('ftesav2');
+          var ftesavings3 = document.getElementById('ftesav3');
+          var ftesavings4 = document.getElementById('ftesav4');
+          var ftesavings5 = document.getElementById('ftesav5');
+      
+          var ftesavingresult1 = ftecount1*ftecost1;
+          var ftesavingresult2 = ftecount2*ftecost2;
+          var ftesavingresult3 = ftecount3*ftecost3;
+          var ftesavingresult4 = ftecount4*ftecost4;
+          var ftesavingresult5 = ftecount5*ftecost5;
+          
+      
+          ftesavings1.value = ftesavingresult1;
+          ftesavings2.value = ftesavingresult2;
+          ftesavings3.value = ftesavingresult3;
+          ftesavings4.value = ftesavingresult4;
+          ftesavings5.value = ftesavingresult5;
+      
+          result1 = ftesavings1.value;
+          result2 = ftesavings2.value;
+          result3 = ftesavings3.value;
+          result4 = ftesavings4.value;
+          result5 = ftesavings5.value;
+      
+          net_savings();
+      
+        };
+      
+       function net_savings(){
+      
+        var implec1 = document.getElementById('imp1').value;
+        var implec2 = document.getElementById('imp2').value;
+        var licc1 = document.getElementById('lic1').value;
+        var infrac1 = document.getElementById('infc1').value;
+        var maintc1 = document.getElementById('mac1').value;
+      
+            var output1 = result1;
+            var output2 = result2;
+            var output3 = result3;
+            var output4 = result4;
+            var output5 = result5;
+          // var ftesavings1 = document.getElementById('ftesav1').value;
+          // var ftesavings2 = document.getElementById('ftesav2').value;
+          // var ftesavings3 = document.getElementById('ftesav3').value;
+          // var ftesavings4 = document.getElementById('ftesav4').value;
+          // var ftesavings5 = document.getElementById('ftesav5').value;
+         
+          var netsav1 = document.getElementById('nets1');
+          var netsav2 = document.getElementById('nets2');
+          var netsav3 = document.getElementById('nets3');
+          var netsav4 = document.getElementById('nets4');
+          var netsav5 = document.getElementById('nets5');
+          var totalsav = document.getElementById('totns');
+          var sum1 = parseInt(implec1) + parseInt(licc1) + parseInt(infrac1) + parseInt(maintc1);
+          var sum2 = parseInt(implec2) + parseInt(licc1) + parseInt(infrac1) + parseInt(maintc1);
+          
+          var netsavings1 = output1-sum1;
+          var netsavings2 = output2-sum2;
+          var netsavings3 = output3-sum2;
+          var netsavings4 = output4-sum2;
+          var netsavings5 = output5-sum2;
+          
+          netsav1.value = Math.round(netsavings1);
+          netsav2.value = Math.round(netsavings2);
+          netsav3.value = Math.round(netsavings3);
+          netsav4.value = Math.round(netsavings4);
+          netsav5.value = Math.round(netsavings5);
+          totalsav.value = Math.round(netsavings1) +  Math.round(netsavings2) +  Math.round(netsavings3) +  Math.round(netsavings4) +  Math.round(netsavings5) 
+          // window.onload = net_savings();
+        };
+        // window.onload = net_savings();
+      //  function quapri(){
+      //   var qua = document.getElementById('qua').value;
+      //   var tabledata = document.getElementById('tqua');
+      //   tabledata.value = qua;
+        
+      
+      //  } ;
+           
 
 
  
