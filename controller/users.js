@@ -2,15 +2,17 @@ const express = require("express");
 const application = express();
  const path = require("path");
 const mongoose = require("mongoose");
-
+const bodyparser = require("body-parser");
 const UserModel = mongoose.model('User');
 const ProcessModel = mongoose.model('Process');
+const DiagramModel = mongoose.model('Diagram');
 // const SecondProcessModel =mongoose.model('SecondProcess')
 const ConfigurationDetailsModel = mongoose.model('ConfigurationDetails')
 const GoogleCharts= require("google-charts");
 const session = require('express-session');
 var uniqBy = require('lodash.uniqby');
-var BusinessModel = mongoose.model('Business')
+var BusinessModel = mongoose.model('Business');
+application.use(bodyparser.json());
 application.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
 
 mongoose.set('useFindAndModify', false);
@@ -28,6 +30,15 @@ router.get("/", (req, res)=>{
 router.get("/adminHome", (req, res)=>{
 res.render("adminHome")
 });
+// router.get("/viewToolbar", (req, res)=>{
+//     res.render("viewToolbar")
+//     });
+router.get("/createToolbar", (req, res)=>{
+    res.render("createToolbar")
+    });
+router.get("/processMining", (req, res)=>{
+        res.render("processMining")
+        });
 router.get("/Calculation", (req, res)=>{
     res.render("Calculation")
     });
@@ -47,6 +58,9 @@ router.get("/confirmBusiness", (req, res)=>{
     res.render("confirmBusiness")
 });
 
+
+
+
 router.get("/processViewById", (req, res)=>{
    
     ProcessModel.find((err, docs) => {
@@ -60,6 +74,8 @@ router.get("/processViewById", (req, res)=>{
         }
         });
 });
+
+
 router.get("/businessTableDetails", (req, res)=>{
     
     ProcessModel.find((err, docs) => {
@@ -1245,4 +1261,79 @@ router.get('/view', (req, res) => {
             
             
         });
+
+        router.post("/saveDiagram",(req,res)=>{
+            // var diagrammodel = new DiagramModel();
+            // diagrammodel.Proc_Id = req.body.Proc_Id;
+            let db = mongoose.connection;
+            var a = JSON.parse(req.body.data);
+            a.Proc_Id = req.body.Proc_Id;
+            db.collection("Diagram").insertOne(a);
+            // diagrammodel.save((err, doc) => {
+            //     if(!err){
+            res.render("processMining",{viewtitle:"Work Flow Captured Successfully"})
+                // }
+        // });
+    });
+    router.get("/viewWorkflow", (req, res)=>{
+        // let db = mongoose.connection;
+        DiagramModel.find((err, docs) => {
+            if(!err){
+                // console.log("hi");
+                console.log("Docs"+docs);
+            res.render("viewWorkflow", {list: docs});
+          
+            
+            }
+            else {
+            console.log('Failed to retrieve the Course List: '+ err);
+            }
+            });
+    });
+    router.get("/viewflow", (req, res)=>{
+        DiagramModel.Proc_Id = req.body.Proc_Id;
+        DiagramModel.findById({_id:req.query.id}, (err, docs) => {
+            if(!err){
+            console.log("in view");
+            // console.log(req.query.id)
+            // console.log(docs);
+            // var abc = JSON.parse(docs)
+            // console.log(abc);
+        //    let doc = res.json(docs);
+            // console.log(doc.Status)
+           
+                // if (doc.Status=="APPROVED") {
+                //     console.log("in if")
+                // console.log(typeof docs);
+                var data = JSON.stringify(docs);
+                
+                res.render("createToolbar", {list: data});
+            }
+            else{
+                console.log(err);
+            }
+                // });
+                //console.log(doc);
+                // }
+            //     else
+            //     res.render("processViewById",{viewtitle:"Process is not Approved wait for the admin approval"});
+            //    //res.send("Process Not Approved");
+        });
+        // let Id= req.body.Proc_Id;
+        // let Id1= req.query.Proc_Id;
+        // console.log(Id);
+        // console.log(Id1);
+        // DiagramModel.find({Proc_Id : Id},(err,docs)=>{  
+        //     // var obj = {name : "Raj", age: 20, job : "all"}  
+   
+        //     res.json(docs[0]);  
+             
+        //     // res.sendFile(__dirname + "/toolbar.html",{workflow:docs[0]});  
+        //     });
+    });
+
+
+        
+
+
 module.exports = router;

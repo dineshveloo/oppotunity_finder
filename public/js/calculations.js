@@ -1,4 +1,6 @@
 const ProcessModel = mongoose.model('Process');
+const DiagramModel = mongoose.model('Diagram');
+
 // const SecondProcessModel =mongoose.model('SecondProcess');
 // const express = require("express");
 // const mongoose = require("mongoose");
