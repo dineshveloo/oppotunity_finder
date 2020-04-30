@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Capture Process Work Flow</title>
-      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gojs/2.1.13/go-debug.js"></script> -->
-      
+      <title> Process Work Flow</title>
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
+  <link rel="stylesheet" type="text/css" href="../css/Capture.css">
+  <script src="../js/calculations.js"></script>
+  
   <link rel="stylesheet" href="../css/jquery-ui.min.css" />
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+ 
+  <script src="../js/bootstrap.min.js"></script>
 
   <script src="../js/go.js"></script>
   <script src="../js/Figures.js"></script>
 
   <link rel='stylesheet' href='../css/DataInspector.css' />
   <script src="../js/DataInspector.js"></script>
+  <script src="../js/edit.js"></script>
+  <script src="../js/calculations.js"></script>
     
   <style type="text/css">
     .draggable {
@@ -43,21 +53,51 @@
       width: 100%;
       overflow: hidden;
     }
+    #svbu{
+        background-color: green;
+        color: white;
+    }
+    #colouring{
+        color: rgb(153, 51, 102);
+        align-content: center;
+        background-color: rgb(241, 229, 229);
+    }
 
    
     
 </style>
-      
+
+       
+     
    </head>	
-<body>   
+<body>
+  <div class="header" id="colouring">
+        <div class="container text-center" >
+        <h1 id="pc"><b>View and Edit Process Work Flow</b></h1>
+        
+        
+        </div>
+      </div>
+       <div class="text-right">
+          
+          
+                
+             <button type="button" onclick="goBack()" class="btn btn-success">Back</button>  
+        
+          </div>
+   
     <div id="sample">
         <div style="width: 100%; display: flex; justify-content: space-between">
+          
           <div id="myPaletteDiv" style="width: 105px; margin-right: 2px; background-color: whitesmoke; border: solid 1px black"></div>
-          <div id="myDiagramDiv" style="flex-grow: 1; height: 620px; border: solid 1px black"></div>
+          
+          <div id="myDiagramDiv" style="flex-grow: 1; height: 620px; border: solid 1px #000000"></div>
         </div>
         <br>
         
-    <div id="infoDraggable" class="draggable" style="display: inline-block; vertical-align: top; padding: 5px; top: 20px; left: 380px;">
+        
+    <div id="infoDraggable" class="draggable" style="display: inline-block; vertical-align: top; padding: 5px; top: 130px; left: 380px;">
+     
       <div id="infoDraggableHandle" class="handle">Info</div>
       <div>
       <div id="myInfo"></div>
@@ -69,39 +109,62 @@
             {{!-- <button onclick="load()">Load</button> --}}
             
           </div>
-          {{!-- <textarea id="mySavedModel" style="width:100%;height:300px" >{ "class": "go.GraphLinksModel",
+          <input hidden id="aa" value="{{list}}">
+          <textarea id="mySavedModel" hidden >{ "class": "go.GraphLinksModel",
         "linkFromPortIdProperty": "fromPort",
         "linkToPortIdProperty": "toPort",
         "nodeDataArray": [
        ],
         "linkDataArray": [
        ]}
-          </textarea> --}}
+          </textarea>
+          
           
         </div>
       </div>
-      <form action="/user/saveDiagram" method="POST">
+      <div align="center">
+      <button class = "btn btn-success" id="SaveDiagram" onclick="save()">Save Diagram</button>
+      </div>
+      <form action="/user/updateDiagram" method="POST">
+      
+   
+ 
         <input id="data" name="data" type="text" hidden/>
-        <input name="Proc_Id" type="text" placeholder="Process_ID" required/>
-        <!-- <p id= "data" name= "data"></p> -->
-        <button type="submit">Save</button>
-        {{!-- <button type="submit" formaction="/load-diagram">Load</button> --}}
+
+<div  align="center">
+<label  for="Proc_Idura"><font size="3"><b>Process ID:</font></label>
+<input type="text-center"  maxlength="30" value="{{id}}"  name="Proc_Idura" readonly>
+</div>
         
+        {{!-- <label for="Proc_Id">Process ID:</label>
+        <input  name="Proc_Id" type="text" value="{{id}}" readonly  placeholder="Process_ID"/> --}}
+<div align="center">
+<button  type="button" id = "btnEditingontool" onclick="createPallete()" class="btn btn-success">Edit</button>
+<span id="hide" hidden>
+        <!-- <p id= "data" name= "data"></p> -->
+        
+        <button id="updatebutton" type="submit" class="btn btn-success">Update</button>
+        </span>
+        </div>
+        {{!-- <button type="submit" formaction="/load-diagram">Load</button> --}}        
       </form>
+      
       <!-- <form action="/load-diagram" method="POST">
         <button type="submit">Load</button>
       </form> -->
 <script>
-    var $ = go.GraphObject.make;  // for conciseness in defining templates
+    var  GO = go.GraphObject.make;  // for conciseness in defining templates
+    var aa = document.getElementById("aa").value;
+    console.log("hello"+aa);
     
       myDiagram =
-        $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
+        GO(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
           {
-            grid: $(go.Panel, "Grid",
-              $(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
-              $(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 10 }),
-              $(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
-              $(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
+            grid: GO(go.Panel, "Grid",
+              GO(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
+              GO(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 10 }),
+              GO(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
+              GO(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 10 })
             ),
             "draggingTool.dragsLink": true,
             "draggingTool.isGridSnapEnabled": true,
@@ -110,11 +173,11 @@
             "relinkingTool.isUnconnectedLinkValid": true,
             "relinkingTool.portGravity": 20,
             "relinkingTool.fromHandleArchetype":
-              $(go.Shape, "Diamond", { segmentIndex: 0, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "tomato", stroke: "darkred" }),
+              GO(go.Shape, "Diamond", { segmentIndex: 0, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "tomato", stroke: "darkred" }),
             "relinkingTool.toHandleArchetype":
-              $(go.Shape, "Diamond", { segmentIndex: -1, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "darkred", stroke: "tomato" }),
+              GO(go.Shape, "Diamond", { segmentIndex: -1, cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "darkred", stroke: "tomato" }),
             "linkReshapingTool.handleArchetype":
-              $(go.Shape, "Diamond", { desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
+              GO(go.Shape, "Diamond", { desiredSize: new go.Size(7, 7), fill: "lightblue", stroke: "deepskyblue" }),
             "rotatingTool.handleAngle": 270,
             "rotatingTool.handleDistance": 30,
             "rotatingTool.snapAngleMultiple": 15,
@@ -124,7 +187,7 @@
 
       // when the document is modified, add a "*" to the title and enable the "Save" button
       myDiagram.addDiagramListener("Modified", function(e) {
-        var button = document.getElementById("SaveButton");
+        var button = document.getElementById("SaveDiagram");
         if (button) button.disabled = !myDiagram.isModified;
         var idx = document.title.indexOf("*");
         if (myDiagram.isModified) {
@@ -140,7 +203,7 @@
       // control whether the user can draw links from or to the port.
       function makePort(name, spot, output, input) {
         // the port is basically just a small transparent square showed on diff shapes
-        return $(go.Shape, "Circle",
+        return GO(go.Shape, "Circle",
           {
             fill: "transparent",  // not seen, by default; set to a translucent gray by showSmallPorts, defined below
             stroke: null,
@@ -161,36 +224,36 @@
       }
 
       var nodeSelectionAdornmentTemplate =
-        $(go.Adornment, "Auto",
-          $(go.Shape, { fill: null, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] }),
-          $(go.Placeholder)
+        GO(go.Adornment, "Auto",
+          GO(go.Shape, { fill: null, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] }),
+          GO(go.Placeholder)
         );
 
       var nodeResizeAdornmentTemplate =
-        $(go.Adornment, "Spot",
+        GO(go.Adornment, "Spot",
           { locationSpot: go.Spot.Right },
-          $(go.Placeholder),
-          $(go.Shape, { alignment: go.Spot.TopLeft, cursor: "nw-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
-          $(go.Shape, { alignment: go.Spot.Top, cursor: "n-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
-          $(go.Shape, { alignment: go.Spot.TopRight, cursor: "ne-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+          GO(go.Placeholder),
+          GO(go.Shape, { alignment: go.Spot.TopLeft, cursor: "nw-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+          GO(go.Shape, { alignment: go.Spot.Top, cursor: "n-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+          GO(go.Shape, { alignment: go.Spot.TopRight, cursor: "ne-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
 
-          $(go.Shape, { alignment: go.Spot.Left, cursor: "w-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
-          $(go.Shape, { alignment: go.Spot.Right, cursor: "e-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+          GO(go.Shape, { alignment: go.Spot.Left, cursor: "w-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+          GO(go.Shape, { alignment: go.Spot.Right, cursor: "e-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
 
-          $(go.Shape, { alignment: go.Spot.BottomLeft, cursor: "se-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
-          $(go.Shape, { alignment: go.Spot.Bottom, cursor: "s-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
-          $(go.Shape, { alignment: go.Spot.BottomRight, cursor: "sw-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" })
+          GO(go.Shape, { alignment: go.Spot.BottomLeft, cursor: "se-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+          GO(go.Shape, { alignment: go.Spot.Bottom, cursor: "s-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" }),
+          GO(go.Shape, { alignment: go.Spot.BottomRight, cursor: "sw-resize", desiredSize: new go.Size(6, 6), fill: "lightblue", stroke: "deepskyblue" })
         );
 
       var nodeRotateAdornmentTemplate =
-        $(go.Adornment,
+        GO(go.Adornment,
           { locationSpot: go.Spot.Center, locationObjectName: "CIRCLE" },
-          $(go.Shape, "Diamond", { name: "CIRCLE", cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "Yellow", stroke: "deepskyblue" }),
-          $(go.Shape, { geometryString: "M3.5 7 L3.5 30", isGeometryPositioned: true, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] })
+          GO(go.Shape, "Diamond", { name: "CIRCLE", cursor: "pointer", desiredSize: new go.Size(8, 8), fill: "Yellow", stroke: "deepskyblue" }),
+          GO(go.Shape, { geometryString: "M3.5 7 L3.5 30", isGeometryPositioned: true, stroke: "deepskyblue", strokeWidth: 1.5, strokeDashArray: [4, 2] })
         );
 
       myDiagram.nodeTemplate =
-        $(go.Node, "Spot",
+        GO(go.Node, "Spot",
           { locationSpot: go.Spot.Center },
           new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
           { selectable: true, selectionAdornmentTemplate: nodeSelectionAdornmentTemplate },
@@ -198,10 +261,10 @@
           { rotatable: true, rotateAdornmentTemplate: nodeRotateAdornmentTemplate },
           new go.Binding("angle").makeTwoWay(),
           // the main object is a Panel that surrounds a TextBlock with a Shape
-          $(go.Panel, "Auto",
+          GO(go.Panel, "Auto",
             { name: "PANEL" },
             new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify),
-            $(go.Shape, "Rectangle",  // default figure
+            GO(go.Shape, "Rectangle",  // default figure
               {
                 portId: "", // the default port: if no spot on link data, use closest side
                 fromLinkable: true, toLinkable: true, cursor: "pointer",
@@ -210,7 +273,7 @@
               },
               new go.Binding("figure"),
               new go.Binding("fill")),
-            $(go.TextBlock,
+            GO(go.TextBlock,
               {
                 font: "bold 8pt Helvetica, Times New Roman, sans-serif",
                 margin: 8,
@@ -240,14 +303,14 @@
       }
 
       var linkSelectionAdornmentTemplate =
-        $(go.Adornment, "Link",
-          $(go.Shape,
+        GO(go.Adornment, "Link",
+          GO(go.Shape,
             // isPanelMain declares that this Shape shares the Link.geometry
             { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 })  // use selection object's strokeWidth
         );
 
       myDiagram.linkTemplate =
-        $(go.Link,  // the whole link panel
+        GO(go.Link,  // the whole link panel
           { selectable: true, selectionAdornmentTemplate: linkSelectionAdornmentTemplate },
           { relinkableFrom: true, relinkableTo: true, reshapable: true },
           {
@@ -257,15 +320,15 @@
             toShortLength: 4
           },
           new go.Binding("points").makeTwoWay(),
-          $(go.Shape,  // the link path shape
+          GO(go.Shape,  // the link path shape
             { isPanelMain: true, strokeWidth: 2 }),
-          $(go.Shape,  // the arrowhead
+          GO(go.Shape,  // the arrowhead
             { toArrow: "Standard", stroke: null }),
-          $(go.Panel, "Auto",
+          GO(go.Panel, "Auto",
             new go.Binding("visible", "isSelected").ofObject(),
-            $(go.Shape, "RoundedRectangle",  // the link shape
+            GO(go.Shape, "RoundedRectangle",  // the link shape
               { fill: "#F8F8F8", stroke: null }),
-            $(go.TextBlock,
+            GO(go.TextBlock,
               {
                 textAlign: "center",
                 font: "10pt helvetica, arial, sans-serif",
@@ -278,25 +341,26 @@
           )
         );
 
-     // load();  // load an initial diagram from some JSON text
+      load();  // load an initial diagram from some JSON text
 
       // initialize the Palette that is on the left side of the page
-      myPalette =
-        $(go.Palette, "myPaletteDiv",  // must name or refer to the DIV HTML element
+     function createPallete() {
+       myPalette =
+        GO(go.Palette, "myPaletteDiv",  // must name or refer to the DIV HTML element
           {
             maxSelectionCount: 1,
             nodeTemplateMap: myDiagram.nodeTemplateMap,  // share the templates used by myDiagram
             linkTemplate: // simplify the link template, just in this Palette
-              $(go.Link,
+              GO(go.Link,
                 { // because the GridLayout.alignment is Location and the nodes have locationSpot == Spot.Center,
                   // to line up the Link in the same manner we have to pretend the Link has the same location spot
                   locationSpot: go.Spot.Center,
                   selectionAdornmentTemplate:
-                    $(go.Adornment, "Link",
+                    GO(go.Adornment, "Link",
                       { locationSpot: go.Spot.Center },
-                      $(go.Shape,
+                      GO(go.Shape,
                         { isPanelMain: true, fill: null, stroke: "deepskyblue", strokeWidth: 0 }),
-                      $(go.Shape,  // the arrowhead
+                      GO(go.Shape,  // the arrowhead
                         { toArrow: "Standard", stroke: null })
                     )
                 },
@@ -307,9 +371,9 @@
                   toShortLength: 4
                 },
                 new go.Binding("points"),
-                $(go.Shape,  // the link path shape
+                GO(go.Shape,  // the link path shape
                   { isPanelMain: true, strokeWidth: 2 }),
-                $(go.Shape,  // the arrowhead
+                GO(go.Shape,  // the arrowhead
                   { toArrow: "Standard", stroke: null })
               ),
             model: new go.GraphLinksModel([  // specify the contents of the Palette
@@ -329,7 +393,9 @@
                 { points: new go.List(/*go.Point*/).addAll([new go.Point(0, 0), new go.Point(30, 0), new go.Point(30, 40), new go.Point(60, 40)]) },
                 { points: new go.List(/*go.Point*/).addAll([new go.Point(-30, 30), new go.Point(30, 30)]) }
               ])
-          });
+         });
+     }
+          
     
     // Show the diagram's model in JSON format that the user may edit
     function save() {
@@ -339,21 +405,27 @@
 
       myDiagram.isModified = false;
     }
-    //function load() {
-     // myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
-     // loadDiagramProperties();  // do this after the Model.modelData has been brought into memory
-   // }
+    function load() {
+      if(aa == ""||aa == null){
+        myDiagram.model = go.Model.fromJson(document.getElementById("mySavedModel").value);
+     }
+      else{
+        myDiagram.model = go.Model.fromJson(document.getElementById("aa").value);
+      }
+     
+      //loadDiagramProperties();  // do this after the Model.modelData has been brought into memory
+    }
 
     function saveDiagramProperties() {
       myDiagram.model.modelData.position = go.Point.stringify(myDiagram.position);
     }
-    //function loadDiagramProperties(e) {
+    function loadDiagramProperties(e) {
       // set Diagram.initialPosition, not Diagram.position, to handle initialization side-effects
-     // var pos = myDiagram.model.modelData.position;
-      //if (pos) myDiagram.initialPosition = go.Point.parse(pos);
-    //}
+      var pos = myDiagram.model.modelData.position;
+      if (pos) myDiagram.initialPosition = go.Point.parse(pos);
+    }
     jQuery(function() {
-        // $("#paletteDraggable").draggable({ handle: "#paletteDraggableHandle" }).resizable({
+        // GO("#paletteDraggable").draggable({ handle: "#paletteDraggableHandle" }).resizable({
         //   // After resizing, perform another layout to fit everything in the palette's viewport
         //   stop: function() { myPalette.layoutDiagram(true); }
         // });

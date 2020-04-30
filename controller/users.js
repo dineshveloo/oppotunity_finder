@@ -1295,44 +1295,41 @@ router.get('/view', (req, res) => {
         DiagramModel.findById({_id:req.query.id}, (err, docs) => {
             if(!err){
             console.log("in view");
-            // console.log(req.query.id)
-            // console.log(docs);
-            // var abc = JSON.parse(docs)
-            // console.log(abc);
-        //    let doc = res.json(docs);
-            // console.log(doc.Status)
-           
-                // if (doc.Status=="APPROVED") {
-                //     console.log("in if")
-                // console.log(typeof docs);
+                 var id = docs.Proc_Id;
                 var data = JSON.stringify(docs);
                 
-                res.render("createToolbar", {list: data});
+                res.render("viewToolbar", {list: data,id:id});
             }
             else{
                 console.log(err);
             }
-                // });
-                //console.log(doc);
-                // }
-            //     else
-            //     res.render("processViewById",{viewtitle:"Process is not Approved wait for the admin approval"});
-            //    //res.send("Process Not Approved");
+                
         });
-        // let Id= req.body.Proc_Id;
-        // let Id1= req.query.Proc_Id;
-        // console.log(Id);
-        // console.log(Id1);
-        // DiagramModel.find({Proc_Id : Id},(err,docs)=>{  
-        //     // var obj = {name : "Raj", age: 20, job : "all"}  
-   
-        //     res.json(docs[0]);  
-             
-        //     // res.sendFile(__dirname + "/toolbar.html",{workflow:docs[0]});  
-        //     });
+         });
+
+         router.post("/updateDiagram",(req,res)=>{
+            
+            
+            var a = JSON.parse(req.body.data);
+            a.Proc_Id = req.body.Proc_Id;
+            // db.collection("Diagram").insertOne(a);
+            DiagramModel.updateOne({Proc_Id:req.body.Proc_Id},a,(err,doc)=>{
+                console.log(a);
+                if(!err)
+        {
+           res.render("processMining",{viewtitle:"Updated Successfully"})
+        }
+        else{
+            console.log(err);
+            res.render("processMining",{viewerror:"error Occured in proceeding"})
+        }
+            });
+            // diagrammodel.save((err, doc) => {
+            //     if(!err){
+           
+                // }
+        // });
     });
-
-
         
 
 

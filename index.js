@@ -6,6 +6,10 @@ const application = express();
  const path = require("path");
 const expressHandlerbars = require("express-handlebars");
 const bodyparser = require("body-parser");
+//upload and download excel//
+//var XLSX       = require('xlsx');
+//var multer     = require('multer');
+//end of//
 
 const UserController = require("./controller/users")
 const session = require('express-session');
@@ -27,6 +31,17 @@ application.engine("hbs", expressHandlerbars({
     defaultLayout : "mainlayout",
     layoutDir: __dirname + "views/layouts/"    
 }));
+//multer
+//var storage = multer.diskStorage({
+  //destination: function (req, file, cb) {
+    //cb(null, './public/uploads')
+  //},
+  //filename: function (req, file, cb) {
+    //cb(null, file.originalname)
+  //}
+//});
+
+//var upload = multer({ storage: storage });
 
 application.set("view engine", "hbs")
 

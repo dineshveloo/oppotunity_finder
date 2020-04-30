@@ -1,3 +1,4 @@
+
 $(document).ready(function()
 {
  $('#btnEdit').click(function()
@@ -156,6 +157,27 @@ $(document).ready(function()
 
  
 
+ });
+
+ });
+
+ $(document).ready(function()
+{
+ $('#SaveDiagram').click(function()
+ {
+  
+   $('#hide').prop('hidden', false);
+   
+ });
+
+ });
+ $(document).ready(function()
+{
+ $('#btnEditingontool').click(function()
+ {
+  
+   $('#hide1').prop('disabled', false);
+   
  });
 
  });
