@@ -12,6 +12,11 @@
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
+  <script type="text/javascript">
+			function showMessage(){
+				alert("File uploaded successfully");
+			}
+		</script>
   
   <script>
       $(document).ready(function(){
@@ -62,6 +67,14 @@ input[type=text] {
     body{
 
 background-color:rgb(247, 240, 240);
+}
+#upl{
+  padding-left: 450px;
+}
+#fi{
+  color:white;
+  background-color: rgb(67, 185, 67);
+  border-radius: 2px;
 }
   </style>
   
@@ -193,9 +206,51 @@ background-color:rgb(247, 240, 240);
     </div>
     
     
-    {{!-- </form> --}}
+    
   
   </div>
+
+  
+     
+                
+                         
+
+      <div class="form-row">
+      <div  class="form-group col-md-6">
+        <form action="/user/excelSubmit" method="post" enctype="multipart/form-data">
+        <label>Upload csv file:</label>
+      
+        <input  type="file" name="excel" accept="csv/*" required><br>
+        <input type="submit" class="btn btn-success" value="Submit" id="btnShowMsg" onClick='showMessage()'>
+        {{!-- <input type="submit" value="submit"  id="btnShowMsg" onClick='showMessage()'> --}}
+        </form> 
+      </div>
+    <div id= "upl" class="form-group col-md-6">
+        <label>Download csv file:</label>
+      
+        <form action="/user/download" method="GET">
+                                  <input type="submit" class="btn btn-success" value="Download">
+                            </form>
+      </div>
+    </div>
+    
+
+                         {{!-- <div  align="center">
+                         <label  for="excel"><font size="3"><b>Upload csv file:</font></label>
+                         <input type="file" name="excel" accept="csv/*" required>
+                         <input type="submit" value="submit"  id="btnShowMsg" onClick='showMessage()'>
+                         </div> --}}
+
+                         {{!-- <label for="excel"><h4><b>Upload csv file:</b></h4></label>
+                            <input type="file" name="excel" accept="csv/*" required><br>  --}}
+                            
+                                 
+                         
+                        
+                          
+  
+                        
+
   
 </body>
 </html> 

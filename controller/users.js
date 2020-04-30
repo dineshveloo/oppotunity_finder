@@ -3,9 +3,12 @@ const application = express();
  const path = require("path");
 const mongoose = require("mongoose");
 const bodyparser = require("body-parser");
+const XLSX       = require('xlsx');
+const multer     = require('multer');
 const UserModel = mongoose.model('User');
 const ProcessModel = mongoose.model('Process');
 const DiagramModel = mongoose.model('Diagram');
+const excelModel = mongoose.model('excelData');
 // const SecondProcessModel =mongoose.model('SecondProcess')
 const ConfigurationDetailsModel = mongoose.model('ConfigurationDetails')
 const GoogleCharts= require("google-charts");
@@ -24,6 +27,19 @@ application.use('/user', express.static('views/images'));
 application.use(express.static(__dirname + '/public'));
 // application.use(express.static(dir));
 const router=express.Router();
+
+//multer
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  });
+  var upload = multer({ storage: storage });
+  
+
 router.get("/", (req, res)=>{
     //res.render("views/adminHome")
 });
@@ -1324,12 +1340,71 @@ router.get('/view', (req, res) => {
             res.render("processMining",{viewerror:"error Occured in proceeding"})
         }
             });
-            // diagrammodel.save((err, doc) => {
-            //     if(!err){
-           
-                // }
-        // });
+            
     });
+
+    router.get('/excelSubmit',(req,res)=>{
+        excelModel.find((err,data)=>{
+            if(err){
+                console.log(err)
+                //res.status(500).send("required missing");
+            }else{
+                if(data!=''){
+                    res.render('home',{result:data});
+                }else{
+                    res.render('home',{result:{}});
+                }
+            }
+        });
+     });
+    
+       
+     router.post('/excelSubmit',upload.single('excel'),(req,res)=>{
+       var workbook =  XLSX.readFile(req.file.path);
+      
+       var sheet_namelist = workbook.SheetNames;
+       var x=0;
+       sheet_namelist.forEach(element => {
+           var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_namelist[x]]);
+     
+           console.log(xlData);
+           
+           excelModel.insertMany(xlData,(err,data)=>{
+               if(err){
+                   console.log(err);
+                 
+              
+               }else{
+                   console.log(data);
+                   
+               }
+           })
+           x++;
+       });
+       res.render("processViewById")
+       
+     });
+     
+     
+     router.get('/download',(req,res)=>{
+       var wb = XLSX.utils.book_new(); 
+       excelModel.find((err,data)=>{
+           if(err){
+               console.log(err)
+           }else{
+               var temp = JSON.stringify(data);
+               temp = JSON.parse(temp);
+               var ws = XLSX.utils.json_to_sheet(temp);
+               var down = __dirname+'\Output.xlsx'
+              XLSX.utils.book_append_sheet(wb,ws,"sheet1");
+              XLSX.writeFile(wb,down);
+              res.download(down);
+           }
+       });
+     });
+
+
+
         
 
 
