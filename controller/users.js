@@ -1324,12 +1324,12 @@ router.get('/view', (req, res) => {
          });
 
          router.post("/updateDiagram",(req,res)=>{
-            
+            let db = mongoose.connection;
             
             var a = JSON.parse(req.body.data);
-            a.Proc_Id = req.body.Proc_Id;
+            a.Proc_Id = req.body.Proc_Idura;
             // db.collection("Diagram").insertOne(a);
-            DiagramModel.updateOne({Proc_Id:req.body.Proc_Id},a,(err,doc)=>{
+            db.collection("Diagram").updateOne({Proc_Id:req.body.Proc_Idura},{$set:a},(err)=>{
                 console.log(a);
                 if(!err)
         {

@@ -125,15 +125,14 @@
       <div align="center">
       <button class = "btn btn-success" id="SaveDiagram" onclick="save()">Save Diagram</button>
       </div>
-      <form action="/user/updateDiagram" method="POST">
-      
+      <form action="/user/updateDiagram" method="POST">    
    
  
         <input id="data" name="data" type="text" hidden/>
 
 <div  align="center">
 <label  for="Proc_Idura"><font size="3"><b>Process ID:</font></label>
-<input type="text-center"  maxlength="30" value="{{id}}"  name="Proc_Idura" readonly>
+<input type="text-center" text-align="center"  maxlength="30" value="{{id}}"  name="Proc_Idura" readonly>
 </div>
         
         {{!-- <label for="Proc_Id">Process ID:</label>

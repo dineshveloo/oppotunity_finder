@@ -17,12 +17,9 @@
       $(document).ready(function(){
         $('#btnClear').click(function(){        
       $('#myTable input[type="text"]').val('');
-       $('#myTable #clientnameinput').val('');
-           clientName();
-           businessunit();
-           subbusinessunit();
-           processname();
-           processid();
+       $('#myTable #processidinput').val('');
+           
+           processid3();
          
       
     });
@@ -35,7 +32,12 @@
                 /* Firefox, Chrome, Opera */ 
                 text-align: center; 
             } 
-    
+    .table {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}
 
 
 input[type=text] {
@@ -118,45 +120,44 @@ background-color:rgb(247, 240, 240);
       
       <input type="button" class="btn btn-success" id="btnClear" value="Clear Search"/>
         
-          </div>
+          </div><br>
 <center> <font color="red">{{viewtitle}}</font></center>
-<div id="allign">
+{{!-- <div id="allign"> --}}
   {{!-- <input type="text" name="search" placeholder="Search.."id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> --}}
   {{!--   <input type="text" name="search" placeholder="Search by client name"  onkeyup="myFunction()" >  --}}
 
  {{!-- <form action=""> --}}
 
-    <div class="row">
-        {{!-- <div class="panel panel-primary filter"> --}}
-            
+    {{!-- <div class="row"> --}}
+        
               
-              <div class="table-responsive">
+              <div class="table-responsive-center" >
             <table class="table" id="myTable">
                 <thead >
                    <tr>
               {{!-- <th>
                  
-                <input type="text" class="fa-fa-search" id="clientnameinput" onKeyup="clientName()" text-align="center" placeholder="Search" title="Type in a name" > 
+                <input type="text" class="fa-fa-search" id="clientnameinput" onKeyup="clientName()" text-align="center" placeholder="Search" title="Type in a name" hidden> 
                    
                  
                  
               </th>
                <th>
             
-                <input type="text" class="fa-fa-search" id="businessunitinput" onkeyup="businessunit()" text-align="center" placeholder="Search" title="Type in a business unit"> 
+                <input type="text" class="fa-fa-search" id="businessunitinput" onkeyup="businessunit()" text-align="center" placeholder="Search" title="Type in a business unit" hidden> 
                    
               </th>
 
               <th>
-                <input type="text" class="fa-fa-search" id="subbusinessunitinput" onkeyup="subbusinessunit()" text-align="center" placeholder="Search" title="Type in a sub business unit"> 
+                <input type="text" class="fa-fa-search" id="subbusinessunitinput" onkeyup="subbusinessunit()" text-align="center" placeholder="Search" title="Type in a sub business unit" hidden> 
                    
               </th>
               <th>
-                <input type="text" class="fa-fa-search" id="processnameinput" onkeyup="processname()" text-align="center" placeholder="Search" title="Type in a process name"> 
+                <input type="text" class="fa-fa-search" id="processnameinput" onkeyup="processname()" text-align="center" placeholder="Search" title="Type in a process name" hidden> 
                    
               </th> --}}
               <th>
-                <input type="text" class="fa-fa-search" id="processidinput" onkeyup="processid()" text-align="center" placeholder="Search" title="Type in a process id"> 
+                <input type="text" class="fa-fa-search" id="processidinput" onkeyup="processid3()" text-align="center" placeholder="Search" title="Type in a process id"> 
                    
               </th>
               </tr>
@@ -189,13 +190,13 @@ background-color:rgb(247, 240, 240);
         </table>
       </div>
       
-      </div>
-    </div>
+      
+    {{!-- </div> --}}
     
     
     {{!-- </form> --}}
   
-  </div>
+  {{!-- </div> --}}
   
 </body>
 </html> 
