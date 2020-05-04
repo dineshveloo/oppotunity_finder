@@ -1,1 +1,1 @@
-# Rapid Assessment Tool
+# Rapid Assessment Platform
