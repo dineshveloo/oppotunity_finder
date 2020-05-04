@@ -46,6 +46,10 @@ router.get("/", (req, res)=>{
 router.get("/adminHome", (req, res)=>{
 res.render("adminHome")
 });
+
+router.get("/uploadDownload", (req, res)=>{
+    res.render("uploadDownload")
+    });
 // router.get("/viewToolbar", (req, res)=>{
 //     res.render("viewToolbar")
 //     });
@@ -1381,7 +1385,7 @@ router.get('/view', (req, res) => {
            })
            x++;
        });
-       res.render("processViewById")
+       res.render("uploadDownload",{viewtitle:"Uploaded Successfully"})
        
      });
      
@@ -1395,12 +1399,13 @@ router.get('/view', (req, res) => {
                var temp = JSON.stringify(data);
                temp = JSON.parse(temp);
                var ws = XLSX.utils.json_to_sheet(temp);
-               var down = __dirname+'\Output.xlsx'
+               var down = __dirname+'/output.xlsx'
               XLSX.utils.book_append_sheet(wb,ws,"sheet1");
               XLSX.writeFile(wb,down);
               res.download(down);
            }
        });
+      
      });
 
 

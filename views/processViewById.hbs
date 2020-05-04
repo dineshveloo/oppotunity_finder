@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title>Rapid Assessment Tool</title>  
+<title>Rapid Assessment Platform</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -219,24 +219,7 @@ background-color:rgb(247, 240, 240);
                 
                          
 
-      <div class="form-row">
-      <div  class="form-group col-md-6">
-        <form action="/user/excelSubmit" method="post" enctype="multipart/form-data">
-        <label>Upload csv file:</label>
-      
-        <input  type="file" name="excel" accept="csv/*" required><br>
-        <input type="submit" class="btn btn-success" value="Submit" id="btnShowMsg" onClick='showMessage()'>
-        {{!-- <input type="submit" value="submit"  id="btnShowMsg" onClick='showMessage()'> --}}
-        </form> 
-      </div>
-    <div id= "upl" class="form-group col-md-6">
-        <label>Download csv file:</label>
-      
-        <form action="/user/download" method="GET">
-                                  <input type="submit" class="btn btn-success" value="Download">
-                            </form>
-      </div>
-    </div>
+    
     
 
                          {{!-- <div  align="center">
