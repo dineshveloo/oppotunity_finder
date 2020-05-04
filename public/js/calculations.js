@@ -48,7 +48,6 @@ function automation(){
 };
 
 
-
 function ap(){
     var selObj1  = document.getElementById("rbased");
     var rulebased_value_str = selObj1.options[selObj1.selectedIndex].value;
@@ -91,7 +90,6 @@ function fte_benifit(){
     resulta.value = final;  
 
 };
-
 
 
 function ValidateRange() {
@@ -248,7 +246,6 @@ function isNumberKey(evt){
       };
     
 
-
       function businessunit() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("businessunitinput");
@@ -286,7 +283,6 @@ function isNumberKey(evt){
           }       
         }
       };
-
 
       function subbusinessunit() {
         var input, filter, table, tr, td, i, txtValue;
@@ -326,7 +322,6 @@ function isNumberKey(evt){
         }
       };
 
-
       function processname() {
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("processnameinput");
@@ -364,7 +359,6 @@ function isNumberKey(evt){
           }       
         }
       };
-
 
       function processid() {
         var input, filter, table, tr, td, i, txtValue;
@@ -727,6 +721,7 @@ function isNumberKey(evt){
       
       //  } ;
            
+
 
 
  
