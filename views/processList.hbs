@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title>Rapid Assessment Tool</title>  
+<title>Rapid Assessment Platform</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,31 +13,76 @@
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
   <script src="../js/edit.js"></script>
-<script>
+{{!-- <script>
   $(document).ready(function() {  
 
    $('#slacalc option:contains("HTML")').attr("disabled","disabled");
 
 });​
-</script>
+</script> --}}
+
+<script>
+
+  $(document).ready(function(){
+
+    $("#save_btn").click(function(){
+
+      console.log("save button clicked");
+
+      $("#myForm" ).submit();
+
+    });
+
+ 
+
+    $(".btnNext").click(function(){
+
+      console.log("next button clicked");
+
+      $('a[href="#tab1"]').click(function(){
+
+      alert('Success! Selected link starting with # in href.');
+
+      });
+
+    });
+
+ 
+
+    $(".btnPrevious").click(function(){
+
+      console.log("previous button clicked");
+
+    });
+
+  });
+
+
+
+
+  </script>
+
+
 
   
-  {{!-- <style>
-    #sub{
-      padding-right:38rem
-    }
-    #btnedit , #su {
-display:inline-block;
-/**other codes**/
-}
-    
-  </style> --}}
+  
   <style>
     body{
     background-color:rgb(247, 240, 240);
 }
     #last{
   padding-left: 33rem;
+}
+ #last1{
+  padding-left: 33rem;
+}
+#fir{
+  color:white;
+
+}
+#sec2{
+  color:white;
+
 }
   </style>
 
@@ -91,7 +136,18 @@ display:inline-block;
         
         </div>
       </div>
-<h3>{{viewTitle}}</h3>
+<center><font color="green"><h1>{{viewtitle}}</h1></font></center>
+<ul class="nav nav-tabs">
+
+    <li class="active"><a href="#tab1" data-toggle="tab">Page 1</a></li>
+
+    <li><a href="#tab2" data-toggle="tab">Page 2</a></li>
+
+    
+
+</ul>
+
+
  <div class="text-right">
           
           
@@ -99,12 +155,14 @@ display:inline-block;
              <button type="button" onclick="goBack()" class="btn btn-success">Back</button>  
         
           </div>
-
+  
    
-    {{!-- <div class="row"> --}}
+    
         
     <div id="main_div">
   <form action="/user/updateDetails" method="POST">
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
   
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -137,21 +195,21 @@ display:inline-block;
           <input type="text-center"  class="form-control" id="procid" maxlength="30" name="Proc_Id" value="{{process.Proc_Id}}" readonly>
         </div>
       <div class="form-group col-md-6">
-        <label for="subject">6. Process Description</label>
+        <label>6. Process Description</label>
       
-        <input id="subject" class="form-control"  name="Proc_Desc" style="height:120px" value="{{process.Proc_Desc}}" readonly>
+        <input id="subj" class="form-control"  name="Proc_Desc" style="height:120px" value="{{process.Proc_Desc}}" readonly>
       </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
           <label for="country">7. Monthly Volume</label>  
         
-            <input type="number-center" class="form-control" oninput="calculate()"   id="mv" maxlength="30" name="Mon_Vol" value="{{process.Mon_Vol}}"readonly/>
+            <input type="number-center" class="form-control" oninput="calculate()" onkeypress="return isNumberKey(event)"  id="mv" maxlength="30" name="Mon_Vol" value="{{process.Mon_Vol}}"readonly/>
         </div>
       <div class="form-group col-md-6">
           <label for="country">8. AHT(in minutes)</label>  
         
-            <input type="number-center" class="form-control" oninput="calculate()"   id="aht" step="any" maxlength="30" name="AHT" value="{{process.AHT}}" readonly/>
+            <input type="number-center" class="form-control" oninput="calculate()" onkeypress="return isNumberKey(event)"  id="aht" step="any" maxlength="30" name="AHT" value="{{process.AHT}}" readonly/>
         </div>
       </div>
       <div class="form-row">
@@ -164,8 +222,10 @@ display:inline-block;
           <label for="sla">10. SLA</label>
         
           <select  class="form-control" id="slacalc" name="SLA">
-                <option>{{process.SLA}}</option>
-                {{!-- <option readonly>{{process.SLA}}</option> --}}
+                {{!-- <option>{{process.SLA}}</option>
+                 --}}
+                 <option disabled selected value> -- {{process.SLA}} -- </option>
+
                 <option id="1" value="Less than 8 hrs" disabled>Less than 8 hrs</option>
                      <option id="2" value="Less than 12 hrs" disabled>Less than 12 hrs</option>
                      <option id="3" value="Less than 24 hrs" disabled>Less than 24 hrs</option>
@@ -184,7 +244,7 @@ display:inline-block;
         
           <select  class="form-control" id="TAT" name="TAT">
                 
-                <option> {{process.TAT}} </option>
+                <option disabled selected value> -- {{process.TAT}} -- </option>
                 <option id="5" value="Less than 8 hrs" disabled>Less than 8 hrs</option>
                      <option id="6" value="Less than 12 hrs" disabled>Less than 12 hrs</option>
                      <option id="7" value="Less than 24 hrs" disabled>Less than 24 hrs</option>
@@ -202,9 +262,9 @@ display:inline-block;
             <div class="form-group col-md-6">
               <label for="country">13. Documentations of the process</label>  
             
-                  <select  class="form-control" id="docpre" name="Doc_Present">
-                          
-                          <option> {{process.Doc_Present}} </option>
+                  <select  class="form-control" id="docpre" onchange="automation()" name="Doc_Present">
+                          <option disabled selected value> -- {{process.Doc_Present}} -- </option>
+                          {{!-- <option> {{process.Doc_Present}} </option> --}}
                            <option id="9" value="No Documenation" disabled>No Documenation</option>
                            <option id="10" value="Partial Documentation" disabled>Partial Documentation</option>
                            <option id="11" value="Detailed Documentation" disabled>Detailed Documentation</option>
@@ -213,9 +273,9 @@ display:inline-block;
          <div class="form-group col-md-6">
                 <label for="country">14. Rule based process</label>  
               
-                      <select class="form-control"  id="rbased" name="Rule_Based">
+                      <select class="form-control" onchange="ap()" id="rbased" name="Rule_Based">
                              
-                             <option>{{process.Rule_Based}} </option>
+                            <option disabled selected value> -- {{process.Rule_Based}} -- </option>
                               <option id="12" value="High" disabled>High</option>
                               <option id="13" value="Medium" disabled>Medium</option>
                               <option id="14" value="Low" disabled>Low</option>
@@ -225,11 +285,11 @@ display:inline-block;
             </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="subject">15. Structure of Input Data</label>
+              <label>15. Structure of Input Data</label>
             
                   <select class="form-control" id="dattype" name="Stuc_Data">
                           
-                          <option>{{process.Stuc_Data}}</option>
+                         <option disabled selected value> -- {{process.Stuc_Data}} -- </option>
                       <option id="15" value="Structured" disabled>Structured</option>
                       <option id="16" value="Unstructured" disabled>Unstructured</option>
                       <option id="17" value="Mix of both" disabled>Mix of both</option>
@@ -240,7 +300,7 @@ display:inline-block;
              
                       <select  class="form-control" id="indat" name="Inp_Data_Type">
                                
-                               <option>{{process.Inp_Data_Type}}</option>
+                               <option disabled selected value> -- {{process.Inp_Data_Type}} -- </option>
                           <option id="18" value="Digitized" disabled>Digitized</option>
                           <option id="19" value="Non Digitized" disabled>Non Digitized</option>
                           <option id="20" value="Mix of Both" disabled>Mix of both</option>
@@ -252,27 +312,27 @@ display:inline-block;
               <div class="form-group col-md-6">
                 <label for="country">17. Percentage of process amenable for RPA</label>  
               
-                      <input class="form-control" id="arpa" type="number-center" step="any" name="Amenable_RPA" value="{{process.Amenable_RPA}}" readonly>
+                      <input class="form-control" id="arpa" type="number-center" step="any" oninput="ap()" onchange="ValidateRange()" onkeyup="validOrPunchTheUser(this)" onkeypress="return isNumberKey(event)" name="Amenable_RPA" value="{{process.Amenable_RPA}}" readonly>
               </div>
             <div class="form-group col-md-6">
                 <label for="country">18. Percentage of process amenable for cognitive</label>  
               
-                      <input class="form-control" id="ac" type="number-center" step="any" name="Amenable_Cognitive" value="{{process.Amenable_Cognitive}}" readonly>
+                      <input class="form-control" id="crpa" oninput="ap()" onchange="ValidateRange1()" onkeyup="validOrPunchTheUser(this)"  onkeypress="return isNumberKey(event)"  type="number-center" step="any" name="Amenable_Cognitive" value="{{process.Amenable_Cognitive}}" readonly>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="sla">19. Automation Readiness</label>
               
-                      <input class="form-control" type="number-center" step="any" name="Automation_Ready" value="{{process.Automation_Ready}}" readonly>
+                      <input class="form-control" type="number-center" step="any" name="Automation_Ready" id="Ar" value="{{process.Automation_Ready}}" readonly>
               </div>
             <div class="form-group col-md-6">
                 <label for="sla">20. Percentage of Automation Potential</label>
               
-                      <input class="form-control" type="number-center" step="any" name="AP_Perc" value="{{process.AP_Perc}}" readonly>
+                      <input class="form-control" type="number-center" id="apot" step="any" name="AP_Perc" value="{{process.AP_Perc}}"  readonly>
               </div>
             </div>
-            {{!-- <div class="form-row"> --}}
+            
               <div class="form-group col-md-6">
                 <label for="sla">21. FTE Benifit</label>
               
@@ -286,25 +346,256 @@ display:inline-block;
           
           
 
-            {{!-- <div class="button-center" id="sub">  
-              <input id="btnEdit" class="btn btn-success" type="button" value="Edit">
-               
-            <input type="submit" class="btn btn-success" value="Next" id="su"> 
-        
-          </div> --}}
+            
            <div id="last" align="center" class="form-group row">
     <div align="center" class="col-sm-10">
      <input id="btnEdit" class="btn btn-success" type="button" value="Edit">
-            <input type="submit" class="btn btn-success" value="Next" id="su"> 
+            <button align="center" type="button" class="btn btn-success"><a id="sec2" href="#tab2" data-toggle="tab">Next</a></button>
+ 
         
     </div>
   </div>
+  </div>
+
+  <div class="tab-pane" id="tab2">
+
+<div class="form-row">
+        <div class="form-group col-md-6">
+      
+        <label for="fname">22. Number of applications involved in the process</label>
+      
+      
+        <input type="text-center" oninput="funtional_point()" id="noa" class="form-control"  name="Num_of_apps" onkeypress="return isNumberKey(event)" value="{{process.Num_of_apps}}"  readonly>
+       </div>
+    
+    <div class="form-group col-md-6">
+    
+        <label for="lname">23. Number of mainframe applications involved</label>
+      
+      
+        <input type="text-center" oninput="funtional_point()" id="nom" class="form-control" name="Num_of_mainframe" onkeypress="return isNumberKey(event)"  value="{{process.Num_of_mainframe}}"  readonly>
+ 
+    </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="country">24. Number of applications to be accessed through Citrix</label>  
+      
+      
+        <input type="text-center" class="form-control" oninput="funtional_point()" id= "noc" name="Num_of_Citrix" onkeypress="return isNumberKey(event)"  value="{{process.Num_of_Citrix}}"  readonly>
+      </div>
+    
+   <div class="form-group col-md-6">
+
+          <label for="country">25. Are there any 3rd Party Sites involved  in the process</label>  
+        
+           <select id="tps" onchange="funtional_point()" class="form-control" name="Third_party_sites">
+                <option disabled selected value> -- {{process.Third_party_sites}} -- </option>
+                
+                <option id="21" value="Yes" disabled>Yes</option>
+                     <option id="22" value="No" disabled>No</option>
+                     
+                
+                     
+          </select>    
+      </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="country">26. Number of Screens involved in the process
+</label>  
+        
+        
+          <input type="text-center" oninput="funtional_point()" id="nos" class="form-control"  maxlength="30" name="Num_of_scrs" onkeypress="return isNumberKey(event)" value="{{process.Num_of_scrs}}"  readonly>
+         </div>
+      <div class="form-group col-md-6">
+    
+        <label>27. Number of  process steps
+</label>
+      
+      
+       <input  class="form-control" id="subject" oninput="funtional_point()" name="Num_of_proccessteps" onkeypress="return isNumberKey(event)" value="{{process.Num_of_proccessteps}}"  readonly>
+       </div>
+    </div>
+    <div class="form-row">
+       <div class="form-group col-md-6">
+          <label for="country">28. Number of Exceptions/alternate scenarios
+</label>  
+        
+        
+            <input type="number-center" class="form-control" oninput="funtional_point()"  id="nosc" onkeypress="return isNumberKey(event)"    name="Num_of_Scenarios" value="{{process.Num_of_Scenarios}}"  readonly/>
+       </div>
+      
+      <div class="form-group col-md-6">
+          <label for="country">29. Number of Decision points involved in the process
+</label>  
+        
+            <input type="number-center" class="form-control" oninput="funtional_point()" id="nod"  onkeypress="return isNumberKey(event)" name="Num_of_Decpoints" value="{{process.Num_of_Decpoints}}"  readonly/>
+       </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+         <label for="country">30. Number of Standard Input Template
+</label>  
+        
+             <input type="number-center" oninput="funtional_point()" id="nost" class="form-control" name="Num_of_standardinput" onkeypress="return isNumberKey(event)" value="{{process.Num_of_standardinput}}"  readonly>
+         </div>
+      
+      <div class="form-group col-md-6">
+        
+          <label for="sla">31. Interaction with Dynamic Table
+</label>
+        
+          <select onchange="funtional_point()" id="indt" class="form-control"  name="Intr_dynamic_table">
+                <option disabled selected value> -- {{process.Intr_dynamic_table}} -- </option>
+                
+                <option value="Yes"  id="23" disabled>Yes</option>
+                     <option value="No" id="24" disabled>No</option>
+                
+          </select>
+        </div>
+      </div>
+      
+    
+    
+    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="fname">32. Number of Dynamic\Ajax based controls
+</label>
+        
+        
+            <input type="number-center"  oninput="funtional_point()" id="nob" class="form-control"  step="any" maxlength="30" name="Num_of_basedcontrols" onkeypress="return isNumberKey(event)" value="{{process.Num_of_basedcontrols}}"  readonly>
+     
+        </div>
+      
+      <div class="form-group col-md-6">
+            <label for="lname">33. Number of Access Profile to cover
+</label>
+          
+            <input  class="form-control" oninput="funtional_point()" id="noap" type="text-center"   name="Num_of_accessprofile" onkeypress="return isNumberKey(event)" value="{{process.Num_of_accessprofile}}"  readonly>
+           </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="country">34. Number of Browser Support
+</label>  
+            
+            <input  class="form-control" oninput="funtional_point()" id="nbs" type="text-center"  name="Num_of_browsersupp" onkeypress="return isNumberKey(event)" value="{{process.Num_of_browsersupp}}"  readonly>
+            </div>
+          
+          <div class="form-group col-md-6">
+                 <label for="country">35. Operational stability of the applications and how often is it changed?</label>  
+              
+                      <select class="form-control" onchange="funtional_point()" id="opst"  name="Operation_stability">
+                              <option disabled selected value> -- {{process.Operation_stability}} -- </option>
+                              
+                              <option id="25" value="Planned Downtime" disabled>Planned Downtime</option>
+                              <option id="26" value="Once in a month" disabled>Once in a month</option>
+                              
+                             </select>
+              </div>
+            </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+             <label>36. Frequency of business process Change</label>
+            
+                   <select onchange="funtional_point()" id="freqch" class="form-control" name="Freq_change">
+                          <option disabled selected value> -- {{process.Freq_change}} -- </option>
+                          
+                      <option id="27" value="Frequently" disabled>Frequently</option>
+                      <option id="28" value="Infrequently" disabled>Infrequently</option>
+
+                      
+                     </select>
+            </div>
+        
+          <div class="form-group col-md-6">
+                 <label for="country">37. Service Level Agreement of the process?</label>  
+              
+                      <select  class="form-control" onchange="funtional_point()" id="svc" name="Svc_lvl_agr">
+                              <option disabled selected value> -- {{process.Svc_lvl_agr}} -- </option>
+                              
+                          <option id="29" value="Less than 8 hrs" disabled>Less than 8 hrs</option>
+                          <option id="30" value="Less than or equal to 24 hrs" disabled>Less than or equal to 24 hrs</option>
+                          <option id="31" value="More than 24 hrs" disabled>More than 24 hrs</option>
+
+                          
+                         </select>
+
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="country">38. Number of Business User to Get Sign-off
+</label>  
+              
+                      <input  class="form-control" id="nog" oninput="funtional_point()" type="text-center"  name="Num_of_getsignoff" onkeypress="return isNumberKey(event)" value="{{process.Num_of_getsignoff}}"  readonly>
+                </div>
+            
+            
+              <div class="form-group col-md-6">
+                <label for="country">39. Number of Business Team Required for Environment Set-up
+</label>  
+              
+                      <input  class="form-control" type="text-center" id="noes" oninput="funtional_point()" name="Num_of_Envsetup" onkeypress="return isNumberKey(event)" value="{{process.Num_of_Envsetup}}"  readonly>
+                 </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="sla">40. Funtional Point ( Ease of Implementation) X- Axis</label>
+              
+              
+                      <input class="form-control" id="funp" type="number-center" name="Func_point"  value="{{process.Func_point}}"  readonly>
+              </div>
+            
+            <div class="form-group col-md-6">
+                <label for="sla">41. Monthly effort Savings (Y AXIS)
+</label>
+              
+                      <input class="form-control" id="meffs" type="number-center" name="Monthly_effsaving" value="{{process.Monthly_effsaving}}"  readonly>
+                   </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="sla">42. Effort (#pm)
+</label>
+              
+              
+                     <input class="form-control" id="effo" type="number-center"  name="Effort" value="{{process.Effort}}"  readonly>
+               </div>
+            
+            <div class="form-group col-md-6">
+                <label for="sla">43. Quadrant
+
+</label>
+              
+              
+                      <input class="form-control" id="qua" type="number-center"  name="Quadrant" value="{{process.Quadrant}}"  readonly>
+                </div>
+            </div>
+
+            <div id="last1" align="center" class="form-group row">
+    <div align="center" class="col-sm-10">
+      <button align="center" type="button" class="btn btn-success"><a id="fir" href="#tab1" data-toggle="tab">Previuos</a></button>
+     <input id="btnEditing" class="btn btn-success" type="button" value="Edit">
+            <input type="submit" class="btn btn-success" value="Submit" id="su"> 
+        
+    </div>
+  </div>
+      
+
+
+
+  </div>
+
+
           
              
           
         
         
-          
+  </div>        
   </form>
   
   

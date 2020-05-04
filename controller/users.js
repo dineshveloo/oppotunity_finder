@@ -2,15 +2,20 @@ const express = require("express");
 const application = express();
  const path = require("path");
 const mongoose = require("mongoose");
-
+const bodyparser = require("body-parser");
+const XLSX       = require('xlsx');
+const multer     = require('multer');
 const UserModel = mongoose.model('User');
 const ProcessModel = mongoose.model('Process');
-const SecondProcessModel =mongoose.model('SecondProcess')
+const DiagramModel = mongoose.model('Diagram');
+const excelModel = mongoose.model('excelData');
+// const SecondProcessModel =mongoose.model('SecondProcess')
 const ConfigurationDetailsModel = mongoose.model('ConfigurationDetails')
 const GoogleCharts= require("google-charts");
 const session = require('express-session');
 var uniqBy = require('lodash.uniqby');
-var BusinessModel = mongoose.model('Business')
+var BusinessModel = mongoose.model('Business');
+application.use(bodyparser.json());
 application.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
 
 mongoose.set('useFindAndModify', false);
@@ -22,12 +27,38 @@ application.use('/user', express.static('views/images'));
 application.use(express.static(__dirname + '/public'));
 // application.use(express.static(dir));
 const router=express.Router();
+
+//multer
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  });
+  var upload = multer({ storage: storage });
+  
+
 router.get("/", (req, res)=>{
     //res.render("views/adminHome")
 });
 router.get("/adminHome", (req, res)=>{
 res.render("adminHome")
 });
+
+router.get("/uploadDownload", (req, res)=>{
+    res.render("uploadDownload")
+    });
+// router.get("/viewToolbar", (req, res)=>{
+//     res.render("viewToolbar")
+//     });
+router.get("/createToolbar", (req, res)=>{
+    res.render("createToolbar")
+    });
+router.get("/processMining", (req, res)=>{
+        res.render("processMining")
+        });
 router.get("/Calculation", (req, res)=>{
     res.render("Calculation")
     });
@@ -47,6 +78,9 @@ router.get("/confirmBusiness", (req, res)=>{
     res.render("confirmBusiness")
 });
 
+
+
+
 router.get("/processViewById", (req, res)=>{
    
     ProcessModel.find((err, docs) => {
@@ -60,9 +94,11 @@ router.get("/processViewById", (req, res)=>{
         }
         });
 });
+
+
 router.get("/businessTableDetails", (req, res)=>{
     
-    SecondProcessModel.find((err, docs) => {
+    ProcessModel.find((err, docs) => {
         if(!err){
             res.render("businessTable", {list: docs});
        
@@ -707,6 +743,7 @@ router.post("/addProcess", (req, res)=>{
     processmodel.Buss_Unit = req.body.Buss_Unit;
     processmodel.Sub_Buss_Unit = req.body.Sub_Buss_Unit;
     processmodel.Proc_Name = req.body.Proc_Name;
+    
     processmodel. Proc_Id = req.body.Proc_Id;
     processmodel.Proc_Desc = req.body.Proc_Desc;
     processmodel.Mon_Vol = req.body.Mon_Vol;
@@ -724,7 +761,35 @@ router.post("/addProcess", (req, res)=>{
     processmodel. Automation_Ready = req.body.Automation_Ready;
     processmodel.AP_Perc = req.body.AP_Perc;
     processmodel.FTE_Benefit = req.body.FTE_Benefit;
+    processmodel.Num_of_apps = req.body.Num_of_apps;
+    processmodel.Num_of_mainframe = req.body.Num_of_mainframe;
+    processmodel.Num_of_Citrix = req.body.Num_of_Citrix;
+    processmodel.Third_party_sites = req.body.Third_party_sites;
+    processmodel.Num_of_scrs = req.body.Num_of_scrs;
+    processmodel.Num_of_proccessteps = req.body.Num_of_proccessteps;
+    processmodel.Num_of_Scenarios = req.body.Num_of_Scenarios;
+    processmodel.Num_of_Decpoints = req.body.Num_of_Decpoints;
+    processmodel.Num_of_standardinput = req.body.Num_of_standardinput;
+    processmodel.Intr_dynamic_table = req.body.Intr_dynamic_table;
+    processmodel.Num_of_basedcontrols = req.body.Num_of_basedcontrols;
+    processmodel.Num_of_accessprofile = req.body.Num_of_accessprofile;
+    processmodel.Num_of_browsersupp = req.body.Num_of_browsersupp;
+    processmodel.Operation_stability = req.body.Operation_stability;
+    processmodel.Freq_change = req.body.Freq_change;
+    processmodel.Svc_lvl_agr = req.body.Svc_lvl_agr;
+    processmodel.Num_of_getsignoff = req.body.Num_of_getsignoff;
+    processmodel.Num_of_Envsetup = req.body.Num_of_Envsetup;
+    processmodel.Func_point = req.body.Func_point;
+    processmodel.Monthly_effsaving = req.body.Monthly_effsaving;
+    processmodel.Effort = req.body.Effort;
+    processmodel.Quadrant = req.body.Quadrant;
     processmodel.Status="REQUESTED";
+    if(processmodel.Func_point <= 25)
+    processmodel.Classification = "Simple";
+    else if(processmodel.Func_point > 25 && processmodel.Func_point <= 50)
+    processmodel.Classification = "Medium";
+    else
+    processmodel.Classification = "Complex";
     processmodel.save((err, doc) => {
         if (err){
             if (err.name === 'MongoError' && err.code === 11000) {
@@ -736,7 +801,7 @@ router.post("/addProcess", (req, res)=>{
         return res.status(422).send(err);
     }
         else{
-       res.render("secondProcess",{list:doc});
+       res.render("CaptureProcess",{viewtitle:"Captured Successfully"});
     }
 });
 }
@@ -1047,10 +1112,34 @@ router.get('/view', (req, res) => {
     processmodel. Automation_Ready = req.body.Automation_Ready;
     processmodel.AP_Perc = req.body.AP_Perc;
     processmodel.FTE_Benefit = req.body.FTE_Benefit;
+    processmodel.Num_of_apps = req.body.Num_of_apps;
+    processmodel.Num_of_mainframe = req.body.Num_of_mainframe;
+    processmodel.Num_of_Citrix = req.body.Num_of_Citrix;
+    processmodel.Third_party_sites = req.body.Third_party_sites;
+    processmodel.Num_of_scrs = req.body.Num_of_scrs;
+    processmodel.Num_of_proccessteps = req.body.Num_of_proccessteps;
+    processmodel.Num_of_Scenarios = req.body.Num_of_Scenarios;
+    processmodel.Num_of_Decpoints = req.body.Num_of_Decpoints;
+    processmodel.Num_of_standardinput = req.body.Num_of_standardinput;
+    processmodel.Intr_dynamic_table = req.body.Intr_dynamic_table;
+    processmodel.Num_of_basedcontrols = req.body.Num_of_basedcontrols;
+    processmodel.Num_of_accessprofile = req.body.Num_of_accessprofile;
+    processmodel.Num_of_browsersupp = req.body.Num_of_browsersupp;
+    processmodel.Operation_stability = req.body.Operation_stability;
+    processmodel.Freq_change = req.body.Freq_change;
+    processmodel.Svc_lvl_agr = req.body.Svc_lvl_agr;
+    processmodel.Num_of_getsignoff = req.body.Num_of_getsignoff;
+    processmodel.Num_of_Envsetup = req.body.Num_of_Envsetup;
+    processmodel.Func_point = req.body.Func_point;
+    processmodel.Monthly_effsaving = req.body.Monthly_effsaving;
+    processmodel.Effort = req.body.Effort;
+    processmodel.Quadrant = req.body.Quadrant;
             
                     var updated_doc={$set: {Proc_Desc:req.body.Proc_Desc, 
                         Mon_Vol:req.body.Mon_Vol,
                         AHT:req.body.AHT,
+                        FTE:req.body.FTE,
+
                         SLA:req.body.SLA,
                         TAT:req.body.TAT,
                         App_Used:req.body.App_Used,
@@ -1060,34 +1149,64 @@ router.get('/view', (req, res) => {
                         Inp_Data_Type:req.body.Inp_Data_Type,
                         Amenable_Cognitive:req.body.Amenable_Cognitive,
                         Automation_Ready:req.body.Automation_Ready,
+                        Num_of_apps:req.body.Num_of_apps,
+                        Num_of_mainframe:req.body.Num_of_mainframe,
+                        Num_of_Citrix:req.body.Num_of_Citrix,
+                        Third_party_sites:req.body.Third_party_sites,
+                        Num_of_scrs:req.body.Num_of_scrs,
+                       Num_of_proccessteps:req.body.Num_of_proccessteps,
+                     Num_of_Scenarios:req.body.Num_of_Scenarios,
+                    Num_of_Decpoints:req.body.Num_of_Decpoints,
+                    Num_of_standardinput:req.body.Num_of_standardinput,
+                   Intr_dynamic_table:req.body.Intr_dynamic_table,
+                   Num_of_basedcontrols:req.body.Num_of_basedcontrols,
+                  Num_of_accessprofile:req.body.Num_of_accessprofile,
+                Num_of_browsersupp:req.body.Num_of_browsersupp,
+                 Operation_stability:req.body.Operation_stability,
+                 Freq_change:req.body.Freq_change,
+                Svc_lvl_agr:req.body.Svc_lvl_agr,
+                Num_of_getsignoff:req.body.Num_of_getsignoff,
+                Num_of_Envsetup:req.body.Num_of_Envsetup,
+                Func_point:req.body.Func_point,
+               Monthly_effsaving:req.body.Monthly_effsaving,
+               Effort:req.body.Effort,
+               Quadrant:req.body.Quadrant,
                                                 }}
                     ProcessModel.updateOne({Proc_Id:req.body.Proc_Id},updated_doc,(err,doc)=>{
                         console.log(updated_doc);
-                        if (!err) {
+                        if (!err) 
+                         {
+                   res.render("CaptureProcess",{viewtitle:"Updated Successfully"})
+                }
+                        // {
                 
                     
-                            SecondProcessModel.find({Proc_Id:req.body.Proc_Id}, (err, doc) => {
+                        //     SecondProcessModel.find({Proc_Id:req.body.Proc_Id}, (err, doc) => {
             
-                                console.log(req.body.Proc_Id);
-                                console.log(req.query.Proc_Id);
-                                console.log(req.params.Proc_Id);
-                                    if (!err) {
+                        //         console.log(req.body.Proc_Id);
+                        //         console.log(req.query.Proc_Id);
+                        //         console.log(req.params.Proc_Id);
+                        //             if (!err) {
                                     
                                         
-                                    res.render("secondProcessList", {secprocess:doc[0]
-                                    });
-                                    console.log(doc);
-                                    }
-                                    else
-                                       { res.send('Error: ' + err);}
+                        //             res.render("secondProcessList", {secprocess:doc[0]
+                        //             });
+                        //             console.log(doc);
+                        //             }
+                        //             else
+                        //                { res.send('Error: ' + err);}
                     
                                     
-                                   //res.send("Process Not Approved");
-                            });
-                            //console.log(doc);
+                        //            //res.send("Process Not Approved");
+                        //     });
+                        //     //console.log(doc);
+                        //     }
+                            // else
+                            //    { res.send('Error: ' + err);}
+                            else{
+                                console.log(err);
+                                res.render("CaptureProcess",{viewerror:"error Occured in proceeding"})
                             }
-                            else
-                               { res.send('Error: ' + err);}
                     });
                 
                 // { $set: { <field1>: <value1>, ... } }
@@ -1165,4 +1284,136 @@ router.get('/view', (req, res) => {
             
             
         });
+
+        router.post("/saveDiagram",(req,res)=>{
+            // var diagrammodel = new DiagramModel();
+            // diagrammodel.Proc_Id = req.body.Proc_Id;
+            let db = mongoose.connection;
+            var a = JSON.parse(req.body.data);
+            a.Proc_Id = req.body.Proc_Id;
+            db.collection("Diagram").insertOne(a);
+            // diagrammodel.save((err, doc) => {
+            //     if(!err){
+            res.render("processMining",{viewtitle:"Work Flow Captured Successfully"})
+                // }
+        // });
+    });
+    router.get("/viewWorkflow", (req, res)=>{
+        // let db = mongoose.connection;
+        DiagramModel.find((err, docs) => {
+            if(!err){
+                // console.log("hi");
+                console.log("Docs"+docs);
+            res.render("viewWorkflow", {list: docs});
+          
+            
+            }
+            else {
+            console.log('Failed to retrieve the Course List: '+ err);
+            }
+            });
+    });
+    router.get("/viewflow", (req, res)=>{
+        DiagramModel.Proc_Id = req.body.Proc_Id;
+        DiagramModel.findById({_id:req.query.id}, (err, docs) => {
+            if(!err){
+            console.log("in view");
+                 var id = docs.Proc_Id;
+                var data = JSON.stringify(docs);
+                
+                res.render("viewToolbar", {list: data,id:id});
+            }
+            else{
+                console.log(err);
+            }
+                
+        });
+         });
+
+         router.post("/updateDiagram",(req,res)=>{
+            let db = mongoose.connection;
+            
+            var a = JSON.parse(req.body.data);
+            a.Proc_Id = req.body.Proc_Idura;
+            // db.collection("Diagram").insertOne(a);
+            db.collection("Diagram").updateOne({Proc_Id:req.body.Proc_Idura},{$set:a},(err)=>{
+                console.log(a);
+                if(!err)
+        {
+           res.render("processMining",{viewtitle:"Updated Successfully"})
+        }
+        else{
+            console.log(err);
+            res.render("processMining",{viewerror:"error Occured in proceeding"})
+        }
+            });
+            
+    });
+
+    router.get('/excelSubmit',(req,res)=>{
+        excelModel.find((err,data)=>{
+            if(err){
+                console.log(err)
+                //res.status(500).send("required missing");
+            }else{
+                if(data!=''){
+                    res.render('home',{result:data});
+                }else{
+                    res.render('home',{result:{}});
+                }
+            }
+        });
+     });
+    
+       
+     router.post('/excelSubmit',upload.single('excel'),(req,res)=>{
+       var workbook =  XLSX.readFile(req.file.path);
+      
+       var sheet_namelist = workbook.SheetNames;
+       var x=0;
+       sheet_namelist.forEach(element => {
+           var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_namelist[x]]);
+     
+           console.log(xlData);
+           
+           excelModel.insertMany(xlData,(err,data)=>{
+               if(err){
+                   console.log(err);
+                 
+              
+               }else{
+                   console.log(data);
+                   
+               }
+           })
+           x++;
+       });
+       res.render("uploadDownload",{viewtitle:"Uploaded Successfully"})
+       
+     });
+     
+     
+     router.get('/download',(req,res)=>{
+       var wb = XLSX.utils.book_new(); 
+       excelModel.find((err,data)=>{
+           if(err){
+               console.log(err)
+           }else{
+               var temp = JSON.stringify(data);
+               temp = JSON.parse(temp);
+               var ws = XLSX.utils.json_to_sheet(temp);
+               var down = __dirname+'/output.xlsx'
+              XLSX.utils.book_append_sheet(wb,ws,"sheet1");
+              XLSX.writeFile(wb,down);
+              res.download(down);
+           }
+       });
+      
+     });
+
+
+
+        
+
+
 module.exports = router;

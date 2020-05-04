@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title>Rapid Assessment Tool</title>  
+<title>Rapid Assessment Platform</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -14,27 +14,71 @@
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
+  {{!-- <script src="../js/secondcalculation.js"></script> --}}
+  <script>
+
+  $(document).ready(function(){
+
+    $("#save_btn").click(function(){
+
+      console.log("save button clicked");
+
+      $("#myForm" ).submit();
+
+    });
+
+ 
+
+    $(".btnNext").click(function(){
+
+      console.log("next button clicked");
+
+      $('a[href="#tab1"]').click(function(){
+
+      alert('Success! Selected link starting with # in href.');
+
+      });
+
+    });
+
+ 
+
+    $(".btnPrevious").click(function(){
+
+      console.log("previous button clicked");
+
+    });
+
+  });
+
+
+
+
+  </script>
+
+
   
 <style>
 
  
 
-#main_div {
 
-  padding-top: 5%;
-
-  padding-right: 5%;
-
-  padding-bottom: 10%;
-
-  padding-left: 5%;
-
-}
 body{
     background-color:rgb(247, 240, 240);
 }
 #last{
   padding-left: 33rem;
+}
+#last1{
+  padding-left: 30rem;
+}
+#fir{
+  color:white;
+
+}
+#sec2{
+  color:white;
+
 }
 
  
@@ -97,6 +141,16 @@ body{
         </div>
       </div>
 <center><font color="green"><h1>{{viewtitle}}</h1></font></center>
+<ul class="nav nav-tabs">
+
+    <li class="active"><a href="#tab1" data-toggle="tab">Page 1</a></li>
+
+    <li><a href="#tab2" data-toggle="tab">Page 2</a></li>
+
+    {{!-- <li><a href="#tab3" data-toggle="tab">Summary</a></li> --}}
+
+</ul>
+
 <div class="text-right">
           
           
@@ -104,11 +158,13 @@ body{
              <button type="button" onclick="goBack()" class="btn btn-success">Back</button>  
         
           </div>
-{{!-- <div class="container" id="abc"> --}}
+
     
         
    <div id="main_div">
   <form action="/user/addProcess" method="POST">
+  <div class="tab-content">
+     <div class="tab-pane active" id="tab1">
   
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -154,10 +210,10 @@ body{
         </div>
       <div class="form-group col-md-6">
     
-        <label for="subject">6. Process Description</label>
+        <label>6. Process Description</label>
       
       
-        <input id="subject" class="form-control"  name="Proc_Desc" style="height:120px" required>
+        <input id="subj" class="form-control"  name="Proc_Desc" style="height:120px" required>
       </div>
     </div>
     <div class="form-row">
@@ -249,7 +305,7 @@ body{
             </div>
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label for="subject">15. Structure of Input Data</label>
+              <label>15. Structure of Input Data</label>
             
             
                   <select class="form-control" id="dattype" name="Stuc_Data" required>
@@ -302,46 +358,249 @@ body{
                       <input class="form-control" min="0" max="100" id="apot" type="number-center" step="any" name="AP_Perc" readonly>
               </div>
             </div>
-            {{!-- <div class="form-row"> --}}
+            
               <div class="form-group col-md-6">
                 <label for="sla">21. FTE Benifit</label>
               
               
                       <input class="form-control" id="fteb" type="number-center" step="any" name="FTE_Benefit" readonly>
               </div>
-              {{!-- <div class="form-group col-md-6">
-                <label for="sla"></label>
+
               
-              
-                      <input class="form-control" id="fteb" type="hidden" step="any" name="FTE_Benefit" readonly>
-              </div> --}}
-            {{!-- </div> --}}
             
             <div id="last" align="center" class="form-group row">
     <div align="center" class="col-sm-10">
-      <button align="center" type="submit" class="btn btn-success">Next</button>
+      <button align="center" type="button" class="btn btn-success"><a id="sec2" href="#tab2" data-toggle="tab">Next</a></button>
     </div>
   </div>
-          
-          
-          {{!-- <div class="text-center">
-          
-          
-              
-              
+  </div>
+<div class="tab-pane" id="tab2">
 
-                
-            <input type="submit" class="btn btn-success" value="Next"> 
-        </div> --}}
+   <div class="form-row">
+        <div class="form-group col-md-6">
+      
+        <label for="fname">22. Number of applications involved in the process</label>
+      
+      
+        <input type="text-center" oninput="funtional_point()" id="noa" class="form-control"  name="Num_of_apps" onkeypress="return isNumberKey(event)"  required>
+     </div>
+    
+    <div class="form-group col-md-6">
+    
+        <label for="lname">23. Number of mainframe applications involved</label>
+      
+      
+        <input type="text-center" oninput="funtional_point()" id="nom" class="form-control" name="Num_of_mainframe" onkeypress="return isNumberKey(event)"  required>
+      
+    </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="country">24. Number of applications to be accessed through Citrix</label>  
+      
+      
+        <input type="text-center" oninput="funtional_point()" id= "noc" class="form-control"  name="Num_of_Citrix" onkeypress="return isNumberKey(event)"  required>
+       </div>
+    
+   <div class="form-group col-md-6">
+
+          <label for="country">25. Are there any 3rd Party Sites involved  in the process</label>  
+        
+           <select  id="tps" onchange="funtional_point()" class="form-control" name="Third_party_sites" required>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="Yes">Yes</option>
+                     <option value="No">No</option>
+                     
+          </select>    
+      </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="country">26. Number of Screens involved in the process
+</label>  
+        
+        
+          <input type="text-center" oninput="funtional_point()" id="nos" class="form-control"  maxlength="30" name="Num_of_scrs" onkeypress="return isNumberKey(event)" required>
+          </div>
+      <div class="form-group col-md-6">
+    
+        <label>27. Number of  process steps
+</label>
+      
+      
+        <input id="subject" oninput="funtional_point()" class="form-control"  name="Num_of_proccessteps" onkeypress="return isNumberKey(event)" required>
+      </div>
+    </div>
+    <div class="form-row">
+       <div class="form-group col-md-6">
+          <label for="country">28. Number of Exceptions/alternate scenarios
+</label>  
+        
+        
+            <input type="number-center" oninput="funtional_point()"  id="nosc" class="form-control"  onkeypress="return isNumberKey(event)"    name="Num_of_Scenarios" required/>
+       </div>
+      
+      <div class="form-group col-md-6">
+          <label for="country">29. Number of Decision points involved in the process
+</label>  
+        
+            <input type="number-center" oninput="funtional_point()" id="nod" class="form-control"   onkeypress="return isNumberKey(event)" name="Num_of_Decpoints" required/>
+       </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+         <label for="country">30. Number of Standard Input Template
+</label>  
+        
+            <input type="number-center" oninput="funtional_point()" id="nost" class="form-control" name="Num_of_standardinput" onkeypress="return isNumberKey(event)" required>
+          </div>
+      
+      <div class="form-group col-md-6">
+        
+          <label for="sla">31. Interaction with Dynamic Table
+</label>
+        
+          <select  class="form-control" onchange="funtional_point()" id="indt"  name="Intr_dynamic_table" required>
+                <option disabled selected value> -- select an option -- </option>
+                <option value="Yes">Yes</option>
+                     <option value="No">No</option>
+                     
+          </select>
+        </div>
+      </div>
+      
+    
+    
+    
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="fname">32. Number of Dynamic\Ajax based controls
+</label>
+        
+        
+            <input type="number-center" oninput="funtional_point()" id="nob" class="form-control"  step="any" maxlength="30" name="Num_of_basedcontrols" onkeypress="return isNumberKey(event)" required>
+     
+        </div>
+      
+      <div class="form-group col-md-6">
+            <label for="lname">33. Number of Access Profile to cover
+</label>
+          
+            <input  class="form-control" oninput="funtional_point()" type="text-center" id="noap"  name="Num_of_accessprofile" onkeypress="return isNumberKey(event)" required>
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="country">34. Number of Browser Support
+</label>  
+            
+            <input  class="form-control" oninput="funtional_point()" type="text-center" id="nbs" name="Num_of_browsersupp" onkeypress="return isNumberKey(event)" required>
+               </div>
+          
+          <div class="form-group col-md-6">
+         <label for="country">35. Operational stability of the applications and how often is it changed?</label>  
+              <select class="form-control" onchange="funtional_point()" id="opst"  name="Operation_stability" required>
+                              <option disabled selected value> -- select an option -- </option>
+                              <option value="Planned Downtime">Planned Downtime</option>
+                              <option value="Once in a month">Once in a month</option>
+                             </select>
+              </div>
+            </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+             <label>36. Frequency of business process Change</label>
+            
+                  <select class="form-control"  onchange="funtional_point()" id="freqch" name="Freq_change" required>
+                          <option disabled selected value> -- select an option -- </option>
+                      <option value="Frequently">Frequently</option>
+                      <option value="Infrequently">Infrequently</option>
+
+                     </select>
+            </div>
+        
+          <div class="form-group col-md-6">
+                 <label for="country">37. Service Level Agreement of the process?</label>  
+              
+                      <select  class="form-control" onchange="funtional_point()" id="svc" name="Svc_lvl_agr" required>
+                              <option disabled selected value> -- select an option -- </option>
+                          <option value="Less than 8 hrs">Less than 8 hrs</option>
+                          <option value="Less than or equal to 24 hrs">Less than or equal to 24 hrs</option>
+                          <option value="More than 24 hrs">More than 24 hrs</option>
+                         </select>
+
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="country">38. Number of Business User to Get Sign-off
+</label>  
+              
+                      <input  class="form-control" oninput="funtional_point()" type="text-center" id="nog"  name="Num_of_getsignoff" onkeypress="return isNumberKey(event)" required>
+           </div>
+            
+            
+              <div class="form-group col-md-6">
+                <label for="country">39. Number of Business Team Required for Environment Set-up
+</label>  
+              
+                      <input  class="form-control" oninput="funtional_point()" type="text-center" id="noes"  name="Num_of_Envsetup" onkeypress="return isNumberKey(event)" required>
+          </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="sla">40. Funtional Point ( Ease of Implementation) X- Axis</label>
+              
+              
+                      <input class="form-control"  type="number-center" id="funp" name="Func_point"  readonly>
+              </div>
+            
+            <div class="form-group col-md-6">
+                <label for="sla">41. Monthly effort Savings (Y AXIS)
+</label>
+              
+                      <input class="form-control"  type="number-center" id="meffs" name="Monthly_effsaving" readonly>
+                  </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="sla">42. Effort (#pm)
+</label>
+              
+              
+                      <input class="form-control"  type="number-center" id="effo" name="Effort" readonly>
+                 </div>
+            
+            <div class="form-group col-md-6">
+                <label for="sla">43. Quadrant
+
+</label>
+              
+              
+                      <input class="form-control"  type="number-center" id="qua" name="Quadrant" readonly>
+                </div>
+            </div>
+            <div id="last1" align="center" class="form-group row">
+    <div align="center" class="col-sm-10">
+      <button align="center" type="button" class="btn btn-success"><a id="fir" href="#tab1" data-toggle="tab">Previuos</a></button>
+
+      <button align="center" type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </div>
+      
+
+</div>
+          
+          
+          
           
           
           
              
           
-        
-          
+     </div>   
+       </div>   
   </form>
-  </div>
+  
   
 </body>
 </html> 

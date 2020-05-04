@@ -1,9 +1,13 @@
+const mongoose = require("mongoose");
+mongoose.pluralize(null);
 const connection = require("./model/db");
 const express = require("express");
 const application = express();
  const path = require("path");
 const expressHandlerbars = require("express-handlebars");
 const bodyparser = require("body-parser");
+
+
 const UserController = require("./controller/users")
 const session = require('express-session');
  //var dir = path.join(__dirname, 'views/images');
@@ -12,6 +16,7 @@ const session = require('express-session');
 // application.use(express.static(dir));
 application.use(express.static("views/images"));
 application.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
+application.use(bodyparser.json());
 application.use(bodyparser.urlencoded({
     extended : true
 }));
@@ -23,6 +28,7 @@ application.engine("hbs", expressHandlerbars({
     defaultLayout : "mainlayout",
     layoutDir: __dirname + "views/layouts/"    
 }));
+
 
 application.set("view engine", "hbs")
 

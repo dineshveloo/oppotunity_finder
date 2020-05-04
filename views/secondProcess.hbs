@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title>Rapid Assessment Tool</title>  
+<title>Rapid Assessment Platform</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,6 +13,9 @@
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
   <script src="../js/secondcalculation.js"></script>
+
+
+  
 <style>
   
 body{
@@ -93,7 +96,7 @@ body{
     
         
     <div id="main_div"> 
-  <form action="/user/addProcessTwo" method="POST">
+  <form id="sp" action="/user/addProcessTwo" method="POST">
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="fname">21. Process ID</label>
@@ -361,6 +364,23 @@ body{
         </div>
           
   </form>
-  
+{{!-- <script>
+      // Get a reference to the form so that we can set up an event handler
+      // for its submit event
+      var form = document.getElementById("sp");
+
+      // Now, set up a submit event handler for the form
+      form.addEventListener("submit", function(){
+
+        // Only when the form has been submitted do you want the textbox value
+        var inputTest = document.getElementById('qua').value;
+        localStorage.setItem( 'objectToPass', inputTest );
+
+        window.location = "processPrioritization.hbs";
+
+      });
+
+    </script> --}}
+
 </body>
 </html> 

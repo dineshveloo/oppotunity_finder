@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title>Rapid Assessment Tool</title>  
+<title>Rapid Assessment Platform</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -12,7 +12,6 @@
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
-  
   <script>
       $(document).ready(function(){
         $('#btnClear').click(function(){        
@@ -28,6 +27,16 @@
     });
       });
     </script>
+  
+  
+  
+  <script type="text/javascript">
+			function showMessage(){
+				alert("File uploaded successfully");
+			}
+		</script>
+  
+  
   <style>
 
     input[type="text"]::placeholder {  
@@ -62,6 +71,14 @@ input[type=text] {
     body{
 
 background-color:rgb(247, 240, 240);
+}
+#upl{
+  padding-left: 450px;
+}
+#fi{
+  color:white;
+  background-color: rgb(67, 185, 67);
+  border-radius: 2px;
 }
   </style>
   
@@ -193,9 +210,34 @@ background-color:rgb(247, 240, 240);
     </div>
     
     
-    {{!-- </form> --}}
+    
   
   </div>
+
+  
+     
+                
+                         
+
+    
+    
+
+                         {{!-- <div  align="center">
+                         <label  for="excel"><font size="3"><b>Upload csv file:</font></label>
+                         <input type="file" name="excel" accept="csv/*" required>
+                         <input type="submit" value="submit"  id="btnShowMsg" onClick='showMessage()'>
+                         </div> --}}
+
+                         {{!-- <label for="excel"><h4><b>Upload csv file:</b></h4></label>
+                            <input type="file" name="excel" accept="csv/*" required><br>  --}}
+                            
+                                 
+                         
+                        
+                          
+  
+                        
+
   
 </body>
 </html> 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<title>Rapid Assessment Tool</title>  
+<title>Rapid Assessment Platform</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -13,7 +13,6 @@
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   
 <script src="../js/calculations.js"></script>
-
 
 
 
@@ -70,7 +69,6 @@
             <button type="button" onclick="goBack()" class="btn btn-success">Back</button>  
         
           </div>
-
 
  
  <div class="container">
@@ -135,18 +133,20 @@
             </tr>
           </thead>
           <tbody>
-              {{!-- {{#each list}}
+              {{#each list}}
             <tr>
               <td><h5>{{this.Proc_Name}}</h5></td>
               <td><h5>{{this.Proc_Id}}</h5></td>
               <td><h5>{{this.Mon_Vol}}</h5></td>
              <td><h5>{{this.AHT}}</h5></td>
              <td><h5>{{this.FTE}}</h5></td>
-             <td></h5>{{this.AP_Perc}}<h5></h5></td>
-             <td><h5>{{this.FTE_Benefit}}</h5></td>
-            </tr>
-           {{/each}} --}}
-            <tr>
+             <td><h5>{{this.AP_Perc}}</h5></td>
+             <td><h5>{{this.Classification}}</h5></td>
+             <td><h5>{{this.Quadrant}}</h5></td>
+             <td><h5>{{this.Ranking}}</h5></td>
+                         </tr>
+           {{/each}}
+            {{!-- <tr>
               <td><h5>Accounts Payable</h5></td>
               <td><h5>C1_FO_NA_AP</h5></td>
               <td><h5>20000</h5></td>
@@ -183,7 +183,7 @@
              <td><h5>Simple</h5></td>
              <td><h5>Quick Wins</h5></td>
              <td><h5>1</h5></td>
-            </tr>
+            </tr> --}}
 
           </tbody>
         </table>
