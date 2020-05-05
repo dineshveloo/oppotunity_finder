@@ -15,4 +15,4 @@ var diagramSchema = new mongoose.Schema({
     }, 
     
 });
-mongoose.model("Diagram",diagramSchema);
+mongoose.model("processFlow",diagramSchema);

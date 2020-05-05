@@ -9,50 +9,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="JS/fte.js"></script>
+  
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
+  <link rel="stylesheet" type="text/css" href="../css/selectedProcess.css">
   <script src="../js/calculations.js"></script>
   
-<style>
-  #click{
-    padding-top: 3rem ;
-
-  }
-  .click1{
-    padding-top: 8rem;
-  }
-        #columnbox {
-     width: 100%; 
-     box-sizing: border-box;
-     -webkit-box-sizing:border-box;
-     -moz-box-sizing: border-box;
-     text-align: center;
-}
-body{
-background-color:rgb(247, 240, 240);
-}
-
-#tl{
-  padding-left:63rem;
-}
-select option {
-    margin: 40px;
-    background:white;
-    color:black; 
-    
-}
-#selectTool{
-  color:rgb(8, 8, 8);
-  background-color: rgb(211, 168, 189);
-}
-
-
-</style>
-
-
-
-
 
 </head>
 <body>
@@ -70,12 +32,12 @@ select option {
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="active"><a href="/user/Home">Home</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
                  <ul class="dropdown-menu" role="menu">
                   <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
-              <li><a href="/user/processViewById"><b>View Process</b></a></li>
+              <li><a href="/user/viewProcessList"><b>View Process</b></a></li>
               <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
               <li><a href="/user/processPrioritization"><b>Process Prioritization</b></a></li>
                     
@@ -162,9 +124,7 @@ select option {
   <div class="col-md-12 school-options-dropdown text-center">
     <div class="dropdown btn-group">
 
-      {{!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Tool
-        <span class="caret"></span>
-      </button> --}}
+      
       <select  class="form-control" id="selectTool" name="RPA_Tool" required>
                 <option style="font-weight: bold; text-align: center; vertical-align: middle;" disabled selected value> <b>Select Tool</b></option>
                 <option value="Automation Anywhere">Automation Anywhere</option>
@@ -173,32 +133,14 @@ select option {
                      <option value="Pega Robotics">Pega Robotics</option>
           </select>
 
-      {{!-- <select class="dropdown-menu w-100">
-        <option>Automation Anywhere</option>
-        <option>UiPath</option>
-        <option>BluePrism</option>
-        <option>Pega Robotics</option>
-        
-      </select> --}}
+     
 
     </div>
   </div>
 </div>
 
 
-{{!-- <div align="center">
 
-  
-<label id="cb" for="selectTool"><font size="3"><b>Select Tool</font></b></label>
-<select  class="form-control" id="selectTool" name="RPA_Tool" required>
-                <option disabled selected value> -- select an option -- </option>
-                <option value="Automation Anywhere">Automation Anywhere</option>
-                     <option value="UiPath">UiPath</option>
-                     <option value="BluePrism">BluePrism</option>
-                     <option value="Pega Robotics">Pega Robotics</option>
-          </select>
-
-</div> --}}
 
 
 
@@ -214,16 +156,4 @@ select option {
    
   </body>
 </html>
-  <!-- </div>
-  
-</div>
-
-<footer class="text-center">
-    <div>
-        <a href="Processdiscovery.html">
-            <input type="submit" class="btn btn-success" value="Submit"> 
-        </a>
-        </div>
-  </footer>
-</body>
-</html> -->
+ 

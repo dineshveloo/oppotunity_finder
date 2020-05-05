@@ -7,9 +7,8 @@ const XLSX       = require('xlsx');
 const multer     = require('multer');
 const UserModel = mongoose.model('User');
 const ProcessModel = mongoose.model('Process');
-const DiagramModel = mongoose.model('Diagram');
+const ProcessFlowModel = mongoose.model('processFlow');
 const excelModel = mongoose.model('excelData');
-// const SecondProcessModel =mongoose.model('SecondProcess')
 const ConfigurationDetailsModel = mongoose.model('ConfigurationDetails')
 const GoogleCharts= require("google-charts");
 const session = require('express-session');
@@ -17,15 +16,9 @@ var uniqBy = require('lodash.uniqby');
 var BusinessModel = mongoose.model('Business');
 application.use(bodyparser.json());
 application.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
-
 mongoose.set('useFindAndModify', false);
-// import {GoogleCharts} from 'google-charts';
-
-// var dir = path.join(__dirname, './views/images');
 application.use('/user', express.static('views/images'));
-
 application.use(express.static(__dirname + '/public'));
-// application.use(express.static(dir));
 const router=express.Router();
 
 //multer
@@ -41,26 +34,24 @@ var storage = multer.diskStorage({
   
 
 router.get("/", (req, res)=>{
-    //res.render("views/adminHome")
+    
 });
-router.get("/adminHome", (req, res)=>{
-res.render("adminHome")
+router.get("/Home", (req, res)=>{
+res.render("Home")
 });
 
 router.get("/uploadDownload", (req, res)=>{
     res.render("uploadDownload")
     });
-// router.get("/viewToolbar", (req, res)=>{
-//     res.render("viewToolbar")
-//     });
-router.get("/createToolbar", (req, res)=>{
-    res.render("createToolbar")
+
+router.get("/captureProcessFlow", (req, res)=>{
+    res.render("captureProcessFlow")
     });
-router.get("/processMining", (req, res)=>{
-        res.render("processMining")
+router.get("/processFlowDocumentation", (req, res)=>{
+        res.render("processFlowDocumentation")
         });
-router.get("/Calculation", (req, res)=>{
-    res.render("Calculation")
+router.get("/effortEstimation", (req, res)=>{
+    res.render("effortEstimation")
     });
 router.get("/CaptureProcess", (req, res)=>{
     res.render("CaptureProcess")
@@ -71,21 +62,21 @@ router.get("/CaptureProcess", (req, res)=>{
 router.get("/processDiscovery", (req, res)=>{
     res.render("processDiscovery")
 });
-router.get("/businessTable", (req, res)=>{
-    res.render("businessTable")
+router.get("/businessCase", (req, res)=>{
+    res.render("businessCase")
 });
-router.get("/confirmBusiness", (req, res)=>{
-    res.render("confirmBusiness")
+router.get("/selectedProcess", (req, res)=>{
+    res.render("selectedProcess")
 });
 
 
 
 
-router.get("/processViewById", (req, res)=>{
+router.get("/viewProcessList", (req, res)=>{
    
     ProcessModel.find((err, docs) => {
         if(!err){
-        res.render("processViewById", {list: docs});
+        res.render("viewProcessList", {list: docs});
       
         console.log(docs);
         }
@@ -96,11 +87,11 @@ router.get("/processViewById", (req, res)=>{
 });
 
 
-router.get("/businessTableDetails", (req, res)=>{
+router.get("/businessCaseDetails", (req, res)=>{
     
     ProcessModel.find((err, docs) => {
         if(!err){
-            res.render("businessTable", {list: docs});
+            res.render("businessCase", {list: docs});
        
         
         
@@ -111,8 +102,8 @@ router.get("/businessTableDetails", (req, res)=>{
         }
         });
 });
-router.get("/configurationDetails",(req,res)=>{
-    res.render("configurationDetails")
+router.get("/configurationDetailsInput",(req,res)=>{
+    res.render("configurationDetailsInput")
 });
 router.get("/defaultConfigurationDetails",(res,req)=>{
     res.render("defaultConfigurationDetails")
@@ -204,21 +195,21 @@ router.post("/addConfigurationDetails",(req,res)=>{
             ConfigurationDetailsModel.updateOne({Simple_Dev:doc[0].Simple_Dev},updated_doc,(err,doc)=>{
                 if(!err)
                 {
-                   res.render("configurationDetails",{viewtitle:"Updated Successfully"})
+                   res.render("configurationDetailsInput",{viewtitle:"Updated Successfully"})
                 }
                 else{
                     console.log(err);
-                    res.render("configurationDetails",{viewerror:"error Occured in proceeding"})
+                    res.render("configurationDetailsInput",{viewerror:"error Occured in proceeding"})
                 }
             });
         }
-        // { $set: { <field1>: <value1>, ... } }
+       
         else
         {
             configurationdetailsmodel.save((err,doc)=>{
                 if(!err)
                 {
-                    // res.send(simplecount,mediumcount,complexcount);
+                    
                     res.render("configurationDetails",{viewtitle:"Details Saved Successfully"})
                 }
                 else
@@ -236,53 +227,6 @@ router.post("/addConfigurationDetails",(req,res)=>{
     }
     });
 });
-// router.post("/addConfigurationDetails",(req,res)=>{
-
-//     var configurationdetailsmodel = new ConfigurationDetailsModel();
-//     configurationdetailsmodel.Simple_Dev=req.body.Simple_Dev;
-//     configurationdetailsmodel.Simple_Srdev=req.body.Simple_Srdev;
-//     configurationdetailsmodel.Simple_BA=req.body.Simple_BA;
-//     configurationdetailsmodel.Simple_Arch=req.body.Simple_Arch;
-//     configurationdetailsmodel.Simple_PM=req.body.Simple_PM;
-//     configurationdetailsmodel.Simple_DM=req.body.Simple_DM;
-//     configurationdetailsmodel.Medium_Dev=req.body.Medium_Dev;
-//     configurationdetailsmodel.Medium_Srdev=req.body.Medium_Srdev;
-//     configurationdetailsmodel.Medium_BA=req.body.Medium_BA;
-//     configurationdetailsmodel.Medium_Arch=req.body.Medium_Arch;
-//     configurationdetailsmodel.Medium_PM=req.body.Medium_PM;
-//     configurationdetailsmodel.Medium_DM=req.body.Medium_DM;
-//     configurationdetailsmodel.Complex_Dev=req.body.Complex_Dev;
-//     configurationdetailsmodel.Complex_Srdev=req.body.Complex_Srdev;
-//     configurationdetailsmodel.Complex_BA=req.body.Complex_BA;
-//     configurationdetailsmodel.Complex_Arch=req.body.Complex_Arch;
-//     configurationdetailsmodel.Complex_PM=req.body.Complex_PM;
-//     configurationdetailsmodel.Complex_DM=req.body.Complex_DM;
-//     configurationdetailsmodel.Dev_Cost=req.body.Dev_Cost;
-//     configurationdetailsmodel.Srdev_Cost=req.body.Srdev_Cost;
-//     configurationdetailsmodel.BA_Cost=req.body.BA_Cost;
-//     configurationdetailsmodel.Arch_Cost=req.body.Arch_Cost;
-//     configurationdetailsmodel.PM_Cost=req.body.PM_Cost;
-//     configurationdetailsmodel.DUlead_Cost=req.body.DUlead_Cost;
-//     configurationdetailsmodel.Bot_Creator_Cost=req.body.Bot_Creator_Cost;
-//     configurationdetailsmodel.Bot_Run_Unatt_Cost=req.body.Bot_Run_Unatt_Cost;
-//     configurationdetailsmodel.Bot_Run_Att_Cost=req.body.Bot_Run_Att_Cost;
-//     configurationdetailsmodel.Cont_Room_Cost=req.body.Cont_Room_Cost;
-//     configurationdetailsmodel.VM_Cost=req.body.VM_Cost;
-//     configurationdetailsmodel.Server_Cost=req.body.Server_Cost;
-//     configurationdetailsmodel.FTE_Cost=req.body.FTE_Cost;
-//  configurationdetailsmodel.save((err,doc)=>{
-//                 if(!err)
-//                 {
-//                     // res.send(simplecount,mediumcount,complexcount);
-//                     res.render("configurationDetails",{viewtitle:"Details Saved Successfully"})
-//                 }
-//                 else
-//                 {
-//                     console.log(err)
-//                     res.render("configurationDetails",{viewerror:"error Occured while Saving the details"});
-//                 }
-//             });
-// });
 
 router.post("/addSelectedProcess",(req,res)=>{
     var businessmodel= new BusinessModel();
@@ -318,8 +262,8 @@ router.post("/addSelectedProcess",(req,res)=>{
                     BusinessModel.find((err,docs)=>{
                         if(!err)
                         {
-                            // console.log(docs)
-                            res.render("confirmBusiness",{list:docs[0]})
+                            
+                            res.render("selectedProcess",{list:docs[0]})
                         }
                         else
                         {
@@ -333,14 +277,14 @@ router.post("/addSelectedProcess",(req,res)=>{
                 }
             });
         }
-        // { $set: { <field1>: <value1>, ... } }
+        
         else
         {
             businessmodel.save((err,doc)=>{
                 if(!err)
                 {
-                    // res.send(simplecount,mediumcount,complexcount);
-                    res.render("confirmBusiness",{list:doc})
+                    
+                    res.render("selectedProcess",{list:doc})
                 }
                 else{
                     console.log(err)
@@ -375,13 +319,9 @@ router.post("/effortcalculation",(req,res)=>{
             Simple_Dev_Effort=docs[0].Simple_Dev*simplecount;
             Simple_Srdev_Effort=docs[0].Simple_Srdev*simplecount;
             Simple_BA_Effort=docs[0].Simple_BA*simplecount;
-            // Simple_BA_Effort=Simple_BA_Effort.toFixed(2);
             Simple_Arch_Effort=docs[0].Simple_Arch*simplecount;
-            // Simple_Arch_Effort=Simple_Arch_Effort.toFixed(2);
             Simple_PM_Effort=docs[0].Simple_PM*simplecount;
-            // Simple_PM_Effort=Simple_PM_Effort.toFixed(2)
             Simple_DM_Effort=docs[0].Simple_DM*simplecount;
-            // Simple_DM_Effort=Simple_DM_Effort.toFixed(2);
             Total_Simple_Effort=Simple_Dev_Effort+Simple_Srdev_Effort+Simple_BA_Effort+Simple_Arch_Effort+Simple_PM_Effort+Simple_DM_Effort;
             Total_Simple_Effort=Total_Simple_Effort.toFixed(2);
             Total_Simple_Effort=Number(Total_Simple_Effort);
@@ -389,15 +329,15 @@ router.post("/effortcalculation",(req,res)=>{
             Medium_Dev_Effort=docs[0].Medium_Dev*mediumcount;
             Medium_Srdev_Effort=docs[0].Medium_Srdev*mediumcount;
             Medium_BA_Effort=docs[0].Medium_BA*mediumcount;
-            // Medium_BA_Effort=Medium_BA_Effort.toFixed(2);
+            
             Medium_Arch_Effort=docs[0].Medium_Arch*mediumcount;
-            // Medium_Arch_Effort=Medium_Arch_Effort.toFixed(2);
+            
             Medium_PM_Effort=docs[0].Medium_PM*mediumcount;
             Medium_PM_Effort=Math.round(Medium_PM_Effort);
-            // Medium_PM_Effort=Medium_PM_Effort.toFixed(2)
+            
             Medium_DM_Effort=docs[0].Medium_DM*mediumcount;
             Medium_DM_Effort=Math.round(Medium_DM_Effort);
-            // Medium_DM_Effort=Medium_DM_Effort.toFixed(2);
+            
             Total_Medium_Effort=Medium_Dev_Effort+Medium_Srdev_Effort+Medium_BA_Effort+Medium_Arch_Effort+Medium_PM_Effort+Medium_DM_Effort;
             Total_Medium_Effort=Total_Medium_Effort.toFixed(2);
             Total_Medium_Effort=Number(Total_Medium_Effort);
@@ -406,13 +346,13 @@ router.post("/effortcalculation",(req,res)=>{
             Complex_Dev_Effort=docs[0].Complex_Dev*complexcount;
             Complex_Srdev_Effort=docs[0].Complex_Srdev*complexcount;
             Complex_BA_Effort=docs[0].Complex_BA*complexcount;
-            // Complex_BA_Effort=Complex_BA_Effort.toFixed(2);
+            
             Complex_Arch_Effort=docs[0].Complex_Arch*complexcount;
-            // Complex_Arch_Effort=Complex_Arch_Effort.toFixed(2);
+            
             Complex_PM_Effort=docs[0].Complex_PM*complexcount;
-            // Complex_PM_Effort=Complex_PM_Effort.toFixed(2);
+            
             Complex_DM_Effort=docs[0].Complex_DM*complexcount;
-            // Complex_DM_Effort=Complex_DM_Effort.toFixed(2);
+            
             Total_Complex_Effort=Complex_Dev_Effort+Complex_Srdev_Effort+Complex_BA_Effort+Complex_Arch_Effort+Complex_PM_Effort+Complex_DM_Effort;
             Total_Complex_Effort=Total_Complex_Effort.toFixed(2);
             Total_Complex_Effort=Number(Total_Complex_Effort);
@@ -480,12 +420,12 @@ router.post("/effortcalculation",(req,res)=>{
             BA_Cost=Total_BA_Effort*docs[0].BA_Cost*168;
             Arch_Cost=Total_Arch_Effort*docs[0].Arch_Cost*168;
             PM_Cost=Math.round(Total_PM_Effort*docs[0].PM_Cost*168);
-            // PM_Cost=PM_Cost.toFixed(2);
+            
             DUlead_Cost=Total_DM_Effort*docs[0].DUlead_Cost*168;
             Total_Imp_Cost=Dev_Cost+Srdev_Cost+BA_Cost+Arch_Cost+PM_Cost+DUlead_Cost;
             Total_Imp_Cost_Two=Total_Imp_Cost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             
-            // Total_Imp_Cost=Total_Imp_Cost.toFixed(2);
+           
             console.log(Total_Imp_Cost);
             Maint_Cost=Math.ceil(totalcount/7*30000);
             FTE_Savings_Count=Math.round(simplecount*0.5+mediumcount*1+complexcount*2);
@@ -496,7 +436,7 @@ router.post("/effortcalculation",(req,res)=>{
             Total_Net_Savings_Two=Total_Net_Savings.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             Total_TCO=Total_Imp_Cost+(5*Totalof_Total_Lisc_Price)+(5*Totalof_Total_Infra_Price)+(5*Maint_Cost);
             Total_TCO_Two=Total_TCO.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-            res.render("Calculation",
+            res.render("effortEstimation",
             {Simple_Dev_Effort:Simple_Dev_Effort,
                 Total:Total,
                 Total_Net_Savings_Two:Total_Net_Savings_Two,
@@ -611,15 +551,7 @@ router.get("/liscenceCostCalculation",(req,res)=>{
                     var count=0
                     for(i=0;i<length;i++)
                      { 
-                        //  count=count+1;
-                    //     console.log(docs[0].Selected_Process[i])
-                    //     var SelectedString=docs[0].Selected_Process[i];
-                    //     console.log(SelectedString)
-                    //     var Selected=SelectedString.split(',');
-                    //     console.log(Selected)
-                    //     docs[i]=Selected[i];
-                    //     console.log(docs[i])
-                    //     console.log(count)
+                        
                     var selected=docs[0].Selected_Process[i].split(',')
                     var SelectedId=[];
                     if(i!=0)
@@ -634,7 +566,7 @@ router.get("/liscenceCostCalculation",(req,res)=>{
                     
                         console.log(SelectedId)
                     }
-                    // console.log("total"+SelectedId)
+                   
                     
                     for(i=0;i<SelectedId.length;i++){
                         console.log(SelectedId[i])
@@ -693,9 +625,9 @@ router.get("/Contact", (req, res)=>{
     res.render("Contact")
 });
 router.post("/checkUser",(req,res) => {
-    // var sess=req.session;
+   
     if(req.body.userName=="ADMIN"&&req.body.password=="ADMIN$1"){
-        res.render("adminHome",{viewtitle:"ADMIN"});
+        res.render("Home",{viewtitle:"ADMIN"});
     }
     else{
     UserModel.findOne({
@@ -706,7 +638,7 @@ router.post("/checkUser",(req,res) => {
         if(result) { // auth was successful
           req.session.user = result; // so writing user document to session
           console.log(result.userName);
-          return res.render("adminHome",{viewtitle:result.userName}); // redirecting user to interface
+          return res.render("Home",{viewtitle:result.userName}); // redirecting user to interface
         }
   
         // auth not successful, because result is null
@@ -724,7 +656,7 @@ router.post("/adduser", (req, res)=>{
     usermodel.save((err, doc) => {
         if (!err){
         res.send("Registerd Successfully");
-        //console.log("success");
+        
     }
         else{
         console.log('Error during record insertion : ' + err);
@@ -796,8 +728,7 @@ router.post("/addProcess", (req, res)=>{
                 // Duplicate username
                 return res.status(422).send({ success: false, message: 'Process already exist!' });
               }
-        // res.redirect("/user/processlist");
-        // console.log("success");
+        
         return res.status(422).send(err);
     }
         else{
@@ -857,8 +788,7 @@ router.post("/addProcessTwo", (req, res)=>{
                 // Duplicate username
                 return res.status(422).send({ success: false, message: 'Process already exist!' });
               }
-        // res.redirect("/user/processlist");
-        // console.log("success");
+        
         return res.status(422).send(err);
     }
         else{
@@ -893,42 +823,10 @@ router.get('/list', (req,res) => {
 
     router.get('/viewbubblechart', (req,res) => {
         ProcessModel.find((err, docs) => {
-            // GoogleCharts.load('current', {'packages':['corechart']});
-            // GoogleCharts.setOnLoadCallback(drawChart);
-      
-            // function drawChart() {
-            //     alert("hbjh")
-            //   var data = GoogleCharts.api.visualization.arrayToDataTable([
-            //     ['Year', 'Sales', 'Expenses'],
-            //     ['2004',  1000,      400],
-            //     ['2005',  1170,      460],
-            //     ['2006',  660,       1120],
-            //     ['2007',  1030,      540]
-            //   ]);
-      
-            //   var options = {
-            //     title: 'Company Performance',
-            //     curveType: 'function',
-            //     legend: { position: 'bottom' }
-            //   };
-      
-            //   var chart = new GoogleCharts.api.visualization.LineChart(document.getElementById('curve_chart'));
-      
-            //   chart.draw(data, options);
-            // }
+            
             console.log(docs);
         if(!err){
         res.render("bubblechart" ,{list: docs});
-//         var info=[]
-// info1=[];
-// docs.forEach(element => {
-//     console.log(element)
-// info[0]=element.AP_Perc
-// info[1]=element.FTE_Benefit
-// info1.push(info);
-// info=[];
-
-// });
 
 
         }
@@ -943,25 +841,23 @@ router.get('/list', (req,res) => {
     router.get('/viewById/:id', (req, res) => {
         console.log("Inside router")
         console.log(req.params.id);
-    //    if(req.params.id) {
+    
         ProcessModel.find(req.params.id,(err, doc) => {
             console.log(doc)
             if(doc.length!=0){
         if (doc[0].Status=="APPROVED") {
-        res.render("processList", {viewtitle:"process",process:doc[0]
+        res.render("view&editProcess", {viewtitle:"process",process:doc[0]
         });
         console.log(doc);
         }
         else
-        res.render("processViewById",{viewtitle:"Process is not Approved wait for the admin approval"});
+        res.render("viewProcessList",{viewtitle:"Process is not Approved wait for the admin approval"});
         }
         else{
-            res.render("processViewById",{viewtitle : "Process is not captured!" })
+            res.render("viewProcessList",{viewtitle : "Process is not captured!" })
         }
     });
-    // }
-    // else
-    // res.render("processViewById",{viewtitle:"Please enter the Process Id"});
+    
         });
         router.get("/approveProcessById",(req,res)=>{
      
@@ -978,38 +874,9 @@ router.get('/list', (req,res) => {
             });
        
       });
-// router.get("/approveProcessById/:id", (req, res)=>{
-//     console.log(req.params.id);
-//     if(req.params.id){
-//         ProcessModel.findById(req.params.id,(err,doc)=>{
-//            if(doc.length!=0){
-//                 if(doc.Status=="REQUESTED"){
-//                     ProcessModel.updateOne({ Status: "APPROVED" }, (err, doc) => {
-//                         //console.log(doc)
-//                         if (!err) {
-//                              res.render("approveProcess",{viewresult:"APPROVED Successfully"}); 
-//                             }         
-//                       else
-//                         { res.send('Error during updating the record: ' + err);}
-//                             });
-//                 }
-//                 else{
-//                     res.render("approveProcess",{viewtitle : "Process is alredy approved!"})
-//                 }
-//            }
-//            else{
-//             res.render("approveProcess",{viewtitle : "Process is not captured!"})
-//            }
-//         });
-    
-//         }
-//         else
-//         res.render("approveProcess",{viewtitle : "please enter the Process Id"})   
-               
-//         });
-    //Router Controller for DELETE request
+
 router.get('/delete/:id', (req, res) => {
-    //var valid = mongoose.Types.ObjectId.isValid(req.params.id);
+    
     if(req.params.id.match(/^[0-9a-fA-F]{24}$/)){
     UserModel.findByIdAndRemove(req.params.Proc_Id, (err, doc) => {
     if (!err) {
@@ -1025,27 +892,6 @@ res.send('error: please provide correct id');
         res.status(404).send('what???');
       });
 
-//  router.get('/:id', (req, res) => {
-//         ProcessModel.findOne({_id:req.params.id}, (err, doc) => {
-//             console.log("in view")
-//             console.log(req.params.id)
-//             console.log(doc)
-//             if(doc.length!=0){
-//                 console.log(doc.Status )
-//                 if (doc.Status=="APPROVED") {
-//                 res.render("processList", {viewtitle:"process",process:doc
-//                 });
-//                 //console.log(doc);
-//                 }
-//                 else
-//                 res.render("processViewById",{viewtitle:"Process is not Approved wait for the admin approval"});
-//                //res.send("Process Not Approved"); 
-//             }
-//                 else{
-//                     res.render("processViewById",{viewtitle : "Process is not captured!" })
-//                 }
-//         });
-//         });
 
 router.get('/view', (req, res) => {
     ProcessModel.findById({_id:req.query.id}, (err, doc) => {
@@ -1056,39 +902,18 @@ router.get('/view', (req, res) => {
        
             if (doc.Status=="APPROVED") {
                 console.log("in if")
-            res.render("processList", {viewtitle:"process",process:doc
+            res.render("view&editProcess", {viewtitle:"process",process:doc
             });
-            //console.log(doc);
+            
             }
             else
-            res.render("processViewById",{viewtitle:"Process is not Approved wait for the admin approval"});
-           //res.send("Process Not Approved");
+            res.render("viewProcessList",{viewtitle:"Process is not Approved wait for the admin approval"});
+           
     });
     });
 
 
-    router.get('/viewSecond', (req, res) => {
-        SecondProcessModel.find({Proc_Id:req.query.Proc_Id}, (err, doc) => {
-            
-            console.log(req.body.Proc_Id);
-            console.log(req.query.Proc_Id);
-            console.log(req.params.Proc_Id);
-                if (!err) {
-                
-                    
-                res.render("secondProcessList", {secprocess:doc[0]
-                });
-                //console.log(doc);
-                }
-                else
-                   { res.send('Error: ' + err);}
-
-                
-               //res.send("Process Not Approved");
-        });
-        });
-
-
+   
         router.post("/updateDetails",(req,res)=>{
 
             var processmodel = new ProcessModel();
@@ -1175,38 +1000,14 @@ router.get('/view', (req, res) => {
                          {
                    res.render("CaptureProcess",{viewtitle:"Updated Successfully"})
                 }
-                        // {
-                
-                    
-                        //     SecondProcessModel.find({Proc_Id:req.body.Proc_Id}, (err, doc) => {
-            
-                        //         console.log(req.body.Proc_Id);
-                        //         console.log(req.query.Proc_Id);
-                        //         console.log(req.params.Proc_Id);
-                        //             if (!err) {
-                                    
-                                        
-                        //             res.render("secondProcessList", {secprocess:doc[0]
-                        //             });
-                        //             console.log(doc);
-                        //             }
-                        //             else
-                        //                { res.send('Error: ' + err);}
-                    
-                                    
-                        //            //res.send("Process Not Approved");
-                        //     });
-                        //     //console.log(doc);
-                        //     }
-                            // else
-                            //    { res.send('Error: ' + err);}
+                        
                             else{
                                 console.log(err);
                                 res.render("CaptureProcess",{viewerror:"error Occured in proceeding"})
                             }
                     });
                 
-                // { $set: { <field1>: <value1>, ... } }
+                
                 
             
             
@@ -1275,33 +1076,30 @@ router.get('/view', (req, res) => {
                 }
                     });
                 
-                // { $set: { <field1>: <value1>, ... } }
+                
                 
             
             
             
         });
 
-        router.post("/saveDiagram",(req,res)=>{
-            // var diagrammodel = new DiagramModel();
-            // diagrammodel.Proc_Id = req.body.Proc_Id;
+        router.post("/saveprocessFlow",(req,res)=>{
+           
             let db = mongoose.connection;
             var a = JSON.parse(req.body.data);
             a.Proc_Id = req.body.Proc_Id;
-            db.collection("Diagram").insertOne(a);
-            // diagrammodel.save((err, doc) => {
-            //     if(!err){
-            res.render("processMining",{viewtitle:"Work Flow Captured Successfully"})
-                // }
-        // });
+            db.collection("processFlow").insertOne(a);
+            
+            res.render("processFlowDocumentation",{viewtitle:"Work Flow Captured Successfully"})
+                
     });
     router.get("/viewWorkflow", (req, res)=>{
-        // let db = mongoose.connection;
-        DiagramModel.find((err, docs) => {
+       
+        ProcessFlowModel.find((err, docs) => {
             if(!err){
-                // console.log("hi");
+                
                 console.log("Docs"+docs);
-            res.render("viewWorkflow", {list: docs});
+            res.render("viewProcessFlowList", {list: docs});
           
             
             }
@@ -1311,14 +1109,14 @@ router.get('/view', (req, res) => {
             });
     });
     router.get("/viewflow", (req, res)=>{
-        DiagramModel.Proc_Id = req.body.Proc_Id;
-        DiagramModel.findById({_id:req.query.id}, (err, docs) => {
+        ProcessFlowModel.Proc_Id = req.body.Proc_Id;
+        ProcessFlowModel.findById({_id:req.query.id}, (err, docs) => {
             if(!err){
             console.log("in view");
                  var id = docs.Proc_Id;
                 var data = JSON.stringify(docs);
                 
-                res.render("viewToolbar", {list: data,id:id});
+                res.render("view&editProcessFlow", {list: data,id:id});
             }
             else{
                 console.log(err);
@@ -1327,21 +1125,21 @@ router.get('/view', (req, res) => {
         });
          });
 
-         router.post("/updateDiagram",(req,res)=>{
+         router.post("/updateprocessFlow",(req,res)=>{
             let db = mongoose.connection;
             
             var a = JSON.parse(req.body.data);
             a.Proc_Id = req.body.Proc_Idura;
-            // db.collection("Diagram").insertOne(a);
-            db.collection("Diagram").updateOne({Proc_Id:req.body.Proc_Idura},{$set:a},(err)=>{
+           
+            db.collection("processFlow").updateOne({Proc_Id:req.body.Proc_Idura},{$set:a},(err)=>{
                 console.log(a);
                 if(!err)
         {
-           res.render("processMining",{viewtitle:"Updated Successfully"})
+           res.render("processFlowDocumentation",{viewtitle:"Updated Successfully"})
         }
         else{
             console.log(err);
-            res.render("processMining",{viewerror:"error Occured in proceeding"})
+            res.render("processFlowDocumentation",{viewerror:"error Occured in proceeding"})
         }
             });
             
@@ -1351,7 +1149,7 @@ router.get('/view', (req, res) => {
         excelModel.find((err,data)=>{
             if(err){
                 console.log(err)
-                //res.status(500).send("required missing");
+                
             }else{
                 if(data!=''){
                     res.render('home',{result:data});

@@ -8,91 +8,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  {{!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> --}}
-
-  <script src="JS/fte.js"></script>
+ 
+  
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
-  {{!-- <script src="../js/secondcalculation.js"></script> --}}
-  <script>
-
-  $(document).ready(function(){
-
-    $("#save_btn").click(function(){
-
-      console.log("save button clicked");
-
-      $("#myForm" ).submit();
-
-    });
-
+   <script src="../js/CaptureProcess.js"></script>
  
-
-    $(".btnNext").click(function(){
-
-      console.log("next button clicked");
-
-      $('a[href="#tab1"]').click(function(){
-
-      alert('Success! Selected link starting with # in href.');
-
-      });
-
-    });
-
- 
-
-    $(".btnPrevious").click(function(){
-
-      console.log("previous button clicked");
-
-    });
-
-  });
-
-
-
-
-  </script>
-
-
   
-<style>
-
- 
-
-
-body{
-    background-color:rgb(247, 240, 240);
-}
-#last{
-  padding-left: 33rem;
-}
-#last1{
-  padding-left: 30rem;
-}
-#fir{
-  color:white;
-
-}
-#sec2{
-  color:white;
-
-}
-
- 
-
-
-
- 
-
- 
-
-</style>
-
-
-
 
 </head>
 <body>
@@ -110,12 +33,12 @@ body{
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="active"><a href="/user/Home">Home</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
                  <ul class="dropdown-menu" role="menu">
                   <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
-              <li><a href="/user/processViewById"><b>View Process</b></a></li>
+              <li><a href="/user/viewProcessList"><b>View Process</b></a></li>
               <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
               <li><a href="/user/processPrioritization"><b>Process Prioritization</b></a></li>
                     
@@ -147,7 +70,7 @@ body{
 
     <li><a href="#tab2" data-toggle="tab">Page 2</a></li>
 
-    {{!-- <li><a href="#tab3" data-toggle="tab">Summary</a></li> --}}
+    
 
 </ul>
 

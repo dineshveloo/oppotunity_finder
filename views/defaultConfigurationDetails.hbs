@@ -8,44 +8,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script src="JS/fte.js"></script>
+  
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
+  <link rel="stylesheet" type="text/css" href="../css/defaultConfigurationDetails.css">
   <script src="../js/calculations.js"></script>
-  <style>
-      input[type="text"] {
-     width: 100%; 
-     box-sizing: border-box;
-     -webkit-box-sizing:border-box;
-     -moz-box-sizing: border-box;
-     text-align: center;
-}
-body{
-
-background-color:rgb(247, 240, 240);
-}
-.heading{
-  padding-top: 4rem;
-}
-#total{
-  font-weight: bold
-}
-
-#eff{
-    padding-left:3rem;
-    color: rgb(153, 51, 102);   
-    font-family: "Montserrat-Black";
-    
-}
-#ef{padding-left:3rem;
-    color: rgb(153, 51, 102);   
-    font-family: "Montserrat-Black";
-   
-}
-
-</style>
-
-
+  
 
 
 
@@ -65,12 +33,12 @@ background-color:rgb(247, 240, 240);
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="active"><a href="/user/Home">Home</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
                  <ul class="dropdown-menu" role="menu">
                   <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
-              <li><a href="/user/processViewById"><b>View Process</b></a></li>
+              <li><a href="/user/viewProcessList"><b>View Process</b></a></li>
               <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
               <li><a href="/user/processPrioritization"><b>Process Prioritization</b></a></li>
                     
@@ -107,7 +75,7 @@ background-color:rgb(247, 240, 240);
 
 
 <body>
-<form action="configurationDetails">
+<form action="configurationDetailsInput">
 <div id="eff" align="left">
 <h2><strong>Effort Estimation</strong><font size="3"><b> (person months)</b></font></h2>
 </div>

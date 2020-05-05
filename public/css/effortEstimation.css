@@ -1,0 +1,29 @@
+input[type="text"] {
+    width: 100%; 
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+    text-align: center;
+    
+}
+#total{
+ font-weight: bold
+}
+
+#eff{
+   padding-left:3rem;
+   color: rgb(153, 51, 102);   
+   font-family: "Montserrat-Black";
+   
+}
+#ef{padding-left:3rem;
+   color: rgb(153, 51, 102);   
+   font-family: "Montserrat-Black";
+}
+   
+body{
+background-color:rgb(247, 240, 240);
+}
+.heading{
+ padding-top: 4rem;
+}

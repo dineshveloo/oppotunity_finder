@@ -34,12 +34,12 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="active"><a href="/user/Home">Home</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
                  <ul class="dropdown-menu" role="menu">
                        <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
-              <li><a href="/user/processViewById"><b>View Process</b></a></li>
+              <li><a href="/user/viewProcessList"><b>View Process</b></a></li>
               <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
               <li><a href="/user/list"><b>Process Prioritization</b></a></li>
                     
@@ -143,50 +143,13 @@
              <td><h5>{{this.AHT}}</h5></td>
              <td><h5>{{this.FTE}}</h5></td>
              <td><h5>{{this.AP_Perc}}</h5></td>
+             <td><h5>{{this.FTE_Benefit}}</h5></td>
              <td><h5>{{this.Classification}}</h5></td>
              <td><h5>{{this.Quadrant}}</h5></td>
              <td><h5>{{this.Ranking}}</h5></td>
                          </tr>
            {{/each}}
-            {{!-- <tr>
-              <td><h5>Accounts Payable</h5></td>
-              <td><h5>C1_FO_NA_AP</h5></td>
-              <td><h5>20000</h5></td>
-             <td><h5>15</h5></td>
-             <td><h5>30</h5></td>
-             <td><h5>72</h5></td>
-             <td><h5>22</h5></td>
-             <td><h5>Medium</h5></td>
-             <td><h5>Big Bets</h5></td>
-             <td><h5>2</h5></td>
-            </tr>
-
-             <tr>
-              <td><h5>Invoice Processing</h5></td>
-              <td><h5>C1_FO_NA_IP</h5></td>
-              <td><h5>30000</h5></td>
-             <td><h5>20</h5></td>
-             <td><h5>60</h5></td>
-             <td><h5>72</h5></td>
-             <td><h5>44</h5></td>
-             <td><h5>Complex</h5></td>
-             <td><h5>Big Bets</h5></td>
-             <td><h5>3</h5></td>
-            </tr>
-
-              <tr>
-              <td><h5>PO Creation</h5></td>
-              <td><h5>C1_PR_OM_PC</h5></td>
-              <td><h5>30000</h5></td>
-             <td><h5>20</h5></td>
-             <td><h5>60</h5></td>
-             <td><h5>68.5</h5></td>
-             <td><h5>42</h5></td>
-             <td><h5>Simple</h5></td>
-             <td><h5>Quick Wins</h5></td>
-             <td><h5>1</h5></td>
-            </tr> --}}
-
+           
           </tbody>
         </table>
       </div>

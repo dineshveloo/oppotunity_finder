@@ -13,86 +13,8 @@
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   <script src="../js/calculations.js"></script>
   <script src="../js/edit.js"></script>
-{{!-- <script>
-  $(document).ready(function() {  
-
-   $('#slacalc option:contains("HTML")').attr("disabled","disabled");
-
-});​
-</script> --}}
-
-<script>
-
-  $(document).ready(function(){
-
-    $("#save_btn").click(function(){
-
-      console.log("save button clicked");
-
-      $("#myForm" ).submit();
-
-    });
-
- 
-
-    $(".btnNext").click(function(){
-
-      console.log("next button clicked");
-
-      $('a[href="#tab1"]').click(function(){
-
-      alert('Success! Selected link starting with # in href.');
-
-      });
-
-    });
-
- 
-
-    $(".btnPrevious").click(function(){
-
-      console.log("previous button clicked");
-
-    });
-
-  });
-
-
-
-
-  </script>
-
-
-
-  
-  
-  <style>
-    body{
-    background-color:rgb(247, 240, 240);
-}
-    #last{
-  padding-left: 33rem;
-}
- #last1{
-  padding-left: 33rem;
-}
-#fir{
-  color:white;
-
-}
-#sec2{
-  color:white;
-
-}
-  </style>
-
-
-
-
-
-
-
-</head>
+<script src="../js/CaptureProcess.js"></script>
+ </head>
 <body>
 <nav class="navbar navbar-inverse">
         <div class="container-fluid">
@@ -108,12 +30,12 @@
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/user/adminHome">Home</a></li>
+              <li class="active"><a href="/user/Home">Home</a></li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
                  <ul class="dropdown-menu" role="menu">
                        <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
-                       <li><a href="/user/processViewById"><b>View Process</b></a></li>
+                       <li><a href="/user/viewProcessList"><b>View Process</b></a></li>
                        <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
                        <li><a href="/user/list"><b>Process Prioritization</b></a></li>
                     
@@ -222,8 +144,7 @@
           <label for="sla">10. SLA</label>
         
           <select  class="form-control" id="slacalc" name="SLA">
-                {{!-- <option>{{process.SLA}}</option>
-                 --}}
+                
                  <option disabled selected value> -- {{process.SLA}} -- </option>
 
                 <option id="1" value="Less than 8 hrs" disabled>Less than 8 hrs</option>
@@ -264,7 +185,7 @@
             
                   <select  class="form-control" id="docpre" onchange="automation()" name="Doc_Present">
                           <option disabled selected value> -- {{process.Doc_Present}} -- </option>
-                          {{!-- <option> {{process.Doc_Present}} </option> --}}
+                         
                            <option id="9" value="No Documenation" disabled>No Documenation</option>
                            <option id="10" value="Partial Documentation" disabled>Partial Documentation</option>
                            <option id="11" value="Detailed Documentation" disabled>Detailed Documentation</option>

@@ -15,7 +15,6 @@ mongoose.connect("mongodb://localhost:27017/Mydb", { useNewUrlParser: true}, { u
 const User = require("./user.model")
 const Process = require("./process.Model")
 const Business = require("./business.model")
-// const SecondProcess=require("./secondprocess.model")
 const Classification=require("./configurationDetails.model")
-const Diagram = require("./diagram.model")
+const ProcessFlow = require("./processFlow.model")
 const ExcelData = require("./exceldata.model")
