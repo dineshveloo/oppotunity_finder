@@ -20,6 +20,11 @@ mongoose.set('useFindAndModify', false);
 application.use('/user', express.static('views/images'));
 application.use(express.static(__dirname + '/public'));
 const router=express.Router();
+//........dropdown....................//
+var MongoClient = require('mongodb').MongoClient;
+
+var url = "mongodb://localhost:27017/";
+//.......................................//
 
 //multer
 var storage = multer.diskStorage({
@@ -797,18 +802,138 @@ router.post("/addProcessTwo", (req, res)=>{
 
 });
 });
-router.get('/list', (req,res) => {
-    ProcessModel.find((err, docs) => {
-    if(!err){
-    res.render("processPrioritization", {list: docs});
+
+//.....................dropdown.......................//
+function get_unique(myData ) {
+
+    return Array.from(new Set(myData.map(JSON.stringify))).map(JSON.parse);
   
-    console.log(docs);
-    }
-    else {
-    console.log('Failed to retrieve the Course List: '+ err);
-    }
+  }
+  
+  
+  router.get('/list', (req, res) => {
+
+    MongoClient.connect(url, function(err, db) {
+    
+      if (err) throw err;
+    
+      var dbo = db.db("Mydb");
+     
+    
+      dbo.collection("Process").find({},{ projection: { _id: 0, clientName: 1} }).toArray(function(err, client_Name) {
+    
+        if (err) throw err;
+    
+        console.log(client_Name);
+    
+    
+        console.log(get_unique(client_Name));
+         
+        res.render('processPrioritization', {client_list: get_unique(client_Name)});
+
+      });
+
+
+
+
+    
     });
+    
     });
+
+
+//...................................original.....................................................//
+// router.get('/list', (req,res) => {
+//     ProcessModel.find((err, docs) => {
+//     if(!err){
+//     res.render("processPrioritization", {list: docs});
+  
+//     console.log(docs);
+    
+//     }
+//     else {
+//     console.log('Failed to retrieve the Course List: '+ err);
+//     }
+//     });
+//     });
+//....................................................................................//
+//...............dropdown trigerring........................................................//
+
+router.post('/showBussinessUnit', (req, res) => {
+
+    MongoClient.connect(url, function(err, db) {
+    
+      if (err) throw err;
+    
+      var dbo = db.db("Mydb");
+     var choice =  dbo.collection("Process").clientName = req.body.client_name;
+    console.log("choice"+req.body.client_name);
+
+      dbo.collection("Process").find({clientName:req.body.client_name},{ projection: { _id: 0, Buss_Unit: 1} }).toArray(function(err, BU_data) {
+        console.log(BU_data);
+    
+        
+    
+        console.log(get_unique(BU_data));
+        if(err){
+             throw err;
+        }
+        
+        
+            else{
+             res.render('processPrioritization', {Business_list: get_unique(BU_data), clientname: req.body.client_name});
+            }
+            
+        
+
+    
+        
+
+       
+      });
+
+    
+    });
+    
+    });
+
+//........................................................................................................//
+
+
+//..............to get table.................................//
+router.post('/showTable', (req, res) => {
+
+    MongoClient.connect(url, function(err, db) {
+    
+      if (err) throw err;
+    
+      var dbo = db.db("Mydb");
+      dbo.collection("Process").clientName = req.body.Client_Name;
+      dbo.collection("Process").Buss_Unit = req.body.Business_Unit;
+      console.log( req.body.Client_Name);
+      console.log(req.body.Business_Unit);
+    
+      dbo.collection("Process").find({clientName:req.body.Client_Name},{ projection: { _id: 0, Buss_Unit: 1, Proc_Name: 1, Proc_Id:1, Mon_Vol: 1, AHT:1, FTE:1, AP_Perc:1, FTE_Benefit:1, Classification:1, Quadrant:1} }).toArray(function(err, process_table) {
+    
+        if (err) throw err;
+    
+        console.log(process_table);
+    
+        
+        res.render('processPrioritization', {client_table: process_table, client: req.body.Client_Name, businessunit: req.body.Business_Unit});
+      });
+
+
+
+
+    
+    });
+    
+    });
+
+
+
+//..........................................................................//
     router.get('/userList', (req,res) => {
         UserModel.find((err, docs) => {
         if(!err){

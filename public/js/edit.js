@@ -111,3 +111,9 @@ $(document).ready(function()
  });
 
  });
+ 
+ $(document).ready(function() {
+  $("#disappear").click(function() {
+    $("#form1").toggle();
+  });
+});

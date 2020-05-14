@@ -29,22 +29,50 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/user/Home">Home</a></li>
-        <li class="dropdown">
+         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
-              <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
+              <li><a href="/user/CaptureProcess"><b>Capture Process</b></a></li>
               <li><a href="/user/viewProcessList"><b>View Process</b></a></li>
               <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
               <li><a href="/user/list"><b>Process Prioritization</b></a></li>
+              <li><a href="/user/uploadDownload"><b>Upload/Download Process</b></a></li>
               
               
            </ul>
        </li>
-       <li><a href="/user/userManagement">User Management</a></li>
+ 
+ <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Flow<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+              <li><a href="/user/captureProcessFlow"><b>Capture Process Flow</b></a></li>
+              <li><a href="/user/viewWorkflow"><b>View Process Flow</b></a></li>
+              
+              
+           </ul>
+       </li>
+
+
+        <li><a href="/user/businessCaseDetails">Business Case & Roadmap</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User Management<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+             <li><a href="/user/userManagement"><b>User Management Home</b></a></li>
+              <li><a href="/user/register"><b>Create User</b></a></li>
+              <li><a href="/user/userList"><b>View Users</b></a></li>
+              
+              
+           </ul>
+       </li>
+        {{!-- <li><a href="/user/userManagement">User Management</a></li> --}}
+        <li><a href="/user/fetchConfigurationDetails">Configuration Details</a></li>
         <li><a href="/user/About">About</a></li>
         <li><a href="/user/Contact">Contact</a></li>
+        
       </ul>
+     
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span>{{viewtitle}}</a></li>
         <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>

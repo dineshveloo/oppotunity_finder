@@ -5,18 +5,15 @@
 <title>Rapid Assessment Platform</title>  
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="JS/fte.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/reference_css.css">
   <link rel="stylesheet" type="text/css" href="../css/Capture.css">
   
 <script src="../js/calculations.js"></script>
-
-
-
-
 
 </head>
 <body>
@@ -32,27 +29,56 @@
               <img  class="navbar-brand" src="mphasis_logo.jpg">
             
           </div>
-          <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="/user/Home">Home</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
-                 <ul class="dropdown-menu" role="menu">
-                       <li><a href="/user/captureProcess"><b>Capture Process</b></a></li>
+           <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/user/Home">Home</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+              <li><a href="/user/CaptureProcess"><b>Capture Process</b></a></li>
               <li><a href="/user/viewProcessList"><b>View Process</b></a></li>
               <li><a href="/user/approveProcess"><b>Approve Process</b></a></li>
               <li><a href="/user/list"><b>Process Prioritization</b></a></li>
-                    
-                 </ul>
-             </li>
-                   <li><a href="/user/userManagement">User Management</a></li>
-                   <li><a href="/user/About">About</a></li>
-                   <li><a href="/user/Contact">Contact</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-            </ul>
-          </div>
+              <li><a href="/user/uploadDownload"><b>Upload/Download Process</b></a></li>
+              
+              
+           </ul>
+       </li>
+ 
+ <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Flow<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+              <li><a href="/user/captureProcessFlow"><b>Capture Process Flow</b></a></li>
+              <li><a href="/user/viewWorkflow"><b>View Process Flow</b></a></li>
+              
+              
+           </ul>
+       </li>
+
+
+        <li><a href="/user/businessCaseDetails">Business Case & Roadmap</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User Management<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+             <li><a href="/user/userManagement"><b>User Management Home</b></a></li>
+              <li><a href="/user/register"><b>Create User</b></a></li>
+              <li><a href="/user/userList"><b>View Users</b></a></li>
+              
+              
+           </ul>
+       </li>
+        {{!-- <li><a href="/user/userManagement">User Management</a></li> --}}
+        <li><a href="/user/fetchConfigurationDetails">Configuration Details</a></li>
+        <li><a href="/user/About">About</a></li>
+        <li><a href="/user/Contact">Contact</a></li>
+        
+      </ul>
+     
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span>{{viewtitle}}</a></li>
+        <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </div>
         </div>
       </nav>
       
@@ -113,15 +139,89 @@
   </div>
  </div>
 
-<div class="container text-center" id="abc1">
+<div class="container-fluid bg-3 text-center">  
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+  
+  <form name="formdata" class="form-horizontal someFormClass" id="someDynamicId" action="/user/showBussinessUnit" method="POST">
+
+<label>Choose a Client:</label>
+
+<select name="client_name">
+ <option disabled selected value> -- select an option -- </option>
+ {{#each client_list}} 
+
+  <option>{{this.clientName}}</option>
+
+
+{{/each}}
+ </select><br><br>
+ <button class="btn btn-success" type="submit" name="submit" id="someId">Select</button>
+ </form>
+ </div>
+ <div class="col-sm-6"> 
+  <form action="/user/showTable" method="post">
+
+  <label>Client Name:</label>
+  <input type="text-center"  class="form-control" placeholder="Client Name" maxlength="30" name="Client_Name" value="{{clientname}}" readonly>
+
+                    <a href="/user/list"><b>Do you want to change the client name?</b></a><br><br>
+                    
+
+<label>Choose a Business Unit:</label>
+
+ <select id="second-choice1" name="Business_Unit">
+   <option disabled selected value> -- select an option -- </option>
+   
+   {{#each Business_list}} 
+  <option>{{this.Buss_Unit}}</option>
+  {{/each}}
+</select><br><br>
+
+  <button type="submit" class="btn btn-success">Submit</button>
+ 
+</form>
+
+</div>
+</div>
+<div>
+
+<div class="row">
+        <div class="col-sm-6">
+      
+        <label>Client Name:</label>
+      
+      
+        <input type="text-center"  class="form-control" placeholder="Client Name" maxlength="30" name="clientName" value="{{client}}" readonly>
+      </div>
+    
+    <div class="col-sm-6">
+    
+        <label for="lname">Business Unit:</label>
+      
+      
+        <input type="text-center" class="form-control"  maxlength="30" placeholder="Business Unit" value="{{businessunit}}" readonly>
      
-    
-  <form action="">
-    
+    </div>
+    </div>
+
+
+
+
+</div>
+</div>
+<div align="center">
+   <a href="/user/list"><b>Do you want to change the client name?</b></a><br>
+</div><br><br><br>
+   
     <div class="table-responsive table-sm">
         <table class="table">
           <thead>
             <tr>
+              <th scope="col"><h5><b>Business Unit</b></h5></th>
               <th scope="col"><h5><b>Process Name</b></h5></th>
               <th scope="col"><h5><b>Process Id</b></th>
               <th scope="col"><h5><b>Monthly Volume</b></h5></th>
@@ -135,8 +235,9 @@
             </tr>
           </thead>
           <tbody>
-              {{#each list}}
+              {{#each client_table}}
             <tr>
+              <td><h5>{{this.Buss_Unit}}</h5></td>
               <td><h5>{{this.Proc_Name}}</h5></td>
               <td><h5>{{this.Proc_Id}}</h5></td>
               <td><h5>{{this.Mon_Vol}}</h5></td>
@@ -147,15 +248,15 @@
              <td><h5>{{this.Classification}}</h5></td>
              <td><h5>{{this.Quadrant}}</h5></td>
              <td><h5>{{this.Ranking}}</h5></td>
-                         </tr>
+            </tr>
            {{/each}}
            
           </tbody>
         </table>
-      </div>
+      </div> <br><br><br>
       
       
-    </div>
+    
     
     
             
@@ -165,7 +266,7 @@
           
           
           
-  </form>
+  
   
 </body>
 </html> 
