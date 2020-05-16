@@ -62,7 +62,18 @@
  <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Flow<span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
-              <li><a href="/user/captureProcessFlow"><b>Capture Process Flow</b></a></li>
+               <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Configuration Details<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+             <li><a href="/user/fetchConfigurationDetails"><b>Automation Anywhere</b></a></li>
+              <li><a href="/user/fetchConfigurationDetails2"><b>UiPath</b></a></li>
+              <li><a href="/user/fetchConfigurationDetails3"><b>Pega Robotics</b></a></li>
+              <li><a href="/user/fetchConfigurationDetails4"><b>Blue Prism</b></a></li>
+             
+              
+              
+           </ul>
+       </li>
               <li><a href="/user/viewWorkflow"><b>View Process Flow</b></a></li>
               
               
@@ -89,7 +100,7 @@
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span>{{viewtitle}}</a></li>
+        
         <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
@@ -179,7 +190,7 @@
              <td>{{this.Proc_Name}}</td>
              <td>{{this.Proc_Id}}</td>
               <td>{{this.Classification}}</td>
-             <td> <input type="checkbox" class='list-item' name="Selected_Process" value="{{this.Proc_Id}},{{this.Sub_Buss_Unit}},{{this.Proc_Name}},{{this.clientName}},{{this.Buss_Unit}},{{this.Classification}}"></td>
+             <td> <input type="checkbox" class='list-item' name="Selected_Process" value="{{this.Proc_Id}},{{this.Sub_Buss_Unit}},{{this.Proc_Name}},{{this.clientName}},{{this.Buss_Unit}},{{this.Classification}}" required></td>
             </tr>
            {{/each}}
           </tbody>

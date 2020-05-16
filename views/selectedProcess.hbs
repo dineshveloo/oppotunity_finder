@@ -69,7 +69,18 @@
            </ul>
        </li>
         {{!-- <li><a href="/user/userManagement">User Management</a></li> --}}
-        <li><a href="/user/fetchConfigurationDetails">Configuration Details</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Configuration Details<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+             <li><a href="/user/fetchConfigurationDetails"><b>Automation Anywhere</b></a></li>
+              <li><a href="/user/fetchConfigurationDetails2"><b>UiPath</b></a></li>
+              <li><a href="/user/fetchConfigurationDetails3"><b>Pega Robotics</b></a></li>
+              <li><a href="/user/fetchConfigurationDetails4"><b>Blue Prism</b></a></li>
+             
+              
+              
+           </ul>
+       </li>
         <li><a href="/user/About">About</a></li>
         <li><a href="/user/Contact">Contact</a></li>
         
@@ -156,9 +167,10 @@
       <select  class="form-control" id="selectTool" name="RPA_Tool" required>
                 <option style="font-weight: bold; text-align: center; vertical-align: middle;" disabled selected value> <b>Select Tool</b></option>
                 <option value="Automation Anywhere">Automation Anywhere</option>
-                     <option value="UiPath">UiPath</option>
-                     <option value="BluePrism">BluePrism</option>
-                     <option value="Pega Robotics">Pega Robotics</option>
+                <option value="UiPath">UiPath</option>
+                <option value="Pega Robotics">Pega Robotics</option>
+                <option value="Blue Prism">Blue Prism</option>
+                     
           </select>
 
      
