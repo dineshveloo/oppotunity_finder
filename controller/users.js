@@ -60,8 +60,8 @@ router.get("/captureProcessFlow", (req, res)=>{
 router.get("/processFlowDocumentation", (req, res)=>{
         res.render("processFlowDocumentation")
         });
-router.get("/effortEstimation", (req, res)=>{
-    res.render("effortEstimation")
+router.get("/effortEstimation AA", (req, res)=>{
+    res.render("effortEstimation AA")
     });
 router.get("/CaptureProcess", (req, res)=>{
     res.render("CaptureProcess")
@@ -72,8 +72,8 @@ router.get("/CaptureProcess", (req, res)=>{
 router.get("/processDiscovery", (req, res)=>{
     res.render("processDiscovery")
 });
-router.get("/businessCase", (req, res)=>{
-    res.render("businessCase")
+router.get("/businessCaseList", (req, res)=>{
+    res.render("businessCaseList")
 });
 router.get("/selectedProcess", (req, res)=>{
     res.render("selectedProcess")
@@ -101,7 +101,7 @@ router.get("/businessCaseDetails", (req, res)=>{
     
     ProcessModel.find((err, docs) => {
         if(!err){
-            res.render("businessCase", {list: docs});
+            res.render("businessCaseList", {list: docs});
        
         
         
@@ -112,17 +112,17 @@ router.get("/businessCaseDetails", (req, res)=>{
         }
         });
 });
-router.get("/configurationDetailsInput",(req,res)=>{
-    res.render("configurationDetailsInput")
+router.get("/configurationDetailsInputAA",(req,res)=>{
+    res.render("configurationDetailsInputAA")
 });
-router.get("/configurationDetailsInput2",(req,res)=>{
-    res.render("configurationDetailsInput2")
+router.get("/configurationDetailsInputUI",(req,res)=>{
+    res.render("configurationDetailsInputUI")
 });
-router.get("/configurationDetailsInput3",(req,res)=>{
-    res.render("configurationDetailsInput3")
+router.get("/configurationDetailsInputPR",(req,res)=>{
+    res.render("configurationDetailsInputPR")
 });
-router.get("/configurationDetailsInput4",(req,res)=>{
-    res.render("configurationDetailsInput4")
+router.get("/configurationDetailsInputBP",(req,res)=>{
+    res.render("configurationDetailsInputBP")
 });
 router.get("/defaultConfigurationDetails",(res,req)=>{
     res.render("defaultConfigurationDetails")
@@ -140,7 +140,7 @@ router.get("/fetchConfigurationDetails",(req,res)=>{
     ConfigurationDetailsModel.find((err,doc)=>{
         if(!err)
         {
-            res.render("defaultConfigurationDetails",{list:doc[0]})
+            res.render("defaultConfigurationDetails AA",{list:doc[0]})
         }
         else{
             res.send(err)
@@ -155,7 +155,7 @@ router.get("/fetchConfigurationDetails2",(req,res)=>{
     ConfigurationDetailsModel2.find((err,doc)=>{
         if(!err)
         {
-            res.render("defaultConfigurationDetails2",{list:doc[0]})
+            res.render("defaultConfigurationDetails UI",{list:doc[0]})
         }
         else{
             res.send(err)
@@ -171,7 +171,7 @@ router.get("/fetchConfigurationDetails3",(req,res)=>{
     ConfigurationDetailsModel3.find((err,doc)=>{
         if(!err)
         {
-            res.render("defaultConfigurationDetails3",{list:doc[0]})
+            res.render("defaultConfigurationDetails PR",{list:doc[0]})
         }
         else{
             res.send(err)
@@ -186,7 +186,7 @@ router.get("/fetchConfigurationDetails4",(req,res)=>{
     ConfigurationDetailsModel4.find((err,doc)=>{
         if(!err)
         {
-            res.render("defaultConfigurationDetails4",{list:doc[0]})
+            res.render("defaultConfigurationDetails BP",{list:doc[0]})
         }
         else{
             res.send(err)
@@ -270,11 +270,11 @@ router.post("/addConfigurationDetails",(req,res)=>{
             ConfigurationDetailsModel.updateOne({Simple_Dev:doc[0].Simple_Dev},updated_doc,(err,doc)=>{
                 if(!err)
                 {
-                   res.render("configurationDetailsInput",{viewtitle:"Updated Successfully"})
+                   res.render("configurationDetailsInputAA",{viewtitle:"Updated Successfully"})
                 }
                 else{
                     console.log(err);
-                    res.render("configurationDetailsInput",{viewerror:"error Occured in proceeding"})
+                    res.render("configurationDetailsInputAA",{viewerror:"error Occured in proceeding"})
                 }
             });
         }
@@ -378,11 +378,11 @@ router.post("/addConfigurationDetails2",(req,res)=>{
             ConfigurationDetailsModel2.updateOne({Simple_Dev1:doc[0].Simple_Dev1},updated_doc,(err,doc)=>{
                 if(!err)
                 {
-                   res.render("configurationDetailsInput2",{viewtitle:"Updated Successfully"})
+                   res.render("configurationDetailsInputUI",{viewtitle:"Updated Successfully"})
                 }
                 else{
                     console.log(err);
-                    res.render("configurationDetailsInput2",{viewerror:"error Occured in proceeding"})
+                    res.render("configurationDetailsInputUI",{viewerror:"error Occured in proceeding"})
                 }
             });
         }
@@ -492,11 +492,11 @@ router.post("/addConfigurationDetails3",(req,res)=>{
             ConfigurationDetailsModel3.updateOne({Simple_Dev2:doc[0].Simple_Dev2},updated_doc,(err,doc)=>{
                 if(!err)
                 {
-                   res.render("configurationDetailsInput3",{viewtitle:"Updated Successfully"})
+                   res.render("configurationDetailsInputPR",{viewtitle:"Updated Successfully"})
                 }
                 else{
                     console.log(err);
-                    res.render("configurationDetailsInput3",{viewerror:"error Occured in proceeding"})
+                    res.render("configurationDetailsInputPR",{viewerror:"error Occured in proceeding"})
                 }
             });
         }
@@ -602,11 +602,11 @@ router.post("/addConfigurationDetails4",(req,res)=>{
             ConfigurationDetailsModel4.updateOne({Simple_Dev3:doc[0].Simple_Dev3},updated_doc,(err,doc)=>{
                 if(!err)
                 {
-                   res.render("configurationDetailsInput4",{viewtitle:"Updated Successfully"})
+                   res.render("configurationDetailsInputBP",{viewtitle:"Updated Successfully"})
                 }
                 else{
                     console.log(err);
-                    res.render("configurationDetailsInput4",{viewerror:"error Occured in proceeding"})
+                    res.render("configurationDetailsInputBP",{viewerror:"error Occured in proceeding"})
                 }
             });
         }
@@ -862,7 +862,7 @@ switch(rtool){
             Total_Net_Savings_Two=Total_Net_Savings.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             Total_TCO=Total_Imp_Cost+(5*Totalof_Total_Lisc_Price)+(5*Totalof_Total_Infra_Price)+(5*Maint_Cost);
             Total_TCO_Two=Total_TCO.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-            res.render("effortEstimation",
+            res.render("effortEstimation AA",
             {Simple_Dev_Effort:Simple_Dev_Effort,
                 Total:Total,
                 Total_Net_Savings_Two:Total_Net_Savings_Two,
@@ -1098,7 +1098,7 @@ case "UiPath":
             Total_Net_Savings_Two2=Total_Net_Savings2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             Total_TCO2=Total_Imp_Cost2+(5*Totalof_Total_Lisc_Price2)+(5*Totalof_Total_Infra_Price2)+(5*Maint_Cost2);
             Total_TCO_Two2=Total_TCO2.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
-            res.render("effortEstimation2",
+            res.render("effortEstimation UI",
             {Simple_Dev_Effort2:Simple_Dev_Effort2,
                 Total2:Total2,
                 Total_Net_Savings_Two2:Total_Net_Savings_Two2,
@@ -1322,7 +1322,7 @@ case "Pega Robotics":
             
             DUlead_Cost2=Total_DM_Effort3*docs[0].DUlead_Cost2*268;
             Total_Imp_Cost3=Dev_Cost2+Srdev_Cost2+BA_Cost2+Arch_Cost2+PM_Cost2+DUlead_Cost2;
-            Total_Imp_Cost_Two3=Total_Imp_Cost3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$2,');
+            Total_Imp_Cost_Two3=Total_Imp_Cost3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             
            
             console.log(Total_Imp_Cost3);
@@ -1332,10 +1332,10 @@ case "Pega Robotics":
             Net_Savings3=Math.round(FTE_Savings_USD3-(Total_Imp_Cost3+Totalof_Total_Lisc_Price3+Totalof_Total_Infra_Price3+Maint_Cost3));
             Net_Savings_Two3=Math.round(FTE_Savings_USD3-(0+Totalof_Total_Lisc_Price3+Totalof_Total_Infra_Price3+Maint_Cost3));
             Total_Net_Savings3=Net_Savings3+(4*Net_Savings_Two3);
-            Total_Net_Savings_Two3=Total_Net_Savings3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$2,');
+            Total_Net_Savings_Two3=Total_Net_Savings3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             Total_TCO3=Total_Imp_Cost3+(5*Totalof_Total_Lisc_Price3)+(5*Totalof_Total_Infra_Price3)+(5*Maint_Cost3);
-            Total_TCO_Two3=Total_TCO3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$2,');
-            res.render("effortEstimation3",
+            Total_TCO_Two3=Total_TCO3.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            res.render("effortEstimation PR",
             {Simple_Dev_Effort3:Simple_Dev_Effort3,
                 Total3:Total3,
                 Total_Net_Savings_Two3:Total_Net_Savings_Two3,
@@ -1559,7 +1559,7 @@ case "Blue Prism":
             
             DUlead_Cost3=Total_DM_Effort4*docs[0].DUlead_Cost3*368;
             Total_Imp_Cost4=Dev_Cost3+Srdev_Cost3+BA_Cost3+Arch_Cost3+PM_Cost3+DUlead_Cost3;
-            Total_Imp_Cost_Two4=Total_Imp_Cost4.toString().replace(/(\d)(?=(\d{4})+(?!\d))/g, '$3,');
+            Total_Imp_Cost_Two4=Total_Imp_Cost4.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             
            
             console.log(Total_Imp_Cost4);
@@ -1569,10 +1569,10 @@ case "Blue Prism":
             Net_Savings4=Math.round(FTE_Savings_USD4-(Total_Imp_Cost4+Totalof_Total_Lisc_Price4+Totalof_Total_Infra_Price4+Maint_Cost4));
             Net_Savings_Two4=Math.round(FTE_Savings_USD4-(0+Totalof_Total_Lisc_Price4+Totalof_Total_Infra_Price4+Maint_Cost4));
             Total_Net_Savings4=Net_Savings4+(4*Net_Savings_Two4);
-            Total_Net_Savings_Two4=Total_Net_Savings4.toString().replace(/(\d)(?=(\d{4})+(?!\d))/g, '$3,');
+            Total_Net_Savings_Two4=Total_Net_Savings4.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
             Total_TCO4=Total_Imp_Cost4+(5*Totalof_Total_Lisc_Price4)+(5*Totalof_Total_Infra_Price4)+(5*Maint_Cost4);
-            Total_TCO_Two4=Total_TCO4.toString().replace(/(\d)(?=(\d{4})+(?!\d))/g, '$3,');
-            res.render("effortEstimation4",
+            Total_TCO_Two4=Total_TCO4.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            res.render("effortEstimation BP",
             {Simple_Dev_Effort4:Simple_Dev_Effort4,
                 Total4:Total4,
                 Total_Net_Savings_Two4:Total_Net_Savings_Two4,

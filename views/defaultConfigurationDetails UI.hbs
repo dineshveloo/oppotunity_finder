@@ -70,7 +70,7 @@
            </ul>
        </li>
         {{!-- <li><a href="/user/userManagement">User Management</a></li> --}}
-         <li class="dropdown">
+        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Configuration Details<span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
              <li><a href="/user/fetchConfigurationDetails"><b>Automation Anywhere</b></a></li>
@@ -88,7 +88,7 @@
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
-        
+       
         <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
@@ -97,8 +97,8 @@
       
       <div class="jumbotron" id="cp">
         <div class="container text-center" >
-        <h1 id="pc">Effort estimation for Automation Anywhere</h1>
-        <p>Tables for calculating effort</p>
+        <h2 id="pc">Configuration Data of UiPath</h2>
+        {{!-- <p>Tables for calculating effort</p> --}}
         
         </div>
       </div>
@@ -114,7 +114,7 @@
 
 
 <body>
-<form action="configurationDetailsInput">
+<form action="configurationDetailsInputUI">
 <div id="eff" align="left">
 <h2><strong>Effort Estimation</strong><font size="3"><b> (person months)</b></font></h2>
 </div>
@@ -136,34 +136,34 @@
    <tbody>
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Simple</b></td>
-      <td><input type="text" name="Simple_Dev" value="{{list.Simple_Dev}}" readonly></td>
-      <td><input type="text"  name="Simple_Srdev" value="{{list.Simple_Srdev}}" readonly></td>
-      <td><input type="text" name="Simple_BA" value="{{list.Simple_BA}}" readonly></td>
-      <td><input type="text" name="Simple_Arch" value="{{list.Simple_Arch}}" readonly></td>
-      <td><input type="text" name="Simple_PM" value="{{list.Simple_PM}}" readonly></td>
-      <td><input type="text" name="Simple_DM" value="{{list.Simple_DM}}" readonly></td>
+      <td><input type="text" name="Simple_Dev1" value="{{list.Simple_Dev1}}" readonly></td>
+      <td><input type="text"  name="Simple_Srdev1" value="{{list.Simple_Srdev1}}" readonly></td>
+      <td><input type="text" name="Simple_BA1" value="{{list.Simple_BA1}}" readonly></td>
+      <td><input type="text" name="Simple_Arch1" value="{{list.Simple_Arch1}}" readonly></td>
+      <td><input type="text" name="Simple_PM1" value="{{list.Simple_PM1}}" readonly></td>
+      <td><input type="text" name="Simple_DM1" value="{{list.Simple_DM1}}" readonly></td>
    </tr>
    
    <tr>
       
        <td style="text-align: center; vertical-align: middle;">Medium</td>
-      <td><input type="text" name="Medium_Dev" value="{{list.Medium_Dev}}" readonly></td>
-      <td><input type="text" name="Medium_Srdev" value="{{list.Medium_Srdev}}" readonly></td>
-      <td><input type="text" name="Medium_BA" value="{{list.Medium_BA}}" readonly></td>
-      <td><input type="text" name="Medium_Arch" value="{{list.Medium_Arch}}" readonly></td>
-      <td><input type="text" name="Medium_PM" value="{{list.Medium_PM}}" readonly></td>
-      <td><input type="text" name="Medium_DM" value="{{list.Medium_DM}}" readonly></td>
+      <td><input type="text" name="Medium_Dev1" value="{{list.Medium_Dev1}}" readonly></td>
+      <td><input type="text" name="Medium_Srdev1" value="{{list.Medium_Srdev1}}" readonly></td>
+      <td><input type="text" name="Medium_BA1" value="{{list.Medium_BA1}}" readonly></td>
+      <td><input type="text" name="Medium_Arch1" value="{{list.Medium_Arch1}}" readonly></td>
+      <td><input type="text" name="Medium_PM1" value="{{list.Medium_PM1}}" readonly></td>
+      <td><input type="text" name="Medium_DM1" value="{{list.Medium_DM1}}" readonly></td>
    </tr>
    
    <tr>
        
        <td style="text-align: center; vertical-align: middle;">Complex</td>
-      <td><input type="text" name="Complex_Dev" value="{{list.Complex_Dev}}" readonly></td>
-      <td><input type="text" name="Complex_Srdev" value="{{list.Complex_Srdev}}" readonly></td>
-      <td><input type="text" name="Complex_BA" value="{{list.Complex_BA}}" readonly></td>
-      <td><input type="text" name="Complex_Arch" value="{{list.Complex_Arch}}" readonly></td>
-      <td><input type="text" name="Complex_PM" value="{{list.Complex_PM}}" readonly></td>
-      <td><input type="text" name="Complex_DM" value="{{list.Complex_DM}}" readonly></td>
+      <td><input type="text" name="Complex_Dev1" value="{{list.Complex_Dev1}}" readonly></td>
+      <td><input type="text" name="Complex_Srdev1" value="{{list.Complex_Srdev1}}" readonly></td>
+      <td><input type="text" name="Complex_BA1" value="{{list.Complex_BA1}}" readonly></td>
+      <td><input type="text" name="Complex_Arch1" value="{{list.Complex_Arch1}}" readonly></td>
+      <td><input type="text" name="Complex_PM1" value="{{list.Complex_PM1}}" readonly></td>
+      <td><input type="text" name="Complex_DM1" value="{{list.Complex_DM1}}" readonly></td>
    </tr>
    
    </tbody>
@@ -187,29 +187,29 @@
    <tbody>
       <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Bot Creator</b></td>
-      <td><input type="text" name="Bot_Creator_Cost" value="{{list.Bot_Creator_Cost}}" readonly></td>
+      <td><input type="text" name="Bot_Creator_Cost1" value="{{list.Bot_Creator_Cost1}}" readonly></td>
    </tr>
    
    <tr><td style="text-align: center; vertical-align: middle;"><b>Bot Runner(Unattended)</b></td>
-      <td><input type="text" name="Bot_Run_Unatt_Cost" value="{{list.Bot_Run_Unatt_Cost}}" readonly></td>
+      <td><input type="text" name="Bot_Run_Unatt_Cost1" value="{{list.Bot_Run_Unatt_Cost1}}" readonly></td>
    </tr>
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Bot Runner(Attended)</b></td>
-      <td><input type="text" name="Bot_Run_Att_Cost" value="{{list.Bot_Run_Att_Cost}}" readonly></td>
+      <td><input type="text" name="Bot_Run_Att_Cost1" value="{{list.Bot_Run_Att_Cost1}}" readonly></td>
         </tr>
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Control Room</b></td>
-      <td><input type="text" name="Cont_Room_Cost" value="{{list.Cont_Room_Cost}}" readonly></td>
+      <td><input type="text" name="Cont_Room_Cost1" value="{{list.Cont_Room_Cost1}}" readonly></td>
    </tr>
     <tr>
        <td style="text-align: center; vertical-align: middle;"><b>VM</b></td>
-      <td><input type="text" name="VM_Cost" value="{{list.VM_Cost}}" readonly></td>
+      <td><input type="text" name="VM_Cost1" value="{{list.VM_Cost1}}" readonly></td>
    </tr>
     <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Server</b></td>
-      <td><input type="text" name="Server_Cost" value="{{list.Server_Cost}}" readonly></td>
+      <td><input type="text" name="Server_Cost1" value="{{list.Server_Cost1}}" readonly></td>
    </tr>
   </tbody>
 </table>
@@ -231,30 +231,30 @@
    <tbody>
       <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Developer</b></td>
-      <td><input type="text" name="Dev_Cost" value="{{list.Dev_Cost}}"></td>
+      <td><input type="text" name="Dev_Cost1" value="{{list.Dev_Cost1}}"></td>
    </tr>
    
    <tr><td style="text-align: center; vertical-align: middle;"><b>Sr.developer</b></td>
-      <td><input type="text" name="Srdev_Cost" value="{{list.Srdev_Cost}}"></td>
+      <td><input type="text" name="Srdev_Cost1" value="{{list.Srdev_Cost1}}"></td>
    </tr>
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>BA</b></td>
-      <td><input type="text" name="BA_Cost" value="{{list.BA_Cost}}"></td>  </tr>
+      <td><input type="text" name="BA_Cost1" value="{{list.BA_Cost1}}"></td>  </tr>
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Architecht</b></td>
-      <td><input type="text" name="Arch_Cost" value="{{list.Arch_Cost}}"></td>
+      <td><input type="text" name="Arch_Cost1" value="{{list.Arch_Cost1}}"></td>
    </tr>
     
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>PM</b></td>
-      <td><input type="text" name="PM_Cost" value="{{list.PM_Cost}}"></td>
+      <td><input type="text" name="PM_Cost1" value="{{list.PM_Cost1}}"></td>
    </tr>
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>DU Lead</b></td>
-      <td><input type="text" name="DUlead_Cost" value="{{list.DUlead_Cost}}"></td>
+      <td><input type="text" name="DUlead_Cost1" value="{{list.DUlead_Cost1}}"></td>
    </tr>
   </tbody>
 </table>
@@ -276,11 +276,11 @@
    <tbody>
     <tr>
        <td style="text-align: center; vertical-align: middle;"><b>VM</b></td>
-      <td><input type="text" name="VM_Cost" value="{{list.VM_Cost}}" readonly></td>
+      <td><input type="text" name="VM_Cost1" value="{{list.VM_Cost1}}" readonly></td>
    </tr>
     <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Server</b></td>
-      <td><input type="text" name="Server_Cost" value="{{list.Server_Cost}}" readonly></td>
+      <td><input type="text" name="Server_Cost1" value="{{list.Server_Cost1}}" readonly></td>
    </tr>
   </tbody>
 </table>
@@ -303,7 +303,7 @@
    <tbody>
     <tr>
        <td style="text-align: center; vertical-align: middle;"><b>FTE Cost</b></td>
-      <td><input type="text" name="FTE_Cost" value="{{list.FTE_Cost}}" readonly></td>
+      <td><input type="text" name="FTE_Cost1" value="{{list.FTE_Cost1}}" readonly></td>
    </tr>
     
   </tbody>
