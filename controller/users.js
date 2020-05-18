@@ -9,12 +9,13 @@ const UserModel = mongoose.model('User');
 const ProcessModel = mongoose.model('Process');
 const ProcessFlowModel = mongoose.model('processFlow');
 const excelModel = mongoose.model('excelData');
-const ConfigurationDetailsModel = mongoose.model('ConfigurationDetails')
+const effortEstimationModel = mongoose.model('EffortEstimation');
+const ConfigurationDetailsModel = mongoose.model('ConfigurationDetails');
 //...............bp............................//
-const ConfigurationDetailsModel2 = mongoose.model('ConfigurationDetails2')
+const ConfigurationDetailsModel2 = mongoose.model('ConfigurationDetails2');
 //.............bp...............................//
-const ConfigurationDetailsModel3 = mongoose.model('ConfigurationDetails3')
-const ConfigurationDetailsModel4 = mongoose.model('ConfigurationDetails4')
+const ConfigurationDetailsModel3 = mongoose.model('ConfigurationDetails3');
+const ConfigurationDetailsModel4 = mongoose.model('ConfigurationDetails4');
 const GoogleCharts= require("google-charts");
 const session = require('express-session');
 var uniqBy = require('lodash.uniqby');
@@ -708,7 +709,7 @@ router.post("/addSelectedProcess",(req,res)=>{
     }
     });
 });
-
+//try in one page.......................................................///
 router.post("/effortcalculation",(req,res)=>{
     console.log("i am in effortcalculation")
     rtool=req.body.RPA_Tool;
@@ -729,6 +730,999 @@ router.post("/effortcalculation",(req,res)=>{
         
     //   }
     //................................................................//
+switch(rtool){
+    case "Automation Anywhere":
+    ConfigurationDetailsModel.find((err,docs)=>{
+        if(!err)
+        {
+           console.log("in aa")
+
+         
+            console.log(docs)
+            Simple=simplecount;
+            Complex=complexcount;
+            Medium=mediumcount;
+            Total=totalcount;
+            rpatool=rtool;
+            Simple_Dev_Effort=docs[0].Simple_Dev*simplecount;
+            Simple_Srdev_Effort=docs[0].Simple_Srdev*simplecount;
+            Simple_BA_Effort=docs[0].Simple_BA*simplecount;
+            Simple_Arch_Effort=docs[0].Simple_Arch*simplecount;
+            Simple_PM_Effort=docs[0].Simple_PM*simplecount;
+            Simple_DM_Effort=docs[0].Simple_DM*simplecount;
+            Total_Simple_Effort=Simple_Dev_Effort+Simple_Srdev_Effort+Simple_BA_Effort+Simple_Arch_Effort+Simple_PM_Effort+Simple_DM_Effort;
+            Total_Simple_Effort=Total_Simple_Effort.toFixed(2);
+            Total_Simple_Effort=Number(Total_Simple_Effort);
+
+            Medium_Dev_Effort=docs[0].Medium_Dev*mediumcount;
+            Medium_Srdev_Effort=docs[0].Medium_Srdev*mediumcount;
+            Medium_BA_Effort=docs[0].Medium_BA*mediumcount;
+            
+            Medium_Arch_Effort=docs[0].Medium_Arch*mediumcount;
+            
+            Medium_PM_Effort=docs[0].Medium_PM*mediumcount;
+            Medium_PM_Effort=Math.round(Medium_PM_Effort);
+            
+            Medium_DM_Effort=docs[0].Medium_DM*mediumcount;
+            Medium_DM_Effort=Math.round(Medium_DM_Effort);
+            
+            Total_Medium_Effort=Medium_Dev_Effort+Medium_Srdev_Effort+Medium_BA_Effort+Medium_Arch_Effort+Medium_PM_Effort+Medium_DM_Effort;
+            Total_Medium_Effort=Total_Medium_Effort.toFixed(2);
+            Total_Medium_Effort=Number(Total_Medium_Effort);
+
+
+            Complex_Dev_Effort=docs[0].Complex_Dev*complexcount;
+            Complex_Srdev_Effort=docs[0].Complex_Srdev*complexcount;
+            Complex_BA_Effort=docs[0].Complex_BA*complexcount;
+            
+            Complex_Arch_Effort=docs[0].Complex_Arch*complexcount;
+            
+            Complex_PM_Effort=Math.round(docs[0].Complex_PM*complexcount);
+           // Complex_PM_Effort= Complex_PM_Effort.toFixed(2);
+            Complex_DM_Effort=Math.round(docs[0].Complex_DM*complexcount);
+            //Complex_DM_Effort=Complex_DM_Effort.toFixed(2);
+            Total_Complex_Effort=Complex_Dev_Effort+Complex_Srdev_Effort+Complex_BA_Effort+Complex_Arch_Effort+Complex_PM_Effort+Complex_DM_Effort;
+            Total_Complex_Effort=Total_Complex_Effort.toFixed(2);
+            Total_Complex_Effort=Number(Total_Complex_Effort);
+
+
+            Total_Dev_Effort=Simple_Dev_Effort+Medium_Dev_Effort+Complex_Dev_Effort;
+            Total_Srdev_Effort=Simple_Srdev_Effort+Medium_Srdev_Effort+Complex_Srdev_Effort;
+            Total_BA_Effort=Simple_BA_Effort+Medium_BA_Effort+Complex_BA_Effort;
+            Total_BA_Effort=Total_BA_Effort.toFixed(2)
+            Total_Arch_Effort=Simple_Arch_Effort+Medium_Arch_Effort+Complex_Arch_Effort;
+            Total_Arch_Effort=Total_Arch_Effort.toFixed(2);
+            Total_PM_Effort=Simple_PM_Effort+Medium_PM_Effort+Complex_PM_Effort;
+            Total_PM_Effort=Total_PM_Effort.toFixed(2);
+            Total_DM_Effort=Simple_DM_Effort+Medium_DM_Effort+Complex_DM_Effort;
+            Total_DM_Effort=Total_DM_Effort.toFixed(2);
+            Total_Of_Total_Effort=Total_Simple_Effort+Total_Medium_Effort+Total_Complex_Effort;
+            Total_Of_Total_Effort=Total_Of_Total_Effort.toFixed(2);
+
+            Dev_Roundoff=Math.ceil(Total_Dev_Effort/projectduration);
+            Srdev_Roundoff=Math.ceil(Total_Srdev_Effort/projectduration);
+            BA_Roundoff=Math.round((Total_BA_Effort/projectduration)*100)/100;
+            BA_Roundoff=Math.round((BA_Roundoff)*10)/10;
+            BA_Roundoff=BA_Roundoff.toFixed(2);
+            Arch_Roundoff=Math.round((Total_Arch_Effort/projectduration)*100)/100;
+            Arch_Roundoff=Math.round((Arch_Roundoff)*10)/10;
+            Arch_Roundoff=Arch_Roundoff.toFixed(2);
+            PM_Roundoff=Math.round((Total_PM_Effort/projectduration)*100)/100;
+            PM_Roundoff=Math.round((PM_Roundoff)*10)/10;
+            PM_Roundoff=PM_Roundoff.toFixed(2);
+            
+            DM_Roundoff=Math.round((Total_DM_Effort/projectduration)*100)/100;
+           
+            DM_Roundoff=Math.round((DM_Roundoff)*10)/10;
+            DM_Roundoff=DM_Roundoff.toFixed(2);
+            DM_Roundoff=(Total_DM_Effort/projectduration).toFixed(2);
+            Total_Rounoff=Total_Of_Total_Effort/projectduration;
+            Total_Rounoff=Total_Rounoff.toFixed(2);
+            
+
+            Bot_Creator_Count=Dev_Roundoff+Srdev_Roundoff;
+            Botrunner_Unatt_Count=totalcount;
+            Botrunner_Att_Count=0;
+            Controlroom_Count=1;
+            Bot_Creator_Price=docs[0].Bot_Creator_Cost;
+            Botrunner_Unatt_Price=docs[0].Bot_Run_Unatt_Cost;
+            Botrunner_Att_Price=docs[0].Bot_Run_Att_Cost;
+            Controlroom_Price=docs[0].Cont_Room_Cost;
+            Total_Bot_Creator_Cost=Bot_Creator_Count*Bot_Creator_Price;
+            Total_Botrunner_Unatt_Cost=Botrunner_Unatt_Count*Botrunner_Unatt_Price;
+            Total_Botrunner_Att_Cost=Botrunner_Att_Count*Botrunner_Att_Price;
+            Total_Controlroom_Cost=Controlroom_Price*Controlroom_Count;
+            Totalof_Total_Lisc_Price=Total_Controlroom_Cost+Total_Botrunner_Att_Cost+Total_Botrunner_Unatt_Cost+Total_Bot_Creator_Cost;
+
+            VM_Count=Dev_Roundoff+Srdev_Roundoff;
+            Server_Count=1;
+            VM_Price=docs[0].VM_Cost;
+            Server_Price=docs[0].Server_Cost;
+            FTE_Price=docs[0].FTE_Cost;
+            Total_VM_Price=VM_Count*VM_Price;
+            Total_Server_Price=Server_Count*Server_Price;
+            Totalof_Total_Infra_Price=Total_VM_Price+Total_Server_Price;
+
+            Dev_Cost=Total_Dev_Effort*docs[0].Dev_Cost*168;
+            Srdev_Cost=Total_Srdev_Effort*docs[0].Srdev_Cost*168;
+            BA_Cost=Total_BA_Effort*docs[0].BA_Cost*168;
+            Arch_Cost=Total_Arch_Effort*docs[0].Arch_Cost*168;
+            PM_Cost=Math.round(Total_PM_Effort*docs[0].PM_Cost*168);
+            
+            DUlead_Cost=Total_DM_Effort*docs[0].DUlead_Cost*168;
+            Total_Imp_Cost=Dev_Cost+Srdev_Cost+BA_Cost+Arch_Cost+PM_Cost+DUlead_Cost;
+            Total_Imp_Cost_Two=Total_Imp_Cost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            
+           
+            console.log(Total_Imp_Cost);
+            Maint_Cost=Math.ceil(totalcount/7*30000);
+            FTE_Savings_Count=Math.round(simplecount*0.5+mediumcount*1+complexcount*2);
+            FTE_Savings_USD=FTE_Price*FTE_Savings_Count;
+            Net_Savings=Math.round(FTE_Savings_USD-(Total_Imp_Cost+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Net_Savings_Two=Math.round(FTE_Savings_USD-(0+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Total_Net_Savings=Net_Savings+(4*Net_Savings_Two);
+            Total_Net_Savings_Two=Total_Net_Savings.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            Total_TCO=Total_Imp_Cost+(5*Totalof_Total_Lisc_Price)+(5*Totalof_Total_Infra_Price)+(5*Maint_Cost);
+            Total_TCO_Two=Total_TCO.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            res.render("effortEstimation",
+            {Simple_Dev_Effort:Simple_Dev_Effort,
+                Total:Total,
+                Total_Net_Savings_Two:Total_Net_Savings_Two,
+                Total_Imp_Cost_Two:Total_Imp_Cost_Two,
+                Total_TCO_Two:Total_TCO_Two,
+                Simple:Simple,
+                Medium:Medium,
+                Complex:Complex,
+                rpatool:rpatool,
+                Total_TCO:Total_TCO,
+                Simple_Srdev_Effort:Simple_Srdev_Effort,
+                Simple_BA_Effort:Simple_BA_Effort,
+                Simple_Arch_Effort:Simple_Arch_Effort,
+                Simple_PM_Effort:Simple_PM_Effort,
+                Simple_DM_Effort:Simple_DM_Effort,
+                Total_Simple_Effort:Total_Simple_Effort,
+
+                Medium_Dev_Effort:Medium_Dev_Effort,
+                Medium_Srdev_Effort:Medium_Srdev_Effort,
+                Medium_BA_Effort:Medium_BA_Effort,
+                Medium_Arch_Effort:Medium_Arch_Effort,
+                Medium_PM_Effort:Medium_PM_Effort,
+                Medium_DM_Effort:Medium_DM_Effort,
+                Total_Medium_Effort:Total_Medium_Effort,
+
+                
+                Complex_Dev_Effort:Complex_Dev_Effort,
+                Complex_Srdev_Effort:Complex_Srdev_Effort,
+                Complex_BA_Effort:Complex_BA_Effort,
+                Complex_Arch_Effort:Complex_Arch_Effort,
+                Complex_PM_Effort:Complex_PM_Effort,
+                Complex_DM_Effort:Complex_DM_Effort,
+                Total_Complex_Effort:Total_Complex_Effort,
+
+
+                 Total_Dev_Effort:Total_Dev_Effort,
+            Total_Srdev_Effort:Total_Srdev_Effort,
+            Total_BA_Effort:Total_BA_Effort,
+            Total_Arch_Effort:Total_Arch_Effort,
+            Total_PM_Effort:Total_PM_Effort,
+            Total_DM_Effort:Total_DM_Effort,
+            Total_Of_Total_Effort:Total_Of_Total_Effort,
+
+            Dev_Roundoff:Dev_Roundoff,
+            Srdev_Roundoff:Srdev_Roundoff,
+            BA_Roundoff:BA_Roundoff,
+            
+            Arch_Roundoff:Arch_Roundoff,
+            PM_Roundoff:PM_Roundoff,
+            DM_Roundoff:DM_Roundoff,
+            Total_Rounoff:Total_Rounoff,
+
+            Bot_Creator_Count:Bot_Creator_Count,
+            Botrunner_Unatt_Count:Botrunner_Unatt_Count,
+            Botrunner_Att_Count:Botrunner_Att_Count,
+            Controlroom_Count:Controlroom_Count,
+            Bot_Creator_Price:Bot_Creator_Price,
+            Botrunner_Unatt_Price:Botrunner_Unatt_Price,
+            Botrunner_Att_Price:Botrunner_Att_Price,
+            Controlroom_Price:Controlroom_Price,
+            Total_Bot_Creator_Cost:Total_Bot_Creator_Cost,
+            Total_Botrunner_Unatt_Cost:Total_Botrunner_Unatt_Cost,
+            Total_Botrunner_Att_Cost:Total_Botrunner_Att_Cost,
+            Total_Controlroom_Cost:Total_Controlroom_Cost,
+            Totalof_Total_Lisc_Price:Totalof_Total_Lisc_Price,
+
+            VM_Count:VM_Count,
+            Server_Count:Server_Count,
+            VM_Price:VM_Price,
+            Server_Price:Server_Price,
+            FTE_Price:FTE_Price,
+            Total_VM_Price:Total_VM_Price,
+            Total_Server_Price:Total_Server_Price,
+            Totalof_Total_Infra_Price:Totalof_Total_Infra_Price,
+
+            Dev_Cost:Dev_Cost,
+            Srdev_Cost:Srdev_Cost,
+            BA_Cost:BA_Cost,
+            Arch_Cost:Arch_Cost,
+            PM_Cost:PM_Cost,
+            DUlead_Cost:DUlead_Cost,
+            Total_Imp_Cost:Total_Imp_Cost,
+            Maint_Cost:Maint_Cost,
+            FTE_Savings_Count:FTE_Savings_Count,
+            FTE_Savings_USD:FTE_Savings_USD,
+            Net_Savings:Net_Savings,
+            Net_Savings_Two:Net_Savings_Two,
+            Total_Net_Savings:Total_Net_Savings,
+
+            
+            });
+           
+            
+        }
+        else{
+            res.send(err)
+            console.log(err)
+        }
+    });
+break;
+//...............................................................//
+
+case "UiPath":
+    ConfigurationDetailsModel2.find((err,docs)=>{
+        if(!err)
+        {
+           console.log("in up")
+
+         
+            console.log(docs)
+            Simple=simplecount;
+            Complex=complexcount;
+            Medium=mediumcount;
+            Total=totalcount;
+            rpatool=rtool;
+            Simple_Dev_Effort=docs[0].Simple_Dev1*simplecount;
+            Simple_Srdev_Effort=docs[0].Simple_Srdev1*simplecount;
+            Simple_BA_Effort=docs[0].Simple_BA1*simplecount;
+            Simple_Arch_Effort=docs[0].Simple_Arch1*simplecount;
+            Simple_PM_Effort=docs[0].Simple_PM1*simplecount;
+            Simple_DM_Effort=docs[0].Simple_DM1*simplecount;
+            Total_Simple_Effort=Simple_Dev_Effort+Simple_Srdev_Effort+Simple_BA_Effort+Simple_Arch_Effort+Simple_PM_Effort+Simple_DM_Effort;
+            Total_Simple_Effort=Total_Simple_Effort.toFixed(2);
+            Total_Simple_Effort=Number(Total_Simple_Effort);
+
+            Medium_Dev_Effort=docs[0].Medium_Dev1*mediumcount;
+            Medium_Srdev_Effort=docs[0].Medium_Srdev1*mediumcount;
+            Medium_BA_Effort=docs[0].Medium_BA1*mediumcount;
+            
+            Medium_Arch_Effort=docs[0].Medium_Arch1*mediumcount;
+            
+            Medium_PM_Effort=docs[0].Medium_PM1*mediumcount;
+            Medium_PM_Effort=Math.round(Medium_PM_Effort);
+            
+            Medium_DM_Effort=docs[0].Medium_DM1*mediumcount;
+            Medium_DM_Effort=Math.round(Medium_DM_Effort);
+            
+            Total_Medium_Effort=Medium_Dev_Effort+Medium_Srdev_Effort+Medium_BA_Effort+Medium_Arch_Effort+Medium_PM_Effort+Medium_DM_Effort;
+            Total_Medium_Effort=Total_Medium_Effort.toFixed(2);
+            Total_Medium_Effort=Number(Total_Medium_Effort);
+
+
+            Complex_Dev_Effort=docs[0].Complex_Dev1*complexcount;
+            Complex_Srdev_Effort=docs[0].Complex_Srdev1*complexcount;
+            Complex_BA_Effort=docs[0].Complex_BA1*complexcount;
+            
+            Complex_Arch_Effort=docs[0].Complex_Arch1*complexcount;
+            
+            Complex_PM_Effort=Math.round(docs[0].Complex_PM1*complexcount);
+            
+            Complex_DM_Effort=Math.round(docs[0].Complex_DM1*complexcount);
+            
+            Total_Complex_Effort=Complex_Dev_Effort+Complex_Srdev_Effort+Complex_BA_Effort+Complex_Arch_Effort+Complex_PM_Effort+Complex_DM_Effort;
+            Total_Complex_Effort=Total_Complex_Effort.toFixed(2);
+            Total_Complex_Effort=Number(Total_Complex_Effort);
+
+
+            Total_Dev_Effort=Simple_Dev_Effort+Medium_Dev_Effort+Complex_Dev_Effort;
+            Total_Srdev_Effort=Simple_Srdev_Effort+Medium_Srdev_Effort+Complex_Srdev_Effort;
+            Total_BA_Effort=Simple_BA_Effort+Medium_BA_Effort+Complex_BA_Effort;
+            Total_BA_Effort=Total_BA_Effort.toFixed(2)
+            Total_Arch_Effort=Simple_Arch_Effort+Medium_Arch_Effort+Complex_Arch_Effort;
+            Total_Arch_Effort=Total_Arch_Effort.toFixed(2);
+            Total_PM_Effort=Simple_PM_Effort+Medium_PM_Effort+Complex_PM_Effort;
+            Total_PM_Effort=Total_PM_Effort.toFixed(2);
+            Total_DM_Effort=Simple_DM_Effort+Medium_DM_Effort+Complex_DM_Effort;
+            Total_DM_Effort=Total_DM_Effort.toFixed(2);
+            Total_Of_Total_Effort=Total_Simple_Effort+Total_Medium_Effort+Total_Complex_Effort;
+            Total_Of_Total_Effort=Total_Of_Total_Effort.toFixed(2);
+
+            Dev_Roundoff=Math.ceil(Total_Dev_Effort/projectduration);
+            Srdev_Roundoff=Math.ceil(Total_Srdev_Effort/projectduration);
+            BA_Roundoff=Math.round((Total_BA_Effort/projectduration)*100)/100;
+            BA_Roundoff=Math.round((BA_Roundoff)*10)/10;
+            BA_Roundoff=BA_Roundoff.toFixed(2);
+            Arch_Roundoff=Math.round((Total_Arch_Effort/projectduration)*100)/100;
+            Arch_Roundoff=Math.round((Arch_Roundoff)*10)/10;
+            Arch_Roundoff=Arch_Roundoff.toFixed(2);
+            PM_Roundoff=Math.round((Total_PM_Effort/projectduration)*100)/100;
+            PM_Roundoff=Math.round((PM_Roundoff)*10)/10;
+            PM_Roundoff=PM_Roundoff.toFixed(2);
+            
+            DM_Roundoff=Math.round((Total_DM_Effort/projectduration)*100)/100;
+           
+            DM_Roundoff=Math.round((DM_Roundoff)*10)/10;
+            DM_Roundoff=DM_Roundoff.toFixed(2);
+            DM_Roundoff=(Total_DM_Effort/projectduration).toFixed(2);
+            Total_Rounoff=Total_Of_Total_Effort/projectduration;
+            Total_Rounoff=Total_Rounoff.toFixed(2);
+            
+
+            Bot_Creator_Count=Dev_Roundoff+Srdev_Roundoff;
+            Botrunner_Unatt_Count=totalcount;
+            Botrunner_Att_Count=0;
+            Controlroom_Count=1;
+            Bot_Creator_Price=docs[0].Bot_Creator_Cost1;
+            Botrunner_Unatt_Price=docs[0].Bot_Run_Unatt_Cost1;
+            Botrunner_Att_Price=docs[0].Bot_Run_Att_Cost1;
+            Controlroom_Price=docs[0].Cont_Room_Cost1;
+            Total_Bot_Creator_Cost=Bot_Creator_Count*Bot_Creator_Price;
+            Total_Botrunner_Unatt_Cost=Botrunner_Unatt_Count*Botrunner_Unatt_Price;
+            Total_Botrunner_Att_Cost=Botrunner_Att_Count*Botrunner_Att_Price;
+            Total_Controlroom_Cost=Controlroom_Price*Controlroom_Count;
+            Totalof_Total_Lisc_Price=Total_Controlroom_Cost+Total_Botrunner_Att_Cost+Total_Botrunner_Unatt_Cost+Total_Bot_Creator_Cost;
+
+            VM_Count=Dev_Roundoff+Srdev_Roundoff;
+            Server_Count=1;
+            VM_Price=docs[0].VM_Cost1;
+            Server_Price=docs[0].Server_Cost1;
+            FTE_Price=docs[0].FTE_Cost1;
+            Total_VM_Price=VM_Count*VM_Price;
+            Total_Server_Price=Server_Count*Server_Price;
+            Totalof_Total_Infra_Price=Total_VM_Price+Total_Server_Price;
+
+            Dev_Cost1=Total_Dev_Effort*docs[0].Dev_Cost1*168;
+            console.log("....................................");
+            console.log(Dev_Cost1);
+            Srdev_Cost1=Total_Srdev_Effort*docs[0].Srdev_Cost1*168;
+            BA_Cost1=Total_BA_Effort*docs[0].BA_Cost1*168;
+            Arch_Cost1=Total_Arch_Effort*docs[0].Arch_Cost1*168;
+            PM_Cost1=Math.round(Total_PM_Effort*docs[0].PM_Cost1*168);
+            
+            DUlead_Cost1=Total_DM_Effort*docs[0].DUlead_Cost1*168;
+            Total_Imp_Cost=Dev_Cost1+Srdev_Cost1+BA_Cost1+Arch_Cost1+PM_Cost1+DUlead_Cost1;
+            Total_Imp_Cost_Two=Total_Imp_Cost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            
+           
+            console.log(Total_Imp_Cost);
+            Maint_Cost=Math.ceil(totalcount/7*30000);
+            FTE_Savings_Count=Math.round(simplecount*0.5+mediumcount*1+complexcount*2);
+            FTE_Savings_USD=FTE_Price*FTE_Savings_Count;
+            Net_Savings=Math.round(FTE_Savings_USD-(Total_Imp_Cost+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Net_Savings_Two=Math.round(FTE_Savings_USD-(0+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Total_Net_Savings=Net_Savings+(4*Net_Savings_Two);
+            Total_Net_Savings_Two=Total_Net_Savings.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            Total_TCO=Total_Imp_Cost+(5*Totalof_Total_Lisc_Price)+(5*Totalof_Total_Infra_Price)+(5*Maint_Cost);
+            Total_TCO_Two=Total_TCO.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            res.render("effortEstimation",
+            {Simple_Dev_Effort:Simple_Dev_Effort,
+                Total:Total,
+                Total_Net_Savings_Two:Total_Net_Savings_Two,
+                Total_Imp_Cost_Two:Total_Imp_Cost_Two,
+                Total_TCO_Two:Total_TCO_Two,
+                Simple:Simple,
+                Medium:Medium,
+                Complex:Complex,
+                rpatool:rpatool,
+                Total_TCO:Total_TCO,
+                Simple_Srdev_Effort:Simple_Srdev_Effort,
+                Simple_BA_Effort:Simple_BA_Effort,
+                Simple_Arch_Effort:Simple_Arch_Effort,
+                Simple_PM_Effort:Simple_PM_Effort,
+                Simple_DM_Effort:Simple_DM_Effort,
+                Total_Simple_Effort:Total_Simple_Effort,
+
+                Medium_Dev_Effort:Medium_Dev_Effort,
+                Medium_Srdev_Effort:Medium_Srdev_Effort,
+                Medium_BA_Effort:Medium_BA_Effort,
+                Medium_Arch_Effort:Medium_Arch_Effort,
+                Medium_PM_Effort:Medium_PM_Effort,
+                Medium_DM_Effort:Medium_DM_Effort,
+                Total_Medium_Effort:Total_Medium_Effort,
+
+                
+                Complex_Dev_Effort:Complex_Dev_Effort,
+                Complex_Srdev_Effort:Complex_Srdev_Effort,
+                Complex_BA_Effort:Complex_BA_Effort,
+                Complex_Arch_Effort:Complex_Arch_Effort,
+                Complex_PM_Effort:Complex_PM_Effort,
+                Complex_DM_Effort:Complex_DM_Effort,
+                Total_Complex_Effort:Total_Complex_Effort,
+
+
+                 Total_Dev_Effort:Total_Dev_Effort,
+            Total_Srdev_Effort:Total_Srdev_Effort,
+            Total_BA_Effort:Total_BA_Effort,
+            Total_Arch_Effort:Total_Arch_Effort,
+            Total_PM_Effort:Total_PM_Effort,
+            Total_DM_Effort:Total_DM_Effort,
+            Total_Of_Total_Effort:Total_Of_Total_Effort,
+
+            Dev_Roundoff:Dev_Roundoff,
+            Srdev_Roundoff:Srdev_Roundoff,
+            BA_Roundoff:BA_Roundoff,
+            
+            Arch_Roundoff:Arch_Roundoff,
+            PM_Roundoff:PM_Roundoff,
+            DM_Roundoff:DM_Roundoff,
+            Total_Rounoff:Total_Rounoff,
+
+            Bot_Creator_Count:Bot_Creator_Count,
+            Botrunner_Unatt_Count:Botrunner_Unatt_Count,
+            Botrunner_Att_Count:Botrunner_Att_Count,
+            Controlroom_Count:Controlroom_Count,
+            Bot_Creator_Price:Bot_Creator_Price,
+            Botrunner_Unatt_Price:Botrunner_Unatt_Price,
+            Botrunner_Att_Price:Botrunner_Att_Price,
+            Controlroom_Price:Controlroom_Price,
+            Total_Bot_Creator_Cost:Total_Bot_Creator_Cost,
+            Total_Botrunner_Unatt_Cost:Total_Botrunner_Unatt_Cost,
+            Total_Botrunner_Att_Cost:Total_Botrunner_Att_Cost,
+            Total_Controlroom_Cost:Total_Controlroom_Cost,
+            Totalof_Total_Lisc_Price:Totalof_Total_Lisc_Price,
+
+            VM_Count:VM_Count,
+            Server_Count:Server_Count,
+            VM_Price:VM_Price,
+            Server_Price:Server_Price,
+            FTE_Price:FTE_Price,
+            Total_VM_Price:Total_VM_Price,
+            Total_Server_Price:Total_Server_Price,
+            Totalof_Total_Infra_Price:Totalof_Total_Infra_Price,
+
+            Dev_Cost:Dev_Cost1,
+            Srdev_Cost:Srdev_Cost1,
+            BA_Cost:BA_Cost1,
+            Arch_Cost:Arch_Cost1,
+            PM_Cost:PM_Cost1,
+            DUlead_Cost:DUlead_Cost1,
+            Total_Imp_Cost:Total_Imp_Cost,
+            Maint_Cost:Maint_Cost,
+            FTE_Savings_Count:FTE_Savings_Count,
+            FTE_Savings_USD:FTE_Savings_USD,
+            Net_Savings:Net_Savings,
+            Net_Savings_Two:Net_Savings_Two,
+            Total_Net_Savings:Total_Net_Savings,
+
+            
+            });
+           
+            
+        }
+        else{
+            res.send(err)
+            console.log(err)
+        }
+    });
+
+
+
+
+break;
+
+case "Pega Robotics":
+    ConfigurationDetailsModel3.find((err,docs)=>{
+        if(!err)
+        {
+           console.log("in pr")
+
+         
+            console.log(docs)
+            Simple=simplecount;
+            Complex=complexcount;
+            Medium=mediumcount;
+            Total=totalcount;
+            rpatool=rtool;
+            Simple_Dev_Effort=docs[0].Simple_Dev2*simplecount;
+            Simple_Srdev_Effort=docs[0].Simple_Srdev2*simplecount;
+            Simple_BA_Effort=docs[0].Simple_BA2*simplecount;
+            Simple_Arch_Effort=docs[0].Simple_Arch2*simplecount;
+            Simple_PM_Effort=docs[0].Simple_PM2*simplecount;
+            Simple_DM_Effort=docs[0].Simple_DM2*simplecount;
+            Total_Simple_Effort=Simple_Dev_Effort+Simple_Srdev_Effort+Simple_BA_Effort+Simple_Arch_Effort+Simple_PM_Effort+Simple_DM_Effort;
+            Total_Simple_Effort=Total_Simple_Effort.toFixed(2);
+            Total_Simple_Effort=Number(Total_Simple_Effort);
+
+            Medium_Dev_Effort=docs[0].Medium_Dev2*mediumcount;
+            Medium_Srdev_Effort=docs[0].Medium_Srdev2*mediumcount;
+            Medium_BA_Effort=docs[0].Medium_BA2*mediumcount;
+            
+            Medium_Arch_Effort=docs[0].Medium_Arch2*mediumcount;
+            
+            Medium_PM_Effort=docs[0].Medium_PM2*mediumcount;
+            Medium_PM_Effort=Math.round(Medium_PM_Effort);
+            
+            Medium_DM_Effort=docs[0].Medium_DM2*mediumcount;
+            Medium_DM_Effort=Math.round(Medium_DM_Effort);
+            
+            Total_Medium_Effort=Medium_Dev_Effort+Medium_Srdev_Effort+Medium_BA_Effort+Medium_Arch_Effort+Medium_PM_Effort+Medium_DM_Effort;
+            Total_Medium_Effort=Total_Medium_Effort.toFixed(2);
+            Total_Medium_Effort=Number(Total_Medium_Effort);
+
+
+            Complex_Dev_Effort=docs[0].Complex_Dev2*complexcount;
+            Complex_Srdev_Effort=docs[0].Complex_Srdev2*complexcount;
+            Complex_BA_Effort=docs[0].Complex_BA2*complexcount;
+            
+            Complex_Arch_Effort=docs[0].Complex_Arch2*complexcount;
+            
+            Complex_PM_Effort=Math.round(docs[0].Complex_PM2*complexcount);
+            
+            Complex_DM_Effort=Math.round(docs[0].Complex_DM2*complexcount);
+            
+            Total_Complex_Effort=Complex_Dev_Effort+Complex_Srdev_Effort+Complex_BA_Effort+Complex_Arch_Effort+Complex_PM_Effort+Complex_DM_Effort;
+            Total_Complex_Effort=Total_Complex_Effort.toFixed(2);
+            Total_Complex_Effort=Number(Total_Complex_Effort);
+
+
+            Total_Dev_Effort=Simple_Dev_Effort+Medium_Dev_Effort+Complex_Dev_Effort;
+            Total_Srdev_Effort=Simple_Srdev_Effort+Medium_Srdev_Effort+Complex_Srdev_Effort;
+            Total_BA_Effort=Simple_BA_Effort+Medium_BA_Effort+Complex_BA_Effort;
+            Total_BA_Effort=Total_BA_Effort.toFixed(2)
+            Total_Arch_Effort=Simple_Arch_Effort+Medium_Arch_Effort+Complex_Arch_Effort;
+            Total_Arch_Effort=Total_Arch_Effort.toFixed(2);
+            Total_PM_Effort=Simple_PM_Effort+Medium_PM_Effort+Complex_PM_Effort;
+            Total_PM_Effort=Total_PM_Effort.toFixed(2);
+            Total_DM_Effort=Simple_DM_Effort+Medium_DM_Effort+Complex_DM_Effort;
+            Total_DM_Effort=Total_DM_Effort.toFixed(2);
+            Total_Of_Total_Effort=Total_Simple_Effort+Total_Medium_Effort+Total_Complex_Effort;
+            Total_Of_Total_Effort=Total_Of_Total_Effort.toFixed(2);
+
+            Dev_Roundoff=Math.ceil(Total_Dev_Effort/projectduration);
+            Srdev_Roundoff=Math.ceil(Total_Srdev_Effort/projectduration);
+            BA_Roundoff=Math.round((Total_BA_Effort/projectduration)*100)/100;
+            BA_Roundoff=Math.round((BA_Roundoff)*10)/10;
+            BA_Roundoff=BA_Roundoff.toFixed(2);
+            Arch_Roundoff=Math.round((Total_Arch_Effort/projectduration)*100)/100;
+            Arch_Roundoff=Math.round((Arch_Roundoff)*10)/10;
+            Arch_Roundoff=Arch_Roundoff.toFixed(2);
+            PM_Roundoff=Math.round((Total_PM_Effort/projectduration)*100)/100;
+            PM_Roundoff=Math.round((PM_Roundoff)*10)/10;
+            PM_Roundoff=PM_Roundoff.toFixed(2);
+            
+            DM_Roundoff=Math.round((Total_DM_Effort/projectduration)*100)/100;
+           
+            DM_Roundoff=Math.round((DM_Roundoff)*10)/10;
+            DM_Roundoff=DM_Roundoff.toFixed(2);
+            DM_Roundoff=(Total_DM_Effort/projectduration).toFixed(2);
+            Total_Rounoff=Total_Of_Total_Effort/projectduration;
+            Total_Rounoff=Total_Rounoff.toFixed(2);
+            
+
+            Bot_Creator_Count=Dev_Roundoff+Srdev_Roundoff;
+            Botrunner_Unatt_Count=totalcount;
+            Botrunner_Att_Count=0;
+            Controlroom_Count=2;
+            Bot_Creator_Price=docs[0].Bot_Creator_Cost2;
+            Botrunner_Unatt_Price=docs[0].Bot_Run_Unatt_Cost2;
+            Botrunner_Att_Price=docs[0].Bot_Run_Att_Cost2;
+            Controlroom_Price=docs[0].Cont_Room_Cost2;
+            Total_Bot_Creator_Cost=Bot_Creator_Count*Bot_Creator_Price;
+            Total_Botrunner_Unatt_Cost=Botrunner_Unatt_Count*Botrunner_Unatt_Price;
+            Total_Botrunner_Att_Cost=Botrunner_Att_Count*Botrunner_Att_Price;
+            Total_Controlroom_Cost=Controlroom_Price*Controlroom_Count;
+            Totalof_Total_Lisc_Price=Total_Controlroom_Cost+Total_Botrunner_Att_Cost+Total_Botrunner_Unatt_Cost+Total_Bot_Creator_Cost;
+
+            VM_Count=Dev_Roundoff+Srdev_Roundoff;
+            Server_Count=2;
+            VM_Price=docs[0].VM_Cost2;
+            Server_Price=docs[0].Server_Cost2;
+            FTE_Price=docs[0].FTE_Cost2;
+            Total_VM_Price=VM_Count*VM_Price;
+            Total_Server_Price=Server_Count*Server_Price;
+            Totalof_Total_Infra_Price=Total_VM_Price+Total_Server_Price;
+
+            Dev_Cost2=Total_Dev_Effort*docs[0].Dev_Cost2*168;
+            Srdev_Cost2=Total_Srdev_Effort*docs[0].Srdev_Cost2*168;
+            BA_Cost2=Total_BA_Effort*docs[0].BA_Cost2*168;
+            Arch_Cost2=Total_Arch_Effort*docs[0].Arch_Cost2*168;
+            PM_Cost2=Math.round(Total_PM_Effort*docs[0].PM_Cost2*168);
+            
+            DUlead_Cost2=Total_DM_Effort*docs[0].DUlead_Cost2*168;
+            Total_Imp_Cost=Dev_Cost2+Srdev_Cost2+BA_Cost2+Arch_Cost2+PM_Cost2+DUlead_Cost2;
+            Total_Imp_Cost_Two=Total_Imp_Cost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            
+           
+            console.log(Total_Imp_Cost);
+            Maint_Cost=Math.ceil(totalcount/7*30000);
+            FTE_Savings_Count=Math.round(simplecount*0.5+mediumcount*1+complexcount*2);
+            FTE_Savings_USD=FTE_Price*FTE_Savings_Count;
+            Net_Savings=Math.round(FTE_Savings_USD-(Total_Imp_Cost+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Net_Savings_Two=Math.round(FTE_Savings_USD-(0+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Total_Net_Savings=Net_Savings+(4*Net_Savings_Two);
+            Total_Net_Savings_Two=Total_Net_Savings.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            Total_TCO=Total_Imp_Cost+(5*Totalof_Total_Lisc_Price)+(5*Totalof_Total_Infra_Price)+(5*Maint_Cost);
+            Total_TCO_Two=Total_TCO.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            res.render("effortEstimation",
+            {Simple_Dev_Effort:Simple_Dev_Effort,
+                Total:Total,
+                Total_Net_Savings_Two:Total_Net_Savings_Two,
+                Total_Imp_Cost_Two:Total_Imp_Cost_Two,
+                Total_TCO_Two:Total_TCO_Two,
+                Simple:Simple,
+                Medium:Medium,
+                Complex:Complex,
+                rpatool:rpatool,
+                Total_TCO:Total_TCO,
+                Simple_Srdev_Effort:Simple_Srdev_Effort,
+                Simple_BA_Effort:Simple_BA_Effort,
+                Simple_Arch_Effort:Simple_Arch_Effort,
+                Simple_PM_Effort:Simple_PM_Effort,
+                Simple_DM_Effort:Simple_DM_Effort,
+                Total_Simple_Effort:Total_Simple_Effort,
+
+                Medium_Dev_Effort:Medium_Dev_Effort,
+                Medium_Srdev_Effort:Medium_Srdev_Effort,
+                Medium_BA_Effort:Medium_BA_Effort,
+                Medium_Arch_Effort:Medium_Arch_Effort,
+                Medium_PM_Effort:Medium_PM_Effort,
+                Medium_DM_Effort:Medium_DM_Effort,
+                Total_Medium_Effort:Total_Medium_Effort,
+
+                
+                Complex_Dev_Effort:Complex_Dev_Effort,
+                Complex_Srdev_Effort:Complex_Srdev_Effort,
+                Complex_BA_Effort:Complex_BA_Effort,
+                Complex_Arch_Effort:Complex_Arch_Effort,
+                Complex_PM_Effort:Complex_PM_Effort,
+                Complex_DM_Effort:Complex_DM_Effort,
+                Total_Complex_Effort:Total_Complex_Effort,
+
+
+                 Total_Dev_Effort:Total_Dev_Effort,
+            Total_Srdev_Effort:Total_Srdev_Effort,
+            Total_BA_Effort:Total_BA_Effort,
+            Total_Arch_Effort:Total_Arch_Effort,
+            Total_PM_Effort:Total_PM_Effort,
+            Total_DM_Effort:Total_DM_Effort,
+            Total_Of_Total_Effort:Total_Of_Total_Effort,
+
+            Dev_Roundoff:Dev_Roundoff,
+            Srdev_Roundoff:Srdev_Roundoff,
+            BA_Roundoff:BA_Roundoff,
+            
+            Arch_Roundoff:Arch_Roundoff,
+            PM_Roundoff:PM_Roundoff,
+            DM_Roundoff:DM_Roundoff,
+            Total_Rounoff:Total_Rounoff,
+
+            Bot_Creator_Count:Bot_Creator_Count,
+            Botrunner_Unatt_Count:Botrunner_Unatt_Count,
+            Botrunner_Att_Count:Botrunner_Att_Count,
+            Controlroom_Count:Controlroom_Count,
+            Bot_Creator_Price:Bot_Creator_Price,
+            Botrunner_Unatt_Price:Botrunner_Unatt_Price,
+            Botrunner_Att_Price:Botrunner_Att_Price,
+            Controlroom_Price:Controlroom_Price,
+            Total_Bot_Creator_Cost:Total_Bot_Creator_Cost,
+            Total_Botrunner_Unatt_Cost:Total_Botrunner_Unatt_Cost,
+            Total_Botrunner_Att_Cost:Total_Botrunner_Att_Cost,
+            Total_Controlroom_Cost:Total_Controlroom_Cost,
+            Totalof_Total_Lisc_Price:Totalof_Total_Lisc_Price,
+
+            VM_Count:VM_Count,
+            Server_Count:Server_Count,
+            VM_Price:VM_Price,
+            Server_Price:Server_Price,
+            FTE_Price:FTE_Price,
+            Total_VM_Price:Total_VM_Price,
+            Total_Server_Price:Total_Server_Price,
+            Totalof_Total_Infra_Price:Totalof_Total_Infra_Price,
+
+            Dev_Cost:Dev_Cost2,
+            Srdev_Cost:Srdev_Cost2,
+            BA_Cost:BA_Cost2,
+            Arch_Cost:Arch_Cost2,
+            PM_Cost:PM_Cost2,
+            DUlead_Cost:DUlead_Cost2,
+            Total_Imp_Cost:Total_Imp_Cost,
+            Maint_Cost:Maint_Cost,
+            FTE_Savings_Count:FTE_Savings_Count,
+            FTE_Savings_USD:FTE_Savings_USD,
+            Net_Savings:Net_Savings,
+            Net_Savings_Two:Net_Savings_Two,
+            Total_Net_Savings:Total_Net_Savings,
+
+            
+            });
+           
+            
+        }
+        else{
+            res.send(err)
+            console.log(err)
+        }
+    });
+
+
+
+
+break;
+
+case "Blue Prism":
+    ConfigurationDetailsModel4.find((err,docs)=>{
+        if(!err)
+        {
+           console.log("in bp")
+
+         
+            console.log(docs)
+            Simple=simplecount;
+            Complex=complexcount;
+            Medium=mediumcount;
+            Total=totalcount;
+            rpatool=rtool;
+            Simple_Dev_Effort=docs[0].Simple_Dev3*simplecount;
+            Simple_Srdev_Effort=docs[0].Simple_Srdev3*simplecount;
+            Simple_BA_Effort=docs[0].Simple_BA3*simplecount;
+            Simple_Arch_Effort=docs[0].Simple_Arch3*simplecount;
+            Simple_PM_Effort=docs[0].Simple_PM3*simplecount;
+            Simple_DM_Effort=docs[0].Simple_DM3*simplecount;
+            Total_Simple_Effort=Simple_Dev_Effort+Simple_Srdev_Effort+Simple_BA_Effort+Simple_Arch_Effort+Simple_PM_Effort+Simple_DM_Effort;
+            Total_Simple_Effort=Total_Simple_Effort.toFixed(2);
+            Total_Simple_Effort=Number(Total_Simple_Effort);
+
+            Medium_Dev_Effort=docs[0].Medium_Dev3*mediumcount;
+            Medium_Srdev_Effort=docs[0].Medium_Srdev3*mediumcount;
+            Medium_BA_Effort=docs[0].Medium_BA3*mediumcount;
+            
+            Medium_Arch_Effort=docs[0].Medium_Arch3*mediumcount;
+            
+            Medium_PM_Effort=docs[0].Medium_PM3*mediumcount;
+            Medium_PM_Effort=Math.round(Medium_PM_Effort);
+            
+            Medium_DM_Effort=docs[0].Medium_DM3*mediumcount;
+            Medium_DM_Effort=Math.round(Medium_DM_Effort);
+            
+            Total_Medium_Effort=Medium_Dev_Effort+Medium_Srdev_Effort+Medium_BA_Effort+Medium_Arch_Effort+Medium_PM_Effort+Medium_DM_Effort;
+            Total_Medium_Effort=Total_Medium_Effort.toFixed(2);
+            Total_Medium_Effort=Number(Total_Medium_Effort);
+
+
+            Complex_Dev_Effort=docs[0].Complex_Dev3*complexcount;
+            Complex_Srdev_Effort=docs[0].Complex_Srdev3*complexcount;
+            Complex_BA_Effort=docs[0].Complex_BA3*complexcount;
+            
+            Complex_Arch_Effort=docs[0].Complex_Arch3*complexcount;
+            
+            Complex_PM_Effort=Math.round(docs[0].Complex_PM3*complexcount);
+            
+            Complex_DM_Effort=Math.round(docs[0].Complex_DM3*complexcount);
+            
+            Total_Complex_Effort=Complex_Dev_Effort+Complex_Srdev_Effort+Complex_BA_Effort+Complex_Arch_Effort+Complex_PM_Effort+Complex_DM_Effort;
+            Total_Complex_Effort=Total_Complex_Effort.toFixed(2);
+            Total_Complex_Effort=Number(Total_Complex_Effort);
+
+
+            Total_Dev_Effort=Simple_Dev_Effort+Medium_Dev_Effort+Complex_Dev_Effort;
+            Total_Srdev_Effort=Simple_Srdev_Effort+Medium_Srdev_Effort+Complex_Srdev_Effort;
+            Total_BA_Effort=Simple_BA_Effort+Medium_BA_Effort+Complex_BA_Effort;
+            Total_BA_Effort=Total_BA_Effort.toFixed(2)
+            Total_Arch_Effort=Simple_Arch_Effort+Medium_Arch_Effort+Complex_Arch_Effort;
+            Total_Arch_Effort=Total_Arch_Effort.toFixed(2);
+            Total_PM_Effort=Simple_PM_Effort+Medium_PM_Effort+Complex_PM_Effort;
+            Total_PM_Effort=Total_PM_Effort.toFixed(2);
+            Total_DM_Effort=Simple_DM_Effort+Medium_DM_Effort+Complex_DM_Effort;
+            Total_DM_Effort=Total_DM_Effort.toFixed(2);
+            Total_Of_Total_Effort=Total_Simple_Effort+Total_Medium_Effort+Total_Complex_Effort;
+            Total_Of_Total_Effort=Total_Of_Total_Effort.toFixed(2);
+
+            Dev_Roundoff=Math.ceil(Total_Dev_Effort/projectduration);
+            Srdev_Roundoff=Math.ceil(Total_Srdev_Effort/projectduration);
+            BA_Roundoff=Math.round((Total_BA_Effort/projectduration)*100)/100;
+            BA_Roundoff=Math.round((BA_Roundoff)*10)/10;
+            BA_Roundoff=BA_Roundoff.toFixed(2);
+            Arch_Roundoff=Math.round((Total_Arch_Effort/projectduration)*100)/100;
+            Arch_Roundoff=Math.round((Arch_Roundoff)*10)/10;
+            Arch_Roundoff=Arch_Roundoff.toFixed(2);
+            PM_Roundoff=Math.round((Total_PM_Effort/projectduration)*100)/100;
+            PM_Roundoff=Math.round((PM_Roundoff)*10)/10;
+            PM_Roundoff=PM_Roundoff.toFixed(2);
+            
+            DM_Roundoff=Math.round((Total_DM_Effort/projectduration)*100)/100;
+           
+            DM_Roundoff=Math.round((DM_Roundoff)*10)/10;
+            DM_Roundoff=DM_Roundoff.toFixed(2);
+            DM_Roundoff=(Total_DM_Effort/projectduration).toFixed(2);
+            Total_Rounoff=Total_Of_Total_Effort/projectduration;
+            Total_Rounoff=Total_Rounoff.toFixed(2);
+            
+
+            Bot_Creator_Count=Dev_Roundoff+Srdev_Roundoff;
+            Botrunner_Unatt_Count=totalcount;
+            Botrunner_Att_Count=0;
+            Controlroom_Count=3;
+            Bot_Creator_Price=docs[0].Bot_Creator_Cost3;
+            Botrunner_Unatt_Price=docs[0].Bot_Run_Unatt_Cost3;
+            Botrunner_Att_Price=docs[0].Bot_Run_Att_Cost3;
+            Controlroom_Price=docs[0].Cont_Room_Cost3;
+            Total_Bot_Creator_Cost=Bot_Creator_Count*Bot_Creator_Price;
+            Total_Botrunner_Unatt_Cost=Botrunner_Unatt_Count*Botrunner_Unatt_Price;
+            Total_Botrunner_Att_Cost=Botrunner_Att_Count*Botrunner_Att_Price;
+            Total_Controlroom_Cost=Controlroom_Price*Controlroom_Count;
+            Totalof_Total_Lisc_Price=Total_Controlroom_Cost+Total_Botrunner_Att_Cost+Total_Botrunner_Unatt_Cost+Total_Bot_Creator_Cost;
+
+            VM_Count=Dev_Roundoff+Srdev_Roundoff;
+            Server_Count=3;
+            VM_Price=docs[0].VM_Cost3;
+            Server_Price=docs[0].Server_Cost3;
+            FTE_Price=docs[0].FTE_Cost3;
+            Total_VM_Price=VM_Count*VM_Price;
+            Total_Server_Price=Server_Count*Server_Price;
+            Totalof_Total_Infra_Price=Total_VM_Price+Total_Server_Price;
+
+            Dev_Cost3=Total_Dev_Effort*docs[0].Dev_Cost3*168;
+            Srdev_Cost3=Total_Srdev_Effort*docs[0].Srdev_Cost3*168;
+            BA_Cost3=Total_BA_Effort*docs[0].BA_Cost3*168;
+            Arch_Cost3=Total_Arch_Effort*docs[0].Arch_Cost3*168;
+            PM_Cost3=Math.round(Total_PM_Effort*docs[0].PM_Cost3*168);
+            
+            DUlead_Cost3=Total_DM_Effort*docs[0].DUlead_Cost3*168;
+            Total_Imp_Cost=Dev_Cost3+Srdev_Cost3+BA_Cost3+Arch_Cost3+PM_Cost3+DUlead_Cost3;
+            Total_Imp_Cost_Two=Total_Imp_Cost.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            
+           
+            console.log(Total_Imp_Cost);
+            Maint_Cost=Math.ceil(totalcount/7*30000);
+            FTE_Savings_Count=Math.round(simplecount*0.5+mediumcount*1+complexcount*2);
+            FTE_Savings_USD=FTE_Price*FTE_Savings_Count;
+            Net_Savings=Math.round(FTE_Savings_USD-(Total_Imp_Cost+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Net_Savings_Two=Math.round(FTE_Savings_USD-(0+Totalof_Total_Lisc_Price+Totalof_Total_Infra_Price+Maint_Cost));
+            Total_Net_Savings=Net_Savings+(4*Net_Savings_Two);
+            Total_Net_Savings_Two=Total_Net_Savings.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            Total_TCO=Total_Imp_Cost+(5*Totalof_Total_Lisc_Price)+(5*Totalof_Total_Infra_Price)+(5*Maint_Cost);
+            Total_TCO_Two=Total_TCO.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+            res.render("effortEstimation",
+            {Simple_Dev_Effort:Simple_Dev_Effort,
+                Total:Total,
+                Total_Net_Savings_Two:Total_Net_Savings_Two,
+                Total_Imp_Cost_Two:Total_Imp_Cost_Two,
+                Total_TCO_Two:Total_TCO_Two,
+                Simple:Simple,
+                Medium:Medium,
+                Complex:Complex,
+                rpatool:rpatool,
+                Total_TCO:Total_TCO,
+                Simple_Srdev_Effort:Simple_Srdev_Effort,
+                Simple_BA_Effort:Simple_BA_Effort,
+                Simple_Arch_Effort:Simple_Arch_Effort,
+                Simple_PM_Effort:Simple_PM_Effort,
+                Simple_DM_Effort:Simple_DM_Effort,
+                Total_Simple_Effort:Total_Simple_Effort,
+
+                Medium_Dev_Effort:Medium_Dev_Effort,
+                Medium_Srdev_Effort:Medium_Srdev_Effort,
+                Medium_BA_Effort:Medium_BA_Effort,
+                Medium_Arch_Effort:Medium_Arch_Effort,
+                Medium_PM_Effort:Medium_PM_Effort,
+                Medium_DM_Effort:Medium_DM_Effort,
+                Total_Medium_Effort:Total_Medium_Effort,
+
+                
+                Complex_Dev_Effort:Complex_Dev_Effort,
+                Complex_Srdev_Effort:Complex_Srdev_Effort,
+                Complex_BA_Effort:Complex_BA_Effort,
+                Complex_Arch_Effort:Complex_Arch_Effort,
+                Complex_PM_Effort:Complex_PM_Effort,
+                Complex_DM_Effort:Complex_DM_Effort,
+                Total_Complex_Effort:Total_Complex_Effort,
+
+
+                 Total_Dev_Effort:Total_Dev_Effort,
+            Total_Srdev_Effort:Total_Srdev_Effort,
+            Total_BA_Effort:Total_BA_Effort,
+            Total_Arch_Effort:Total_Arch_Effort,
+            Total_PM_Effort:Total_PM_Effort,
+            Total_DM_Effort:Total_DM_Effort,
+            Total_Of_Total_Effort:Total_Of_Total_Effort,
+
+            Dev_Roundoff:Dev_Roundoff,
+            Srdev_Roundoff:Srdev_Roundoff,
+            BA_Roundoff:BA_Roundoff,
+            
+            Arch_Roundoff:Arch_Roundoff,
+            PM_Roundoff:PM_Roundoff,
+            DM_Roundoff:DM_Roundoff,
+            Total_Rounoff:Total_Rounoff,
+
+            Bot_Creator_Count:Bot_Creator_Count,
+            Botrunner_Unatt_Count:Botrunner_Unatt_Count,
+            Botrunner_Att_Count:Botrunner_Att_Count,
+            Controlroom_Count:Controlroom_Count,
+            Bot_Creator_Price:Bot_Creator_Price,
+            Botrunner_Unatt_Price:Botrunner_Unatt_Price,
+            Botrunner_Att_Price:Botrunner_Att_Price,
+            Controlroom_Price:Controlroom_Price,
+            Total_Bot_Creator_Cost:Total_Bot_Creator_Cost,
+            Total_Botrunner_Unatt_Cost:Total_Botrunner_Unatt_Cost,
+            Total_Botrunner_Att_Cost:Total_Botrunner_Att_Cost,
+            Total_Controlroom_Cost:Total_Controlroom_Cost,
+            Totalof_Total_Lisc_Price:Totalof_Total_Lisc_Price,
+
+            VM_Count:VM_Count,
+            Server_Count:Server_Count,
+            VM_Price:VM_Price,
+            Server_Price:Server_Price,
+            FTE_Price:FTE_Price,
+            Total_VM_Price:Total_VM_Price,
+            Total_Server_Price:Total_Server_Price,
+            Totalof_Total_Infra_Price:Totalof_Total_Infra_Price,
+
+            Dev_Cost:Dev_Cost3,
+            Srdev_Cost:Srdev_Cost3,
+            BA_Cost:BA_Cost3,
+            Arch_Cost:Arch_Cost3,
+            PM_Cost:PM_Cost3,
+            DUlead_Cost:DUlead_Cost3,
+            Total_Imp_Cost:Total_Imp_Cost,
+            Maint_Cost:Maint_Cost,
+            FTE_Savings_Count:FTE_Savings_Count,
+            FTE_Savings_USD:FTE_Savings_USD,
+            Net_Savings:Net_Savings,
+            Net_Savings_Two:Net_Savings_Two,
+            Total_Net_Savings:Total_Net_Savings,
+
+            
+            });
+           
+            
+        }
+        else{
+            res.send(err)
+            console.log(err)
+        }
+    });
+
+
+
+
+break;
+
+
+
+}
+
+//.................new...........................................................//
+
+
+// else{
+//     // res.send("success")
+//     console.log("success")
+// }
+
+//...............................................................................//
+
+
+});
+
+
+
+
+
+
+
+
+
+//....................................//
+
+router.post("/effortcalculationtry",(req,res)=>{
+    console.log("i am in effortcalculation")
+    rtool=req.body.RPA_Tool;
+    console.log(rtool)
+    projectduration=req.body.Proj_Dura;
+    simplecount=req.body.Simple_Count;
+    mediumcount=req.body.Medium_Count;
+    complexcount=req.body.Complex_Count;
+    totalcount=req.body.Total_Count;
+    
 switch(rtool){
     case "Automation Anywhere":
     ConfigurationDetailsModel.find((err,docs)=>{
@@ -1823,6 +2817,112 @@ router.post("/adduser", (req, res)=>{
     else
     res.render("register",{viewtitle:"Password not matched.."});
 });
+//....................................save effortestimation............................................//
+router.post("/addEffort", (req, res)=>{
+    try{
+        console.log("in addEffort");
+    var effortmodel = new effortEstimationModel();
+    effortmodel.rpatool = req.body.rpatool;
+    effortmodel.Simple = req.body.Simple;
+    effortmodel.Medium = req.body.Medium;
+    effortmodel.Complex = req.body.Complex;
+    effortmodel.Total = req.body.Total;
+    effortmodel.Simple_Dev_Effort = req.body.Simple_Dev_Effort;
+    effortmodel.Simple_Srdev_Effort = req.body.Simple_Srdev_Effort;
+    effortmodel.Simple_BA_Effort = req.body.Simple_BA_Effort;
+    effortmodel.Simple_Arch_Effort = req.body.Simple_Arch_Effort;
+    effortmodel.Simple_PM_Effort = req.body.Simple_PM_Effort;
+    effortmodel.Simple_DM_Effort = req.body.Simple_DM_Effort;
+    effortmodel.Total_Simple_Effort = req.body.Total_Simple_Effort;
+    effortmodel.Medium_Dev_Effort = req.body.Medium_Dev_Effort;
+    effortmodel.Medium_Srdev_Effort = req.body.Medium_Srdev_Effort;
+    effortmodel.Medium_BA_Effort = req.body.Medium_BA_Effort;
+    effortmodel.Medium_Arch_Effort = req.body.Medium_Arch_Effort;
+    effortmodel.Medium_PM_Effort = req.body.Medium_PM_Effort;
+    effortmodel.Medium_DM_Effort = req.body.Medium_DM_Effort;
+    effortmodel.Total_Medium_Effort = req.body.Total_Medium_Effort;
+    effortmodel.Complex_Dev_Effort = req.body.Complex_Dev_Effort;
+    effortmodel.Complex_Srdev_Effort = req.body.Complex_Srdev_Effort;
+    effortmodel.Complex_BA_Effort = req.body.Complex_BA_Effort;
+    effortmodel.Complex_Arch_Effort = req.body.Complex_Arch_Effort;
+    effortmodel.Complex_PM_Effort = req.body.Complex_PM_Effort;
+    effortmodel.Complex_DM_Effort = req.body.Complex_DM_Effort;
+    effortmodel.Total_Complex_Effort = req.body.Total_Complex_Effort;
+    effortmodel.Total_Dev_Effort = req.body.Total_Dev_Effort;
+    effortmodel.Total_Srdev_Effort = req.body.Total_Srdev_Effort;
+    effortmodel.Total_BA_Effort = req.body.Total_BA_Effort;
+    effortmodel.Total_Arch_Effort = req.body.Total_Arch_Effort;
+    effortmodel.Total_PM_Effort = req.body.Total_PM_Effort;
+    effortmodel.Total_DM_Effort = req.body.Total_DM_Effort;
+    effortmodel.Total_Of_Total_Effort = req.body.Total_Of_Total_Effort;
+    effortmodel.Dev_Roundoff = req.body.Dev_Roundoff;
+    effortmodel.Srdev_Roundoff = req.body.Srdev_Roundoff;
+    effortmodel.BA_Roundoff = req.body.BA_Roundoff;
+    effortmodel.Arch_Roundoff = req.body.Arch_Roundoff;
+    effortmodel.PM_Roundoff = req.body.PM_Roundoff;
+    effortmodel.DM_Roundoff = req.body.DM_Roundoff;
+    effortmodel.Dev_Cost = req.body.Dev_Cost;
+    effortmodel.Srdev_Cost = req.body.Srdev_Cost;
+    effortmodel.BA_Cost = req.body.BA_Cost;
+    effortmodel.Arch_Cost = req.body.Arch_Cost;
+    effortmodel.PM_Cost = req.body.PM_Cost;
+    effortmodel.DUlead_Cost_ = req.body.DUlead_Cost_;
+    effortmodel.Total_Imp_Cost = req.body.Total_Imp_Cost;
+    effortmodel.Bot_Creator_Count = req.body.Bot_Creator_Count;
+    effortmodel.Bot_Creator_Price = req.body.Bot_Creator_Price;
+    effortmodel.Total_Bot_Creator_Cost = req.body.Total_Bot_Creator_Cost;
+    effortmodel.Botrunner_Unatt_Count = req.body.Botrunner_Unatt_Count;
+    effortmodel.Botrunner_Unatt_Price = req.body.Botrunner_Unatt_Price;
+    effortmodel.Total_Botrunner_Unatt_Cost = req.body.Total_Botrunner_Unatt_Cost;
+    effortmodel.Botrunner_Att_Count = req.body.Botrunner_Att_Count;
+    effortmodel.Botrunner_Att_Price = req.body.Botrunner_Att_Price;
+    effortmodel.Total_Botrunner_Att_Cost = req.body.Total_Botrunner_Att_Cost;
+    effortmodel.Controlroom_Count = req.body.Controlroom_Count;
+    effortmodel.Controlroom_Price = req.body.Controlroom_Price;
+    effortmodel.Total_Controlroom_Cost = req.body.Total_Controlroom_Cost;
+    effortmodel.Totalof_Total_Lisc_Price = req.body.Totalof_Total_Lisc_Price;
+    effortmodel.VM_Count = req.body.VM_Count;
+    effortmodel.VM_Price = req.body.VM_Price;
+    effortmodel.Total_VM_Price = req.body.Total_VM_Price;
+    effortmodel.Server_Count = req.body.Server_Count;
+    effortmodel.Server_Price = req.body.Server_Price;
+    effortmodel.Total_Server_Price = req.body. Total_Server_Price;
+    effortmodel.Totalof_Total_Infra_Price = req.body.Totalof_Total_Infra_Price;
+    effortmodel.Maint_Cost = req.body.Maint_Cost;
+    effortmodel.FTE_Savings_Count = req.body.FTE_Savings_Count;
+    effortmodel.Controlroom_Count = req.body.Controlroom_Count;
+    effortmodel.FTE_Price = req.body.FTE_Price;
+    effortmodel.FTE_Savings_USD = req.body.FTE_Savings_USD;
+    effortmodel.Net_Savings = req.body.Net_Savings;
+    effortmodel.Net_Savings_Two = req.body.Net_Savings_Two;
+    effortmodel.Total_Imp_Cost_Two_ = req.body.Total_Imp_Cost_Two_;
+    effortmodel.Total_TCO_Two_ = req.body.Total_TCO_Two_;
+    effortmodel.Total_Net_Savings_Two_ = req.body.Total_Net_Savings_Two_;
+
+    
+    effortmodel.save((err, doc) => {
+        if (err){
+            if (err.name === 'MongoError' && err.code === 11000) {
+                // Duplicate username
+                return res.status(422).send({ success: false, message: 'Effort Estimation already exists!' });
+              }
+        
+        return res.status(422).send(err);
+    }
+        else{
+       res.render("effortEstimation",{viewtitle:"Saved Successfully"});
+    }
+});
+}
+catch(e){
+    res.status(500).json({
+        success: false,
+        message: 'Server error. Please try again.',
+        error: error.message,
+      });
+}   
+});
+//....................................................................................................//
 
 router.post("/addProcess", (req, res)=>{
     try{

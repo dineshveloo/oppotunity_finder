@@ -108,15 +108,15 @@
         
           </div>
           
-     </style>    
-</head>
-<body>
+       
 
-    
+
+
+    <form action="/user/addEffort" method="POST">
  <div align="center" class="container">
 
     <label id="eff" for="AA"><font size="5"><b>Name of the Tool: </font></b></label>
-<input style="font-weight: bold" type="text-center" value="Automation Anywhere" maxlength="30" id="AA" name="AA" readonly>
+<input style="font-weight: bold" type="text-center" value="{{rpatool}}" maxlength="30" id="AA" name="rpatool" readonly>
      
         
       </div>
@@ -183,36 +183,36 @@
    <tbody>
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Simple</b></td>
-      <td><input type="text" name="Simple_Dev" value="{{Simple_Dev_Effort}}" readonly></td>
-      <td><input type="text"  name="Simple_Srdev" value="{{Simple_Srdev_Effort}}" readonly></td>
-      <td><input type="text" name="Simple_BA" value="{{Simple_BA_Effort}}" readonly></td>
-      <td><input type="text" name="Simple_Arch" value="{{Simple_Arch_Effort}}" readonly></td>
-      <td><input type="text" name="Simple_PM" value="{{Simple_PM_Effort}}" readonly></td>
-      <td><input type="text" name="Simple_DM" value="{{Simple_DM_Effort}}" readonly></td>
+      <td><input type="text" name="Simple_Dev_Effort" value="{{Simple_Dev_Effort}}" readonly></td>
+      <td><input type="text"  name="Simple_Srdev_Effort" value="{{Simple_Srdev_Effort}}" readonly></td>
+      <td><input type="text" name="Simple_BA_Effort" value="{{Simple_BA_Effort}}" readonly></td>
+      <td><input type="text" name="Simple_Arch_Effort" value="{{Simple_Arch_Effort}}" readonly></td>
+      <td><input type="text" name="Simple_PM_Effort" value="{{Simple_PM_Effort}}" readonly></td>
+      <td><input type="text" name="Simple_DM_Effort" value="{{Simple_DM_Effort}}" readonly></td>
       <td style="font-weight: bold"><input type="text" name="Total_Simple_Effort" value="{{Total_Simple_Effort}}" readonly></td>
    </tr>
    
    <tr>
       
        <td style="text-align: center; vertical-align: middle;"><b>Medium</b></td>
-      <td><input type="text" name="Medium_Dev" value="{{Medium_Dev_Effort}}" readonly></td>
-      <td><input type="text" name="Medium_Srdev" value="{{Medium_Srdev_Effort}}" readonly></td>
-      <td><input type="text" name="Medium_BA" value="{{Medium_BA_Effort}}" readonly></td>
-      <td><input type="text" name="Medium_Arch" value="{{Medium_Arch_Effort}}" readonly></td>
-      <td><input type="text" name="Medium_PM" value="{{Medium_PM_Effort}}" readonly></td>
-      <td><input type="text" name="Medium_DM" value="{{Medium_DM_Effort}}" readonly></td>
+      <td><input type="text" name="Medium_Dev_Effort" value="{{Medium_Dev_Effort}}" readonly></td>
+      <td><input type="text" name="Medium_Srdev_Effort" value="{{Medium_Srdev_Effort}}" readonly></td>
+      <td><input type="text" name="Medium_BA_Effort" value="{{Medium_BA_Effort}}" readonly></td>
+      <td><input type="text" name="Medium_Arch_Effort" value="{{Medium_Arch_Effort}}" readonly></td>
+      <td><input type="text" name="Medium_PM_Effort" value="{{Medium_PM_Effort}}" readonly></td>
+      <td><input type="text" name="Medium_DM_Effort" value="{{Medium_DM_Effort}}" readonly></td>
       <td style="font-weight: bold"><input type="text" name="Total_Medium_Effort" value="{{Total_Medium_Effort}}" readonly></td>
    </tr>
    
    <tr>
        
        <td style="text-align: center; vertical-align: middle;"><b>Complex</b></td>
-      <td><input type="text" name="Complex_Dev" value="{{Complex_Dev_Effort}}" readonly></td>
-      <td><input type="text" name="Complex_Srdev" value="{{Complex_Srdev_Effort}}" readonly></td>
-      <td><input type="text" name="Complex_BA" value="{{Complex_BA_Effort}}" readonly></td>
-      <td><input type="text" name="Complex_Arch" value="{{Complex_Arch_Effort}}" readonly></td>
-      <td><input type="text" name="Complex_PM" value="{{Complex_PM_Effort}}" readonly></td>
-      <td><input type="text" name="Complex_DM" value="{{Complex_DM_Effort}}" readonly></td>
+      <td><input type="text" name="Complex_Dev_Effort" value="{{Complex_Dev_Effort}}" readonly></td>
+      <td><input type="text" name="Complex_Srdev_Effort" value="{{Complex_Srdev_Effort}}" readonly></td>
+      <td><input type="text" name="Complex_BA_Effort" value="{{Complex_BA_Effort}}" readonly></td>
+      <td><input type="text" name="Complex_Arch_Effort" value="{{Complex_Arch_Effort}}" readonly></td>
+      <td><input type="text" name="Complex_PM_Effort" value="{{Complex_PM_Effort}}" readonly></td>
+      <td><input type="text" name="Complex_DM_Effort" value="{{Complex_DM_Effort}}" readonly></td>
       <td style="font-weight: bold"><input type="text" name="Total_Complex_Effort" value="{{Total_Complex_Effort}}" readonly></td>
    </tr>
    
@@ -283,50 +283,50 @@
    <tbody>
       <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Developer</b></td>
-       <td><input type="text" name="Bot_Creator_Count" value="{{Total_Dev_Effort}}" readonly></td>
-      <td><input type="text" name="Bot_Creator_Price" value="{{Dev_Cost}}" readonly></td>
+       <td><input type="text" name="Total_Dev_Effort1" value="{{Total_Dev_Effort}}" readonly></td>
+      <td><input type="text" name="Dev_Cost" value="{{Dev_Cost}}" readonly></td>
       
    </tr>
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Sr.Developer</b></td>
-       <td><input type="text" name="Bot_Creator_Count" value="{{Total_Srdev_Effort}}" readonly></td>
-      <td><input type="text" name="Bot_Creator_Price" value="{{Srdev_Cost}}" readonly></td>
+       <td><input type="text" name="Total_Srdev_Effort1" value="{{Total_Srdev_Effort}}" readonly></td>
+      <td><input type="text" name="Srdev_Cost" value="{{Srdev_Cost}}" readonly></td>
       
    </tr>
    
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>BA</b></td>
-       <td><input type="text" name="Bot_Creator_Count" value="{{Total_BA_Effort}}" readonly></td>
-      <td><input type="text" name="Bot_Creator_Price" value="{{BA_Cost}}" readonly></td>
+       <td><input type="text" name="Total_BA_Effort1" value="{{Total_BA_Effort}}" readonly></td>
+      <td><input type="text" name="BA_Cost" value="{{BA_Cost}}" readonly></td>
       
    </tr>
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Architect</b></td>
-       <td><input type="text" name="Bot_Creator_Count" value="{{Total_Arch_Effort}}" readonly></td>
-      <td><input type="text" name="Bot_Creator_Price" value="{{Arch_Cost}}" readonly></td>
+       <td><input type="text" name="Total_Arch_Effort1" value="{{Total_Arch_Effort}}" readonly></td>
+      <td><input type="text" name="Arch_Cost" value="{{Arch_Cost}}" readonly></td>
       
    </tr>
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>PM</b></td>
-       <td><input type="text" name="Bot_Creator_Count" value="{{Total_PM_Effort}}" readonly></td>
-      <td><input type="text" name="Bot_Creator_Price" value="{{PM_Cost}}" readonly></td>
+       <td><input type="text" name="Total_PM_Effort1" value="{{Total_PM_Effort}}" readonly></td>
+      <td><input type="text" name="PM_Cost" value="{{PM_Cost}}" readonly></td>
       
    </tr>
    
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>DU Lead</b></td>
-       <td><input type="text" name="Bot_Creator_Count" value="{{Total_DM_Effort}}" readonly></td>
-      <td><input type="text" name="Bot_Creator_Price" value="{{DUlead_Cost}}" readonly></td>
+       <td><input type="text" name="Total_DM_Effort1" value="{{Total_DM_Effort}}" readonly></td>
+      <td><input type="text" name="DUlead_Cost_" value="{{DUlead_Cost}}" readonly></td>
       
    </tr>
    <tr>
       <td></td>
       <td style="text-align: center; vertical-align: middle;"><b>Total</b></td>
-      <td><input type="text" name="Totalof_Total_Lisc_Price" id="total" value="{{Total_Imp_Cost}}" readonly></td>
+      <td><input type="text" name="Total_Imp_Cost" id="total" value="{{Total_Imp_Cost}}" readonly></td>
 
 </tr>
   </tbody>
@@ -451,7 +451,7 @@
    <tbody>
    <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Implementation Cost</b></td>
-      <td><input type="text" id="imp1"  name="Total_Imp_Cost" value="{{Total_Imp_Cost}}" readonly></td>
+      <td><input type="text" id="imp1"  name="Total_Imp_Cost1" value="{{Total_Imp_Cost}}" readonly></td>
       <td><input type="text" id="imp2"  value="0" readonly></td>
       <td><input type="text" id="imp3"  value="0" readonly></td>
       <td><input type="text" id="imp4"  value="0" readonly></td>
@@ -483,7 +483,7 @@
    <tr>
        
        <td style="text-align: center; vertical-align: middle;"><b>Maintenance Cost</b></td>
-      <td><input type="text" id="mac1"  value="{{Maint_Cost}}" readonly></td>
+      <td><input type="text" id="mac1" name="Maint_Cost" value="{{Maint_Cost}}" readonly></td>
       <td><input type="text" id="mc2" value="{{Maint_Cost}}" readonly></td>
       <td><input type="text" id="mc3" value="{{Maint_Cost}}" readonly></td>
       <td><input type="text" id="mc4" value="{{Maint_Cost}}" readonly></td>
@@ -493,7 +493,7 @@
  <tr>
        
        <td style="text-align: center; vertical-align: middle;"><b>FTE Savings (count)</b></td>
-      <td><input type="text" id="year1" value="{{FTE_Savings_Count}}"  readonly></td>
+      <td><input type="text" id="year1" name="FTE_Savings_Count" value="{{FTE_Savings_Count}}"  readonly></td>
       <td><input type="text" id="year2"  value="{{FTE_Savings_Count}}"  readonly></td>
       <td><input type="text" id="year3"  value="{{FTE_Savings_Count}}"  readonly></td>
       <td><input type="text" id="year4"  value="{{FTE_Savings_Count}}"  readonly></td>
@@ -503,10 +503,10 @@
        
        <td style="text-align: center; vertical-align: middle;"><b>FTE Cost</b></td>
       <td><input type="text" name="FTE_Price" id="y1" value="{{FTE_Price}}" readonly ></td>
-      <td><input type="text" name="FTE_Price" id="y2" value="{{FTE_Price}}" readonly ></td>
-      <td><input type="text" name="FTE_Price" id="y3" value="{{FTE_Price}}" readonly ></td>
-      <td><input type="text" name="FTE_Price" id="y4" value="{{FTE_Price}}" readonly ></td>
-      <td><input type="text" name="FTE_Price" id="y5" value="{{FTE_Price}}" readonly ></td>
+      <td><input type="text"  id="y2" value="{{FTE_Price}}" readonly ></td>
+      <td><input type="text" id="y3" value="{{FTE_Price}}" readonly ></td>
+      <td><input type="text" id="y4" value="{{FTE_Price}}" readonly ></td>
+      <td><input type="text" id="y5" value="{{FTE_Price}}" readonly ></td>
       
       
          </tr>
@@ -515,7 +515,7 @@
     <tr>
        
        <td style="text-align: center; vertical-align: middle;"><b>FTE Savings</b></td>
-      <td><input type="text" id="ftesav1" value="{{FTE_Savings_USD}}" readonly></td>
+      <td><input type="text" id="ftesav1" name="FTE_Savings_USD" value="{{FTE_Savings_USD}}" readonly></td>
       <td><input type="text" id="ftesav2" value="{{FTE_Savings_USD}}" readonly></td>
       <td><input type="text" id="ftesav3"  value="{{FTE_Savings_USD}}"readonly></td>
       <td><input type="text" id="ftesav4" value="{{FTE_Savings_USD}}"readonly></td>
@@ -525,8 +525,8 @@
     <tr>
        
        <td style="text-align: center; vertical-align: middle;"><b>Net Savings</b></td>
-      <td style="font-weight: bold"><input type="text" id="nets1" value="{{Net_Savings}}" readonly></td>
-      <td style="font-weight: bold"><input type="text" id="nets2" value="{{Net_Savings_Two}}" readonly></td>
+      <td style="font-weight: bold"><input type="text" id="nets1" name="Net_Savings" value="{{Net_Savings}}" readonly></td>
+      <td style="font-weight: bold"><input type="text" id="nets2" name="Net_Savings_Two" value="{{Net_Savings_Two}}" readonly></td>
       <td style="font-weight: bold"><input type="text" id="nets3" value="{{Net_Savings_Two}}" readonly></td>
       <td style="font-weight: bold"><input type="text" id="nets4" value="{{Net_Savings_Two}}" readonly></td>
       <td style="font-weight: bold"><input type="text" id="nets5" value="{{Net_Savings_Two}}" readonly></td>
@@ -548,38 +548,43 @@
    <tbody>
       <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Number of Business Processes in Scope for Automation:</b></td>
-       <td><input type="text" name="Total" value="{{Total}}" readonly></td>
+       <td><input type="text" name="Total1" value="{{Total}}" readonly></td>
      </tr>
  <tr>
        <td style="text-align: center; vertical-align: middle;"><b>Implementation Cost for BOTs (USD):</b></td>
-      <td><input type="text" name="Total_Imp_Cost_Two" value="{{Total_Imp_Cost_Two}}" readonly></td>
+      <td><input type="text" name="Total_Imp_Cost_Two_" value="{{Total_Imp_Cost_Two}}" readonly></td>
       
 </tr>
 <tr>
        <td style="text-align: center; vertical-align: middle;"><b>The TCO for 5 years to build and run the BOTs (USD):</b></td>
-      <td><input type="text" name="Total_TCO_Two" value="{{Total_TCO_Two}}" readonly></td>
+      <td><input type="text" name="Total_TCO_Two_" value="{{Total_TCO_Two}}" readonly></td>
       
 </tr>
 <tr>
        <td style="text-align: center; vertical-align: middle;"><b>The net savings across 5 years (USD):</b></td>
-      <td><input type="text" name="Total_Net_Savings_Two" value="{{Total_Net_Savings_Two}}" readonly></td>
+      <td><input type="text" name="Total_Net_Savings_Two_" value="{{Total_Net_Savings_Two}}" readonly></td>
       
 </tr>
 
   </tbody>
 </table>
       </div>
-
-
-
-
-
-
+       <div align="center">
+         
+      <button  type="submit" class="btn btn-success">Save</button>
+     
       </div>
+
+</form>
+
+
+
+
+      
       
       
  
 
-   </form>
+   
    </body>
    </html>
