@@ -307,6 +307,22 @@ var EffortEstimationSchema = new mongoose.Schema({
     Total_Net_Savings_Two_:{
         type:String,
         required:"Required"
+    },
+   BI:{
+        type:String,
+        required:"Required"
+    },
+   rx:{
+        type:String,
+        required:"Required"
+    },
+    pid:{
+        type:String,
+        required:"Required"
+    },
+    pd:{
+        type:Number,
+        required:"Required"
     }
 
 },

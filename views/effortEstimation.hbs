@@ -58,7 +58,15 @@
        </li>
 
 
-        <li><a href="/user/businessCaseDetails">Business Case & Roadmap</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Business Case & Roadmap<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+              <li><a href="/user/listbusiness"><b>Select</b></a></li>
+              <li><a href="/user/viewEffortList"><b>View</b></a></li>
+              
+              
+           </ul>
+       </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User Management<span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
@@ -97,8 +105,8 @@
       
       <div class="jumbotron" id="cp">
         <div class="container text-center" >
-        <h1 id="pc">Effort Estimation</h1>
-        <p>Tables for calculating effort</p>
+        <h1 id="pc">Business Case</h1>
+       
         
         </div>
       </div>
@@ -113,13 +121,73 @@
 
 
     <form action="/user/addEffort" method="POST">
- <div align="center" class="container">
+ {{!-- <div align="center" class="container">
 
     <label id="eff" for="AA"><font size="5"><b>Name of the Tool: </font></b></label>
 <input style="font-weight: bold" type="text-center" value="{{rpatool}}" maxlength="30" id="AA" name="rpatool" readonly>
      
         
-      </div>
+      </div> --}}
+<div id="eff" class="heading" align="left">
+<h2><strong>Business Case Inputs</strong></h2>
+</div>
+<div class="container" style="overflow:auto;">
+<table id="scrollid" class="table table-condensed" border="3" align="center">
+            {{!-- <thead>
+   <tr class="danger">
+              <td scope="col"><h4><b>Process Type</b></h4></td>
+              <td scope="col"><h4><b>Count</b></h4></td>
+
+   </tr>
+   </thead> --}}
+   <tbody>
+       <tr>
+       <td style="text-align: center; vertical-align: middle;"><b>Business Case Id</b></td>
+      <td><input type="text" id="columnbox" name="BI" value="{{BI}}" readonly></td>
+
+   </tr>
+    <tr>
+       <td style="text-align: center; vertical-align: middle;width:10%"><b>Total Number of Selected Processes</b></td>
+      <td style="width:10%"><input type="text" id="columnbox" name="Totalbuss" value="{{Total}}" readonly></td>
+      
+   </tr>
+   <tr hidden>
+       <td style="text-align: center; vertical-align: middle;"><b>Client Name</b></td>
+      <td><input type="text" id="columnbox" name="rx" value="{{rx}}" readonly></td>
+       {{!-- <td name="rx"><div style="overflow:scroll; width:100%">{{rx}}</div></td> --}}
+
+   </tr>
+    <tr hidden>
+       <td style="text-align: center; vertical-align: middle;width:30%"><b>Process Id</b></td>
+      {{!-- <td name="pid"><div style="overflow:scroll; width:100%">{{pid}}</div> --}}
+         <td style="width:100%">
+         <input type="text" id="columnbox" name="pid" value="{{pid}}" readonly>
+         </td>
+
+   </tr>
+    
+
+   
+   <tr>
+       <td style="text-align: center; vertical-align: middle;"><b>Tool Selected</b></td>
+      <td><input type="text" id="columnbox" name="rpatool" value="{{rpatool}}" readonly></td>
+      
+   </tr>
+   
+   <tr>
+       <td style="text-align: center; vertical-align: middle;"><b>Project Duration</b></td>
+      <td><input type="text" id="columnbox" name="pd" value="{{pd}}" readonly></td>
+      
+   </tr>
+      {{!-- <tr>
+       <td style="text-align: center; vertical-align: middle;"><b>Total</b></td>
+      <td style="font-weight: bold"><input type="text" id="columnbox" name="Total" value="{{Total}}" readonly></td>
+      
+   </tr> --}}
+   </tbody>
+</table>
+</div> 
+
 
 
 <div id="eff" class="heading" align="left">

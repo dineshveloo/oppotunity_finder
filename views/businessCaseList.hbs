@@ -70,7 +70,15 @@
        </li>
 
 
-        <li><a href="/user/businessCaseDetails">Business Case & Roadmap</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Business Case & Roadmap<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+              <li><a href="/user/listbusiness"><b>Select</b></a></li>
+              <li><a href="/user/viewEffortList"><b>View</b></a></li>
+              
+              
+           </ul>
+       </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User Management<span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
@@ -126,6 +134,32 @@
           </div>
          
  <center> <font color="red">{{viewtitle}}</font></center>
+
+
+  <div class="container-fluid bg-3 text-center"> 
+<div allign="center">
+        
+<form  action="/user/showTablebusiness" method="POST">
+
+<label>Choose a Client:</label><br>
+
+<select style="width: 200px;" name="client_name_bus">
+ <option disabled selected value> -- select an option -- </option>
+ {{#each Bus_list}} 
+
+  <option>{{this.clientName}}</option>
+
+
+{{/each}}
+ </select><br><br>
+ <button class="btn btn-success" type="submit" name="submit" id="someId">Select</button>
+ </form>
+ </div>
+ </div><br>
+
+ 
+
+
 <div id="allign">
   
  <form action="/user/addSelectedProcess"+Proc_Id method="POST">
@@ -184,7 +218,7 @@
             </tr>
           </thead>
           <tbody>
-              {{#each list}}
+              {{#each business_table}}
             <tr>
               <td>{{this.clientName}}</td>
               <td>{{this.Buss_Unit}}</td>
@@ -192,7 +226,7 @@
              <td>{{this.Proc_Name}}</td>
              <td>{{this.Proc_Id}}</td>
               <td>{{this.Classification}}</td>
-             <td> <input type="checkbox" class='list-item' name="Selected_Process" value="{{this.Proc_Id}},{{this.Sub_Buss_Unit}},{{this.Proc_Name}},{{this.clientName}},{{this.Buss_Unit}},{{this.Classification}}"></td>
+             <td> <input type="checkbox" class='list-item' name="Selected_Process" value="Client Name: {{this.clientName}}, Business Unit: {{this.Buss_Unit}}, Sub Business Unit: {{this.Sub_Buss_Unit}}, Process Name: {{this.Proc_Name}}, ProcessId: {{this.Proc_Id}}, Classification: {{this.Classification}}"></td>
             </tr>
            {{/each}}
           </tbody>
@@ -210,9 +244,9 @@
       </form>
     </div>
     
-  </form>
   
-  </div>
+  
+  
   
 </body>
 </html> 

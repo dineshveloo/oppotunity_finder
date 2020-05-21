@@ -17,6 +17,8 @@
     "gojs": "^2.1.15",
     "google-charts": "^2.0.0",
     "handlebars": "^4.5.3",
+    "jspdf": "^1.5.3",
+    "jspdf-autotable": "^3.5.3",
     "lodash.uniqby": "^4.7.0",
     "mongoose": "^5.8.9",
     "multer": "^1.4.2",

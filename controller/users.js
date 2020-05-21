@@ -97,6 +97,22 @@ router.get("/viewProcessList", (req, res)=>{
         });
 });
 
+//.................................effortview....................//
+router.get("/viewEffortList", (req, res)=>{
+   
+    effortEstimationModel.find((err, docs) => {
+        if(!err){
+        res.render("viewEffortList", {list: docs});
+      
+        console.log(docs);
+        }
+        else {
+        console.log('Failed to retrieve the Course List: '+ err);
+        }
+        });
+});
+//.............................................................//
+
 
 router.get("/businessCaseDetails", (req, res)=>{
     
@@ -671,8 +687,9 @@ router.post("/addSelectedProcess",(req,res)=>{
                     BusinessModel.find((err,docs)=>{
                         if(!err)
                         {
-                            
-                            res.render("selectedProcess",{list:docs[0]})
+                            console.log("Selected_Process");
+                            // console.log(req.body.Selected_Process.Proc_Id);
+                            res.render("selectedProcess",{list:docs[0], Selected_Process:req.body.Selected_Process})
                         }
                         else
                         {
@@ -692,8 +709,9 @@ router.post("/addSelectedProcess",(req,res)=>{
             businessmodel.save((err,doc)=>{
                 if(!err)
                 {
-                    
-                    res.render("selectedProcess",{list:doc})
+                    console.log("..//......//..........//..........//");
+                    console.log(req.body.Selected_Process);
+                    res.render("selectedProcess",{list:doc, Selected_Process:req.body.Selected_Process})
                 }
                 else{
                     console.log(err)
@@ -713,12 +731,57 @@ router.post("/addSelectedProcess",(req,res)=>{
 router.post("/effortcalculation",(req,res)=>{
     console.log("i am in effortcalculation")
     rtool=req.body.RPA_Tool;
+    businesscaseid=req.body.Business_Case_Id;
     console.log(rtool)
     projectduration=req.body.Proj_Dura;
     simplecount=req.body.Simple_Count;
     mediumcount=req.body.Medium_Count;
     complexcount=req.body.Complex_Count;
     totalcount=req.body.Total_Count;
+    processlist=req.body.Selected_Process;
+   console.log(typeof  processlist);
+   finalprocesslist=processlist.split(",");
+//    finalprocesslistarray=processlist.toArray;
+
+   rega=processlist.match(/Client Name\:\s[\w\s]*/gm);
+   regb=rega.toString();
+   console.log(regb);
+   reg=regb.replace(/Client Name:/gm,'');
+  // subStr = reg1.split(':').pop().split(',')[0];
+//    mySubString = reg.toString().substring(
+//     reg.toString().lastIndexOf("Client Name:") + 1, 
+//     reg.toString().lastIndexOf(",")
+// );
+// console.log(subStr);
+   processid=processlist.match(/ProcessId\:\s[\w\s]*/gm);
+   console.log("*?????**********************"); 
+  // console.log(finalprocesslist1);
+  console.log(reg);
+  console.log(typeof  finalprocesslist);
+   console.log(finalprocesslist);
+   console.log(finalprocesslist.length); 
+//    SearchIndex = finalprocesslist.indexOf("Client Name");
+//    console.log(SearchIndex);
+//    function search(nameKey, myArray){
+//     for (var i=0; i < myArray.length; i++) {
+//         if (myArray[i].name === nameKey) {
+//             return myArray[i];
+//         }
+//     }
+// }
+//  resultObject = search("Client Name", finalprocesslist);
+//  console.log("....*...*.......*");
+//  console.log( resultObject);
+
+//    console.log(finalprocesslist.Client Name);
+    
+    // console.log(typeof(processlist));
+    // processlist1=req.query.Selected_Process;
+    // processlist2=req.params.Selected_Process;
+    console.log("...........//.............//.............//")
+    console.log( processlist);
+    // console.log( processlist1);
+    // console.log( processlist2);
     //.....................switch...........................//
     // switch(thirdPartySites_str){
     //     case "Yes":
@@ -744,6 +807,12 @@ switch(rtool){
             Medium=mediumcount;
             Total=totalcount;
             rpatool=rtool;
+            pd=projectduration;
+            pl=processlist;
+            fpl=finalprocesslist;
+            BI=businesscaseid;
+            rx=reg;
+            pid=processid;
             Simple_Dev_Effort=docs[0].Simple_Dev*simplecount;
             Simple_Srdev_Effort=docs[0].Simple_Srdev*simplecount;
             Simple_BA_Effort=docs[0].Simple_BA*simplecount;
@@ -874,6 +943,12 @@ switch(rtool){
                 Medium:Medium,
                 Complex:Complex,
                 rpatool:rpatool,
+                pd:pd,
+                pid:pid,
+                pl:pl,
+                BI:BI,
+                fpl:fpl,
+                rx:rx,
                 Total_TCO:Total_TCO,
                 Simple_Srdev_Effort:Simple_Srdev_Effort,
                 Simple_BA_Effort:Simple_BA_Effort,
@@ -976,10 +1051,16 @@ case "UiPath":
          
             console.log(docs)
             Simple=simplecount;
+            rx=reg;
             Complex=complexcount;
             Medium=mediumcount;
             Total=totalcount;
             rpatool=rtool;
+            pid=processid;
+            pd=projectduration;
+            pl=processlist;
+            BI=businesscaseid;
+            fpl=finalprocesslist;
             Simple_Dev_Effort=docs[0].Simple_Dev1*simplecount;
             Simple_Srdev_Effort=docs[0].Simple_Srdev1*simplecount;
             Simple_BA_Effort=docs[0].Simple_BA1*simplecount;
@@ -1112,6 +1193,12 @@ case "UiPath":
                 Medium:Medium,
                 Complex:Complex,
                 rpatool:rpatool,
+                pd:pd,
+                pid:pid,
+                pl:pl,
+                BI:BI,
+                fpl:fpl,
+                rx:rx,
                 Total_TCO:Total_TCO,
                 Simple_Srdev_Effort:Simple_Srdev_Effort,
                 Simple_BA_Effort:Simple_BA_Effort,
@@ -1217,10 +1304,15 @@ case "Pega Robotics":
          
             console.log(docs)
             Simple=simplecount;
+            rx=reg;
             Complex=complexcount;
             Medium=mediumcount;
             Total=totalcount;
             rpatool=rtool;
+            pid=processid;
+            pd=projectduration;
+            BI=businesscaseid;
+            pl=processlist;
             Simple_Dev_Effort=docs[0].Simple_Dev2*simplecount;
             Simple_Srdev_Effort=docs[0].Simple_Srdev2*simplecount;
             Simple_BA_Effort=docs[0].Simple_BA2*simplecount;
@@ -1351,6 +1443,11 @@ case "Pega Robotics":
                 Medium:Medium,
                 Complex:Complex,
                 rpatool:rpatool,
+                pd:pd,
+                pid:pid,
+                pl:pl,
+                BI:BI,
+                rx:rx,
                 Total_TCO:Total_TCO,
                 Simple_Srdev_Effort:Simple_Srdev_Effort,
                 Simple_BA_Effort:Simple_BA_Effort,
@@ -1456,10 +1553,15 @@ case "Blue Prism":
          
             console.log(docs)
             Simple=simplecount;
+            rx=reg;
             Complex=complexcount;
             Medium=mediumcount;
             Total=totalcount;
             rpatool=rtool;
+            pid=processid;
+            pd=projectduration;
+            BI=businesscaseid;
+            pl=processlist;
             Simple_Dev_Effort=docs[0].Simple_Dev3*simplecount;
             Simple_Srdev_Effort=docs[0].Simple_Srdev3*simplecount;
             Simple_BA_Effort=docs[0].Simple_BA3*simplecount;
@@ -1590,6 +1692,11 @@ case "Blue Prism":
                 Medium:Medium,
                 Complex:Complex,
                 rpatool:rpatool,
+                pd:pd,
+                pl:pl,
+                BI:BI,
+                rx:rx,
+                pid:pid,
                 Total_TCO:Total_TCO,
                 Simple_Srdev_Effort:Simple_Srdev_Effort,
                 Simple_BA_Effort:Simple_BA_Effort,
@@ -2822,6 +2929,10 @@ router.post("/addEffort", (req, res)=>{
     try{
         console.log("in addEffort");
     var effortmodel = new effortEstimationModel();
+    effortmodel.pd = req.body.pd;
+    effortmodel.pid = req.body.pid;
+    effortmodel.rx = req.body.rx;
+    effortmodel.BI = req.body.BI;
     effortmodel.rpatool = req.body.rpatool;
     effortmodel.Simple = req.body.Simple;
     effortmodel.Medium = req.body.Medium;
@@ -3054,12 +3165,16 @@ router.post("/addProcessTwo", (req, res)=>{
 });
 });
 
+
 //.....................dropdown.......................//
 function get_unique(myData ) {
 
     return Array.from(new Set(myData.map(JSON.stringify))).map(JSON.parse);
   
   }
+  //....................................business.....................................//
+ 
+  //.................................................................................//
   
   
   router.get('/list', (req, res) => {
@@ -3091,6 +3206,37 @@ function get_unique(myData ) {
     });
     
     });
+    //.........................//
+    router.get('/listbusiness', (req, res) => {
+
+        MongoClient.connect(url, function(err, db) {
+        
+          if (err) throw err;
+        
+          var dbo = db.db("Mydb");
+         
+        
+          dbo.collection("Process").find({},{ projection: { _id: 0, clientName: 1} }).toArray(function(err, client_Name) {
+        
+            if (err) throw err;
+        
+            console.log(client_Name);
+        
+        
+            console.log(get_unique(client_Name));
+             
+            res.render('businessCaseList', {Bus_list: get_unique(client_Name)});
+    
+          });
+    
+    
+    
+    
+        
+        });
+        
+        });
+    //..........................//
 
 
 //...................................original.....................................................//
@@ -3181,9 +3327,36 @@ router.post('/showTable', (req, res) => {
     });
     
     });
+    //..................businesstable...........................//
 
+    router.post('/showTablebusiness', (req, res) => {
 
-
+        MongoClient.connect(url, function(err, db) {
+        
+          if (err) throw err;
+        
+          var dbo = db.db("Mydb");
+          dbo.collection("Process").clientName = req.body.client_name_bus;
+          
+          console.log( req.body.client_name_bus);
+          
+          dbo.collection("Process").find({clientName:req.body.client_name_bus},{ projection: { _id: 0, clientName:1, Buss_Unit: 1,  Sub_Buss_Unit:1, Proc_Name: 1, Proc_Id:1, Classification:1} }).toArray(function(err, bus_table) {
+        
+            if (err) throw err;
+        
+            console.log(bus_table);
+        
+            
+            res.render('businessCaseList', {business_table: bus_table});
+          });
+    
+    
+    
+    
+        
+        });
+        
+        });
 //..........................................................................//
     router.get('/userList', (req,res) => {
         UserModel.find((err, docs) => {
@@ -3235,6 +3408,29 @@ router.post('/showTable', (req, res) => {
     });
     
         });
+        ////////////...................effort.................///
+        router.get('/viewEffortById/:id', (req, res) => {
+            // console.log("Inside router")
+            // console.log(req.params.id);
+        
+            effortEstimationModel.find(req.params.id,(err, doc) => {
+                // console.log(doc)
+                if(doc.length!=0){
+            if (!err) {
+            res.render("viewEffort", {process:doc[0]
+            });
+            console.log(doc);
+            }
+            else
+            res.render("viewProcessList",{viewtitle:"Process is not Approved wait for the admin approval"});
+            }
+            else{
+                res.render("viewProcessList",{viewtitle : "Process is not captured!" })
+            }
+        });
+        
+            });
+        ////......................../////
         router.get("/approveProcessById",(req,res)=>{
      
             ProcessModel.findByIdAndUpdate({_id:req.query.Id},{Status:"APPROVED"}, (err,doc)=>{
@@ -3287,6 +3483,29 @@ router.get('/view', (req, res) => {
            
     });
     });
+    //...............vieweffort................................//
+    router.get('/viewEffort', (req, res) => {
+        effortEstimationModel.findById({_id:req.query.id}, (err, doc) => {
+            // console.log("in view")
+            // console.log(req.query.id)
+            // console.log(doc)
+            // console.log(doc.Status)
+            console.log("*&*&*&*&*&*&*&*&");
+           
+                if (!err) {
+                    console.log("in if")
+                res.render("viewEffort", {effortestimation:doc
+                });
+                
+                }
+                else
+                res.render("viewEffort",{viewtitle:"Error"});
+               
+        });
+        });
+    
+    
+    //.......................................................//
 
 
    
