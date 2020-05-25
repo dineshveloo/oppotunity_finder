@@ -3305,19 +3305,19 @@ router.post('/showTable', (req, res) => {
       if (err) throw err;
     
       var dbo = db.db("Mydb");
-      dbo.collection("Process").clientName = req.body.Client_Name;
+      dbo.collection("Process").clientName = req.body.client_name;
       dbo.collection("Process").Buss_Unit = req.body.Business_Unit;
-      console.log( req.body.Client_Name);
+      console.log( req.body.client_name);
       console.log(req.body.Business_Unit);
     
-      dbo.collection("Process").find({clientName:req.body.Client_Name},{ projection: { _id: 0, Buss_Unit: 1, Proc_Name: 1, Proc_Id:1, Mon_Vol: 1, AHT:1, FTE:1, AP_Perc:1, FTE_Benefit:1, Classification:1, Quadrant:1} }).toArray(function(err, process_table) {
+      dbo.collection("Process").find({clientName:req.body.client_name},{ projection: { _id: 0,clientName:1, Buss_Unit: 1, Proc_Name: 1, Proc_Id:1, Mon_Vol: 1, AHT:1, FTE:1, AP_Perc:1, FTE_Benefit:1, Classification:1, Quadrant:1} }).toArray(function(err, process_table) {
     
         if (err) throw err;
     
         console.log(process_table);
     
         
-        res.render('processPrioritization', {client_table: process_table, client: req.body.Client_Name, businessunit: req.body.Business_Unit});
+        res.render('processPrioritization', {client_table: process_table, client: req.body.client_name, businessunit: req.body.Business_Unit});
       });
 
 
