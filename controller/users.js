@@ -50,6 +50,9 @@ router.get("/", (req, res)=>{
 router.get("/Home", (req, res)=>{
 res.render("Home")
 });
+router.get("/indexexample", (req, res)=>{
+    res.render("indexexample")
+    });
 
 router.get("/uploadDownload", (req, res)=>{
     res.render("uploadDownload")
