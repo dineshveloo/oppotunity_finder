@@ -20,20 +20,21 @@
 </head>
 <body>
 <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>                        
-            </button>
-            
-              <img  class="navbar-brand" src="mphasis_logo.jpg">
-            
-          </div>
-          <div class="collapse navbar-collapse" id="myNavbar">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      
+      	<img  class="navbar-brand" src="mphasis_logo.jpg">
+      
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/user/Home">Home</a></li>
+         <li class="active"><a href="/user/indexexample">Home2</a></li>
          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Discovery<span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
@@ -50,18 +51,7 @@
  <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Process Flow<span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
-              <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Configuration Details<span class="caret"></span></a>
-           <ul class="dropdown-menu" role="menu">
-             <li><a href="/user/fetchConfigurationDetails"><b>Automation Anywhere</b></a></li>
-              <li><a href="/user/fetchConfigurationDetails2"><b>UiPath</b></a></li>
-              <li><a href="/user/fetchConfigurationDetails3"><b>Pega Robotics</b></a></li>
-              <li><a href="/user/fetchConfigurationDetails4"><b>Blue Prism</b></a></li>
-             
-              
-              
-           </ul>
-       </li>
+              <li><a href="/user/captureProcessFlow"><b>Capture Process Flow</b></a></li>
               <li><a href="/user/viewWorkflow"><b>View Process Flow</b></a></li>
               
               
@@ -69,7 +59,9 @@
        </li>
 
 
-         <li class="dropdown">
+        {{!-- <li><a href="/user/businessCaseDetails">Business Case & Roadmap</a></li> --}}
+        {{!-- ////////////////////////////////////////////////////// --}}
+        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Business Case & Roadmap<span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
               <li><a href="/user/listbusiness"><b>Select</b></a></li>
@@ -78,6 +70,7 @@
               
            </ul>
        </li>
+        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User Management<span class="caret"></span></a>
            <ul class="dropdown-menu" role="menu">
@@ -89,7 +82,20 @@
            </ul>
        </li>
         {{!-- <li><a href="/user/userManagement">User Management</a></li> --}}
-        <li><a href="/user/fetchConfigurationDetails">Configuration Details</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Configuration Details<span class="caret"></span></a>
+           <ul class="dropdown-menu" role="menu">
+             <li><a href="/user/fetchConfigurationDetails"><b>Automation Anywhere</b></a></li>
+              <li><a href="/user/fetchConfigurationDetails2"><b>UiPath</b></a></li>
+              <li><a href="/user/fetchConfigurationDetails3"><b>Pega Robotics</b></a></li>
+              <li><a href="/user/fetchConfigurationDetails4"><b>Blue Prism</b></a></li>
+             
+              
+              
+           </ul>
+       </li>
+        {{!-- <li><a href="/user/fetchConfigurationDetails">Configuration Details</a></li> --}}
+
         <li><a href="/user/About">About</a></li>
         <li><a href="/user/Contact">Contact</a></li>
         
@@ -100,8 +106,8 @@
         <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
-        </div>
-      </nav>
+  </div>
+</nav>
       
       <div class="jumbotron" id="cp">
         <div class="container text-center" >

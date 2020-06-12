@@ -1,7 +1,8 @@
 .jumbotron{
-    background-color:  rgb(153, 51, 102);
-    color: white;   
+    background-color:  whitesmoke;
+    color: rgb(18, 66, 101);   
     font-family: "Montserrat-Black";
+    font-weight: bold; 
     padding-bottom: 4.5rem;
 }
 
