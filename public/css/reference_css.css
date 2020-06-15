@@ -76,3 +76,30 @@
     width: auto;
     padding-bottom: 0.25rem;
   }
+  #left{ 
+    padding-left: 40px;
+    float:left;  
+   
+     
+} 
+
+#right{ 
+    float:left;
+   
+   
+} 
+#left1{ 
+   
+    float:left;  
+   
+     
+} 
+#middle{
+  float:left;
+}
+
+#right1{ 
+    float:right;
+   
+   
+} 
