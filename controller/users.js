@@ -64,17 +64,26 @@ router.get("/captureProcessFlow", (req, res)=>{
 router.get("/processFlowDocumentation", (req, res)=>{
         res.render("processFlowDocumentation")
         });
+router.get("/processFlowDocumentation2", (req, res)=>{
+            res.render("processFlowDocumentation2")
+            });
 router.get("/effortEstimation AA", (req, res)=>{
     res.render("effortEstimation AA")
     });
 router.get("/CaptureProcess", (req, res)=>{
     res.render("CaptureProcess")
 });
+router.get("/CaptureProcess2", (req, res)=>{
+    res.render("CaptureProcess2")
+});
 
 
 
 router.get("/processDiscovery", (req, res)=>{
     res.render("processDiscovery")
+});
+router.get("/processDiscovery2", (req, res)=>{
+    res.render("processDiscovery2")
 });
 router.get("/businessCaseList", (req, res)=>{
     res.render("businessCaseList")
@@ -138,6 +147,7 @@ router.get("/configurationDetailsInputAA",(req,res)=>{
 router.get("/configurationDetailsInputUI",(req,res)=>{
     res.render("configurationDetailsInputUI")
 });
+
 router.get("/configurationDetailsInputPR",(req,res)=>{
     res.render("configurationDetailsInputPR")
 });
