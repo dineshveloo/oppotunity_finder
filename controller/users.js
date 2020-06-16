@@ -2879,6 +2879,9 @@ router.get("/processPrioritization", (req, res)=>{
  router.get("/userManagement", (req, res)=>{
     res.render("userManagement")
 });
+router.get("/userManagement2", (req, res)=>{
+    res.render("userManagement2")
+});
 router.get("/register", (req, res)=>{
     res.render("register")
 });
