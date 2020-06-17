@@ -144,6 +144,9 @@ router.get("/businessCaseDetails", (req, res)=>{
 router.get("/configurationDetailsInputAA",(req,res)=>{
     res.render("configurationDetailsInputAA")
 });
+router.get("/configurationDetailsInputAA2",(req,res)=>{
+    res.render("configurationDetailsInputAA2")
+});
 router.get("/configurationDetailsInputUI",(req,res)=>{
     res.render("configurationDetailsInputUI")
 });

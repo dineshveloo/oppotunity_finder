@@ -8,7 +8,7 @@
 }
 body{
 
-background-color:rgb(247, 240, 240);
+
 }
 .heading{
   padding-top: 4rem;
@@ -19,14 +19,18 @@ background-color:rgb(247, 240, 240);
 
 #eff{
     padding-left:3rem;
-    color: rgb(153, 51, 102);   
+    color: rgb(18, 66, 101);  
     font-family: "Montserrat-Black";
     
 }
 #ef{padding-left:3rem;
-    color: rgb(153, 51, 102);   
+  color: rgb(18, 66, 101);   
     font-family: "Montserrat-Black";
    
+}
+.coll{
+  color:white;
+  background-color:rgb(18, 66, 101); 
 }
 
 
