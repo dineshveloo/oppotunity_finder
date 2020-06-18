@@ -100,10 +100,13 @@
 
 #right1{ 
     float:right;
-    padding-right: 25px;
+    padding-right: 35px;
    
    
 } 
 #middlepfd{
   padding-left:4rem;
+}
+#fontfam{
+  font-family: initial;
 }

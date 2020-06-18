@@ -211,7 +211,7 @@ function isNumberKey(evt){
     
       function clientName2() {
         var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
+        input = document.getElementById("myInput1");
         filter = input.value.toUpperCase();
         table = document.getElementById("processes");
         tr = table.getElementsByTagName("tr");
