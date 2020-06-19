@@ -260,38 +260,38 @@
     --}}
    
     <div  class="container">
-        <table  class="table table-condensed" border="2" align="center">
+        <table class="table table-condensed" border="2" align="center">
           <thead>
-            <tr id="fontfam" class="coll">
-               <th scope="col"><h5><b>Client Name</b></h5></th>
-              <th scope="col"><h5><b>Business Unit</b></h5></th>
-              <th scope="col"><h5><b>Process Name</b></h5></th>
-              <th scope="col"><h5><b>Process Id</b></th>
-              <th scope="col"><h5><b>Monthly Volume</b></h5></th>
-              <th scope="col"><h5><b>AHT(min)</b></h5></th>
-              <th scope="col"><h5><b>FTE</h5></b></th>
-              <th scope="col"><h5><b>Automation Potential</b></h5></th>
-              <th scope="col"><h5><b>FTE Benefit</b></h5></th>
-              <th scope="col"><h5><b>Implementation Complexity</b></h5></th>
-              <th scope="col"><h5><b>Quadrant</b></h5></th>
-              <th scope="col"><h5><b>Ranking</b></h5></th>
+            <tr  class="coll">
+               <th scope="col"><h4 id="fb"><b>Client Name</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>Business Unit</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>Process Name</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>Process Id</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>Monthly Volume</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>AHT(min)</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>FTE</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>Automation Potential</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>FTE Benefit</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>Implementation Complexity</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>Quadrant</b></h4></th>
+              <th scope="col"><h4 id="fb"><b>Ranking</b></h4></th>
             </tr>
           </thead>
           <tbody>
               {{#each client_table}}
             <tr>
-               <td><h5>{{this.clientName}}</h5></td>
-              <td><h5>{{this.Buss_Unit}}</h5></td>
-              <td><h5>{{this.Proc_Name}}</h5></td>
-              <td><h5>{{this.Proc_Id}}</h5></td>
-              <td><h5>{{this.Mon_Vol}}</h5></td>
-             <td><h5>{{this.AHT}}</h5></td>
-             <td><h5>{{this.FTE}}</h5></td>
-             <td><h5>{{this.AP_Perc}}</h5></td>
-             <td><h5>{{this.FTE_Benefit}}</h5></td>
-             <td><h5>{{this.Classification}}</h5></td>
-             <td><h5>{{this.Quadrant}}</h5></td>
-             <td><h5>{{this.Ranking}}</h5></td>
+               <td><h4 id="fb">{{this.clientName}}</h4></td>
+              <td><h4 id="fb">{{this.Buss_Unit}}</h4></td>
+              <td><h4 id="fb">{{this.Proc_Name}}</h4></td>
+              <td><h4 id="fb">{{this.Proc_Id}}</h4></td>
+              <td><h4 id="fb">{{this.Mon_Vol}}</h4></td>
+             <td><h4 id="fb">{{this.AHT}}</h4></td>
+             <td><h4 id="fb">{{this.FTE}}</h4></td>
+             <td><h4 id="fb">{{this.AP_Perc}}</h4></td>
+             <td><h4 id="fb">{{this.FTE_Benefit}}</h4></td>
+             <td><h4 id="fb">{{this.Classification}}</h4></td>
+             <td><h4 id="fb">{{this.Quadrant}}</h4></td>
+             <td><h4 id="fb">{{this.Ranking}}</h4></td>
             </tr>
            {{/each}}
            

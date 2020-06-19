@@ -3414,7 +3414,7 @@ router.post('/showTable', (req, res) => {
             console.log(doc)
             if(doc.length!=0){
         if (doc[0].Status=="APPROVED") {
-        res.render("view&editProcess", {viewtitle:"process",process:doc[0]
+        res.render("view&editProcess", {viewtitle:"Process",process:doc[0]
         });
         console.log(doc);
         }
@@ -3493,7 +3493,7 @@ router.get('/view', (req, res) => {
        
             if (doc.Status=="APPROVED") {
                 console.log("in if")
-            res.render("view&editProcess", {viewtitle:"process",process:doc
+            res.render("view&editProcess", {viewtitle:"Process Details",process:doc
             });
             
             }
