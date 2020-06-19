@@ -449,6 +449,13 @@ h1, h2, h3, h4, h5, h6 {
 #someDynamicId{
   font-size: 15px;
 }
+#projectduration{
+  font-size: 15px;
+  
+}
+#businesscaseid{
+  font-size: 15px;
+}
 #fb{
   font-family: Arial, Helvetica, sans-serif;
 }
