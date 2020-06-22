@@ -32,7 +32,7 @@ input[type="text"]::placeholder {
     } 
     body{
     
-    background-color:rgb(247, 240, 240);
+    /* background-color:rgb(247, 240, 240); */
     }
     #example-select-all{
       color: white;
