@@ -3513,12 +3513,12 @@ router.get('/view', (req, res) => {
            
                 if (!err) {
                     console.log("in if")
-                res.render("viewEffort", {effortestimation:doc
+                res.render("viewEffort2", {effortestimation:doc
                 });
                 
                 }
                 else
-                res.render("viewEffort",{viewtitle:"Error"});
+                res.render("viewEffort2",{viewtitle:"Error"});
                
         });
         });
